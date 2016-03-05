@@ -13231,7 +13231,7 @@ var SWUtils = SWUtils || (function() {
     },
 
     /* evaluateExpression
-    *  reads in the string, evalutates it until we find a number, then passes that numbe to the callback.
+    *  reads in the string, evalutates it until we find a number, then passes that number to the callback.
     *  @exprStr= A string containing a mathematical expression, possibly containing references to fields such as @{myfield}
     *  @callback = a function taking one parameter, either a number or empty string .
     */
@@ -13244,7 +13244,7 @@ var SWUtils = SWUtils || (function() {
         }
         searchAndReplaceFields(exprStr, function(replacedStr) {
             var evaluated;
-            console.log("search and replace of " + exprStr +" resulted in " + replacedStr);
+            //console.log("cleaning up string replacedStr=" + replacedStr);
             replacedStr=replacedStr.replace(/\s+/g,'').replace(/\[\[/g,"(").replace(/\]\]/g,")");
 			if(!isNaN(parseFloat(replacedStr)) && isFinite(replacedStr)) {
 				evaluated=parseFloat(replacedStr);
@@ -13329,7 +13329,7 @@ var SWUtils = SWUtils || (function() {
             } else {
                 //console.log("ok evaluate "+values[readField]);
                 evaluateExpression(values[readField],function(value2){
-                    console.log("came back with "+value2+", is it NaN?:"+isNaN(value2));
+                    //console.log("came back with " + value2 + ", is it NaN?:" + isNaN(value2));
 					//look for ( and ) at begining and end 
 					
                     value2=isNaN(value2)?trueDefault:value2;
@@ -13650,7 +13650,7 @@ var PFSheet = PFSheet || (function(){
         getSectionIDs("repeating_"+section,function(ids){
             ids.forEach(function(id,index){
 				if (isBadRowId(section,id,false)) {
-					console.log("ERROR: handleRepeatingRowOrdering invalid id:"+id);
+                    //console.log("ERROR: handleRepeatingRowOrdering invalid id:" + id);
 					return;
 				}
 				setRepeatingRowDefaultFields(section,id,forceReset);
@@ -13782,7 +13782,6 @@ var PFSheet = PFSheet || (function(){
                 ,dmg =   Math.floor(Math.abs(parseInt(values[ability+"-damage"],10)||0)/2)
                 ,pen =   Math.floor(Math.abs(parseInt(values[ability+"-penalty"],10)||0)/2)
                 ,cond= (columnUpdated==="cond"?columnVal:( Math.floor(Math.abs(parseInt(values[ability+"-cond"],10)||0)/2)))
-                //use 99 (never happen) to make sure we update if there's a problem
                 ,currAbility=parseInt(values[ability],10)
                 ,currMod = parseInt(values[ability+"-mod"],10)
                 ,mod= Math.floor((base -10)/2) - dmg - pen -cond
@@ -14280,8 +14279,7 @@ var PFSheet = PFSheet || (function(){
      * A creature can also add any circumstance, deflection, dodge, insight, luck, morale, profane, and sacred bonuses to AC to its CMD.
      * Any penalties to a creature's AC also apply to its CMD
      *
-      */
-  
+     */
     updateDefenses = function(eventInfo) {
         getAttrs(["condition-Flat-Footed","AC-ability-mod","FF-DEX","AC-penalty","CMD-penalty","size","max-dex",
             "AC-dodge","AC-natural","AC-deflect","AC-misc","buff_AC-total","buff_Touch-total","buff_CMD-total",
@@ -14343,6 +14341,7 @@ var PFSheet = PFSheet || (function(){
                 cmdFFAbility2 = Math.min(cmdFFAbility2, maxDex);
                 //console.log("CMD-ability is DEX-mod, cmdFFAbility2=" + cmdFFAbility2);
             }
+
             //lose Dex: you lose your bonus (and dodge) but are not flat footed
             //Must be applied even if your bonus is not dex :
             //http://paizo.com/paizo/faq/v5748nruor1fm#v5748eaic9qdi
@@ -14403,30 +14402,28 @@ var PFSheet = PFSheet || (function(){
     /*updateArmor
      * updates total AC and penalty and max dex
      * if not proficient sets attack penalty
-     * for backward compatiblity, proficiency is string and 0 is proficient, anything else non proficient
+    * for backward compatibility, proficiency is string and 0 is proficient, anything else non proficient
      */
     updateArmor=function(){
         getAttrs(["shield-equipped", "shield-acbonus", "shield-max-dex", "shield-acp", "shield-spell-fail", "shield-proficiency",
          "shield2-equipped", "shield2-acbonus", "shield2-max-dex", "shield2-acp", "shield2-spell-fail", "shield2-proficiency",
-
 		 "shield3-equipped", "shield3-acbonus", "shield3-max-dex", "shield3-acp", "shield3-spell-fail", "shield3-proficiency",
          "armor-equipped", "armor-acbonus", "armor-max-dex", "armor-acp", "armor-spell-fail", "armor-proficiency",
          "armor2-equipped", "armor2-acbonus", "armor2-max-dex", "armor2-acp", "armor2-spell-fail", "armor2-proficiency",
-
 		 "armor3-equipped", "armor3-acbonus", "armor3-max-dex", "armor3-acp", "armor3-spell-fail", "armor3-proficiency",
          "acp","max-dex","AC-armor","AC-shield","spell-fail","acp-attack-mod",
          "max-dex-source","acp-source"], function(v)    {
+         //console.log("updateArmor");
          //console.log(v);
          var acp=0,maxDex=99,acA=0,acS=0,sp=0,atk=0
 			,subAC=0,subD=0,subAcp=0,nonProf=0,subsp=0
 			,currACP=0,currMaxDex=0,currACArmor=0,currACShield=0,currSpellFail=0,currAtkMod=0
          	,maxDexDropdown=parseInt(v["max-dex-source"],10)
          	,acpDropdown  = parseInt(v["acp-source"],10)
-
          	,setAny=0
-
 			,setter={}
 			;
+
          if (v["armor-equipped"]=="1" ) {
              subAC=parseInt(v["armor-acbonus"],10)||0;
              subD=parseInt(v["armor-max-dex"],10);subD=isNaN(subD)?99:subD; //cannot do "or 0" since 0 is valid but falsy
@@ -14520,7 +14517,6 @@ var PFSheet = PFSheet || (function(){
 
          currMaxDex=isNaN(currMaxDex)?99:currMaxDex;
 
-         //using -1 forces update
          currACArmor=parseInt(v["AC-armor"],10)||0;
          currACShield=parseInt(v["AC-shield"],10)||0;
          currSpellFail=parseInt(v["spell-fail"],10)||0;
@@ -15241,8 +15237,8 @@ var PFSheet = PFSheet || (function(){
 				//	setAttrs(setter,{quiet:true});
 				//	updateCasterLevel(spellclassidx,null,cl);
 				//}
-				
 			});
+
         });
     },
 
@@ -15396,7 +15392,6 @@ var PFSheet = PFSheet || (function(){
 
     /******** SPELLS REPEATING SECTION ******/
 	
-
 	/* updateSpell
 	* For a row in lvl-x-spells repeating sections, updates:
 	*  cast_def_dc, cast_def, savedc, casterlevel, Concentration,spellPen
@@ -15535,6 +15530,7 @@ var PFSheet = PFSheet || (function(){
 		});
 		
 	},
+
 	updateSpellRangeKnowVals = function (fieldToUpdate,currRange,rangetext,area,casterlevel) {
 		var ranges= calculateSpellRanges (casterlevel)
 		, newRange = findSpellRange(rangetext,ranges,area,casterlevel)
@@ -15625,6 +15621,7 @@ var PFSheet = PFSheet || (function(){
             });
         });	
 	},
+
 	/*recalculateSpellLevelsAll calls recalculateSpellLevels for each spell levels 0-9 */
 	recalculateSpellLevelsAll = function(force) {
 		var i=0;
@@ -15726,9 +15723,6 @@ var PFSheet = PFSheet || (function(){
         });
     },
 
-	
-
-	
 	/* recalculateSkills - updates ALL skills  - calls handleDropdown for ability then updateSkill 
 	* CB: REFACTOR: put updateSkill in the callback so it happens in order */
     recalculateSkills = function() {	
@@ -15982,8 +15976,6 @@ var PFSheet = PFSheet || (function(){
 	/* recalculateSheet - all pages in sheet!  */
     recalculateSheet = function(oldversion) {
         if (oldversion < 0.15) {
-
-            
             updateAbility("STR");
             updateAbility("DEX");
             updateAbility("CON");
@@ -16008,7 +16000,6 @@ var PFSheet = PFSheet || (function(){
             handleDropdown("melee-ability","melee-ability-mod");
             handleDropdown("ranged-ability","ranged-ability-mod");
             handleDropdown("CMB-ability","CMB-ability-mod");
-
 
             updateSize();
             updateInit();
@@ -16037,10 +16028,8 @@ var PFSheet = PFSheet || (function(){
             updateAttack("ranged");
             updateAttack("CMB");
             recalculateRepeatingWeapons();
-
         }
         if (oldversion < 0.16) {
-
             SWUtils.evaluateAndSetNumber("Max-Skill-Ranks-Misc","Max-Skill-Ranks-mod");
             updateMaxSkills();
 
@@ -16099,8 +16088,7 @@ var PFSheet = PFSheet || (function(){
 		if (oldversion < 0.31) {
 			updateConditionCheckPenalty();
 			updateConditionDefensePenalty();
-
-		}
+        }
 		if (oldversion < 0.32) {
 			ifSpellClassExists(0,function(){
 				handleConcentrationAbilityDropdown(0);
@@ -16181,7 +16169,8 @@ var PFSheet = PFSheet || (function(){
     };
 
     return {
-        util:{findAbilityInString:findAbilityInString,
+        util: {
+            findAbilityInString: findAbilityInString,
             findMultiplier:findMultiplier,
             updateRowTotal:updateRowTotal,
 			isBadRowId:isBadRowId
@@ -16300,7 +16289,6 @@ on("change:buff1_touch_macro-text", function() { getAttrs(["buff1_Toggle"], func
 on("change:buff1_cmd_macro-text", function() { getAttrs(["buff1_Toggle"], function (v){ if (v.buff1_Toggle === "1"){PFSheet.updateBuff("CMD","1");}});});
 on("change:buff1_check_macro-text", function() { getAttrs(["buff1_Toggle"], function (v){ if (v.buff1_Toggle === "1"){PFSheet.updateBuff("Check","1");}});});
 on("change:buff1_casterlevel_macro-text", function() { getAttrs(["buff1_Toggle"], function (v){ if (v.buff1_Toggle === "1"){PFSheet.updateBuff("CasterLevel","1");}});});
-
 
 on("change:buff2_melee_macro-text", function() { getAttrs(["buff2_Toggle"], function (v){ if (v.buff2_Toggle == "1"){PFSheet.updateBuff("Melee","2");}});});
 on("change:buff2_ranged_macro-text", function() { getAttrs(["buff2_Toggle"], function (v){ if (v.buff2_Toggle == "1"){PFSheet.updateBuff("Ranged","2");}});});
@@ -16473,11 +16461,7 @@ on("change:buff10_cmd_macro-text", function() { getAttrs(["buff10_Toggle"], func
 on("change:buff10_check_macro-text", function() { getAttrs(["buff10_Toggle"], function (v){ if (v.buff10_Toggle === "1"){PFSheet.updateBuff("Check","10");}});});
 on("change:buff10_casterlevel_macro-text", function() { getAttrs(["buff10_Toggle"], function (v){ if (v.buff10_Toggle === "1"){PFSheet.updateBuff("CasterLevel","10");}});});
 
-
 //allskills
-
-
-
 on("change:acrobatics-ability",function(){PFSheet.handleDropdown("Acrobatics-ability","Acrobatics-ability-mod");});
 on("change:acp change:acrobatics-cs change:acrobatics-ranks change:acrobatics-class change:checks-cond change:acrobatics-ability-mod change:acrobatics-racial change:acrobatics-feat change:acrobatics-item change:acrobatics-size change:acrobatics-acp change:acrobatics-misc change:acrobatics-ReqTrain"
    ,function(){PFSheet.updateSkill("Acrobatics");});
@@ -16682,7 +16666,6 @@ on("change:cS-Athletics-ability",function(){PFSheet.handleDropdown("CS-Athletics
 on("change:acp change:cS-Athletics-cs change:cS-Athletics-ranks change:cS-Athletics-class change:checks-cond change:cS-Athletics-ability-mod change:cS-Athletics-racial change:cS-Athletics-feat change:cS-Athletics-item change:cS-Athletics-size change:cS-Athletics-acp change:cS-Athletics-misc change:cS-Athletics-ReqTrain"
    ,function(){PFSheet.updateSkill("CS-Athletics");});
 
-
 on("change:cs-finesse-ability",function(){PFSheet.handleDropdown("CS-Finesse-ability","CS-Finesse-ability-mod");});
 on("change:cs-finesse-cs change:cs-finesse-ranks change:cs-finesse-class change:checks-cond change:cs-finesse-ability-mod change:cs-finesse-racial change:cs-finesse-feat change:cs-finesse-item change:cs-finesse-size change:cs-finesse-acp change:cs-finesse-misc change:cs-finesse-ReqTrain"
    ,function(){PFSheet.updateSkill("CS-Finesse");});
@@ -16730,21 +16713,12 @@ on("change:buff_check-total", function() {
 });
 
 //Abilities 
-//on("change:str-base change:str-enhance change:str-misc change:str-temp change:str-damage change:str-penalty change:str-drain change:buff_str-total change:str-cond", function() { PFSheet.updateAbility("STR"); });
-//on("change:dex-base change:dex-enhance change:dex-misc change:dex-temp change:dex-damage change:dex-penalty change:dex-drain change:buff_dex-total change:dex-cond", function() { PFSheet.updateAbility("DEX"); });
-//on("change:con-base change:con-enhance change:con-misc change:con-temp change:con-damage change:con-penalty change:con-drain change:buff_con-total change:con-cond", function() { PFSheet.updateAbility("CON"); });
-//on("change:int-base change:int-enhance change:int-misc change:int-temp change:int-damage change:int-penalty change:int-drain change:buff_int-total change:int-cond", function() { PFSheet.updateAbility("INT"); });
-//on("change:wis-base change:wis-enhance change:wis-misc change:wis-temp change:wis-damage change:wis-penalty change:wis-drain change:buff_wis-total change:wis-cond", function() { PFSheet.updateAbility("WIS"); });
-//on("change:cha-base change:cha-enhance change:cha-misc change:cha-temp change:cha-damage change:cha-penalty change:cha-drain change:buff_cha-total change:cha-cond", function() { PFSheet.updateAbility("CHA"); });
-
 on("change:str-base change:str-enhance change:str-misc change:str-temp change:str-damage change:str-penalty change:str-drain", function() { PFSheet.updateAbility("STR"); });
 on("change:dex-base change:dex-enhance change:dex-misc change:dex-temp change:dex-damage change:dex-penalty change:dex-drain", function() { PFSheet.updateAbility("DEX"); });
 on("change:con-base change:con-enhance change:con-misc change:con-temp change:con-damage change:con-penalty change:con-drain change:con-cond", function() { PFSheet.updateAbility("CON"); });
 on("change:int-base change:int-enhance change:int-misc change:int-temp change:int-damage change:int-penalty change:int-drain change:int-cond", function() { PFSheet.updateAbility("INT"); });
 on("change:wis-base change:wis-enhance change:wis-misc change:wis-temp change:wis-damage change:wis-penalty change:wis-drain change:wis-cond", function() { PFSheet.updateAbility("WIS"); });
 on("change:cha-base change:cha-enhance change:cha-misc change:cha-temp change:cha-damage change:cha-penalty change:cha-drain change:cha-cond", function() { PFSheet.updateAbility("CHA"); });
-
-
 
 //Conditions
 on("change:condition-fatigued change:condition-entangled", function() { PFSheet.updateConditionAbilityPenalty(); });
@@ -16790,9 +16764,6 @@ on("change:hp-ability-mod change:level change:total-hp change:total-mythic-hp ch
 on("change:hp-temp-misc change:buff_hp-temp-total", function() { PFSheet.updateTempHP(); });
 on("change:hp-formula-macro-text",function(){SWUtils.evaluateAndSetNumber("HP-formula-macro-text","HP-formula-mod");});
 
-
-
-
 //classes
 on("change:class-0-hp change:class-1-hp change:class-2-hp change:class-3-hp change:class-4-hp change:class-5-hp", function() {PFSheet.updateClassInformation("hp");});
 on("change:class-0-fchp change:class-1-fchp change:class-2-fchp change:class-3-fchp change:class-4-fchp change:class-5-fchp", function() {PFSheet.updateClassInformation("fchp");});
@@ -16810,21 +16781,23 @@ on("change:class-0-level change:class-1-level change:class-2-level change:class-
 
 //mythic paths
 on("change:mythic-tier change:mythic-hp", function () { PFSheet.updateMythicPathInformation(); });
+
 //mythic power
 on("change:mythic-tier", function () { PFSheet.updateTierMythicPower(); });
 on("change:misc-mythic-power change:tier-mythic-power", function () { PFSheet.updateMythicPower(); });
+
 //mythic features/abilities
 on("change:repeating_mythic-ability:max-calculation",function(){ SWUtils.evaluateAndSetNumber("repeating_mythic-ability_max-calculation","repeating_mythic-ability_used_max");});
 
 //mythic feats
 on("change:repeating_mythic-feat:max-calculation", function () { SWUtils.evaluateAndSetNumber("repeating_mythic-feat_max-calculation", "repeating_mythic-feat_used_max"); });
+
 //class abilities
 on("change:repeating_class-ability:max-calculation",function(){ SWUtils.evaluateAndSetNumber("repeating_class-ability_max-calculation","repeating_class-ability_used_max");});
 //on("change:repeating_class-ability:max-calculation",function(eventInfo){ console.log("Detected change to "+eventInfo.sourceAttribute);});
 
 on("change:ac-ability change:ff-ability change:cmd-ability1 change:cmd-ability2 change:cmd-ability"
 	, function (eventInfo) {PFSheet.handleDefenseDropdown(eventInfo.sourceAttribute);});
-
 
 //defenses
 on("change:condition-stunned change:condition-flat-footed change:ac-ability-mod change:ff-dex change:ac-penalty change:cmd-penalty change:size change:ac-dodge change:ac-natural change:ac-deflect change:ac-misc change:ac-shield change:ac-armor change:cmd-dex change:ff-cmd-dex change:cmd-str change:cmd-misc change:buff_ac-total change:buff_touch-total change:buff_cmd-total change:bab change:max-dex"
@@ -16853,7 +16826,6 @@ on("change:fort-ability", function(){PFSheet.handleDropdown  ("Fort-ability","Fo
 on("change:ref-ability", function(){PFSheet.handleDropdown  ("Ref-ability","Ref-ability-mod");   });
 on("change:will-ability", function(){PFSheet.handleDropdown  ("Will-ability","Will-ability-mod");   });
 
-
 //attacks
 on("change:melee-ability", function () {PFSheet.handleDropdown("melee-ability","melee-ability-mod");});
 on("change:ranged-ability", function () {PFSheet.handleDropdown("ranged-ability","ranged-ability-mod");});
@@ -16862,7 +16834,6 @@ on("change:bab change:size change:melee-ability-mod change:buff_melee-total chan
 on("change:bab change:size change:ranged-ability-mod change:buff_ranged-total change:attk-ranged-misc change:attk-penalty",function() { PFSheet.updateAttack("ranged"); });
 on("change:bab change:CMD-size change:cmb-ability-mod change:cmb-total change:attk-cmb-misc change:attk-penalty",function() { PFSheet.updateAttack("CMB"); });
 on("change:condition-Sickened change:buff_dmg-total",function(){PFSheet.updateDamage();});
-
 
 //attack effects
 on("change:attk-effect_mod_1 change:attk-effect_mod_1_Toggle change:attk-effect_mod_2 change:attk-effect_mod_2_Toggle change:attk-effect_mod_3 change:attk-effect_mod_3_Toggle change:attk-effect_mod_4 change:attk-effect_mod_4_Toggle"
@@ -16873,10 +16844,10 @@ on("change:dmg-effect_mod_1 change:dmg-effect_mod_1_Toggle change:dmg-effect_mod
 , function () {
     PFSheet.updateDMGEffectTotals();
 });
+
 //repeating weapons
 on("change:attk-effect-total",function(eventInfo){PFSheet.updateRepeatingWeaponAttacks(eventInfo);});
 on("change:dmg-effect-total change:dmg-mod", function(){PFSheet.updateRepeatingWeaponDamages();});
-
 
 on("change:repeating_weapon:attack-type-mod change:repeating_weapon:masterwork change:repeating_weapon:proficiency change:repeating_weapon:attack-mod"
 	, function (eventInfo) {
@@ -16902,20 +16873,18 @@ on("change:size",function(){
 	PFSheet.updateSize();
 	PFSheet.updateDamageNote();
 });
+
 //feats
 on("change:repeating_feat:max-calculation",function(){  SWUtils.evaluateAndSetNumber("repeating_feat_max-calculation","repeating_feat_used_max");});
 //racial-traits
 on("change:repeating_racial-trait:max-calculation",function(){  SWUtils.evaluateAndSetNumber("repeating_racial-trait_max-calculation","repeating_racial-trait_used_max");});
+
 //traits
 on("change:repeating_trait:max-calculation",function(){ SWUtils.evaluateAndSetNumber("repeating_trait_max-calculation","repeating_trait_used_max");});
-
-
 
 //skills
 on("change:total-skill change:total-fcskill change:int-mod change:level change:max-skill-ranks-mod change:Max-Skill-Ranks-Misc2 change:unchained_skills-show change:BG-Skill-Use",function() { PFSheet.updateMaxSkills(); });
 on("change:max-skill-ranks-misc",function(){SWUtils.evaluateAndSetNumber("Max-Skill-Ranks-Misc","Max-Skill-Ranks-mod");});
-
-
 
 on("change:size_skill",function(){PFSheet.updateSkill("Fly");});
 
@@ -16962,16 +16931,13 @@ on("change:class-3-level", function(){ PFSheet.updateSpellClassLevel(3);});
 on("change:class-4-level", function(){ PFSheet.updateSpellClassLevel(4);});
 on("change:class-5-level", function(){ PFSheet.updateSpellClassLevel(5);});
 
-
 on("change:concentration-0-ability", function () {PFSheet.handleConcentrationAbilityDropdown(0);});
 on("change:concentration-1-ability", function () {PFSheet.handleConcentrationAbilityDropdown(1);});
 on("change:concentration-2-ability", function () {PFSheet.handleConcentrationAbilityDropdown(2);});
 
-
 on("change:concentration-0-mod",function(){PFSheet.ifSpellClassExists(0,function(){PFSheet.updateSaveDCs(0);});});
 on("change:concentration-1-mod",function(){PFSheet.ifSpellClassExists(1,function(){PFSheet.updateSaveDCs(1);});});
 on("change:concentration-2-mod",function(){PFSheet.ifSpellClassExists(2,function(){PFSheet.updateSaveDCs(2);});});
-
 
 on("change:concentration-0-ability",function(eventInfo){PFSheet.ifSpellClassExists(0,function(){PFSheet.updateBonusSpells(0,eventInfo);});});
 on("change:concentration-1-ability",function(eventInfo){PFSheet.ifSpellClassExists(1,function(){PFSheet.updateBonusSpells(1,eventInfo);});});
@@ -17008,9 +16974,6 @@ on("change:spellclass-2-level-total", function (eventInfo) {
 		PFSheet.updateSpellClassRange(2,eventInfo);
 	});
 });
-
-
-
 on("change:spellclass-0-SP_misc", function () {
 	PFSheet.updateSpellPenetration(0);
 });
@@ -17021,8 +16984,6 @@ on("change:spellclass-2-SP_misc", function () {
 	PFSheet.updateSpellPenetration(2);
 });
 on("change:condition-Deafened",function(){PFSheet.updateCastingPenaltyNote();});
-
-
 
 on("change:spellclass-0-level-0-class change:spellclass-0-level-0-bonus change:spellclass-0-level-0-misc",function() {PFSheet.updateMaxSpellsPerDay(0,0);});
 on("change:spellclass-0-level-1-class change:spellclass-0-level-1-bonus change:spellclass-0-level-1-misc",function() {PFSheet.updateMaxSpellsPerDay(0,1);});
@@ -17056,7 +17017,6 @@ on("change:spellclass-2-level-6-class change:spellclass-2-level-6-bonus change:s
 on("change:spellclass-2-level-7-class change:spellclass-2-level-7-bonus change:spellclass-2-level-7-misc",function() {PFSheet.updateMaxSpellsPerDay(2,7);});
 on("change:spellclass-2-level-8-class change:spellclass-2-level-8-bonus change:spellclass-2-level-8-misc",function() {PFSheet.updateMaxSpellsPerDay(2,8);});
 on("change:spellclass-2-level-9-class change:spellclass-2-level-9-bonus change:spellclass-2-level-9-misc",function() {PFSheet.updateMaxSpellsPerDay(2,9);});
-
 
 on("change:spellclass-0-level change:spellclass-0-level-misc change:buff_CasterLevel-total change:condition-Drained change:CasterLevel-Penalty", function (eventInfo) {PFSheet.updateCasterLevel(0,eventInfo);});
 on("change:spellclass-1-level change:spellclass-1-level-misc change:buff_CasterLevel-total change:condition-Drained change:CasterLevel-Penalty", function (eventInfo) {PFSheet.updateCasterLevel(1,eventInfo);});
@@ -17109,7 +17069,6 @@ on("change:repeating_lvl-7-spells:spellclass change:repeating_lvl-7-spells:spell
 on("change:repeating_lvl-8-spells:spellclass change:repeating_lvl-8-spells:spell_level change:repeating_lvl-8-spells:DC_misc change:repeating_lvl-8-spells:CL_misc change:repeating_lvl-8-spells:SP_misc  change:repeating_lvl-8-spells:Concentration_misc",function(eventInfo) {PFSheet.updateSpell("lvl-8-spells",null,eventInfo);});
 on("change:repeating_lvl-9-spells:spellclass change:repeating_lvl-9-spells:spell_level change:repeating_lvl-9-spells:DC_misc change:repeating_lvl-9-spells:CL_misc change:repeating_lvl-9-spells:SP_misc  change:repeating_lvl-9-spells:Concentration_misc",function(eventInfo) {PFSheet.updateSpell("lvl-9-spells",null,eventInfo);});
 
-
 //update the spell if  user drags and drops from compendium it populates hidden field compendium_id
 on("change:repeating_lvl-0-spells:name",function(eventInfo) { PFSheet.updateSpell("lvl-0-spells",null,eventInfo);});
 on("change:repeating_lvl-1-spells:name",function(eventInfo) { PFSheet.updateSpell("lvl-1-spells",null,eventInfo);});
@@ -17121,7 +17080,6 @@ on("change:repeating_lvl-6-spells:name",function(eventInfo) { PFSheet.updateSpel
 on("change:repeating_lvl-7-spells:name",function(eventInfo) { PFSheet.updateSpell("lvl-7-spells",null,eventInfo);});
 on("change:repeating_lvl-8-spells:name",function(eventInfo) { PFSheet.updateSpell("lvl-8-spells",null,eventInfo);});
 on("change:repeating_lvl-9-spells:name",function(eventInfo) { PFSheet.updateSpell("lvl-9-spells",null,eventInfo);});
-
 
 //set repeating IDS
 on("change:repeating_weapon:ids-show",function(eventInfo) {PFSheet.checkIsNewRow("weapon",eventInfo);});
