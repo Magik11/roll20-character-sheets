@@ -581,9 +581,6 @@ textarea {
 [data-groupname=repeating_item] > button.btn.repcontrol_add::after {
 	content: " New Item";
 }
-[data-groupname=repeating_belonging] > button.btn.repcontrol_add::after {
-	content: " New Belonging";
-}
 [data-groupname=repeating_racial-trait] > button.btn.repcontrol_add::after {
 	content: " New Racial Trait";
 }
@@ -602,15 +599,11 @@ textarea {
 	float: right;
 	margin-right: 5px;
 	width: 1.5em;
-
-
-
 }
 button[type=roll].sheet-blank-roll-button::before { 
 	content: ' ';
 }
 .sheet-options {
-
 	width:99.6%;
 	padding: 2px 0 2px 0;
 	border: 1px solid #808080;

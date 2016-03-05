@@ -1074,18 +1074,22 @@
 					<div class="sheet-table">
 						<span class="sheet-table-name">Speeds</span>
 						<div class="sheet-table-row">
-							<span class="sheet-table-header">Base</span>
+                            <span class="sheet-table-header" title="The base speed for the character">Base</span>
+                            <span class="sheet-table-header" title="The modified speed due to armor and/or carry capacity & load">Modified</span>
 							<span class="sheet-table-header">Fly</span>
 							<span class="sheet-table-header">Swim</span>
 							<span class="sheet-table-header">Climb</span>
 							<span class="sheet-table-header">Misc</span>
+                            <span class="sheet-table-header" title="The maximum distance that the character can run in a straight line during your turn">Run</span>
 						</div>
 						<div class="sheet-table-row">
 							<span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{speed-base}" type="number" name="attr_speed-base" value="0" step="5" /></span>
+                            <span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{speed-modified}" type="number" name="attr_speed-modified" value="0" class="sheet-calc" readonly="readonly" /></span>
 							<span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{speed-fly}" type="number" name="attr_speed-fly" value="0" step="5" /></span>
 							<span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{speed-swim}" type="number" name="attr_speed-swim" value="0" step="5" /></span>
 							<span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{speed-climb}" type="number" name="attr_speed-climb" value="0" step="5" /></span>
 							<span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{speed-misc}" type="number" name="attr_speed-misc" value="0" step="5" /></span>
+                            <span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{speed-run}" type="number" name="attr_speed-run" value="0" class="sheet-calc" readonly="readonly" /></span>
 						</div>
 					</div>
 				</div>
@@ -1746,31 +1750,31 @@
 		<div class="sheet-table sheet-sect">
 			<span class="sheet-table-name">Armor Penalties</span>
 			<div class="sheet-table-row">
-				<span class="sheet-table-row-name" style="width:3.5em;" title="Armor Check Penalty">ACP</span>
-				<span class="sheet-table-data sheet-center"><input title="@{acp}" type="number" name="attr_acp" value="0" style="width:3.5em;" class="sheet-calc" readonly="readonly" /></span>
+                <span class="sheet-table-row-name" style="width:3.0em;" title="Armor Check Penalty">ACP</span>
+                <span class="sheet-table-data sheet-center"><input title="@{acp}" type="text" name="attr_acp" value="0" style="width:2.5em;" class="sheet-calc" readonly="readonly"></span>
 				<span class="sheet-table-data sheet-center">
 					<select title="@{acp-source}" name="attr_acp-source">
-						<option value="0"  >None</option>
-						<option value="( ((@{armor-acp} * @{armor-equipped}) + (@{armor2-acp} * @{armor2-equipped}) ) + ( (@{shield-acp} * @{shield-equipped}) + (@{shield2-acp} * @{shield2-equipped}) ) )" selected>&#8226;Armor &amp; Shield</option>
-						<option value="-3">Medium Load</option>
-						<option value="-6">Heavy Load</option>
+                        <option value="0" selected>&#8226;Armor, Shield &amp; Load</option>
+                        <option value="1">Armor &amp; Shield only</option>
+                        <option value="2">Load only</option>
+                        <option value="3">None</option>
 					</select>
 				</span>
 				<span class="sheet-table-row-name">Attack Penalty</span>
-				<span class="sheet-table-data sheet-center"><input title="@{acp-attack-mod}" type="number" name="attr_acp-attack-mod" value="0" style="width:3.5em;" class="sheet-calc" readonly="readonly" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{acp-attack-mod}" type="text" name="attr_acp-attack-mod" value="0" style="width:2.5em;" class="sheet-calc" readonly="readonly"></span>
 				<span class="sheet-table-row-name">Max DEX</span>
-				<span class="sheet-table-data sheet-center"><input title="@{max-dex}" type="number" name="attr_max-dex" value=99 style="width:3.5em;" class="sheet-calc" readonly="readonly" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{max-dex}" type="text" name="attr_max-dex" value="99" style="width:2.5em;" class="sheet-calc" readonly="readonly"></span>
 				<span class="sheet-table-data sheet-center">
 					<select title="@{max-dex-source}" name="attr_max-dex-source">
-						<option value="9999" selected>&#8226;None</option>
-						<option value="(@{armor-max-dex} + @{armor2-max-dex})">Armor & Shield</option>
-						<option value="3">Medium Load</option>
-						<option value="1">Heavy Load</option>
+                        <option value="0" selected>&#8226;Armor, Shield &amp; Load</option>
+                        <option value="1">Armor &amp; Shield only</option>
+                        <option value="2">Load only</option>
+                        <option value="3">None</option>
 					</select>
 				</span>
-				<span class="sheet-table-row-name"><button class="sheet-text-button" type="roll" title="%{selected|Spell-Fail-Check}" name="roll_Spell-Fail-Check" style="font-size:13px; line-height:10px; vertical-align:text-bottom;" value="@{PC-whisper} &{template:pf_generic} {{header_image=@{header_image-pf_generic}}} {{character_name=@{character_name}}} {{character_id=@{character_id}}} {{subtitle}} {{name=Spell Failure}} {{Spell Fail Chance=[[ @{spell-fail} ]]&nbsp;%&nbsp;}} {{Check=[[ 1d100cf<[[ @{spell-fail} ]]cs>[[ @{spell-fail}+1 ]] ]]&nbsp;%&nbsp;}} {{lefttext_6=@{SpellFailureNote}}}"> Spell Fail Chance</button></span>
-				<span class="sheet-table-data sheet-center"><input title="@{spell-fail}" type="number" name="attr_spell-fail" value="0" style="width:3.5em;" class="sheet-calc" readonly="readonly" />&#37;</span>
-				<input title="@{SpellFailureNote}" name="attr_SpellFailureNote" type="hidden" value="" />
+                <span class="sheet-table-row-name"><button class="sheet-text-button btn ui-draggable" type="roll" title="%{selected|Spell-Fail-Check}" name="roll_Spell-Fail-Check" style="font-size:13px; line-height:10px; vertical-align:text-bottom;" value="@{PC-whisper} &{template:pf_generic} {{header_image=@{header_image-pf_generic}}} {{character_name=@{character_name}}} {{character_id=@{character_id}}} {{subtitle}} {{name=Spell Failure}} {{Spell Fail Chance=[[ @{spell-fail} ]]&nbsp;%&nbsp;}} {{Check=[[ 1d100cf<[[ @{spell-fail} ]]cs>[[ @{spell-fail}+1 ]] ]]&nbsp;%&nbsp;}} {{lefttext_6=@{SpellFailureNote}}}"> Spell Fail Chance</button></span>
+                <span class="sheet-table-data sheet-center"><input title="@{spell-fail}" type="text" name="attr_spell-fail" value="0" style="width:2.5em;" class="sheet-calc" readonly="readonly">&#37;</span>
+                <input title="@{SpellFailureNote}" name="attr_SpellFailureNote" type="hidden" value="">
 			</div>
 		</div>
 		<br>
@@ -1947,7 +1951,7 @@
 			</div>
 			<div class="sheet-table-row">
                 <span class="sheet-table-data sheet-center"><label><input title="@{armor3-equipped}" type="checkbox" name="attr_armor3-equipped" value="1" checked="checked" /><b title="Worn Armor">&nbsp;&nbsp;Worn Armor</b></label></span>
-                <span class="sheet-table-data sheet-center"><input title="@{armor3}" type="text" name="attr_armor3" value="" class="sheet-detail-medium"  /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{worn-Armor}" type="text" name="attr_worn-Armor" value="" class="sheet-detail-medium" /></span>
                 <span class="sheet-table-data sheet-center"><input title="@{armor3-acbonus}" type="number" name="attr_armor3-acbonus" value="0" min="0" /></span>
                 <span class="sheet-table-data sheet-center"><input title="@{armor3-max-dex}" type="number" name="attr_armor3-max-dex" value="99" min="0" /></span>
                 <span class="sheet-table-data sheet-center"><input title="@{armor3-acp}" type="number" name="attr_armor3-acp" value="0" max="0" /></span>
@@ -1965,17 +1969,17 @@
                         <option value="1">No</option>
                     </select>
                 </span>
-                <span class="sheet-table-data sheet-center"><input title="@{armor3-hardness}" type="number" name="attr_armor3-hardness" value="0" /></span>
-                <span class="sheet-table-data sheet-center"><input title="@{armor3-hp}" type="number" name="attr_armor3-hp" value="0" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{worn-Armor-hardness}" type="number" name="attr_worn-Armor-hardness" value="0" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{worn-Armor-hp}" type="number" name="attr_worn-Armor-hp" value="0" /></span>
 				<span class="sheet-table-data sheet-divider-lg">/</span>
-                <span class="sheet-table-data sheet-center"><input title="@{armor3-hp|max}" type="number" name="attr_armor3-hp_max" value="0" /></span>
-                <span class="sheet-table-data sheet-center"><input title="@{armor3-weight}" type="number" name="attr_armor3-weight" value="0" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{worn-Armor-hp|max}" type="number" name="attr_worn-Armor-hp_max" value="0" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{worn-Armor-weight}" type="number" name="attr_worn-Armor-weight" value="0" /></span>
             </div>
             <div class="sheet-table-row">
                 <span class="sheet-table-data sheet-center"><label><input title="@{armor-equipped}" type="checkbox" name="attr_armor-equipped" value="1" checked="checked" /><b title="Additional Armor">&nbsp;&nbsp;Armor 1</b></label></span>
 				<span class="sheet-table-data sheet-center"><input title="@{armor}" type="text" name="attr_armor" placeholder="Armor 1" class="sheet-detail-medium" /></span>
 				<span class="sheet-table-data sheet-center"><input title="@{armor-acbonus}" type="number" name="attr_armor-acbonus" value="0" min="0" /></span>
-				<span class="sheet-table-data sheet-center"><input title="@{armor-max-dex}" type="number" name="attr_armor-max-dex" value="0" min="0" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{armor-max-dex}" type="number" name="attr_armor-max-dex" value="99" min="0" /></span>
 				<span class="sheet-table-data sheet-center"><input title="@{armor-acp}" type="number" name="attr_armor-acp" value="0" max="0" /></span>
 				<span class="sheet-table-data sheet-center"><input title="@{armor-spell-fail}" type="number" name="attr_armor-spell-fail" value="0" min="0" max="100" />&#37;</span>
 				<span class="sheet-table-data sheet-center">
@@ -2001,7 +2005,7 @@
 				<span class="sheet-table-data sheet-center"><label><input title="@{armor2-equipped}" type="checkbox" name="attr_armor2-equipped" value="1" checked="checked" /><b title="Alternate Armor">&nbsp;&nbsp;Armor 2</b></label></span>
 				<span class="sheet-table-data sheet-center"><input title="@{armor2}" type="text" name="attr_armor2" placeholder="Armor 2" class="sheet-detail-medium" /></span>
 				<span class="sheet-table-data sheet-center"><input title="@{armor2-acbonus}" type="number" name="attr_armor2-acbonus" value="0" min="0" /></span>
-				<span class="sheet-table-data sheet-center"><input title="@{armor2-max-dex}" type="number" name="attr_armor2-max-dex" value="0" min="0" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{armor2-max-dex}" type="number" name="attr_armor2-max-dex" value="99" min="0" /></span>
 				<span class="sheet-table-data sheet-center"><input title="@{armor2-acp}" type="number" name="attr_armor2-acp" value="0" max="0" /></span>
 				<span class="sheet-table-data sheet-center"><input title="@{armor2-spell-fail}" type="number" name="attr_armor2-spell-fail" value="0" min="0" max="100" />&#37;</span>
 				<span class="sheet-table-data sheet-center">
@@ -2025,9 +2029,9 @@
 			</div>
 			<div class="sheet-table-row">
                 <span class="sheet-table-data sheet-center"><label><input title="@{shield3-equipped}" type="checkbox" name="attr_shield3-equipped" value="1" checked="checked" /><b title="Worn Shield">&nbsp;&nbsp;Worn Shield</b></label></span>
-                <span class="sheet-table-data sheet-center"><input title="@{shield3}" type="text" name="attr_shield3" value="" class="sheet-detail-medium" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{worn-Shield}" type="text" name="attr_worn-Shield" value="" class="sheet-detail-medium" /></span>
                 <span class="sheet-table-data sheet-center"><input title="@{shield3-acbonus}" type="number" name="attr_shield3-acbonus" value="0" min="0" /></span>
-                <span class="sheet-table-data sheet-center"><input title="@{shield3-max-dex}" type="number" name="attr_shield3-max-dex" value="0" min="0" max="99" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{shield3-max-dex}" type="number" name="attr_shield3-max-dex" value="99" min="0" max="99" /></span>
                 <span class="sheet-table-data sheet-center"><input title="@{shield3-acp}" type="number" name="attr_shield3-acp" value="0" max="0" /></span>
                 <span class="sheet-table-data sheet-center"><input title="@{shield3-spell-fail}" type="number" name="attr_shield3-spell-fail" value="0" min="0" max="100" />&#37;</span>
                 <span class="sheet-table-data sheet-center">
@@ -2042,17 +2046,17 @@
                         <option value="1">No</option>
                     </select>
                 </span>
-                <span class="sheet-table-data sheet-center"><input title="@{shield3-hardness}" type="number" name="attr_shield3-hardness" value="0" /></span>
-                <span class="sheet-table-data sheet-center"><input title="@{shield3-hp}" type="number" name="attr_shield3-hp" value="0" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{worn-Shield-hardness}" type="number" name="attr_worn-Shield-hardness" value="0" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{worn-Shield-hp}" type="number" name="attr_worn-Shield-hp" value="0" /></span>
 				<span class="sheet-table-data sheet-divider-lg">/</span>
-                <span class="sheet-table-data sheet-center"><input title="@{shield3-hp|max}" type="number" name="attr_shield3-hp_max" value="0" /></span>
-                <span class="sheet-table-data sheet-center"><input title="@{shield3-weight}" type="number" name="attr_shield3-weight" value="0" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{worn-Shield-hp|max}" type="number" name="attr_worn-Shield-hp_max" value="0" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{worn-Shield-weight}" type="number" name="attr_worn-Shield-weight" value="0" /></span>
             </div>
             <div class="sheet-table-row">
                 <span class="sheet-table-data sheet-center"><label><input title="@{shield-equipped}" type="checkbox" name="attr_shield-equipped" value="1" checked="checked" /><b title="Additional Shield">&nbsp;&nbsp;Shield 1</b></label></span>
 				<span class="sheet-table-data sheet-center"><input title="@{shield}" type="text" name="attr_shield" placeholder="Shield 1" class="sheet-detail-medium" /></span>
 				<span class="sheet-table-data sheet-center"><input title="@{shield-acbonus}" type="number" name="attr_shield-acbonus" value="0" min="0" /></span>
-				<span class="sheet-table-data sheet-center"><input title="@{shield-max-dex}" type="number" name="attr_shield-max-dex" value="0" min="0" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{shield-max-dex}" type="number" name="attr_shield-max-dex" value="99" min="0" /></span>
 				<span class="sheet-table-data sheet-center"><input title="@{shield-acp}" type="number" name="attr_shield-acp" value="0" max="0" /></span>
 				<span class="sheet-table-data sheet-center"><input title="@{shield-spell-fail}" type="number" name="attr_shield-spell-fail" value="0" min="0" max="100" />&#37;</span>
 				<span class="sheet-table-data sheet-center">
@@ -2077,7 +2081,7 @@
 				<span class="sheet-table-data sheet-center"><label><input title="@{shield2-equipped}" type="checkbox" name="attr_shield2-equipped" value="1" checked="checked" /><b title="Alternate Shield">&nbsp;&nbsp;Shield 2</b></label></span>
 				<span class="sheet-table-data sheet-center"><input title="@{shield2}" type="text" name="attr_shield2" placeholder="Shield 2" class="sheet-detail-medium" /></span>
 				<span class="sheet-table-data sheet-center"><input title="@{shield2-acbonus}" type="number" name="attr_shield2-acbonus" value="0" min="0" /></span>
-				<span class="sheet-table-data sheet-center"><input title="@{shield2-max-dex}" type="number" name="attr_shield2-max-dex" value="0" min="0" max="99" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{shield2-max-dex}" type="number" name="attr_shield2-max-dex" value="99" min="0" max="99" /></span>
 				<span class="sheet-table-data sheet-center"><input title="@{shield2-acp}" type="number" name="attr_shield2-acp" value="0" max="0" /></span>
 				<span class="sheet-table-data sheet-center"><input title="@{shield2-spell-fail}" type="number" name="attr_shield2-spell-fail" value="0" min="0" max="100" />&#37;</span>
 				<span class="sheet-table-data sheet-center">
@@ -6598,126 +6602,294 @@
 		<b>Currency</b>
 		<input type="checkbox" class="sheet-sect-show" title="@{currency-show}" name="attr_currency-show" value="1" style="opacity:0; width:80px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -65px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
 		<div class="sheet-table sheet-sect">
-			<span class="sheet-table-name">Currency</span>
-			<div class="sheet-table-row">
-				<span class="sheet-table-row-name">CP</span>
+            <div class="sheet-table-row" style="vertical-align:top;">
+                <div class="sheet-table-data sheet-center">
+                    <span class="sheet-table-name" style="padding-right:0;" title="The amount of currency carried on the character that will contribute to the load that the character has">Carried Currency</span>
+                    <span class="sheet-table-row-name" title="Copper pieces" style="width:10%;">&nbsp;CP</span>
 				<span class="sheet-table-data sheet-center"><input title="@{CP}" type="number" name="attr_CP" value="0"  style="width:100%;"></span>
-				<span class="sheet-table-row-name">SP</span>
+                    <span class="sheet-table-row-name" title="Silver pieces" style="width:10%;">&nbsp;SP</span>
 				<span class="sheet-table-data sheet-center"><input title="@{SP}" type="number" name="attr_SP" value="0"  style="width:100%;"></span>
-				<span class="sheet-table-row-name">GP</span>
+                    <span class="sheet-table-row-name" title="Gold pieces" style="width:10%;">&nbsp;GP</span>
 				<span class="sheet-table-data sheet-center"><input title="@{GP}" type="number" name="attr_GP" value="0"  style="width:100%;"></span>
-				<span class="sheet-table-row-name">PP</span>
+                    <span class="sheet-table-row-name" title="Platinum pieces" style="width:10%;">&nbsp;PP</span>
 				<span class="sheet-table-data sheet-center"><input title="@{PP}" type="number" name="attr_PP" value="0"  style="width:100%;"></span>
+                    <span class="sheet-table-row-name" style="width:0.4em;">&nbsp;</span>
+                </div>
+                <div class="sheet-table-data">
+                    &nbsp;
+                </div>
+                <div class="sheet-table-data sheet-center">
+                    <span class="sheet-table-name" title="The amount of currency not actively carried by the character">Other Currency</span>
+                    <span class="sheet-table-row-name" title="Copper pieces" style="width:10%;">&nbsp;CP</span>
+                    <span class="sheet-table-data sheet-center"><input title="@{other-CP}" type="number" name="attr_other-CP" value="0" style="width:100%;"></span>
+                    <span class="sheet-table-row-name" title="Silver pieces" style="width:10%;">&nbsp;SP</span>
+                    <span class="sheet-table-data sheet-center"><input title="@{other-SP}" type="number" name="attr_other-SP" value="0" style="width:100%;"></span>
+                    <span class="sheet-table-row-name" title="Gold pieces" style="width:10%;">&nbsp;GP</span>
+                    <span class="sheet-table-data sheet-center"><input title="@{other-GP}" type="number" name="attr_other-GP" value="0" style="width:100%;"></span>
+                    <span class="sheet-table-row-name" title="Platinum pieces" style="width:10%;">&nbsp;PP</span>
+                    <span class="sheet-table-data sheet-center"><input title="@{other-PP}" type="number" name="attr_other-PP" value="0" style="width:100%;"></span>
 			</div>
 		</div>
+        </div>
 		<br>
 	</div>
 	<div>
-		<b>Worn Magic Equipment</b>
+        <b>Worn Equipment</b>
 		<input type="checkbox" class="sheet-sect-show" title="@{worn-equipment-show}" name="attr_worn-equipment-show" value="1" style="opacity:0;width: 150px; height:1.5em; position:relative; top:0; left:0;margin: 0 -15px 0 -133px; cursor:pointer; z-index:1;" /><span></span>
 		<div class="sheet-table sheet-sect">
-			<span class="sheet-table-name">Worn Magic Equipment</span>
+            <span class="sheet-table-name" title="The equipment currently worn by the character">Worn Equipment</span>
+            <div class="sheet-table-row">
+                <span class="sheet-table-header" style="width:7%;" title="The location on the body where the equipment is worn">Slot</span>
+                <span class="sheet-table-header" style="width:21%;" title="Brief description of the item">Name</span>
+                <span class="sheet-table-header" style="width:30%;" title="Lengthy description of the item">Description</span>
+                <span class="sheet-table-header" style="width:6%;" title="If the item has charges, this is how many remain">Charges</span>
+                <span class="sheet-table-header" style="width:6%;" title="The weight of the item">Weight</span>
+                <span class="sheet-table-header" style="width:8%;" title="The hardness of the item that helps prevent it from taking hit point damage">Hardness</span>
+                <span class="sheet-table-header" style="width:6%;" title="The current hit points of the item">HP</span>
+                <span class="sheet-table-header sheet-divider-lg">/</span>
+                <span class="sheet-table-header" style="width:6%; min-width:4em;" title="The maximum possible hit points of the item">Max HP</span>
+                <span class="sheet-table-header" style="width:10%;" title="The value of the item measured in gold pieces">Value (GP)</span>
+            </div>
+            <div class="sheet-table-row">
+                <span class="sheet-table-data sheet-right">Armor:</span>
+                <span class="sheet-table-data sheet-left"><input title="@{worn-Armor}" type="text" name="attr_worn-Armor" placeholder="Item Name"></span>
+                <span class="sheet-table-data sheet-left"><input title="@{worn-Armor-description}" type="text" name="attr_worn-Armor-description" placeholder="Short Description"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Armor-charges}" type="number" name="attr_worn-Armor-charges" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Armor-weight}" type="number" name="attr_worn-Armor-weight" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Armor-hardness}" type="number" name="attr_worn-Armor-hardness" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Armor-hp}" type="number" name="attr_worn-Armor-hp" value="0"></span>
+                <span class="sheet-table-data sheet-divider-lg">/</span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Armor-hp|max}" type="number" name="attr_worn-Armor-hp_max" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Armor-value}" type="number" name="attr_worn-Armor-value" value="0"></span>
+            </div>
+            <div class="sheet-table-row">
+                <span class="sheet-table-data sheet-right">Belt:</span>
+                <span class="sheet-table-data sheet-left"><input title="@{worn-Belt}" type="text" name="attr_worn-Belt" placeholder="Item Name"></span>
+                <span class="sheet-table-data sheet-left"><input title="@{worn-Belt-description}" type="text" name="attr_worn-Belt-description" placeholder="Short Description"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Belt-charges}" type="number" name="attr_worn-Belt-charges" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Belt-weight}" type="number" name="attr_worn-Belt-weight" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Belt-hardness}" type="number" name="attr_worn-Belt-hardness" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Belt-hp}" type="number" name="attr_worn-Belt-hp" value="0"></span>
+                <span class="sheet-table-data sheet-divider-lg">/</span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Belt-hp|max}" type="number" name="attr_worn-Belt-hp_max" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Belt-value}" type="number" name="attr_worn-Belt-value" value="0"></span>
+            </div>
 			<div class="sheet-table-row">
-				<span class="sheet-table-header" style="width:10%;">Slot</span>
-				<span class="sheet-table-header">Name</span>
-				<span class="sheet-table-header">Description</span>
+                <span class="sheet-table-data sheet-right">Body:</span>
+                <span class="sheet-table-data sheet-left"><input title="@{worn-Body}" type="text" name="attr_worn-Body" placeholder="Item Name"></span>
+                <span class="sheet-table-data sheet-left"><input title="@{worn-Body-description}" type="text" name="attr_worn-Body-description" placeholder="Short Description"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Body-charges}" type="number" name="attr_worn-Body-charges" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Body-weight}" type="number" name="attr_worn-Body-weight" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Body-hardness}" type="number" name="attr_worn-Body-hardness" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Body-hp}" type="number" name="attr_worn-Body-hp" value="0"></span>
+                <span class="sheet-table-data sheet-divider-lg">/</span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Body-hp|max}" type="number" name="attr_worn-Body-hp_max" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Body-value}" type="number" name="attr_worn-Body-value" value="0"></span>
 			</div>
 			<div class="sheet-table-row">
-				<span class="sheet-table-data sheet-right" style="width:10%;">Belt:</span>
-				<span class="sheet-table-data sheet-left" style="width:30%;"><input title="@{worn-Belt}" type="text" name="attr_worn-Belt" placeholder="Name"></span>
-				<span class="sheet-table-data sheet-left" style="width:60%;"><input title="@{worn-Belt-description}" type="text" name="attr_worn-Belt-description" placeholder="Description"></span>
+                <span class="sheet-table-data sheet-right">Chest:</span>
+                <span class="sheet-table-data sheet-left"><input title="@{worn-Chest}" type="text" name="attr_worn-Chest" placeholder="Item Name"></span>
+                <span class="sheet-table-data sheet-left"><input title="@{worn-Chest-description}" type="text" name="attr_worn-Chest-description" placeholder="Short Description"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Chest-charges}" type="number" name="attr_worn-Chest-charges" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Chest-weight}" type="number" name="attr_worn-Chest-weight" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Chest-hardness}" type="number" name="attr_worn-Chest-hardness" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Chest-hp}" type="number" name="attr_worn-Chest-hp" value="0"></span>
+                <span class="sheet-table-data sheet-divider-lg">/</span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Chest-hp|max}" type="number" name="attr_worn-Chest-hp_max" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Chest-value}" type="number" name="attr_worn-Chest-value" value="0"></span>
 			</div>
 			<div class="sheet-table-row">
-				<span class="sheet-table-data sheet-right" style="width:10%;">Body:</span>
-				<span class="sheet-table-data sheet-left" style="width:30%;"><input title="@{worn-Body}" type="text" name="attr_worn-Body" placeholder="Name"></span>
-				<span class="sheet-table-data sheet-left" style="width:60%;"><input title="@{worn-Body-description}" type="text" name="attr_worn-Body-description" placeholder="Description"></span>
+                <span class="sheet-table-data sheet-right">Eyes:</span>
+                <span class="sheet-table-data sheet-left"><input title="@{worn-Eyes}" type="text" name="attr_worn-Eyes" placeholder="Item Name"></span>
+                <span class="sheet-table-data sheet-left"><input title="@{worn-Eyes-description}" type="text" name="attr_worn-Eyes-description" placeholder="Short Description"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Eyes-charges}" type="number" name="attr_worn-Eyes-charges" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Eyes-weight}" type="number" name="attr_worn-Eyes-weight" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Eyes-hardness}" type="number" name="attr_worn-Eyes-hardness" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Eyes-hp}" type="number" name="attr_worn-Eyes-hp" value="0"></span>
+                <span class="sheet-table-data sheet-divider-lg">/</span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Eyes-hp|max}" type="number" name="attr_worn-Eyes-hp_max" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Eyes-value}" type="number" name="attr_worn-Eyes-value" value="0"></span>
 			</div>
 			<div class="sheet-table-row">
-				<span class="sheet-table-data sheet-right" style="width:10%;">Chest:</span>
-				<span class="sheet-table-data sheet-left" style="width:30%;"><input title="@{worn-Chest}" type="text" name="attr_worn-Chest" placeholder="Name"></span>
-				<span class="sheet-table-data sheet-left" style="width:60%;"><input title="@{worn-Chest-description}" type="text" name="attr_worn-Chest-description" placeholder="Description"></span>
+                <span class="sheet-table-data sheet-right">Feet:</span>
+                <span class="sheet-table-data sheet-left"><input title="@{worn-Feet}" type="text" name="attr_worn-Feet" placeholder="Item Name"></span>
+                <span class="sheet-table-data sheet-left"><input title="@{worn-Feet-description}" type="text" name="attr_worn-Feet-description" placeholder="Short Description"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Feet-charges}" type="number" name="attr_worn-Feet-charges" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Feet-weight}" type="number" name="attr_worn-Feet-weight" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Feet-hardness}" type="number" name="attr_worn-Feet-hardness" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Feet-hp}" type="number" name="attr_worn-Feet-hp" value="0"></span>
+                <span class="sheet-table-data sheet-divider-lg">/</span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Feet-hp|max}" type="number" name="attr_worn-Feet-hp_max" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Feet-value}" type="number" name="attr_worn-Feet-value" value="0"></span>
 			</div>
 			<div class="sheet-table-row">
-				<span class="sheet-table-data sheet-right" style="width:10%;">Eyes:</span>
-				<span class="sheet-table-data sheet-left" style="width:30%;"><input title="@{worn-Eyes}" type="text" name="attr_worn-Eyes" placeholder="Name"></span>
-				<span class="sheet-table-data sheet-left" style="width:60%;"><input title="@{worn-Eyes-description}" type="text" name="attr_worn-Eyes-description" placeholder="Description"></span>
+                <span class="sheet-table-data sheet-right">Hands:</span>
+                <span class="sheet-table-data sheet-left"><input title="@{worn-Hands}" type="text" name="attr_worn-Hands" placeholder="Item Name"></span>
+                <span class="sheet-table-data sheet-left"><input title="@{worn-Hands-description}" type="text" name="attr_worn-Hands-description" placeholder="Short Description"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Hands-charges}" type="number" name="attr_worn-Hands-charges" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Hands-weight}" type="number" name="attr_worn-Hands-weight" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Hands-hardness}" type="number" name="attr_worn-Hands-hardness" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Hands-hp}" type="number" name="attr_worn-Hands-hp" value="0"></span>
+                <span class="sheet-table-data sheet-divider-lg">/</span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Hands-hp|max}" type="number" name="attr_worn-Hands-hp_max" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Hands-value}" type="number" name="attr_worn-Hands-value" value="0"></span>
 			</div>
 			<div class="sheet-table-row">
-				<span class="sheet-table-data sheet-right" style="width:10%;">Feet:</span>
-				<span class="sheet-table-data sheet-left" style="width:30%;"><input title="@{worn-Feet}" type="text" name="attr_worn-Feet" placeholder="Name"></span>
-				<span class="sheet-table-data sheet-left" style="width:60%;"><input title="@{worn-Feet-description}" type="text" name="attr_worn-Feet-description" placeholder="Description"></span>
+                <span class="sheet-table-data sheet-right">Head:</span>
+                <span class="sheet-table-data sheet-left"><input title="@{worn-Head}" type="text" name="attr_worn-Head" placeholder="Item Name"></span>
+                <span class="sheet-table-data sheet-left"><input title="@{worn-Head-description}" type="text" name="attr_worn-Head-description" placeholder="Short Description"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Head-charges}" type="number" name="attr_worn-Head-charges" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Head-weight}" type="number" name="attr_worn-Head-weight" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Head-hardness}" type="number" name="attr_worn-Head-hardness" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Head-hp}" type="number" name="attr_worn-Head-hp" value="0"></span>
+                <span class="sheet-table-data sheet-divider-lg">/</span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Head-hp|max}" type="number" name="attr_worn-Head-hp_max" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Head-value}" type="number" name="attr_worn-Head-value" value="0"></span>
 			</div>
 			<div class="sheet-table-row">
-				<span class="sheet-table-data sheet-right" style="width:10%;">Hands:</span>
-				<span class="sheet-table-data sheet-left" style="width:30%;"><input title="@{worn-Hands}" type="text" name="attr_worn-Hands" placeholder="Name"></span>
-				<span class="sheet-table-data sheet-left" style="width:60%;"><input title="@{worn-Hands-description}" type="text" name="attr_worn-Hands-description" placeholder="Description"></span>
+                <span class="sheet-table-data sheet-right">Headband:</span>
+                <span class="sheet-table-data sheet-left"><input title="@{worn-Headband}" type="text" name="attr_worn-Headband" placeholder="Item Name"></span>
+                <span class="sheet-table-data sheet-left"><input title="@{worn-Headband-description}" type="text" name="attr_worn-Headband-description" placeholder="Short Description"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Headband-charges}" type="number" name="attr_worn-Headband-charges" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Headband-weight}" type="number" name="attr_worn-Headband-weight" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Headband-hardness}" type="number" name="attr_worn-Headband-hardness" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Headband-hp}" type="number" name="attr_worn-Headband-hp" value="0"></span>
+                <span class="sheet-table-data sheet-divider-lg">/</span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Headband-hp|max}" type="number" name="attr_worn-Headband-hp_max" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Headband-value}" type="number" name="attr_worn-Headband-value" value="0"></span>
 			</div>
 			<div class="sheet-table-row">
-				<span class="sheet-table-data sheet-right" style="width:10%;">Head:</span>
-				<span class="sheet-table-data sheet-left" style="width:30%;"><input title="@{worn-Head}" type="text" name="attr_worn-Head" placeholder="Name"></span>
-				<span class="sheet-table-data sheet-left" style="width:60%;"><input title="@{worn-Head-description}" type="text" name="attr_worn-Head-description" placeholder="Description"></span>
+                <span class="sheet-table-data sheet-right">Neck:</span>
+                <span class="sheet-table-data sheet-left"><input title="@{worn-Neck}" type="text" name="attr_worn-Neck" placeholder="Item Name"></span>
+                <span class="sheet-table-data sheet-left"><input title="@{worn-Neck-description}" type="text" name="attr_worn-Neck-description" placeholder="Short Description"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Neck-charges}" type="number" name="attr_worn-Neck-charges" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Neck-weight}" type="number" name="attr_worn-Neck-weight" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Neck-hardness}" type="number" name="attr_worn-Neck-hardness" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Neck-hp}" type="number" name="attr_worn-Neck-hp" value="0"></span>
+                <span class="sheet-table-data sheet-divider-lg">/</span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Neck-hp|max}" type="number" name="attr_worn-Neck-hp_max" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Neck-value}" type="number" name="attr_worn-Neck-value" value="0"></span>
 			</div>
 			<div class="sheet-table-row">
-				<span class="sheet-table-data sheet-right" style="width:10%;">Headband:</span>
-				<span class="sheet-table-data sheet-left" style="width:30%;"><input title="@{worn-Headband}" type="text" name="attr_worn-Headband" placeholder="Name"></span>
-				<span class="sheet-table-data sheet-left" style="width:60%;"><input title="@{worn-Headband-description}" type="text" name="attr_worn-Headband-description" placeholder="Description"></span>
+                <span class="sheet-table-data sheet-right">Ring 1:</span>
+                <span class="sheet-table-data sheet-left"><input title="@{worn-Ring1}" type="text" name="attr_worn-Ring1" placeholder="Item Name"></span>
+                <span class="sheet-table-data sheet-left"><input title="@{worn-Ring1-description}" type="text" name="attr_worn-Ring1-description" placeholder="Short Description"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Ring1-charges}" type="number" name="attr_worn-Ring1-charges" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Ring1-weight}" type="number" name="attr_worn-Ring1-weight" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Ring1-hardness}" type="number" name="attr_worn-Ring1-hardness" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Ring1-hp}" type="number" name="attr_worn-Ring1-hp" value="0"></span>
+                <span class="sheet-table-data sheet-divider-lg">/</span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Ring1-hp|max}" type="number" name="attr_worn-Ring1-hp_max" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Ring1-value}" type="number" name="attr_worn-Ring1-value" value="0"></span>
 			</div>
 			<div class="sheet-table-row">
-				<span class="sheet-table-data sheet-right" style="width:10%;">Neck:</span>
-				<span class="sheet-table-data sheet-left" style="width:30%;"><input title="@{worn-Neck}" type="text" name="attr_worn-Neck" placeholder="Name"></span>
-				<span class="sheet-table-data sheet-left" style="width:60%;"><input title="@{worn-Neck-description}" type="text" name="attr_worn-Neck-description" placeholder="Description"></span>
+                <span class="sheet-table-data sheet-right">Ring 2:</span>
+                <span class="sheet-table-data sheet-left"><input title="@{worn-Ring2}" type="text" name="attr_worn-Ring2" placeholder="Item Name"></span>
+                <span class="sheet-table-data sheet-left"><input title="@{worn-Ring2-description}" type="text" name="attr_worn-Ring2-description" placeholder="Short Description"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Ring2-charges}" type="number" name="attr_worn-Ring2-charges" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Ring2-weight}" type="number" name="attr_worn-Ring2-weight" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Ring2-hardness}" type="number" name="attr_worn-Ring2-hardness" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Ring2-hp}" type="number" name="attr_worn-Ring2-hp" value="0"></span>
+                <span class="sheet-table-data sheet-divider-lg">/</span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Ring2-hp|max}" type="number" name="attr_worn-Ring2-hp_max" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Ring2-value}" type="number" name="attr_worn-Ring2-value" value="0"></span>
 			</div>
 			<div class="sheet-table-row">
-				<span class="sheet-table-data sheet-right" style="width:10%;">Ring 1:</span>
-				<span class="sheet-table-data sheet-left" style="width:30%;"><input title="@{worn-Ring1}" type="text" name="attr_worn-Ring1" placeholder="Name"></span>
-				<span class="sheet-table-data sheet-left" style="width:60%;"><input title="@{worn-Ring1-description}" type="text" name="attr_worn-Ring1-description" placeholder="Description"></span>
+                <span class="sheet-table-data sheet-right">Shield:</span>
+                <span class="sheet-table-data sheet-left"><input title="@{worn-Shield}" type="text" name="attr_worn-Shield" placeholder="Item Name"></span>
+                <span class="sheet-table-data sheet-left"><input title="@{worn-Shield-description}" type="text" name="attr_worn-Shield-description" placeholder="Short Description"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Shield-charges}" type="number" name="attr_worn-Shield-charges" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Shield-weight}" type="number" name="attr_worn-Shield-weight" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Shield-hardness}" type="number" name="attr_worn-Shield-hardness" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Shield-hp}" type="number" name="attr_worn-Shield-hp" value="0"></span>
+                <span class="sheet-table-data sheet-divider-lg">/</span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Shield-hp|max}" type="number" name="attr_worn-Shield-hp_max" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Shield-value}" type="number" name="attr_worn-Shield-value" value="0"></span>
 			</div>
 			<div class="sheet-table-row">
-				<span class="sheet-table-data sheet-right" style="width:10%;">Ring 2:</span>
-				<span class="sheet-table-data sheet-left" style="width:30%;"><input title="@{worn-Ring2}" type="text" name="attr_worn-Ring2" placeholder="Name"></span>
-				<span class="sheet-table-data sheet-left" style="width:60%;"><input title="@{worn-Ring2-description}" type="text" name="attr_worn-Ring2-description" placeholder="Description"></span>
+                <span class="sheet-table-data sheet-right">Shoulders:</span>
+                <span class="sheet-table-data sheet-left"><input title="@{worn-Shoulders}" type="text" name="attr_worn-Shoulders" placeholder="Item Name"></span>
+                <span class="sheet-table-data sheet-left"><input title="@{worn-Shoulders-description}" type="text" name="attr_worn-Shoulders-description" placeholder="Short Description"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Shoulders-charges}" type="number" name="attr_worn-Shoulders-charges" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Shoulders-weight}" type="number" name="attr_worn-Shoulders-weight" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Shoulders-hardness}" type="number" name="attr_worn-Shoulders-hardness" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Shoulders-hp}" type="number" name="attr_worn-Shoulders-hp" value="0"></span>
+                <span class="sheet-table-data sheet-divider-lg">/</span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Shoulders-hp|max}" type="number" name="attr_worn-Shoulders-hp_max" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Shoulders-value}" type="number" name="attr_worn-Shoulders-value" value="0"></span>
 			</div>
 			<div class="sheet-table-row">
-				<span class="sheet-table-data sheet-right" style="width:10%;">Shoulders:</span>
-				<span class="sheet-table-data sheet-left" style="width:30%;"><input title="@{worn-Shoulders}" type="text" name="attr_worn-Shoulders" placeholder="Name"></span>
-				<span class="sheet-table-data sheet-left" style="width:60%;"><input title="@{worn-Shoulders-description}" type="text" name="attr_worn-Shoulders-description" placeholder="Description"></span>
+                <span class="sheet-table-data sheet-right">Wrist:</span>
+                <span class="sheet-table-data sheet-left"><input title="@{worn-Wrist}" type="text" name="attr_worn-Wrist" placeholder="Item Name"></span>
+                <span class="sheet-table-data sheet-left"><input title="@{worn-Wrist-description}" type="text" name="attr_worn-Wrist-description" placeholder="Short Description"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Wrist-charges}" type="number" name="attr_worn-Wrist-charges" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Wrist-weight}" type="number" name="attr_worn-Wrist-weight" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Wrist-hardness}" type="number" name="attr_worn-Wrist-hardness" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Wrist-hp}" type="number" name="attr_worn-Wrist-hp" value="0"></span>
+                <span class="sheet-table-data sheet-divider-lg">/</span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Wrist-hp|max}" type="number" name="attr_worn-Wrist-hp_max" value="0"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Wrist-value}" type="number" name="attr_worn-Wrist-value" value="0"></span>
 			</div>
 			<div class="sheet-table-row">
-				<span class="sheet-table-data sheet-right" style="width:10%;">Wrist:</span>
-				<span class="sheet-table-data sheet-left" style="width:30%;"><input title="@{worn-Wrist}" type="text" name="attr_worn-Wrist" placeholder="Name"></span>
-				<span class="sheet-table-data sheet-left" style="width:60%;"><input title="@{worn-Wrist-description}" type="text" name="attr_worn-Wrist-description" placeholder="Description"></span>
+                <span class="sheet-table-data sheet-left"></span>
+                <span class="sheet-table-data sheet-left"></span>
+                <span class="sheet-table-data sheet-right"><b>Totals:</b></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-total-charges}" type="number" name="attr_worn-total-charges" value="0" class="sheet-calc" readonly="readonly"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%; min-width:4.5em;" title="@{worn-total-weight}" type="number" name="attr_worn-total-weight" value="0" class="sheet-calc" readonly="readonly"></span>
+                <span class="sheet-table-data sheet-left"><b>lbs.</b></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-total-hp}" type="number" name="attr_worn-total-hp" value="0" class="sheet-calc" readonly="readonly"></span>
+                <span class="sheet-table-data sheet-divider-lg">/</span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-total-hp|max}" type="number" name="attr_worn-total-hp_max" value="0" class="sheet-calc" readonly="readonly"></span>
+                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-total-value}" type="number" name="attr_worn-total-value" value="0" class="sheet-calc" readonly="readonly"></span>
 			</div>
 		</div>
 		<br>
 	</div>
 	<div>
-		<b>Inventory</b>
+        <b>Equipment</b>
 		<input type="checkbox" class="sheet-sect-show" title="@{inventory-show}" name="attr_inventory-show" value="1" style="opacity:0; width:90px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -75px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
-		<input type="checkbox" class="sheet-expand-show" title="Collapse or expand all rows." name="attr_inventory-expand-show" value="1" style="opacity: 0;height: 1.5em;width: 38px; margin: 0px -38px 2px 0;help;z-index: 1;cursor: help;" /><span></span>
+        <input type="checkbox" class="sheet-expand-show" title="Collapse or expand all rows." name="attr_inventory-expand-show" value="1" style="opacity: 0;height: 1.5em;width: 38px; margin: 0px -38px 2px 0;z-index: 1;cursor: help;" /><span></span>
 		<div class="sheet-table sheet-sect">
-			<span class="sheet-table-name">Inventory</span>
+            <span class="sheet-table-name" title="The items that the character has; either carried or elsewhere">Equipment</span>
 			<div class="sheet-table-row">
-				<span class="sheet-table-header" style="width:5%;"></span>
-				<span class="sheet-table-header" style="width:5%;"></span>
-				<span class="sheet-table-header" style="width:18%;">Name</span>
-				<span class="sheet-table-header" style="width:40%;">Short Description</span>
-				<span class="sheet-table-header" style="width:5%; text-align:right;">Charges/Qty</span>
-				<span class="sheet-table-header sheet-divider-lg" style="width:1%;">/</span>
-				<span class="sheet-table-header" style="width:5%;text-align:left;">Max</span>
-				<span class="sheet-table-header" style="width:5%;">Weight</span>
+                <span class="sheet-table-header sheet-table-data" style="width:4%;"></span>
+                <span class="sheet-table-header sheet-table-data" style="width:4%;"></span>
+                <span class="sheet-table-header sheet-table-data" style="width:18%;">Name</span>
+                <span class="sheet-table-header sheet-table-data" style="width:40%;">Short Description</span>
+                <span class="sheet-table-header sheet-table-data" style="width:8%; min-width:3.5em;">Location</span>
+                <span class="sheet-table-header sheet-table-data" style="width:5%; text-align:right; min-width:3.5em;">Chrg/Qty</span>
+                <span class="sheet-table-header sheet-divider-lg sheet-table-data">/</span>
+                <span class="sheet-table-header sheet-table-data" style="width:5%; text-align:left; min-width:3.5em;">Max</span>
+                <span class="sheet-table-header sheet-table-data" style="width:5%; min-width:3.5em;">Wt</span>
+                <span class="sheet-table-header sheet-table-data" style="width:5%; min-width:3.5em;">Hard</span>
+                <span class="sheet-table-header sheet-table-data" style="width:5%; min-width:3.5em;">HP</span>
+                <span class="sheet-table-header sheet-divider-lg sheet-table-data">/</span>
+                <span class="sheet-table-header sheet-table-data" style="width:5%; min-width:4em;">Max</span>
+                <span class="sheet-table-header sheet-table-data" style="width:5%; min-width:3.5em;">Value</span>
 			</div>
 		</div>
 		<div class="sheet-table sheet-sect">
 			<div class="sheet-repeating-fields">
 				<fieldset class="repeating_item">
-					<input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_item_$X_item-show}" name="attr_item-show" value="1" style="opacity: 0 ; height: 1.5em ; position: absolute; top: 10px; width: 3.5% ; cursor: pointer ; z-index: 1" checked="checked" /><span class="sheet-table-data sheet-center" style="width:5%;"></span>
+                    <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_item_$X_item-show}" name="attr_item-show" value="1" style="opacity: 0 ; height: 1.5em ; position: absolute; top: 10px; width: 3.5% ; cursor: pointer ; z-index: 1" checked="checked" /><span class="sheet-table-data sheet-center" style="width:4%;"></span>
 					<span class="sheet-table-data sheet-center" style="width:4%;"><button type="roll"  name="attr_roll" title="%{selected|repeating_item_$X_item-roll}" value="@{macro-text}"></button></span>
-					<span class="sheet-table-data sheet-center" style="width:23%;"><input title="@{repeating_item_$X_name}" type="text" name="attr_name" placeholder="Item Name"></span>
-					<span class="sheet-table-data sheet-center" style="width:55%;"><input title="@{repeating_item_$X_short-description}" type="text" name="attr_short-description" placeholder="Short Description"></span>
+                    <span class="sheet-table-data sheet-center" style="width:18%;"><input title="@{repeating_item_$X_name}" type="text" name="attr_name" placeholder="Item Name"></span>
+                    <span class="sheet-table-data sheet-center" style="width:40%;"><input title="@{repeating_item_$X_short-description}" type="text" name="attr_short-description" placeholder="Short Description"></span>
+                    <span class="sheet-table-data sheet-center" style="width:8%;">
+                        <select style="width:100%;" title="@{repeating_item_$X_location}" name="attr_location" class="sheet-select-small">
+                            <option value="0" selected>&#8226;Carried</option>
+                            <option value="1">Not Carried</option>
+                        </select>
+                    </span>
 					<span class="sheet-table-data sheet-center" style="width:5%;"><input title="@{repeating_item_$X_qty}" type="number" name="attr_qty" value="0" /></span>
 					<span class="sheet-table-data sheet-divider-lg" >/</span>
 					<span class="sheet-table-data sheet-center" style="width:5%;"><input title="@{repeating_item_$X_qty|max" type="number" name="attr_qty_max" value="0" /></span>
 					<span class="sheet-table-data sheet-center" style="width:5%;"><input title="@{repeating_item_$X_weight}" type="number" name="attr_weight" value="0"  step="any" min="0" /></span>
+                    <span class="sheet-table-data sheet-center" style="width:5%;"><input title="@{repeating_item_$X_hardness}" type="number" name="attr_hardness" value="0" step="any" min="0" /></span>
+                    <span class="sheet-table-data sheet-center" style="width:5%;"><input title="@{repeating_item_$X_hp}" type="number" name="attr_hp" value="0" step="any" min="0" /></span>
+                    <span class="sheet-table-data sheet-divider-lg">/</span>
+                    <span class="sheet-table-data sheet-center" style="width:5%; min-width:4em;"><input title="@{repeating_item_$X_hp|max}" type="number" name="attr_hp_max" value="0" step="any" min="0" /></span>
+                    <span class="sheet-table-data sheet-center" style="width:5%;"><input title="@{repeating_item_$X_value}" type="number" name="attr_value" value="0" step="any" min="0" /></span>
 					<div class="sheet-sect sheet-expand">
 						<b>Description</b>
 						<input type="checkbox" class="sheet-desc-show" title="@{repeating_item_$X_description-show}" name="attr_description-show" value="1" style="opacity:0; width:90px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -75px; cursor:pointer; z-index:1;" /><span></span>
@@ -6739,6 +6911,21 @@
 					</div>
 				</fieldset>
 			</div>
+            <div class="sheet-table">
+                <span class="sheet-table-data sheet-left" style="width:4%;"></span>
+                <span class="sheet-table-data sheet-left" style="width:4%;"></span>
+                <span class="sheet-table-data sheet-left" style="width:18%;"></span>
+                <span class="sheet-table-data sheet-left" style="width:40%;"></span>
+                <span class="sheet-table-data sheet-left" style="width:5%; min-width:3.5em;"></span>
+                <span class="sheet-table-data sheet-left">&nbsp;</span>
+                <span class="sheet-table-data sheet-right" style="width:5%; min-width:3.5em;"><b>Totals:</b></span>
+                <span class="sheet-table-data sheet-left" style="width:5%; min-width:4.5em;"><input style="width:100%;" title="@{item_total_weight}" type="number" name="attr_item_total_weight" value="0" class="sheet-calc" readonly="readonly"></span>
+                <span class="sheet-table-data sheet-left" style="width:5%; min-width:3.5em;"><b>lbs.</b></span>
+                <span class="sheet-table-data sheet-left" style="width:5%; min-width:3.5em;"><input style="width:100%;" title="@{item-total-hp}" type="number" name="attr_item-total-hp" value="0" class="sheet-calc" readonly="readonly"></span>
+                <span class="sheet-table-data sheet-left sheet-divider-lg">/</span>
+                <span class="sheet-table-data sheet-left" style="width:5%; min-width:4em;"><input style="width:100%;" title="@{item-total-hp|max}" type="number" name="attr_item-total-hp_max" value="0" class="sheet-calc" readonly="readonly"></span>
+                <span class="sheet-table-data sheet-left" style="width:5%; min-width:3.5em;"><input style="width:100%;" title="@{item-total-value}" type="number" name="attr_item-total-value" value="0" class="sheet-calc" readonly="readonly"></span>
+            </div>
 		</div>
 	</div>
 	<div>
@@ -6747,26 +6934,26 @@
 		<div class="sheet-table sheet-sect">
 			<span class="sheet-table-name">Carried Weight</span>
 			<div class="sheet-table-row">
-				<span class="sheet-table-header">Armor &amp; Weapons</span>
+                <span class="sheet-table-header">Carried Currency</span>
 				<span class="sheet-table-header"></span>
-				<span class="sheet-table-header">Currency</span>
+                <span class="sheet-table-header">Worn Equipment</span>
 				<span class="sheet-table-header"></span>
-				<span class="sheet-table-header">Equipment</span>
+                <span class="sheet-table-header">Carried Equipment</span>
 				<span class="sheet-table-header"></span>
-				<span class="sheet-table-header">Misc</span>
+                <span class="sheet-table-header" title="Miscellaneous weight. Player configurable">Misc</span>
 				<span class="sheet-table-header"></span>
-				<span class="sheet-table-header">Total</span>
+                <span class="sheet-table-header" title="Total weight carried by character">Total</span>
 			</div>
 			<div class="sheet-table-row">
-				<span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{carried-armor-and-weapons}" type="number" name="attr_carried-armor-and-weapons" value="0"  min="0" /></span>
+                <span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{carried-currency}" type="number" name="attr_carried-currency" value="0" class="sheet-calc" readonly="readonly" /></span>
 				<span class="sheet-table-data sheet-divider">+</span>
-				<span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{carried-currency}" type="number" name="attr_carried-currency" value="((@{CP} + [[ @{SP} ]] + [[ @{GP} ]] + [[ @{PP} ]])/50)" disabled /></span>
+                <span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{carried-worn-equipment}" type="number" name="attr_carried-worn-equipment" value="@{worn-total-weight}" disabled /></span>
 				<span class="sheet-table-data sheet-divider">+</span>
-				<span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{carried-equipment}" type="number" name="attr_carried-equipment" value="0"  min="0" /></span>
+                <span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{carried-equipment}" type="number" name="attr_carried-equipment" value="@{item_total_weight}" disabled /></span>
 				<span class="sheet-table-data sheet-divider">+</span>
-				<span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{carried-misc}" type="number" name="attr_carried-misc" value="0"  min="0" /></span>
+                <span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{carried-misc}" type="number" name="attr_carried-misc" value="0" /></span>
 				<span class="sheet-table-data sheet-divider">=</span>
-				<span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{carried-total}" type="number" name="attr_carried-total" value="(@{carried-armor-and-weapons} + [[ @{carried-currency} ]] + [[ @{carried-equipment} ]] + [[ @{carried-misc} ]])" disabled /></span>
+                <span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{carried-total}" type="number" name="attr_carried-total" value="0" class="sheet-calc" readonly="readonly" /></span>
 			</div>
 		</div>
 		<br>
@@ -6777,22 +6964,28 @@
 		<div class="sheet-table sheet-sect">
 			<span class="sheet-table-name">Loads and Lift</span>
 			<div class="sheet-table-row">
-				<span class="sheet-table-header">Light</span>
-				<span class="sheet-table-header">Medium</span>
-				<span class="sheet-table-header">Heavy</span>
+                <span class="sheet-table-header" title="Bonus to Strength score for carrying capacity only">STR Bonus</span>
+                <span class="sheet-table-header" title="The amount that load values will be multiplied">Multiplier</span>
+                <span class="sheet-table-header" title="Miscellaneous bonus to load values">Misc</span>
+                <span class="sheet-table-header" title="At this weight of carried equipment or less, the character is unencumbered">Light</span>
+                <span class="sheet-table-header" title="Over the light load and up to this weight, the character is moderately encumbered">Medium</span>
+                <span class="sheet-table-header" title="Over the medium load and up to this weight, the character is heavily encumbered">Heavy</span>
 				<span class="sheet-table-header" style="background-color:black;"></span>
-				<span class="sheet-table-header">Above Head</span>
-				<span class="sheet-table-header">Off Ground</span>
-				<span class="sheet-table-header">Drag &amp; Push</span>
+                <span class="sheet-table-header" title="A character can lift as much as his maximum load over his head">Above Head</span>
+                <span class="sheet-table-header" title="A character can lift as much as double his maximum load off the ground, but he or she can only stagger around with it">Off Ground</span>
+                <span class="sheet-table-header" title="A character can generally push or drag along the ground as much as five times his maximum load">Drag &amp; Push</span>
 			</div>
 			<div class="sheet-table-row">
-				<span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{load-light}" type="number" name="attr_load-light" value="0" /></span>
-				<span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{load-medium}" type="number" name="attr_load-medium" value="0" /></span>
-				<span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{load-heavy}" type="number" name="attr_load-heavy" value="0" /></span>
+                <span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{load-str-bonus}" type="number" name="attr_load-str-bonus" value="0" /></span>
+                <span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{load-multiplier}" type="number" name="attr_load-multiplier" value="1" min="1" /></span>
+                <span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{load-misc}" type="number" name="attr_load-misc" value="0" /></span>
+                <span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{load-light}" type="number" name="attr_load-light" value="33" class="sheet-calc" readonly="readonly" /></span>
+                <span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{load-medium}" type="number" name="attr_load-medium" value="66" class="sheet-calc" readonly="readonly" /></span>
+                <span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{load-heavy}" type="number" name="attr_load-heavy" value="100" class="sheet-calc" readonly="readonly" /></span>
 				<span class="sheet-table-data sheet-center" style="background-color:black;">&nbsp;</span>
-				<span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{lift-above-head}" type="number" name="attr_lift-above-head" value="@{load-heavy}" disabled /></span>
-				<span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{lift-off-ground}" type="number" name="attr_lift-off-ground" value="(@{load-heavy} * 2)" disabled /></span>
-				<span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{lift-drag-and-push}" type="number" name="attr_lift-drag-and-push" value="(@{load-heavy} * 5)" disabled /></span>
+                <span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{lift-above-head}" type="number" name="attr_lift-above-head" value="100" class="sheet-calc" readonly="readonly" /></span>
+                <span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{lift-off-ground}" type="number" name="attr_lift-off-ground" value="200" class="sheet-calc" readonly="readonly" /></span>
+                <span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{lift-drag-and-push}" type="number" name="attr_lift-drag-and-push" value="500" class="sheet-calc" readonly="readonly" /></span>
 			</div>
 		</div>
 		<div class="sheet-table sheet-sect">
@@ -9315,6 +9508,13 @@
             <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{CMD-size}" type="number" name="attr_CMD-size" value="0" class="sheet-calc" readonly="readonly" hidden /><br>Size-CMD</span>
             <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{size_skill}" type="number" name="attr_size_skill" value="0" class="sheet-calc" readonly="readonly" hidden /><br>Size-Skills</span>
             <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{size_skill_double}" type="number" name="attr_size_skill_double" value="0" class="sheet-calc" readonly="readonly" hidden /><br>Size-Skills x2</span>
+            <span class="sheet-table-data sheet-center sheet-small-label" style="width:11%;" title="How many legs the character has. Affects carrying capacity">
+                <select title="@{legs}" name="attr_legs">
+                    <option value="2" selected>&#8226;Bipedal</option>
+                    <option value="4">Quadruped</option>
+                </select>
+                <br>Legs
+            </span>
 			<span class="sheet-table-data sheet-center sheet-small-label" style="width:15%;"><input title="@{deity}" type="text" name="attr_deity" placeholder="Deity" /><br>Deity</span>
 			<span class="sheet-table-data sheet-center sheet-small-label" style="width:15%;"><input title="@{homeland}" type="text" name="attr_homeland" placeholder="Homeland" /><br>Homeland</span>
 			<span class="sheet-table-data sheet-center sheet-small-label" style="width:15%;"><input title="@{occupation}" type="text" name="attr_occupation" placeholder="Occupation" /><br>Occupation</span>
@@ -13487,7 +13687,7 @@ var SWUtils = SWUtils || (function() {
 
 var PFSheet = PFSheet || (function(){
 
-    var version= 0.36,
+    var version = 0.37,
 	pfDebug = false,
 	
 	/****************************** UTILITIES ************************************/
@@ -14412,15 +14612,16 @@ var PFSheet = PFSheet || (function(){
          "armor2-equipped", "armor2-acbonus", "armor2-max-dex", "armor2-acp", "armor2-spell-fail", "armor2-proficiency",
 		 "armor3-equipped", "armor3-acbonus", "armor3-max-dex", "armor3-acp", "armor3-spell-fail", "armor3-proficiency",
          "acp","max-dex","AC-armor","AC-shield","spell-fail","acp-attack-mod",
-         "max-dex-source","acp-source"], function(v)    {
+        "max-dex-source", "acp-source", "current-load"], function (v) {
          //console.log("updateArmor");
          //console.log(v);
          var acp=0,maxDex=99,acA=0,acS=0,sp=0,atk=0
 			,subAC=0,subD=0,subAcp=0,nonProf=0,subsp=0
-			,currACP=0,currMaxDex=0,currACArmor=0,currACShield=0,currSpellFail=0,currAtkMod=0
-         	,maxDexDropdown=parseInt(v["max-dex-source"],10)
+            , currACP = 0, currMaxDex = 99, currACArmor = 0, currACShield = 0, currSpellFail = 0, currAtkMod = 0
+            , maxDexDropdown = parseInt(v["max-dex-source"], 10) || 0
          	,acpDropdown  = parseInt(v["acp-source"],10)
          	,setAny=0
+            , currentLoad = parseInt(v["current-load"], 10) || 0
 			,setter={}
 			;
 
@@ -14502,19 +14703,50 @@ var PFSheet = PFSheet || (function(){
 			 if (nonProf) { atk += subAcp; }
 	         //console.log("subAC=" + subAC + ", subD=" + subD + ", subAcp=" + subAcp + ", nonProf=" + nonProf + ", subsp=" + subsp + ", acA=" + acA + ", maxDex=" + maxDex + ", acp=" + acp + ", sp=" + sp + ", atk=" + atk);
 		 }
-         //if not using armor and shield then use value in the dropdown
-         //armor and shield are not a number
-         if (!isNaN(maxDexDropdown)) {
-             maxDex = maxDexDropdown;
-             if (maxDex===9999) { maxDex =99;}
-         }
-         if (!isNaN(acpDropdown)) {
-             acp = acpDropdown;
-         }
+
+            // #0: Armor, Shield & Load
+            // #1: Armor & Shield only
+            // #2: Load only
+            // #3: None
+            if (maxDexDropdown == 0 || maxDexDropdown == 2) {
+                if (maxDexDropdown == 2) { maxDex = 99; }
+
+                //carry capacity / encumbrance / load affect on max dex
+                //console.log("currentLoad=" + currentLoad);
+                if (currentLoad == 1) { // under medium encumbrance load
+                    maxDex = Math.min(maxDex, 3);
+                    //console.log("medium load adjusted maxDex=" + maxDex);
+                } else if (currentLoad == 2) { // under heavy encumbrance load
+                    maxDex = Math.min(maxDex, 1);
+                    //console.log("heavy load adjusted maxDex=" + maxDex);
+                }
+            } else if (maxDexDropdown == 3) {
+                maxDex = 99;
+            }
+
+            // #0: Armor, Shield & Load
+            // #1: Armor & Shield only
+            // #2: Load only
+            // #3: None
+            if (acpDropdown == 0 || acpDropdown == 2) {
+                if (acpDropdown == 2) { acp = 0; }
+
+                //carry capacity / encumbrance / load affect on max dex
+                //console.log("currentLoad=" + currentLoad);
+                if (currentLoad == 1) { // under medium encumbrance load
+                    acp -= 3;
+                    //console.log("medium load adjusted acp=" + acp);
+                } else if (currentLoad == 2) { // under heavy encumbrance load
+                    acp -= 6;
+                    //console.log("heavy load adjusted acp=" + acp);
+                }
+            } else if (acpDropdown == 3) {
+                acp = 0;
+            }
 
          currACP=parseInt(v.acp,10)||0;
          currMaxDex=parseInt(v["max-dex"],10);//cannot do "||0" since 0 is valid but falsy
-
+            //console.log("currMaxDex:" + currMaxDex);
          currMaxDex=isNaN(currMaxDex)?99:currMaxDex;
 
          currACArmor=parseInt(v["AC-armor"],10)||0;
@@ -15031,7 +15263,163 @@ var PFSheet = PFSheet || (function(){
 	    });
 	},
 
-	
+    getCarryingCapacity = function (str, load) {
+        var l, m, h;
+        switch (str) {
+            case 0: l = 0; m = 0; h = 0; break;
+            case 1: l = 3; m = 6; h = 10; break;
+            case 2: l = 6; m = 13; h = 20; break;
+            case 3: l = 10; m = 20; h = 30; break;
+            case 4: l = 13; m = 26; h = 40; break;
+            case 5: l = 16; m = 33; h = 50; break;
+            case 6: l = 20; m = 40; h = 60; break;
+            case 7: l = 23; m = 46; h = 70; break;
+            case 8: l = 26; m = 53; h = 80; break;
+            case 9: l = 30; m = 60; h = 90; break;
+            case 10: l = 33; m = 66; h = 100; break;
+            case 11: l = 38; m = 76; h = 115; break;
+            case 12: l = 43; m = 86; h = 130; break;
+            case 13: l = 50; m = 100; h = 150; break;
+            case 14: l = 58; m = 116; h = 175; break;
+            case 15: l = 66; m = 133; h = 200; break;
+            case 16: l = 76; m = 153; h = 230; break;
+            case 17: l = 86; m = 173; h = 260; break;
+            case 18: l = 100; m = 200; h = 300; break;
+            case 19: l = 116; m = 233; h = 350; break;
+            case 20: l = 133; m = 266; h = 400; break;
+            case 21: l = 153; m = 306; h = 460; break;
+            case 22: l = 173; m = 346; h = 520; break;
+            case 23: l = 200; m = 400; h = 600; break;
+            case 24: l = 233; m = 466; h = 700; break;
+            case 25: l = 266; m = 533; h = 800; break;
+            case 26: l = 306; m = 613; h = 920; break;
+            case 27: l = 346; m = 693; h = 1040; break;
+            case 28: l = 400; m = 800; h = 1200; break;
+            case 29: l = 466; m = 933; h = 1400; break;
+            default: l = getCarryingCapacity(str - 10, "light") * 4; m = getCarryingCapacity(str - 10, "medium") * 4; h = getCarryingCapacity(str - 10, "heavy") * 4; break;
+        }
+        if (load == "light") { return l; }
+        else if (load == "medium") { return m; }
+        else if (load == "heavy") { return h; }
+    },
+
+    /* updateLoadsAndLift
+    * updates the load and lift numbers
+    *
+    */
+    updateLoadsAndLift = function () {
+        getAttrs(["STR", "size", "legs", "load-light", "load-medium", "load-heavy", "lift-above-head", "lift-off-ground", "lift-drag-and-push", "load-str-bonus", "load-multiplier", "load-misc"], function (v) {
+            var str = parseInt(v["STR"], 10) || 0,
+            size = parseInt(v["size"], 10) || 0,
+            legs = parseInt(v["legs"], 10) || 0,
+            light = parseInt(v["load-light"], 10) || 0,
+            medium = parseInt(v["load-medium"], 10) || 0,
+            heavy = parseInt(v["load-heavy"], 10) || 0,
+            abovehead = parseInt(v["lift-above-head"], 10) || 0,
+            offground = parseInt(v["lift-off-ground"], 10) || 0,
+            drag = parseInt(v["lift-drag-and-push"], 10) || 0,
+            strmod = parseInt(v["load-str-bonus"], 10) || 0,
+            loadmult = parseInt(v["load-multiplier"], 10) || 0,
+            misc = parseInt(v["load-misc"], 10) || 0;
+            //console.log("STR=" + str + ", legs=" + legs + ", load-light=" + light + ", load-medium=" + medium + ", load-heavy=" + heavy + ", lift-above-head=" + abovehead + ", lift-off-ground=" + offground + ", lift-drag-and-push=" + drag + ", load-str-bonus=" + strmod + ", load-multiplier=" + loadmult + ", load-misc=" + misc);
+            if (loadmult < 1) { loadmult = 1; }
+            loadmult--;
+            var l = getCarryingCapacity(str + strmod, "light") + misc,
+            m = getCarryingCapacity(str + strmod, "medium") + misc,
+            h = getCarryingCapacity(str + strmod, "heavy") + misc,
+            mult = 1;
+            if (legs == 2) {
+                switch (size) {
+                    case -8: mult = 16; break;
+                    case -4: mult = 8; break;
+                    case -2: mult = 4; break;
+                    case -1: mult = 2; break;
+                    case 1: mult = 3 / 4; break;
+                    case 2: mult = 1 / 2; break;
+                    case 4: mult = 1 / 4; break;
+                    case 8: mult = 1 / 8; break;
+                }
+            } else if (legs == 4) {
+                switch (size) {
+                    case -8: mult = 24; break;
+                    case -4: mult = 12; break;
+                    case -2: mult = 6; break;
+                    case -1: mult = 3; break;
+                    case 0: mult = 1.5; break;
+                    case 1: mult = 1; break;
+                    case 2: mult = 3 / 4; break;
+                    case 4: mult = 1 / 2; break;
+                    case 8: mult = 1 / 4; break;
+                }
+            }
+            mult += loadmult;
+            l *= mult; m *= mult; h *= mult;
+            var a = h, o = h * 2, d = h * 5;
+
+            //console.log("new light load=" + l + ", new medium load=" + m + ", new heavy load=" + h + ", new above head=" + a + ", new off ground=" + o + ", new drag=" + d);
+            if (light !== l) { setAttrs({ "load-light": l }); }
+            if (medium !== m) { setAttrs({ "load-medium": m }); }
+            if (heavy !== h) { setAttrs({ "load-heavy": h }); }
+            if (abovehead !== a) { setAttrs({ "lift-above-head": a }); }
+            if (offground !== o) { setAttrs({ "lift-off-ground": o }); }
+            if (drag !== d) { setAttrs({ "lift-drag-and-push": d }); }
+        });
+    },
+
+    /* updateRepeatingItemTotalWeight
+    * updates the total for repeating item with weight, qty and qty_max
+    *
+    */
+    updateRepeatingItemTotalWeight = function (repeatName, totalVar) {
+        //console.log("repeatName=" + repeatName + ", totalVar=" + totalVar);
+        getAttrs([totalVar], function (w) {
+            var currentTotal = parseFloat(w[totalVar], 10) || 0;
+            //console.log("currentTotal=" + currentTotal);
+            getSectionIDs("repeating_" + repeatName, function (idarray) { // get the repeating set
+                //console.log("idarray.length=" + idarray.length);
+                var newTotal = 0.0,
+                setter = {};
+                if (idarray.length > 0) {
+                    _.each(idarray, function (currentID, i) { // loop through the set
+                        getAttrs(["repeating_" + repeatName + "_" + currentID + "_weight",
+                        "repeating_" + repeatName + "_" + currentID + "_qty",
+                        "repeating_" + repeatName + "_" + currentID + "_qty_max",
+                        "repeating_" + repeatName + "_" + currentID + "_location"], function (v) {
+                            var weight = parseFloat(v["repeating_" + repeatName + "_" + currentID + "_weight"], 10) || 0,
+                            qty = parseInt(v["repeating_" + repeatName + "_" + currentID + "_qty"]) || 0,
+                            max = parseInt(v["repeating_" + repeatName + "_" + currentID + "_qty_max"]) || 0,
+                            location = parseInt(v["repeating_" + repeatName + "_" + currentID + "_location"]) || 0;
+                            //console.log("weight=" + weight + ", qty=" + qty + ", max=" + ", location=" + location + ", newTotal=" + newTotal);
+                            if (qty > 0 && location == 0) { // Location #0 = Carried, #1 = Not Carried, #2+ = Worn
+                                if (max == 0) { // max charges is 0, so qty is the number of items; not charges
+                                    newTotal += weight * qty;
+                                } else { // this is a single item with charges, so just add the weight once
+                                    newTotal += weight;
+                                }
+                                //console.log("change newTotal=" + newTotal);
+                            }
+                            if (i === idarray.length - 1) {
+                                //console.log("loop finished newTotal=" + newTotal + ", currentTotal=" + currentTotal);
+                                if (currentTotal !== newTotal) {
+                                    //console.log("changing " + totalVar + " to " + newTotal);
+                                    setter[totalVar] = newTotal;
+                                    setAttrs(setter); // could not simply set totalVar to newTotal since it would set newTotal to the attribute named totalVar instead
+                                }
+                            }
+                        });
+                    });
+                } else {
+                    //console.log("no loop? newTotal=" + newTotal + ", currentTotal=" + currentTotal + ", totalVar=" + totalVar);
+                    if (currentTotal !== newTotal) {
+                        //console.log("changing " + totalVar + " to " + newTotal);
+                        setter[totalVar] = newTotal;
+                        setAttrs(setter);
+                    }
+                }
+            });
+        });
+    },
+
 	/*******************************************  SPELL PAGE ***********************/
 	
 	/********  Spell Classes top section ****/
@@ -16130,6 +16518,38 @@ var PFSheet = PFSheet || (function(){
 		if (oldversion < 0.36 ){
 			updateSpellsAll(null,true);
 		}
+        if (oldversion < 0.37) {
+            // v.36 had armor3, which got converted into worn-Armor in v.37
+            getAttrs(["armor3", "armor3-hardness", "armor3-hp", "armor3-hp_max", "armor3-weight"], function (v) {
+                var setter = {}, setAny = 0,
+                currName = v["armor3"],
+                currHardness = parseInt(v["armor3-hardness"], 10) || 0,
+                currHP = parseInt(v["armor3-hp"], 10) || 0,
+                currHPMax = parseInt(v["armor3-hp_max"], 10) || 0,
+                currWeight = parseFloat(v["armor3-weight"], 10) || 0;
+                if (currName.length > 0) { setter["worn-Armor"] = currName; setAny = 1; }
+                if (currHardness !== 0) { setter["worn-Armor-hardness"] = currHardness; setAny = 1; }
+                if (currHP !== 0) { setter["worn-Armor-hp"] = currHP; setAny = 1; }
+                if (currHPMax !== 0) { setter["worn-Armor-hp_max"] = currHPMax; setAny = 1; }
+                if (currWeight !== 0) { setter["worn-Armor-weight"] = currWeight; setAny = 1; }
+                if (setAny > 0) { setAttrs(setter); }
+            });
+            // New functions to support v.37
+            updateModifiedSpeed();
+            updateWornEquipment("charges");
+            updateWornEquipment("weight");
+            updateWornEquipment("hp");
+            updateWornEquipment("hp_max");
+            updateWornEquipment("value");
+            updateRepeatingItemTotalWeight("item", "item_total_weight");
+            TAS.repeatingSimpleSum('item', 'hp', 'item-total-hp');
+            TAS.repeatingSimpleSum('item', 'hp_max', 'item-total-hp_max');
+            TAS.repeatingSimpleSum('item', 'value', 'item-total-value');
+            updateCarriedCurrency();
+            updateCarriedTotal();
+            updateLoadsAndLift();
+            updateCurrentLoad();
+        }
 	},  
 	
 
@@ -16179,6 +16599,7 @@ var PFSheet = PFSheet || (function(){
         handleDropdown:handleDropdown,
         updateSize:updateSize,
         updateAbility:updateAbility,
+        updateModifiedSpeed: updateModifiedSpeed,
         updateGrapple:updateGrapple,
         updatePin:updatePin,
         updateBuff:updateBuff,
@@ -16215,6 +16636,12 @@ var PFSheet = PFSheet || (function(){
         updateMaxSkills:updateMaxSkills,
         updateSkill:updateSkill,
         updateNPCHP:updateNPCHP,
+        updateWornEquipment: updateWornEquipment,
+        updateCarriedCurrency: updateCarriedCurrency,
+        updateCarriedTotal: updateCarriedTotal,
+        updateCurrentLoad: updateCurrentLoad,
+        updateLoadsAndLift: updateLoadsAndLift,
+        updateRepeatingItemTotalWeight: updateRepeatingItemTotalWeight,
         handleSpellClassDropdown:handleSpellClassDropdown,
 		updateSpellClassRange:updateSpellClassRange,
         updateConcentration:updateConcentration,
@@ -16758,6 +17185,12 @@ on("change:condition-grappled change:condition-invisible", function() {
 on("change:init-ability", function() {  PFSheet.handleDropdown("init-ability","init-ability-mod");});
 on("change:init-ability-mod change:init-trait change:init-misc change:condition-deafened",function(){ PFSheet.updateInit(); });
 
+//speed
+on("change:current-load change:speed-base change:load-heavy change:carried-total change:race change:armor-equipped change:armor2-eqipped change:armor3-eqipped change:armor-type change:armor2-type change:armor3-type", function (eventInfo) {
+    //console.log("caught " + eventInfo.sourceAttribute + " event");
+    PFSheet.updateModifiedSpeed();
+});
+
 //hp
 on("change:hp-ability", function () {PFSheet.handleDropdown("HP-ability","HP-ability-mod");});
 on("change:hp-ability-mod change:level change:total-hp change:total-mythic-hp change:hp-formula-mod change:HP-misc change:mythic-adventures-show", function () { PFSheet.updateHP(); });
@@ -16809,7 +17242,7 @@ on("change:shield-equipped change:shield-acbonus change:shield-max-dex change:sh
 	+"change:armor-equipped change:armor-acbonus change:armor-max-dex change:armor-acp change:armor-spell-fail change:armor-proficiency "
 	+"change:armor2-equipped change:armor2-acbonus change:armor2-max-dex change:armor2-acp change:armor2-spell-fail change:armor2-proficiency "
 	+ "change:armor3-equipped change:armor3-acbonus change:armor3-max-dex change:armor3-acp change:armor3-spell-fail change:armor3-proficiency "
-	+"change:max-dex-source change:acp-source"
++ "change:max-dex-source change:acp-source change:current-load"
 	,function(eventInfo){PFSheet.updateArmor(eventInfo.sourceAttribute); });
 
 //saves
@@ -16918,6 +17351,45 @@ on("change:recalc1",function(){PFSheet.checkForUpdate();});
 //npc sheet
 on("change:npc-hd change:npc-hd-num change:npc-hd2 change:npc-hd-num2 change:npc-hd-misc-mod",function() {PFSheet.updateNPCHP();});
 on("change:npc-hd-misc",function(){ SWUtils.evaluateAndSetNumber("NPC-HD-misc","NPC-HD-misc-mod");});
+
+//items
+on("change:worn-Armor-charges change:worn-Belt-charges change:worn-Body-charges change:worn-Chest-charges change:worn-Eyes-charges change:worn-Feet-charges change:worn-Hands-charges change:worn-Head-charges change:worn-Headband-charges change:worn-Neck-charges change:worn-Ring1-charges change:worn-Ring2-charges change:worn-Shield-charges change:worn-Shoulders-charges change:worn-Wrist-charges", function () { PFSheet.updateWornEquipment("charges"); });
+on("change:worn-Armor-weight change:worn-Belt-weight change:worn-Body-weight change:worn-Chest-weight change:worn-Eyes-weight change:worn-Feet-weight change:worn-Hands-weight change:worn-Head-weight change:worn-Headband-weight change:worn-Neck-weight change:worn-Ring1-weight change:worn-Ring2-weight change:worn-Shield-weight change:worn-Shoulders-weight change:worn-Wrist-weight", function () { PFSheet.updateWornEquipment("weight"); });
+on("change:worn-Armor-hp change:worn-Belt-hp change:worn-Body-hp change:worn-Chest-hp change:worn-Eyes-hp change:worn-Feet-hp change:worn-Hands-hp change:worn-Head-hp change:worn-Headband-hp change:worn-Neck-hp change:worn-Ring1-hp change:worn-Ring2-hp change:worn-Shield-hp change:worn-Shoulders-hp change:worn-Wrist-hp", function () { PFSheet.updateWornEquipment("hp"); });
+on("change:worn-Armor-hp_max change:worn-Belt-hp_max change:worn-Body-hp_max change:worn-Chest-hp_max change:worn-Eyes-hp_max change:worn-Feet-hp_max change:worn-Hands-hp_max change:worn-Head-hp_max change:worn-Headband-hp_max change:worn-Neck-hp_max change:worn-Ring1-hp_max change:worn-Ring2-hp_max change:worn-Shield-hp_max change:worn-Shoulders-hp_max change:worn-Wrist-hp_max", function () { PFSheet.updateWornEquipment("hp_max"); });
+on("change:worn-Armor-value change:worn-Belt-value change:worn-Body-value change:worn-Chest-value change:worn-Eyes-value change:worn-Feet-value change:worn-Hands-value change:worn-Head-value change:worn-Headband-value change:worn-Neck-value change:worn-Ring1-value change:worn-Ring2-value change:worn-Shield-value change:worn-Shoulders-value change:worn-Wrist-value", function () { PFSheet.updateWornEquipment("value"); });
+on('change:repeating_item:weight change:repeating_item:qty change:repeating_item:qty_max change:repeating_item:location', function (eventInfo) {
+    //console.log("caught " + eventInfo.sourceAttribute + " event");
+    PFSheet.updateRepeatingItemTotalWeight("item", "item_total_weight");
+});
+on('change:repeating_item:hp', function (eventInfo) {
+    //console.log("caught " + eventInfo.sourceAttribute + " event");
+    TAS.repeatingSimpleSum('item', 'hp', 'item-total-hp');
+});
+on('change:repeating_item:hp_max', function (eventInfo) {
+    //console.log("caught " + eventInfo.sourceAttribute + " event");
+    TAS.repeatingSimpleSum('item', 'hp_max', 'item-total-hp_max');
+});
+on('change:repeating_item:value', function (eventInfo) {
+    //console.log("caught " + eventInfo.sourceAttribute + " event");
+    TAS.repeatingSimpleSum('item', 'value', 'item-total-value');
+});
+on('change:CP change:SP change:GP change:PP', function (eventInfo) {
+    //console.log("caught " + eventInfo.sourceAttribute + " event");
+    PFSheet.updateCarriedCurrency();
+});
+on('change:carried-currency change:item_total_weight change:worn-total-weight change:carried-misc', function (eventInfo) {
+    //console.log("caught " + eventInfo.sourceAttribute + " event");
+    PFSheet.updateCarriedTotal();
+});
+on('change:load-light change:load-medium change:carried-total', function (eventInfo) {
+    //console.log("checking current-load radio buttons");
+    PFSheet.updateCurrentLoad();
+});
+on("change:STR change:size change:legs change:load-str-bonus change:load-multiplier change:load-misc", function (eventInfo) {
+    //console.log("caught " + eventInfo.sourceAttribute + " event");
+    PFSheet.updateLoadsAndLift();
+});
 
 //spells
 on("change:spellclass-0",function(){ PFSheet.handleSpellClassDropdown(0);});
