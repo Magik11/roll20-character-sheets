@@ -8,7 +8,8 @@
 			<li>For macro calls to <b>button rolls</b> in repeating rows, you must do the above ($) and you must add "_roll" to the end. For attacks, add "-roll".</li>
 			<li>For <b>existing characters/npc's</b>, if you do not see Version > 0 listed (top-right corner of sheet), use the recalc checkbox to force a refresh of all auto-calculated attributes. This should only need to be done once and could take up to 10s.</li>
 			<li>If the sheet has been recalculated and you still have empty auto-calculated fields, you may have to toggle(change attribute value(s)) of sub-component attributes to help generate a value for the empty fields.</li>
-			<li>If you changed the attributes/fields listed below, you must update to the new version of the attribute/field (same location on sheet) because the new fields are only modifiers to the calculations which are done within sheet workers(javascript).:
+            <li>
+                If you changed the attributes/fields listed below, you must update to the new version of the attribute/field (same location on sheet) because the new fields are only modifiers to the calculations which are done within sheet workers(javascript).:
 				<ol>
 					<li>HP-formula</li>
 					<li>max-skill-ranks-formula</li>
@@ -938,7 +939,8 @@
 				<span class="sheet-table-data sheet-left" style="width:20%;"><label><input type="checkbox" title="@{condition-Prone}" name="attr_condition-Prone" value="4" /><b title="-4 penalty on melee attack rolls"> Prone</b></label></span>
 				<span class="sheet-table-data sheet-left" style="width:20%;"><label><input type="checkbox" title="@{condition-Sickened}" name="attr_condition-Sickened" value="2" /><b title="-2 penalty on all attack rolls, weapon damage rolls, saving throws, skill checks, and ability checks"> Sickened</b></label></span>
 				<span class="sheet-table-data sheet-left" style="width:20%;"><label><input type="checkbox" title="@{condition-Stunned}" name="attr_condition-Stunned" value="2" /><b title="-2 penalty to Armor Class"> Stunned</b></label></span>
-				<span class="sheet-table-data sheet-left" style="width:20%;">&nbsp;
+                <span class="sheet-table-data sheet-left" style="width:20%;">
+                    &nbsp;
 				<input type="hidden" name="attr_checks-cond" value="0" />
 				<input type="hidden" name="attr_Phys-skills-cond" value="0" />
 				<input type="hidden" name="attr_Perception-cond" value="0" />
@@ -1011,7 +1013,7 @@
 			</div>
 		</div>
 		<div class="sheet-table sheet-sect" style="margin:-10px 0px -10px 0px;">
-			<input type="checkbox" class="sheet-sect-show" title="@{wound_threshold-show}" name="attr_wound_threshold-show" value="1" style="opacity:0;width: 35px;height: 16px;position: relative;top: 0;left: 0;margin: -9999px;cursor: pointer;z-index: 1;" /><span></span>		
+            <input type="checkbox" class="sheet-sect-show" title="@{wound_threshold-show}" name="attr_wound_threshold-show" value="1" style="opacity:0;width: 35px;height: 16px;position: relative;top: 0;left: 0;margin: -9999px;cursor: pointer;z-index: 1;" /><span></span>
 			<div class="sheet-table-row sheet-sect">
 				<span class="sheet-table-data sheet-center" style="background-color:#000;color:#FFF;font-weight:bold;">Wound Threshold</span>
 				<span class="sheet-table-data">&nbsp;</span>
@@ -1256,9 +1258,9 @@
 				<span class="sheet-table-data sheet-center"><input title="@{total-Will}" type="number" name="attr_total-Will" value="(@{class-0-Will} + [[ @{class-1-Will} ]] + [[ @{class-2-Will} ]] + [[ @{class-3-Will} ]] + [[ @{class-4-Will} ]])" class="sheet-calc" readonly="readonly" /></span>
 				<span class="sheet-table-data sheet-center"><input title="@{level}" type="number" name="attr_level" value="0" class="sheet-calc" readonly="readonly" /></span>
 			</div>
+            <br>
 		</div>
     </div>
-		<br>
     <!-- Mythic Adventures display option toggled from Config -->
     <div style="margin:-15px 0px 15px 0px;">
         <input type="checkbox" class="sheet-sect-show" title="@{mythic-adventures-show}" name="attr_mythic-adventures-show" value="1" style="margin:-9999px;" /><span></span>
@@ -1891,7 +1893,7 @@
 			</div>
 			<div>
 				<b>Options</b>
-				<input type="checkbox" class="sheet-options-show" title="@{options_defense_notes-show}" name="attr_options_defense_notes-show" value="1" style="opacity:0; width:70px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -55px; cursor:pointer; z-index:1;" /><span></span>	
+                <input type="checkbox" class="sheet-options-show" title="@{options_defense_notes-show}" name="attr_options_defense_notes-show" value="1" style="opacity:0; width:70px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -55px; cursor:pointer; z-index:1;" /><span></span>
 					<input type="hidden" name="attr_var_dr_notes" value="{{dr_notes=@{DR}}}" disabled />
 					<input type="hidden" name="attr_var_resistances_notes" value="{{resistances_notes=@{resistances}}}" disabled />
 					<input type="hidden" name="attr_var_immunities_notes" value="{{immunities_notes=@{immunities}}}" disabled />
@@ -1919,7 +1921,7 @@
 						<span class="sheet-table-data sheet-center sheet-small-label">&nbsp;</span>
 					</div>
 				</div>
-					<input type="hidden" name="attr_save_options" value="@{toggle_dr_notes} @{toggle_resistances_notes} @{toggle_immunities_notes} @{toggle_weaknesses_notes} @{toggle_sr0_notes} @{toggle_armor_notes} @{toggle_save_notes} @{toggle_cmd_notes} @{toggle_defense_notes}" disabled />	
+                <input type="hidden" name="attr_save_options" value="@{toggle_dr_notes} @{toggle_resistances_notes} @{toggle_immunities_notes} @{toggle_weaknesses_notes} @{toggle_sr0_notes} @{toggle_armor_notes} @{toggle_save_notes} @{toggle_cmd_notes} @{toggle_defense_notes}" disabled />
 			</div>
 		</div>
 	</div>
@@ -1973,7 +1975,7 @@
                 <span class="sheet-table-data sheet-center"><label><input title="@{armor-equipped}" type="checkbox" name="attr_armor-equipped" value="1" checked="checked" /><b title="Additional Armor">&nbsp;&nbsp;Armor 1</b></label></span>
 				<span class="sheet-table-data sheet-center"><input title="@{armor}" type="text" name="attr_armor" placeholder="Armor 1" class="sheet-detail-medium" /></span>
 				<span class="sheet-table-data sheet-center"><input title="@{armor-acbonus}" type="number" name="attr_armor-acbonus" value="0" min="0" /></span>
-				<span class="sheet-table-data sheet-center"><input title="@{armor-max-dex}" type="number" name="attr_armor-max-dex" value="0" min="0"  /></span>
+				<span class="sheet-table-data sheet-center"><input title="@{armor-max-dex}" type="number" name="attr_armor-max-dex" value="0" min="0" /></span>
 				<span class="sheet-table-data sheet-center"><input title="@{armor-acp}" type="number" name="attr_armor-acp" value="0" max="0" /></span>
 				<span class="sheet-table-data sheet-center"><input title="@{armor-spell-fail}" type="number" name="attr_armor-spell-fail" value="0" min="0" max="100" />&#37;</span>
 				<span class="sheet-table-data sheet-center">
@@ -1999,7 +2001,7 @@
 				<span class="sheet-table-data sheet-center"><label><input title="@{armor2-equipped}" type="checkbox" name="attr_armor2-equipped" value="1" checked="checked" /><b title="Alternate Armor">&nbsp;&nbsp;Armor 2</b></label></span>
 				<span class="sheet-table-data sheet-center"><input title="@{armor2}" type="text" name="attr_armor2" placeholder="Armor 2" class="sheet-detail-medium" /></span>
 				<span class="sheet-table-data sheet-center"><input title="@{armor2-acbonus}" type="number" name="attr_armor2-acbonus" value="0" min="0" /></span>
-				<span class="sheet-table-data sheet-center"><input title="@{armor2-max-dex}" type="number" name="attr_armor2-max-dex" value="0" min="0"   /></span>
+				<span class="sheet-table-data sheet-center"><input title="@{armor2-max-dex}" type="number" name="attr_armor2-max-dex" value="0" min="0" /></span>
 				<span class="sheet-table-data sheet-center"><input title="@{armor2-acp}" type="number" name="attr_armor2-acp" value="0" max="0" /></span>
 				<span class="sheet-table-data sheet-center"><input title="@{armor2-spell-fail}" type="number" name="attr_armor2-spell-fail" value="0" min="0" max="100" />&#37;</span>
 				<span class="sheet-table-data sheet-center">
@@ -2023,11 +2025,11 @@
 			</div>
 			<div class="sheet-table-row">
                 <span class="sheet-table-data sheet-center"><label><input title="@{shield3-equipped}" type="checkbox" name="attr_shield3-equipped" value="1" checked="checked" /><b title="Worn Shield">&nbsp;&nbsp;Worn Shield</b></label></span>
-                <span class="sheet-table-data sheet-center"><input title="@{shield3}" type="text" name="attr_shield3" value="" class="sheet-detail-medium"  /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{shield3}" type="text" name="attr_shield3" value="" class="sheet-detail-medium" /></span>
                 <span class="sheet-table-data sheet-center"><input title="@{shield3-acbonus}" type="number" name="attr_shield3-acbonus" value="0" min="0" /></span>
-                <span class="sheet-table-data sheet-center"><input title="@{shield3-max-dex}" type="number" name="attr_shield3-max-dex" value="0" min="0" max=99 /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{shield3-max-dex}" type="number" name="attr_shield3-max-dex" value="0" min="0" max="99" /></span>
                 <span class="sheet-table-data sheet-center"><input title="@{shield3-acp}" type="number" name="attr_shield3-acp" value="0" max="0" /></span>
-                <span class="sheet-table-data sheet-center"><input title="@{shield3-spell-fail}" type="number" name="attr_shield3-spell-fail" value="0" min="0" max=100 />&#37;</span>
+                <span class="sheet-table-data sheet-center"><input title="@{shield3-spell-fail}" type="number" name="attr_shield3-spell-fail" value="0" min="0" max="100" />&#37;</span>
                 <span class="sheet-table-data sheet-center">
                     <select class="sheet-medium" title="@{shield3-type}" name="attr_shield3-type">
                         <option value="Shield">Shield</option>
@@ -2050,7 +2052,7 @@
                 <span class="sheet-table-data sheet-center"><label><input title="@{shield-equipped}" type="checkbox" name="attr_shield-equipped" value="1" checked="checked" /><b title="Additional Shield">&nbsp;&nbsp;Shield 1</b></label></span>
 				<span class="sheet-table-data sheet-center"><input title="@{shield}" type="text" name="attr_shield" placeholder="Shield 1" class="sheet-detail-medium" /></span>
 				<span class="sheet-table-data sheet-center"><input title="@{shield-acbonus}" type="number" name="attr_shield-acbonus" value="0" min="0" /></span>
-				<span class="sheet-table-data sheet-center"><input title="@{shield-max-dex}" type="number" name="attr_shield-max-dex" value="0" min="0"  /></span>
+				<span class="sheet-table-data sheet-center"><input title="@{shield-max-dex}" type="number" name="attr_shield-max-dex" value="0" min="0" /></span>
 				<span class="sheet-table-data sheet-center"><input title="@{shield-acp}" type="number" name="attr_shield-acp" value="0" max="0" /></span>
 				<span class="sheet-table-data sheet-center"><input title="@{shield-spell-fail}" type="number" name="attr_shield-spell-fail" value="0" min="0" max="100" />&#37;</span>
 				<span class="sheet-table-data sheet-center">
@@ -2075,9 +2077,9 @@
 				<span class="sheet-table-data sheet-center"><label><input title="@{shield2-equipped}" type="checkbox" name="attr_shield2-equipped" value="1" checked="checked" /><b title="Alternate Shield">&nbsp;&nbsp;Shield 2</b></label></span>
 				<span class="sheet-table-data sheet-center"><input title="@{shield2}" type="text" name="attr_shield2" placeholder="Shield 2" class="sheet-detail-medium" /></span>
 				<span class="sheet-table-data sheet-center"><input title="@{shield2-acbonus}" type="number" name="attr_shield2-acbonus" value="0" min="0" /></span>
-				<span class="sheet-table-data sheet-center"><input title="@{shield2-max-dex}" type="number" name="attr_shield2-max-dex" value="0" min="0" max=99  /></span>
+				<span class="sheet-table-data sheet-center"><input title="@{shield2-max-dex}" type="number" name="attr_shield2-max-dex" value="0" min="0" max="99" /></span>
 				<span class="sheet-table-data sheet-center"><input title="@{shield2-acp}" type="number" name="attr_shield2-acp" value="0" max="0" /></span>
-				<span class="sheet-table-data sheet-center"><input title="@{shield2-spell-fail}" type="number" name="attr_shield2-spell-fail" value="0" min="0" max=100 />&#37;</span>
+				<span class="sheet-table-data sheet-center"><input title="@{shield2-spell-fail}" type="number" name="attr_shield2-spell-fail" value="0" min="0" max="100" />&#37;</span>
 				<span class="sheet-table-data sheet-center">
 					<select class="sheet-medium" title="@{shield2-type}" name="attr_shield2-type">
 						<option value="Shield">Shield</option>
@@ -2447,7 +2449,7 @@
 					<span class="sheet-table-data sheet-center sheet-small-label"><input type="number" name="attr_attk-effect-total-copy" title="@{repeating_weapon_$X_attk-effect-total-copy}" value="0" style="width:40px;" class="sheet-calc" readonly="readonly"  /><br><b title="Additional modifier from Attack and Damage Effects.">Other</b></span>
 					<span class="sheet-table-data sheet-divider">=</span>
 					<span class="sheet-table-data sheet-center sheet-small-label"><input type="number" name="attr_total-attack" title="@{repeating_weapon_$X_total-attack}" value="0" style="width:3.5em;" class="sheet-calc" readonly="readonly" /><br>ATK</span>
-					<span class="sheet-table-data sheet-center sheet-small-label"><input type="number" name="attr_crit-target" title="@{repeating_weapon_$X_crit-target}" style="width:40px;" value="20" min="0" max=20 /><br>Crit</span>
+                    <span class="sheet-table-data sheet-center sheet-small-label"><input type="number" name="attr_crit-target" title="@{repeating_weapon_$X_crit-target}" style="width:40px;" value="20" min="0" max="20" /><br>Crit</span>
 					<span class="sheet-table-data sheet-divider-lg" style="padding-bottom:10px;"><b>/x</b></span>
 					<span class="sheet-table-data sheet-center sheet-small-label"><input type="number" name="attr_crit-multiplier" title="@{repeating_weapon_$X_crit-multiplier}" style="width:40px;" value="2" min="0" /><br>Mult</span>
 					<span class="sheet-table-data sheet-center sheet-small-label">
@@ -4450,7 +4452,7 @@
 								<span class="sheet-table-data sheet-center"><input title="@{CS-Acrobatics-misc}" type="number" name="attr_CS-Acrobatics-misc" value="0"  /></span>
 								<span class="sheet-table-data sheet-divider">+</span>
 								<span class="sheet-table-data sheet-center"><input title="@{CS-Acrobatics-class}" type="text" name="attr_CS-Acrobatics-class" value="0/0/0/0" style="width:4em;" class="sheet-calc" readonly="readonly"  /></span>
-								<span class="sheet-table-data sheet-center"><input title="Apply size mod to Fly checks @{CS-Acrobatics-size-mod}" type="checkbox" name="attr_CS-Acrobatics-size-mod" value="0" class="sheet-calc" readonly="readonly"  /></span>			
+                                <span class="sheet-table-data sheet-center"><input title="Apply size mod to Fly checks @{CS-Acrobatics-size-mod}" type="checkbox" name="attr_CS-Acrobatics-size-mod" value="0" class="sheet-calc" readonly="readonly" /></span>
 								<span class="sheet-table-data sheet-center"><textarea class="sheet-skill-macro-text" title="@{CS-Acrobatics-macro}" name="attr_CS-Acrobatics-macro">@{PC-whisper} &{template:pf_generic} {{header_image=@{header_image-pf_generic}}} {{character_name=@{character_name}}} {{character_id=@{character_id}}}  {{subtitle}} {{name=Acrobatics}} {{Check=[[ 1d20 + [[ @{CS-Acrobatics} ]] ]]}}</textarea></span>
 							</div>
 						   <div class="sheet-table-row">
@@ -6529,8 +6531,8 @@
 				</fieldset>
 			</div>
 		</div>
+        <br>
 	</div>
-	<br>
     <!-- Mythic Adventures display option toggled from Config -->
     <div style="margin:-15px 0px 15px 0px;">
         <input type="checkbox" class="sheet-sect-show" title="@{mythic-adventures-show}" name="attr_mythic-adventures-show" value="1" style="margin:-9999px;" /><span></span>
@@ -6919,16 +6921,16 @@
 							<span class="sheet-table-header">Type</span><span class="sheet-table-header">Name</span>
 						</div>
 						<div class="sheet-table-row">
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-0-domaintype-0} type="text" name="attr_spellclass-0-domaintype-0" value="" Placeholder="(Sub)Domain/School/Bloodline/Patron" /></span>
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-0-domain-0} type="text" name="attr_spellclass-0-domain-0" value="" Placeholder="Name" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-0-domaintype-0}" type="text" name="attr_spellclass-0-domaintype-0" value="" Placeholder="(Sub)Domain/School/Bloodline/Patron" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-0-domain-0}" type="text" name="attr_spellclass-0-domain-0" value="" Placeholder="Name" /></span>
 						</div>
 						<div class="sheet-table-row">
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-0-domaintype-1} type="text" name="attr_spellclass-0-domaintype-1" value="" Placeholder="(Sub)Domain/School/Bloodline/Patron" /></span>
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-0-domain-1} type="text" name="attr_spellclass-0-domain-1" value="" Placeholder="Name" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-0-domaintype-1}" type="text" name="attr_spellclass-0-domaintype-1" value="" Placeholder="(Sub)Domain/School/Bloodline/Patron" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-0-domain-1}" type="text" name="attr_spellclass-0-domain-1" value="" Placeholder="Name" /></span>
 						</div>
 						<div class="sheet-table-row">
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-0-domaintype-2} type="text" name="attr_spellclass-0-domaintype-2" value="" Placeholder="(Sub)Domain/School/Bloodline/Patron" /></span>
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-0-domain-2} type="text" name="attr_spellclass-0-domain-2" value="" Placeholder="Name" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-0-domaintype-2}" type="text" name="attr_spellclass-0-domaintype-2" value="" Placeholder="(Sub)Domain/School/Bloodline/Patron" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-0-domain-2}" type="text" name="attr_spellclass-0-domain-2" value="" Placeholder="Name" /></span>
 						</div>
 					</div>
 					<div class="sheet-table sheet-sect">
@@ -6937,16 +6939,16 @@
 							<span class="sheet-table-header">Name</span><span class="sheet-table-header">Effect</span>
 						</div>
 						<div class="sheet-table-row">
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-0-oppositionschool-0} type="text" name="attr_spellclass-0-oppositionschool-0" value="" Placeholder="Name" /></span>
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-0-oppositioneffect-0} type="text" name="attr_spellclass-0-oppositioneffect-0" value="" Placeholder="Cost double or prohibited" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-0-oppositionschool-0}" type="text" name="attr_spellclass-0-oppositionschool-0" value="" Placeholder="Name" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-0-oppositioneffect-0}" type="text" name="attr_spellclass-0-oppositioneffect-0" value="" Placeholder="Cost double or prohibited" /></span>
 						</div>
 						<div class="sheet-table-row">
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-0-oppositionschool-1} type="text" name="attr_spellclass-0-oppositionschool-1" value="" Placeholder="Name" /></span>
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-0-oppositioneffect-1} type="text" name="attr_spellclass-0-oppositioneffect-1" value="" Placeholder="Cost double or prohibited" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-0-oppositionschool-1}" type="text" name="attr_spellclass-0-oppositionschool-1" value="" Placeholder="Name" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-0-oppositioneffect-1}" type="text" name="attr_spellclass-0-oppositioneffect-1" value="" Placeholder="Cost double or prohibited" /></span>
 						</div>
 						<div class="sheet-table-row">
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-0-oppositionschool-2} type="text" name="attr_spellclass-0-oppositionschool-2" value="" Placeholder="Name" /></span>
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-0-oppositioneffect-2} type="text" name="attr_spellclass-0-oppositioneffect-2" value="" Placeholder="Cost double or prohibited" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-0-oppositionschool-2}" type="text" name="attr_spellclass-0-oppositionschool-2" value="" Placeholder="Name" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-0-oppositioneffect-2}" type="text" name="attr_spellclass-0-oppositioneffect-2" value="" Placeholder="Cost double or prohibited" /></span>
 						</div>
 					</div>
 					
@@ -7106,11 +7108,11 @@
 						<span class="sheet-table-name">Spell Ranges</span>
 						<div class="sheet-table-row">
 							<span class="sheet-table-row-name sheet-spellrange-header">Close</span>
-							<span class="sheet-table-data sheet-center"><input class="sheet-spellrange-data" title="@{spellclass-0-close} 25 + 5/2levels" type="number" name="attr_spellclass-0-close" value="0" class="sheet-calc" readonly="readonly" /></span>
+                            <span class="sheet-table-data sheet-center"><input class="sheet-spellrange-data sheet-calc" title="@{spellclass-0-close} 25 + 5/2 levels" type="number" name="attr_spellclass-0-close" value="0" readonly="readonly" /></span>
 							<span class="sheet-table-row-name sheet-spellrange-header">Medium</span>
-							<span class="sheet-table-data sheet-center"><input class="sheet-spellrange-data" title="@{spellclass-0-medium} 100 + 10/level" type="number" name="attr_spellclass-0-medium" value="0" class="sheet-calc" readonly="readonly" /></span>
+                            <span class="sheet-table-data sheet-center"><input class="sheet-spellrange-data sheet-calc" title="@{spellclass-0-medium} 100 + 10/level" type="number" name="attr_spellclass-0-medium" value="0" readonly="readonly" /></span>
 							<span class="sheet-table-row-name sheet-spellrange-header">Long</span>
-							<span class="sheet-table-data sheet-center"><input class="sheet-spellrange-data" title="@{spellclass-0-long} 400 + 40/level" type="number" name="attr_spellclass-0-long" value="0" class="sheet-calc" readonly="readonly" /></span>
+                            <span class="sheet-table-data sheet-center"><input class="sheet-spellrange-data sheet-calc" title="@{spellclass-0-long} 400 + 40/level" type="number" name="attr_spellclass-0-long" value="0" readonly="readonly" /></span>
 						</div>
 					</div>
 				</div>
@@ -7219,16 +7221,16 @@
 							<span class="sheet-table-header">Type</span><span class="sheet-table-header">Name</span>
 						</div>
 						<div class="sheet-table-row">
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-1-domaintype-0} type="text" name="attr_spellclass-1-domaintype-0" value="" Placeholder="(Sub)Domain/School/Bloodline/Patron" /></span>
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-1-domain-0} type="text" name="attr_spellclass-1-domain-0" value="" Placeholder="Name" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-1-domaintype-0}" type="text" name="attr_spellclass-1-domaintype-0" value="" Placeholder="(Sub)Domain/School/Bloodline/Patron" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-1-domain-0}" type="text" name="attr_spellclass-1-domain-0" value="" Placeholder="Name" /></span>
 						</div>
 						<div class="sheet-table-row">
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-1-domaintype-1} type="text" name="attr_spellclass-1-domaintype-1" value="" Placeholder="(Sub)Domain/School/Bloodline/Patron" /></span>
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-1-domain-1} type="text" name="attr_spellclass-1-domain-1" value="" Placeholder="Name" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-1-domaintype-1}" type="text" name="attr_spellclass-1-domaintype-1" value="" Placeholder="(Sub)Domain/School/Bloodline/Patron" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-1-domain-1}" type="text" name="attr_spellclass-1-domain-1" value="" Placeholder="Name" /></span>
 						</div>
 						<div class="sheet-table-row">
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-1-domaintype-2} type="text" name="attr_spellclass-1-domaintype-2" value="" Placeholder="(Sub)Domain/School/Bloodline/Patron" /></span>
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-1-domain-2} type="text" name="attr_spellclass-1-domain-2" value="" Placeholder="Name" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-1-domaintype-2}" type="text" name="attr_spellclass-1-domaintype-2" value="" Placeholder="(Sub)Domain/School/Bloodline/Patron" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-1-domain-2}" type="text" name="attr_spellclass-1-domain-2" value="" Placeholder="Name" /></span>
 						</div>
 					</div>
 					<div class="sheet-table sheet-sect">
@@ -7237,16 +7239,16 @@
 							<span class="sheet-table-header">Name</span><span class="sheet-table-header">Effect</span>
 						</div>
 						<div class="sheet-table-row">
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-1-oppositionschool-0} type="text" name="attr_spellclass-1-oppositionschool-0" value="" Placeholder="Name" /></span>
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-1-oppositioneffect-0} type="text" name="attr_spellclass-1-oppositioneffect-0" value="" Placeholder="Cost double or prohibited" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-1-oppositionschool-0}" type="text" name="attr_spellclass-1-oppositionschool-0" value="" Placeholder="Name" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-1-oppositioneffect-0}" type="text" name="attr_spellclass-1-oppositioneffect-0" value="" Placeholder="Cost double or prohibited" /></span>
 						</div>
 						<div class="sheet-table-row">
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-1-oppositionschool-1} type="text" name="attr_spellclass-1-oppositionschool-1" value="" Placeholder="Name" /></span>
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-1-oppositioneffect-1} type="text" name="attr_spellclass-1-oppositioneffect-1" value="" Placeholder="Cost double or prohibited" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-1-oppositionschool-1}" type="text" name="attr_spellclass-1-oppositionschool-1" value="" Placeholder="Name" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-1-oppositioneffect-1}" type="text" name="attr_spellclass-1-oppositioneffect-1" value="" Placeholder="Cost double or prohibited" /></span>
 						</div>
 						<div class="sheet-table-row">
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-1-oppositionschool-2} type="text" name="attr_spellclass-1-oppositionschool-2" value="" Placeholder="Name" /></span>
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-1-oppositioneffect-2} type="text" name="attr_spellclass-1-oppositioneffect-2" value="" Placeholder="Cost double or prohibited" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-1-oppositionschool-2}" type="text" name="attr_spellclass-1-oppositionschool-2" value="" Placeholder="Name" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-1-oppositioneffect-2}" type="text" name="attr_spellclass-1-oppositioneffect-2" value="" Placeholder="Cost double or prohibited" /></span>
 						</div>
 					</div>
 					
@@ -7406,11 +7408,11 @@
 						<span class="sheet-table-name">Spell Ranges</span>
 						<div class="sheet-table-row">
 							<span class="sheet-table-row-name sheet-spellrange-header">Close</span>
-							<span class="sheet-table-data sheet-center"><input class="sheet-spellrange-data" title="@{spellclass-1-close} 25 + 5/2levels" type="number" name="attr_spellclass-1-close" value="0" class="sheet-calc" readonly="readonly" /></span>
+                            <span class="sheet-table-data sheet-center"><input class="sheet-spellrange-data sheet-calc" title="@{spellclass-1-close} 25 + 5/2 levels" type="number" name="attr_spellclass-1-close" value="0" readonly="readonly" /></span>
 							<span class="sheet-table-row-name sheet-spellrange-header">Medium</span>
-							<span class="sheet-table-data sheet-center"><input class="sheet-spellrange-data" title="@{spellclass-1-medium} 100 + 10/level" type="number" name="attr_spellclass-1-medium" value="0" class="sheet-calc" readonly="readonly" /></span>
+                            <span class="sheet-table-data sheet-center"><input class="sheet-spellrange-data sheet-calc" title="@{spellclass-1-medium} 100 + 10/level" type="number" name="attr_spellclass-1-medium" value="0" readonly="readonly" /></span>
 							<span class="sheet-table-row-name sheet-spellrange-header">Long</span>
-							<span class="sheet-table-data sheet-center"><input class="sheet-spellrange-data" title="@{spellclass-1-long} 400 + 40/level" type="number" name="attr_spellclass-1-long" value="0" class="sheet-calc" readonly="readonly" /></span>
+                            <span class="sheet-table-data sheet-center"><input class="sheet-spellrange-data sheet-calc" title="@{spellclass-1-long} 400 + 40/level" type="number" name="attr_spellclass-1-long" value="0" readonly="readonly" /></span>
 						</div>
 					</div>
 				</div>
@@ -7519,16 +7521,16 @@
 							<span class="sheet-table-header">Type</span><span class="sheet-table-header">Name</span>
 						</div>
 						<div class="sheet-table-row">
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-2-domaintype-0} type="text" name="attr_spellclass-2-domaintype-0" value="" Placeholder="(Sub)Domain/School/Bloodline/Patron" /></span>
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-2-domain-0} type="text" name="attr_spellclass-2-domain-0" value="" Placeholder="Name" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-2-domaintype-0}" type="text" name="attr_spellclass-2-domaintype-0" value="" Placeholder="(Sub)Domain/School/Bloodline/Patron" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-2-domain-0}" type="text" name="attr_spellclass-2-domain-0" value="" Placeholder="Name" /></span>
 						</div>
 						<div class="sheet-table-row">
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-2-domaintype-1} type="text" name="attr_spellclass-2-domaintype-1" value="" Placeholder="(Sub)Domain/School/Bloodline/Patron" /></span>
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-2-domain-1} type="text" name="attr_spellclass-2-domain-1" value="" Placeholder="Name" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-2-domaintype-1}" type="text" name="attr_spellclass-2-domaintype-1" value="" Placeholder="(Sub)Domain/School/Bloodline/Patron" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-2-domain-1}" type="text" name="attr_spellclass-2-domain-1" value="" Placeholder="Name" /></span>
 						</div>
 						<div class="sheet-table-row">
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-2-domaintype-2} type="text" name="attr_spellclass-2-domaintype-2" value="" Placeholder="(Sub)Domain/School/Bloodline/Patron" /></span>
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-2-domain-2} type="text" name="attr_spellclass-2-domain-2" value="" Placeholder="Name" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-2-domaintype-2}" type="text" name="attr_spellclass-2-domaintype-2" value="" Placeholder="(Sub)Domain/School/Bloodline/Patron" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-2-domain-2}" type="text" name="attr_spellclass-2-domain-2" value="" Placeholder="Name" /></span>
 						</div>
 					</div>
 					<div class="sheet-table sheet-sect">
@@ -7537,16 +7539,16 @@
 							<span class="sheet-table-header">Name</span><span class="sheet-table-header">Effect</span>
 						</div>
 						<div class="sheet-table-row">
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-2-oppositionschool-0} type="text" name="attr_spellclass-2-oppositionschool-0" value="" Placeholder="Name" /></span>
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-2-oppositioneffect-0} type="text" name="attr_spellclass-2-oppositioneffect-0" value="" Placeholder="Cost double or prohibited" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-2-oppositionschool-0}" type="text" name="attr_spellclass-2-oppositionschool-0" value="" Placeholder="Name" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-2-oppositioneffect-0}" type="text" name="attr_spellclass-2-oppositioneffect-0" value="" Placeholder="Cost double or prohibited" /></span>
 						</div>
 						<div class="sheet-table-row">
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-2-oppositionschool-1} type="text" name="attr_spellclass-2-oppositionschool-1" value="" Placeholder="Name" /></span>
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-2-oppositioneffect-1} type="text" name="attr_spellclass-2-oppositioneffect-1" value="" Placeholder="Cost double or prohibited" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-2-oppositionschool-1}" type="text" name="attr_spellclass-2-oppositionschool-1" value="" Placeholder="Name" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-2-oppositioneffect-1}" type="text" name="attr_spellclass-2-oppositioneffect-1" value="" Placeholder="Cost double or prohibited" /></span>
 						</div>
 						<div class="sheet-table-row">
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-2-oppositionschool-2} type="text" name="attr_spellclass-2-oppositionschool-2" value="" Placeholder="Name" /></span>
-							<span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-2-oppositioneffect-2} type="text" name="attr_spellclass-2-oppositioneffect-2" value="" Placeholder="Cost double or prohibited" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-2-oppositionschool-2}" type="text" name="attr_spellclass-2-oppositionschool-2" value="" Placeholder="Name" /></span>
+                            <span class="sheet-table-data sheet-left sheet-entry-wide"><input title="@{spellclass-2-oppositioneffect-2}" type="text" name="attr_spellclass-2-oppositioneffect-2" value="" Placeholder="Cost double or prohibited" /></span>
 						</div>
 					</div>
 					
@@ -7706,11 +7708,11 @@
 						<span class="sheet-table-name">Spell Ranges</span>
 						<div class="sheet-table-row">
 							<span class="sheet-table-row-name sheet-spellrange-header">Close</span>
-							<span class="sheet-table-data sheet-center"><input class="sheet-spellrange-data" title="@{spellclass-2-close} 25 + 5/2levels" type="number" name="attr_spellclass-2-close" value="0" class="sheet-calc" readonly="readonly" /></span>
+                            <span class="sheet-table-data sheet-center"><input class="sheet-spellrange-data sheet-calc" title="@{spellclass-2-close} 25 + 5/2 levels" type="number" name="attr_spellclass-2-close" value="0" readonly="readonly" /></span>
 							<span class="sheet-table-row-name sheet-spellrange-header">Medium</span>
-							<span class="sheet-table-data sheet-center"><input class="sheet-spellrange-data" title="@{spellclass-2-medium} 100 + 10/level" type="number" name="attr_spellclass-2-medium" value="0" class="sheet-calc" readonly="readonly" /></span>
+                            <span class="sheet-table-data sheet-center"><input class="sheet-spellrange-data sheet-calc" title="@{spellclass-2-medium} 100 + 10/level" type="number" name="attr_spellclass-2-medium" value="0" readonly="readonly" /></span>
 							<span class="sheet-table-row-name sheet-spellrange-header">Long</span>
-							<span class="sheet-table-data sheet-center"><input class="sheet-spellrange-data" title="@{spellclass-2-long} 400 + 40/level" type="number" name="attr_spellclass-2-long" value="0" class="sheet-calc" readonly="readonly" /></span>
+                            <span class="sheet-table-data sheet-center"><input class="sheet-spellrange-data sheet-calc" title="@{spellclass-2-long} 400 + 40/level" type="number" name="attr_spellclass-2-long" value="0" readonly="readonly" /></span>
 						</div>
 					</div>
 				</div>
@@ -7779,7 +7781,8 @@
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-0-spells_$X_components}" type="text" value="" name="attr_components" placeholder="Components" accept="Components"><br>Components</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-0-spells_$X_range}" type="text" value="" name="attr_range" placeholder="Range" accept="Range"><br>Range</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-0-spells_$X_range_numeric}" type="number" value="0" name="attr_range_numeric" placeholder="0" ><br>Range</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-0-spells_$X_targets}" type="text" value="" name="attr_targets" placeholder="Targets/Area/Effect" accept="Target">
+                                        <span class="sheet-table-data sheet-center sheet-small-label">
+                                            <input title="@{repeating_lvl-0-spells_$X_targets}" type="text" value="" name="attr_targets" placeholder="Targets/Area/Effect" accept="Target">
 											<input type="hidden" value="" name="attr_targets" accept="Area">
 											<input type="hidden" value="" name="attr_targets" accept="Effect">
 											<br>Targets/Area/Effect
@@ -7798,7 +7801,7 @@
 										</span>
 									</div>
 									<b>Misc</b>
-									<input type="checkbox" class="sheet-spell-misc-show" title="@{repeating_lvl-0-spells_$X_spell-misc-show}" name="attr_spell-misc-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" checked="checked" /><span></span>				
+                                    <input type="checkbox" class="sheet-spell-misc-show" title="@{repeating_lvl-0-spells_$X_spell-misc-show}" name="attr_spell-misc-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
 									<b>Description</b>
 									<input type="checkbox" class="sheet-desc-show" title="@{repeating_lvl-0-spells_$X_description-show}" name="attr_description-show" value="1" style="opacity:0; width:90px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -75px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
 									<b>Macro Text</b>
@@ -7811,16 +7814,16 @@
 									<div class="sheet-table sheet-spell-misc">					
 										<span class="sheet-table-data" style="width:15%;"></span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-0-spells_$X_CL_misc}" type="number" value="0" name="attr_CL_misc" placeholder="CL Mod" /> <br>CL Mod</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-0-spells_$X_casterlevel}" type="number" value="0" name="attr_casterlevel" class="sheet-calc" readonly="readonly" /> <br>CL</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-0-spells_$X_casterlevel}" type="number" value="0" name="attr_casterlevel" class="sheet-calc" readonly="readonly" /> <br>CL</span>
 										<span class="sheet-table-data sheet-divider-lg" >|<br>&nbsp;</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-0-spells_$X_Concentration_misc}" type="number" value="0" name="attr_Concentration_misc" /> <br>Conc Mod</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-0-spells_$X_Concentration-mod}" type="number" value="0" name="attr_Concentration-mod" class="sheet-calc" readonly="readonly" /> <br>Conc</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-0-spells_$X_Concentration-mod}" type="number" value="0" name="attr_Concentration-mod" class="sheet-calc" readonly="readonly" /> <br>Conc</span>
 										<span class="sheet-table-data sheet-divider-lg" >|<br>&nbsp;</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-0-spells_$X_cast_def-mod}" type="number" value="0" name="attr_cast_def-mod" class="sheet-calc" readonly="readonly" /> <br>Cast Def</span>				
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-0-spells_$X_cast_def_dc}" type="number" value="0" name="attr_cast_def_dc" class="sheet-calc" readonly="readonly" /> <br>Cast Def DC</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-0-spells_$X_cast_def-mod}" type="number" value="0" name="attr_cast_def-mod" class="sheet-calc" readonly="readonly" /> <br>Cast Def</span>
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-0-spells_$X_cast_def_dc}" type="number" value="0" name="attr_cast_def_dc" class="sheet-calc" readonly="readonly" /> <br>Cast Def DC</span>
 										<span class="sheet-table-data sheet-divider-lg" >|<br>&nbsp;</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-0-spells_$X_SP_misc}" type="number" value="0" name="attr_SP_misc" placeholder="Spell Penetration Mod" /> <br>Spell Pen Mod</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-0-spells_$X_SP-mod}" type="number" value="0" name="attr_SP-mod" class="sheet-calc" readonly="readonly" /> <br>Spellpen</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-0-spells_$X_SP-mod}" type="number" value="0" name="attr_SP-mod" class="sheet-calc" readonly="readonly" /> <br>Spellpen</span>
 										<span class="sheet-table-data" style="width:15%;"></span>
 									</div>
 									
@@ -7846,8 +7849,8 @@
 										<input type="hidden" name="attr_var_spellPen_check" value="{{spellPen_chk=[[ 1d20 + [[  @{SP-mod} ]] ]] }}" />
 										<input type="hidden" name="attr_var_Concentration_check" value="{{Concentration_chk=[[ 1d20 + [[ @{Concentration-mod} ]] ]] }}" />
 										<input type="hidden" name="attr_var_cast_def_check" value="{{cast_def_chk=[[ (1d20 + @{cast_def-mod})cs> [[ @{cast_def_dc} ]]cf<[[ @{cast_def_dc} - 1 ]] ]] }}" />
-										<input type="hidden" name="attr_spell_options" value="@{toggle_level_notes}@{toggle_casterlevel_notes}@{toggle_school_notes}@{toggle_casting_time_notes}@{toggle_dc_notes}@{toggle_components_notes}@{toggle_range_notes}@{toggle_targets_notes}@{toggle_duration_notes}@{toggle_saving_throw_notes}@{toggle_sr_notes}@{toggle_casterlevel_check}@{toggle_spellPen_notes}@{toggle_spellPen_check}@{toggle_Concentration_notes}@{toggle_Concentration_check}@{toggle_cast_def_notes}@{toggle_cast_def_check}@{toggle_description_notes}" />			
-									
+                                    <input type="hidden" name="attr_spell_options" value="@{toggle_level_notes}@{toggle_casterlevel_notes}@{toggle_school_notes}@{toggle_casting_time_notes}@{toggle_dc_notes}@{toggle_components_notes}@{toggle_range_notes}@{toggle_targets_notes}@{toggle_duration_notes}@{toggle_saving_throw_notes}@{toggle_sr_notes}@{toggle_casterlevel_check}@{toggle_spellPen_notes}@{toggle_spellPen_check}@{toggle_Concentration_notes}@{toggle_Concentration_check}@{toggle_cast_def_notes}@{toggle_cast_def_check}@{toggle_description_notes}" />
+
 									<div class="sheet-options">
 										<div class="sheet-table">
 											<div class="sheet-table-row">
@@ -7930,7 +7933,8 @@
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-1-spells_$X_components}" type="text" value="" name="attr_components" placeholder="Components" accept="Components"><br>Components</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-1-spells_$X_range}" type="text" value="" name="attr_range" placeholder="Range" accept="Range"><br>Range</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-1-spells_$X_range_numeric}" type="number" value="0" name="attr_range_numeric" placeholder="0" ><br>Range</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-1-spells_$X_targets}" type="text" value="" name="attr_targets" placeholder="Targets/Area/Effect" accept="Target">
+                                        <span class="sheet-table-data sheet-center sheet-small-label">
+                                            <input title="@{repeating_lvl-1-spells_$X_targets}" type="text" value="" name="attr_targets" placeholder="Targets/Area/Effect" accept="Target">
 											<input type="hidden" value="" name="attr_targets" accept="Area">
 											<input type="hidden" value="" name="attr_targets" accept="Effect">
 											<br>Targets/Area/Effect
@@ -7949,7 +7953,7 @@
 										</span>
 									</div>
 									<b>Misc</b>
-									<input type="checkbox" class="sheet-spell-misc-show" title="@{repeating_lvl-1-spells_$X_spell-misc-show}" name="attr_spell-misc-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" checked="checked" /><span></span>				
+                                    <input type="checkbox" class="sheet-spell-misc-show" title="@{repeating_lvl-1-spells_$X_spell-misc-show}" name="attr_spell-misc-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
 									<b>Description</b>
 									<input type="checkbox" class="sheet-desc-show" title="@{repeating_lvl-1-spells_$X_description-show}" name="attr_description-show" value="1" style="opacity:0; width:90px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -75px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
 									<b>Macro Text</b>
@@ -7962,16 +7966,16 @@
 									<div class="sheet-table sheet-spell-misc">					
 										<span class="sheet-table-data" style="width:15%;"></span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-1-spells_$X_CL_misc}" type="number" value="0" name="attr_CL_misc" placeholder="CL Mod" /> <br>CL Mod</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-1-spells_$X_casterlevel}" type="number" value="0" name="attr_casterlevel" class="sheet-calc" readonly="readonly" /> <br>CL</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-1-spells_$X_casterlevel}" type="number" value="0" name="attr_casterlevel" class="sheet-calc" readonly="readonly" /> <br>CL</span>
 										<span class="sheet-table-data sheet-divider-lg" >|<br>&nbsp;</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-1-spells_$X_Concentration_misc}" type="number" value="0" name="attr_Concentration_misc" /> <br>Conc Mod</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-1-spells_$X_Concentration-mod}" type="number" value="0" name="attr_Concentration-mod" class="sheet-calc" readonly="readonly" /> <br>Conc</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-1-spells_$X_Concentration-mod}" type="number" value="0" name="attr_Concentration-mod" class="sheet-calc" readonly="readonly" /> <br>Conc</span>
 										<span class="sheet-table-data sheet-divider-lg" >|<br>&nbsp;</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-1-spells_$X_cast_def-mod}" type="number" value="0" name="attr_cast_def-mod" class="sheet-calc" readonly="readonly" /> <br>Cast Def</span>				
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-1-spells_$X_cast_def_dc}" type="number" value="0" name="attr_cast_def_dc" class="sheet-calc" readonly="readonly" /> <br>Cast Def DC</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-1-spells_$X_cast_def-mod}" type="number" value="0" name="attr_cast_def-mod" class="sheet-calc" readonly="readonly" /> <br>Cast Def</span>
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-1-spells_$X_cast_def_dc}" type="number" value="0" name="attr_cast_def_dc" class="sheet-calc" readonly="readonly" /> <br>Cast Def DC</span>
 										<span class="sheet-table-data sheet-divider-lg" >|<br>&nbsp;</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-1-spells_$X_SP_misc}" type="number" value="0" name="attr_SP_misc" placeholder="Spell Penetration Mod" /> <br>Spell Pen Mod</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-1-spells_$X_SP-mod}" type="number" value="0" name="attr_SP-mod" class="sheet-calc" readonly="readonly" /> <br>Spellpen</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-1-spells_$X_SP-mod}" type="number" value="0" name="attr_SP-mod" class="sheet-calc" readonly="readonly" /> <br>Spellpen</span>
 										<span class="sheet-table-data" style="width:15%;"></span>
 									</div>
 									
@@ -7997,8 +8001,8 @@
 										<input type="hidden" name="attr_var_spellPen_check" value="{{spellPen_chk=[[ 1d20 + [[  @{SP-mod} ]] ]] }}" />
 										<input type="hidden" name="attr_var_Concentration_check" value="{{Concentration_chk=[[ 1d20 + [[ @{Concentration-mod} ]] ]] }}" />
 										<input type="hidden" name="attr_var_cast_def_check" value="{{cast_def_chk=[[ (1d20 + @{cast_def-mod})cs> [[ @{cast_def_dc} ]]cf<[[ @{cast_def_dc} - 1 ]] ]] }}" />
-										<input type="hidden" name="attr_spell_options" value="@{toggle_level_notes}@{toggle_casterlevel_notes}@{toggle_school_notes}@{toggle_casting_time_notes}@{toggle_dc_notes}@{toggle_components_notes}@{toggle_range_notes}@{toggle_targets_notes}@{toggle_duration_notes}@{toggle_saving_throw_notes}@{toggle_sr_notes}@{toggle_casterlevel_check}@{toggle_spellPen_notes}@{toggle_spellPen_check}@{toggle_Concentration_notes}@{toggle_Concentration_check}@{toggle_cast_def_notes}@{toggle_cast_def_check}@{toggle_description_notes}" />			
-									
+                                    <input type="hidden" name="attr_spell_options" value="@{toggle_level_notes}@{toggle_casterlevel_notes}@{toggle_school_notes}@{toggle_casting_time_notes}@{toggle_dc_notes}@{toggle_components_notes}@{toggle_range_notes}@{toggle_targets_notes}@{toggle_duration_notes}@{toggle_saving_throw_notes}@{toggle_sr_notes}@{toggle_casterlevel_check}@{toggle_spellPen_notes}@{toggle_spellPen_check}@{toggle_Concentration_notes}@{toggle_Concentration_check}@{toggle_cast_def_notes}@{toggle_cast_def_check}@{toggle_description_notes}" />
+
 									<div class="sheet-options">
 										<div class="sheet-table">
 											<div class="sheet-table-row">
@@ -8080,7 +8084,8 @@
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-2-spells_$X_components}" type="text" value="" name="attr_components" placeholder="Components" accept="Components"><br>Components</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-2-spells_$X_range}" type="text" value="" name="attr_range" placeholder="Range" accept="Range"><br>Range</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-2-spells_$X_range_numeric}" type="number" value="0" name="attr_range_numeric" placeholder="0" ><br>Range</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-2-spells_$X_targets}" type="text" value="" name="attr_targets" placeholder="Targets/Area/Effect" accept="Target">
+                                        <span class="sheet-table-data sheet-center sheet-small-label">
+                                            <input title="@{repeating_lvl-2-spells_$X_targets}" type="text" value="" name="attr_targets" placeholder="Targets/Area/Effect" accept="Target">
 											<input type="hidden" value="" name="attr_targets" accept="Area">
 											<input type="hidden" value="" name="attr_targets" accept="Effect">
 											<br>Targets/Area/Effect
@@ -8099,7 +8104,7 @@
 										</span>
 									</div>
 									<b>Misc</b>
-									<input type="checkbox" class="sheet-spell-misc-show" title="@{repeating_lvl-2-spells_$X_spell-misc-show}" name="attr_spell-misc-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" checked="checked" /><span></span>				
+                                    <input type="checkbox" class="sheet-spell-misc-show" title="@{repeating_lvl-2-spells_$X_spell-misc-show}" name="attr_spell-misc-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
 									<b>Description</b>
 									<input type="checkbox" class="sheet-desc-show" title="@{repeating_lvl-2-spells_$X_description-show}" name="attr_description-show" value="1" style="opacity:0; width:90px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -75px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
 									<b>Macro Text</b>
@@ -8112,16 +8117,16 @@
 									<div class="sheet-table sheet-spell-misc">					
 										<span class="sheet-table-data" style="width:15%;"></span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-2-spells_$X_CL_misc}" type="number" value="0" name="attr_CL_misc" placeholder="CL Mod" /> <br>CL Mod</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-2-spells_$X_casterlevel}" type="number" value="0" name="attr_casterlevel" class="sheet-calc" readonly="readonly" /> <br>CL</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-2-spells_$X_casterlevel}" type="number" value="0" name="attr_casterlevel" class="sheet-calc" readonly="readonly" /> <br>CL</span>
 										<span class="sheet-table-data sheet-divider-lg" >|<br>&nbsp;</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-2-spells_$X_Concentration_misc}" type="number" value="0" name="attr_Concentration_misc" /> <br>Conc Mod</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-2-spells_$X_Concentration-mod}" type="number" value="0" name="attr_Concentration-mod" class="sheet-calc" readonly="readonly" /> <br>Conc</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-2-spells_$X_Concentration-mod}" type="number" value="0" name="attr_Concentration-mod" class="sheet-calc" readonly="readonly" /> <br>Conc</span>
 										<span class="sheet-table-data sheet-divider-lg" >|<br>&nbsp;</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-2-spells_$X_cast_def-mod}" type="number" value="0" name="attr_cast_def-mod" class="sheet-calc" readonly="readonly" /> <br>Cast Def</span>				
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-2-spells_$X_cast_def_dc}" type="number" value="0" name="attr_cast_def_dc" class="sheet-calc" readonly="readonly" /> <br>Cast Def DC</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-2-spells_$X_cast_def-mod}" type="number" value="0" name="attr_cast_def-mod" class="sheet-calc" readonly="readonly" /> <br>Cast Def</span>
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-2-spells_$X_cast_def_dc}" type="number" value="0" name="attr_cast_def_dc" class="sheet-calc" readonly="readonly" /> <br>Cast Def DC</span>
 										<span class="sheet-table-data sheet-divider-lg" >|<br>&nbsp;</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-2-spells_$X_SP_misc}" type="number" value="0" name="attr_SP_misc" placeholder="Spell Penetration Mod" /> <br>Spell Pen Mod</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-2-spells_$X_SP-mod}" type="number" value="0" name="attr_SP-mod" class="sheet-calc" readonly="readonly" /> <br>Spellpen</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-2-spells_$X_SP-mod}" type="number" value="0" name="attr_SP-mod" class="sheet-calc" readonly="readonly" /> <br>Spellpen</span>
 										<span class="sheet-table-data" style="width:15%;"></span>
 									</div>
 									
@@ -8147,8 +8152,8 @@
 										<input type="hidden" name="attr_var_spellPen_check" value="{{spellPen_chk=[[ 1d20 + [[  @{SP-mod} ]] ]] }}" />
 										<input type="hidden" name="attr_var_Concentration_check" value="{{Concentration_chk=[[ 1d20 + [[ @{Concentration-mod} ]] ]] }}" />
 										<input type="hidden" name="attr_var_cast_def_check" value="{{cast_def_chk=[[ (1d20 + @{cast_def-mod})cs> [[ @{cast_def_dc} ]]cf<[[ @{cast_def_dc} - 1 ]] ]] }}" />
-										<input type="hidden" name="attr_spell_options" value="@{toggle_level_notes}@{toggle_casterlevel_notes}@{toggle_school_notes}@{toggle_casting_time_notes}@{toggle_dc_notes}@{toggle_components_notes}@{toggle_range_notes}@{toggle_targets_notes}@{toggle_duration_notes}@{toggle_saving_throw_notes}@{toggle_sr_notes}@{toggle_casterlevel_check}@{toggle_spellPen_notes}@{toggle_spellPen_check}@{toggle_Concentration_notes}@{toggle_Concentration_check}@{toggle_cast_def_notes}@{toggle_cast_def_check}@{toggle_description_notes}" />			
-									
+                                    <input type="hidden" name="attr_spell_options" value="@{toggle_level_notes}@{toggle_casterlevel_notes}@{toggle_school_notes}@{toggle_casting_time_notes}@{toggle_dc_notes}@{toggle_components_notes}@{toggle_range_notes}@{toggle_targets_notes}@{toggle_duration_notes}@{toggle_saving_throw_notes}@{toggle_sr_notes}@{toggle_casterlevel_check}@{toggle_spellPen_notes}@{toggle_spellPen_check}@{toggle_Concentration_notes}@{toggle_Concentration_check}@{toggle_cast_def_notes}@{toggle_cast_def_check}@{toggle_description_notes}" />
+
 									<div class="sheet-options">
 										<div class="sheet-table">
 											<div class="sheet-table-row">
@@ -8231,7 +8236,8 @@
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-3-spells_$X_components}" type="text" value="" name="attr_components" placeholder="Components" accept="Components"><br>Components</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-3-spells_$X_range}" type="text" value="" name="attr_range" placeholder="Range" accept="Range"><br>Range</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-3-spells_$X_range_numeric}" type="number" value="0" name="attr_range_numeric" placeholder="0" ><br>Range</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-3-spells_$X_targets}" type="text" value="" name="attr_targets" placeholder="Targets/Area/Effect" accept="Target">
+                                        <span class="sheet-table-data sheet-center sheet-small-label">
+                                            <input title="@{repeating_lvl-3-spells_$X_targets}" type="text" value="" name="attr_targets" placeholder="Targets/Area/Effect" accept="Target">
 											<input type="hidden" value="" name="attr_targets" accept="Area">
 											<input type="hidden" value="" name="attr_targets" accept="Effect">
 											<br>Targets/Area/Effect
@@ -8250,7 +8256,7 @@
 										</span>
 									</div>
 									<b>Misc</b>
-									<input type="checkbox" class="sheet-spell-misc-show" title="@{repeating_lvl-3-spells_$X_spell-misc-show}" name="attr_spell-misc-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" checked="checked" /><span></span>				
+                                    <input type="checkbox" class="sheet-spell-misc-show" title="@{repeating_lvl-3-spells_$X_spell-misc-show}" name="attr_spell-misc-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
 									<b>Description</b>
 									<input type="checkbox" class="sheet-desc-show" title="@{repeating_lvl-3-spells_$X_description-show}" name="attr_description-show" value="1" style="opacity:0; width:90px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -75px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
 									<b>Macro Text</b>
@@ -8263,16 +8269,16 @@
 									<div class="sheet-table sheet-spell-misc">					
 										<span class="sheet-table-data" style="width:15%;"></span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-3-spells_$X_CL_misc}" type="number" value="0" name="attr_CL_misc" placeholder="CL Mod" /> <br>CL Mod</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-3-spells_$X_casterlevel}" type="number" value="0" name="attr_casterlevel" class="sheet-calc" readonly="readonly" /> <br>CL</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-3-spells_$X_casterlevel}" type="number" value="0" name="attr_casterlevel" class="sheet-calc" readonly="readonly" /> <br>CL</span>
 										<span class="sheet-table-data sheet-divider-lg" >|<br>&nbsp;</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-3-spells_$X_Concentration_misc}" type="number" value="0" name="attr_Concentration_misc" /> <br>Conc Mod</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-3-spells_$X_Concentration-mod}" type="number" value="0" name="attr_Concentration-mod" class="sheet-calc" readonly="readonly" /> <br>Conc</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-3-spells_$X_Concentration-mod}" type="number" value="0" name="attr_Concentration-mod" class="sheet-calc" readonly="readonly" /> <br>Conc</span>
 										<span class="sheet-table-data sheet-divider-lg" >|<br>&nbsp;</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-3-spells_$X_cast_def-mod}" type="number" value="0" name="attr_cast_def-mod" class="sheet-calc" readonly="readonly" /> <br>Cast Def</span>				
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-3-spells_$X_cast_def_dc}" type="number" value="0" name="attr_cast_def_dc" class="sheet-calc" readonly="readonly" /> <br>Cast Def DC</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-3-spells_$X_cast_def-mod}" type="number" value="0" name="attr_cast_def-mod" class="sheet-calc" readonly="readonly" /> <br>Cast Def</span>
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-3-spells_$X_cast_def_dc}" type="number" value="0" name="attr_cast_def_dc" class="sheet-calc" readonly="readonly" /> <br>Cast Def DC</span>
 										<span class="sheet-table-data sheet-divider-lg" >|<br>&nbsp;</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-3-spells_$X_SP_misc}" type="number" value="0" name="attr_SP_misc" placeholder="Spell Penetration Mod" /> <br>Spell Pen Mod</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-3-spells_$X_SP-mod}" type="number" value="0" name="attr_SP-mod" class="sheet-calc" readonly="readonly" /> <br>Spellpen</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-3-spells_$X_SP-mod}" type="number" value="0" name="attr_SP-mod" class="sheet-calc" readonly="readonly" /> <br>Spellpen</span>
 										<span class="sheet-table-data" style="width:15%;"></span>
 									</div>
 									
@@ -8298,8 +8304,8 @@
 										<input type="hidden" name="attr_var_spellPen_check" value="{{spellPen_chk=[[ 1d20 + [[  @{SP-mod} ]] ]] }}" />
 										<input type="hidden" name="attr_var_Concentration_check" value="{{Concentration_chk=[[ 1d20 + [[ @{Concentration-mod} ]] ]] }}" />
 										<input type="hidden" name="attr_var_cast_def_check" value="{{cast_def_chk=[[ (1d20 + @{cast_def-mod})cs> [[ @{cast_def_dc} ]]cf<[[ @{cast_def_dc} - 1 ]] ]] }}" />
-										<input type="hidden" name="attr_spell_options" value="@{toggle_level_notes}@{toggle_casterlevel_notes}@{toggle_school_notes}@{toggle_casting_time_notes}@{toggle_dc_notes}@{toggle_components_notes}@{toggle_range_notes}@{toggle_targets_notes}@{toggle_duration_notes}@{toggle_saving_throw_notes}@{toggle_sr_notes}@{toggle_casterlevel_check}@{toggle_spellPen_notes}@{toggle_spellPen_check}@{toggle_Concentration_notes}@{toggle_Concentration_check}@{toggle_cast_def_notes}@{toggle_cast_def_check}@{toggle_description_notes}" />			
-									
+                                    <input type="hidden" name="attr_spell_options" value="@{toggle_level_notes}@{toggle_casterlevel_notes}@{toggle_school_notes}@{toggle_casting_time_notes}@{toggle_dc_notes}@{toggle_components_notes}@{toggle_range_notes}@{toggle_targets_notes}@{toggle_duration_notes}@{toggle_saving_throw_notes}@{toggle_sr_notes}@{toggle_casterlevel_check}@{toggle_spellPen_notes}@{toggle_spellPen_check}@{toggle_Concentration_notes}@{toggle_Concentration_check}@{toggle_cast_def_notes}@{toggle_cast_def_check}@{toggle_description_notes}" />
+
 									<div class="sheet-options">
 										<div class="sheet-table">
 											<div class="sheet-table-row">
@@ -8382,14 +8388,10 @@
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-4-spells_$X_components}" type="text" value="" name="attr_components" placeholder="Components" accept="Components"><br>Components</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-4-spells_$X_range}" type="text" value="" name="attr_range" placeholder="Range" accept="Range"><br>Range</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-4-spells_$X_range_numeric}" type="number" value="0" name="attr_range_numeric" placeholder="0" ><br>Range</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-4-spells_$X_targets}" type="text" value="" name="attr_targets" placeholder="Targets/Area/Effect" accept="Target">
+                                        <span class="sheet-table-data sheet-center sheet-small-label">
+                                            <input title="@{repeating_lvl-4-spells_$X_targets}" type="text" value="" name="attr_targets" placeholder="Targets/Area/Effect" accept="Target">
 											<input type="hidden" value="" name="attr_targets" accept="Area">
 											<input type="hidden" value="" name="attr_targets" accept="Effect">
-
-
-
-
-
 											<br>Targets/Area/Effect
 										</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-4-spells_$X_duration}" type="text" value="" name="attr_duration" placeholder="Duration" accept="Duration" /><br>Duration</span>
@@ -8406,7 +8408,7 @@
 										</span>
 									</div>
 									<b>Misc</b>
-									<input type="checkbox" class="sheet-spell-misc-show" title="@{repeating_lvl-4-spells_$X_spell-misc-show}" name="attr_spell-misc-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" checked="checked" /><span></span>				
+                                    <input type="checkbox" class="sheet-spell-misc-show" title="@{repeating_lvl-4-spells_$X_spell-misc-show}" name="attr_spell-misc-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
 									<b>Description</b>
 									<input type="checkbox" class="sheet-desc-show" title="@{repeating_lvl-4-spells_$X_description-show}" name="attr_description-show" value="1" style="opacity:0; width:90px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -75px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
 									<b>Macro Text</b>
@@ -8419,16 +8421,16 @@
 									<div class="sheet-table sheet-spell-misc">					
 										<span class="sheet-table-data" style="width:15%;"></span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-4-spells_$X_CL_misc}" type="number" value="0" name="attr_CL_misc" placeholder="CL Mod" /> <br>CL Mod</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-4-spells_$X_casterlevel}" type="number" value="0" name="attr_casterlevel" class="sheet-calc" readonly="readonly" /> <br>CL</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-4-spells_$X_casterlevel}" type="number" value="0" name="attr_casterlevel" class="sheet-calc" readonly="readonly" /> <br>CL</span>
 										<span class="sheet-table-data sheet-divider-lg" >|<br>&nbsp;</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-4-spells_$X_Concentration_misc}" type="number" value="0" name="attr_Concentration_misc" /> <br>Conc Mod</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-4-spells_$X_Concentration-mod}" type="number" value="0" name="attr_Concentration-mod" class="sheet-calc" readonly="readonly" /> <br>Conc</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-4-spells_$X_Concentration-mod}" type="number" value="0" name="attr_Concentration-mod" class="sheet-calc" readonly="readonly" /> <br>Conc</span>
 										<span class="sheet-table-data sheet-divider-lg" >|<br>&nbsp;</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-4-spells_$X_cast_def-mod}" type="number" value="0" name="attr_cast_def-mod" class="sheet-calc" readonly="readonly" /> <br>Cast Def</span>				
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-4-spells_$X_cast_def_dc}" type="number" value="0" name="attr_cast_def_dc" class="sheet-calc" readonly="readonly" /> <br>Cast Def DC</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-4-spells_$X_cast_def-mod}" type="number" value="0" name="attr_cast_def-mod" class="sheet-calc" readonly="readonly" /> <br>Cast Def</span>
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-4-spells_$X_cast_def_dc}" type="number" value="0" name="attr_cast_def_dc" class="sheet-calc" readonly="readonly" /> <br>Cast Def DC</span>
 										<span class="sheet-table-data sheet-divider-lg" >|<br>&nbsp;</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-4-spells_$X_SP_misc}" type="number" value="0" name="attr_SP_misc" placeholder="Spell Penetration Mod" /> <br>Spell Pen Mod</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-4-spells_$X_SP-mod}" type="number" value="0" name="attr_SP-mod" class="sheet-calc" readonly="readonly" /> <br>Spellpen</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-4-spells_$X_SP-mod}" type="number" value="0" name="attr_SP-mod" class="sheet-calc" readonly="readonly" /> <br>Spellpen</span>
 										<span class="sheet-table-data" style="width:15%;"></span>
 									</div>
 									
@@ -8454,8 +8456,8 @@
 										<input type="hidden" name="attr_var_spellPen_check" value="{{spellPen_chk=[[ 1d20 + [[  @{SP-mod} ]] ]] }}" />
 										<input type="hidden" name="attr_var_Concentration_check" value="{{Concentration_chk=[[ 1d20 + [[ @{Concentration-mod} ]] ]] }}" />
 										<input type="hidden" name="attr_var_cast_def_check" value="{{cast_def_chk=[[ (1d20 + @{cast_def-mod})cs> [[ @{cast_def_dc} ]]cf<[[ @{cast_def_dc} - 1 ]] ]] }}" />
-										<input type="hidden" name="attr_spell_options" value="@{toggle_level_notes}@{toggle_casterlevel_notes}@{toggle_school_notes}@{toggle_casting_time_notes}@{toggle_dc_notes}@{toggle_components_notes}@{toggle_range_notes}@{toggle_targets_notes}@{toggle_duration_notes}@{toggle_saving_throw_notes}@{toggle_sr_notes}@{toggle_casterlevel_check}@{toggle_spellPen_notes}@{toggle_spellPen_check}@{toggle_Concentration_notes}@{toggle_Concentration_check}@{toggle_cast_def_notes}@{toggle_cast_def_check}@{toggle_description_notes}" />			
-									
+                                    <input type="hidden" name="attr_spell_options" value="@{toggle_level_notes}@{toggle_casterlevel_notes}@{toggle_school_notes}@{toggle_casting_time_notes}@{toggle_dc_notes}@{toggle_components_notes}@{toggle_range_notes}@{toggle_targets_notes}@{toggle_duration_notes}@{toggle_saving_throw_notes}@{toggle_sr_notes}@{toggle_casterlevel_check}@{toggle_spellPen_notes}@{toggle_spellPen_check}@{toggle_Concentration_notes}@{toggle_Concentration_check}@{toggle_cast_def_notes}@{toggle_cast_def_check}@{toggle_description_notes}" />
+
 									<div class="sheet-options">
 										<div class="sheet-table">
 											<div class="sheet-table-row">
@@ -8538,7 +8540,8 @@
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-5-spells_$X_components}" type="text" value="" name="attr_components" placeholder="Components" accept="Components"><br>Components</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-5-spells_$X_range}" type="text" value="" name="attr_range" placeholder="Range" accept="Range"><br>Range</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-5-spells_$X_range_numeric}" type="number" value="0" name="attr_range_numeric" placeholder="0" ><br>Range</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-5-spells_$X_targets}" type="text" value="" name="attr_targets" placeholder="Targets/Area/Effect" accept="Target">
+                                        <span class="sheet-table-data sheet-center sheet-small-label">
+                                            <input title="@{repeating_lvl-5-spells_$X_targets}" type="text" value="" name="attr_targets" placeholder="Targets/Area/Effect" accept="Target">
 											<input type="hidden" value="" name="attr_targets" accept="Area">
 											<input type="hidden" value="" name="attr_targets" accept="Effect">
 
@@ -8558,7 +8561,7 @@
 										</span>
 									</div>
 									<b>Misc</b>
-									<input type="checkbox" class="sheet-spell-misc-show" title="@{repeating_lvl-5-spells_$X_spell-misc-show}" name="attr_spell-misc-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" checked="checked" /><span></span>				
+                                    <input type="checkbox" class="sheet-spell-misc-show" title="@{repeating_lvl-5-spells_$X_spell-misc-show}" name="attr_spell-misc-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
 									<b>Description</b>
 									<input type="checkbox" class="sheet-desc-show" title="@{repeating_lvl-5-spells_$X_description-show}" name="attr_description-show" value="1" style="opacity:0; width:90px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -75px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
 									<b>Macro Text</b>
@@ -8571,16 +8574,16 @@
 									<div class="sheet-table sheet-spell-misc">					
 										<span class="sheet-table-data" style="width:15%;"></span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-5-spells_$X_CL_misc}" type="number" value="0" name="attr_CL_misc" placeholder="CL Mod" /> <br>CL Mod</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-5-spells_$X_casterlevel}" type="number" value="0" name="attr_casterlevel" class="sheet-calc" readonly="readonly" /> <br>CL</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-5-spells_$X_casterlevel}" type="number" value="0" name="attr_casterlevel" class="sheet-calc" readonly="readonly" /> <br>CL</span>
 										<span class="sheet-table-data sheet-divider-lg" >|<br>&nbsp;</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-5-spells_$X_Concentration_misc}" type="number" value="0" name="attr_Concentration_misc" /> <br>Conc Mod</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-5-spells_$X_Concentration-mod}" type="number" value="0" name="attr_Concentration-mod" class="sheet-calc" readonly="readonly" /> <br>Conc</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-5-spells_$X_Concentration-mod}" type="number" value="0" name="attr_Concentration-mod" class="sheet-calc" readonly="readonly" /> <br>Conc</span>
 										<span class="sheet-table-data sheet-divider-lg" >|<br>&nbsp;</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-5-spells_$X_cast_def-mod}" type="number" value="0" name="attr_cast_def-mod" class="sheet-calc" readonly="readonly" /> <br>Cast Def</span>				
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-5-spells_$X_cast_def_dc}" type="number" value="0" name="attr_cast_def_dc" class="sheet-calc" readonly="readonly" /> <br>Cast Def DC</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-5-spells_$X_cast_def-mod}" type="number" value="0" name="attr_cast_def-mod" class="sheet-calc" readonly="readonly" /> <br>Cast Def</span>
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-5-spells_$X_cast_def_dc}" type="number" value="0" name="attr_cast_def_dc" class="sheet-calc" readonly="readonly" /> <br>Cast Def DC</span>
 										<span class="sheet-table-data sheet-divider-lg" >|<br>&nbsp;</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-5-spells_$X_SP_misc}" type="number" value="0" name="attr_SP_misc" placeholder="Spell Penetration Mod" /> <br>Spell Pen Mod</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-5-spells_$X_SP-mod}" type="number" value="0" name="attr_SP-mod" class="sheet-calc" readonly="readonly" /> <br>Spellpen</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-5-spells_$X_SP-mod}" type="number" value="0" name="attr_SP-mod" class="sheet-calc" readonly="readonly" /> <br>Spellpen</span>
 										<span class="sheet-table-data" style="width:15%;"></span>
 									</div>
 									
@@ -8606,8 +8609,8 @@
 										<input type="hidden" name="attr_var_spellPen_check" value="{{spellPen_chk=[[ 1d20 + [[  @{SP-mod} ]] ]] }}" />
 										<input type="hidden" name="attr_var_Concentration_check" value="{{Concentration_chk=[[ 1d20 + [[ @{Concentration-mod} ]] ]] }}" />
 										<input type="hidden" name="attr_var_cast_def_check" value="{{cast_def_chk=[[ (1d20 + @{cast_def-mod})cs> [[ @{cast_def_dc} ]]cf<[[ @{cast_def_dc} - 1 ]] ]] }}" />
-										<input type="hidden" name="attr_spell_options" value="@{toggle_level_notes}@{toggle_casterlevel_notes}@{toggle_school_notes}@{toggle_casting_time_notes}@{toggle_dc_notes}@{toggle_components_notes}@{toggle_range_notes}@{toggle_targets_notes}@{toggle_duration_notes}@{toggle_saving_throw_notes}@{toggle_sr_notes}@{toggle_casterlevel_check}@{toggle_spellPen_notes}@{toggle_spellPen_check}@{toggle_Concentration_notes}@{toggle_Concentration_check}@{toggle_cast_def_notes}@{toggle_cast_def_check}@{toggle_description_notes}" />			
-									
+                                    <input type="hidden" name="attr_spell_options" value="@{toggle_level_notes}@{toggle_casterlevel_notes}@{toggle_school_notes}@{toggle_casting_time_notes}@{toggle_dc_notes}@{toggle_components_notes}@{toggle_range_notes}@{toggle_targets_notes}@{toggle_duration_notes}@{toggle_saving_throw_notes}@{toggle_sr_notes}@{toggle_casterlevel_check}@{toggle_spellPen_notes}@{toggle_spellPen_check}@{toggle_Concentration_notes}@{toggle_Concentration_check}@{toggle_cast_def_notes}@{toggle_cast_def_check}@{toggle_description_notes}" />
+
 									<div class="sheet-options">
 										<div class="sheet-table">
 											<div class="sheet-table-row">
@@ -8690,7 +8693,8 @@
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-6-spells_$X_components}" type="text" value="" name="attr_components" placeholder="Components" accept="Components"><br>Components</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-6-spells_$X_range}" type="text" value="" name="attr_range" placeholder="Range" accept="Range"><br>Range</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-6-spells_$X_range_numeric}" type="number" value="0" name="attr_range_numeric" placeholder="0" ><br>Range</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-6-spells_$X_targets}" type="text" value="" name="attr_targets" placeholder="Targets/Area/Effect" accept="Target">
+                                        <span class="sheet-table-data sheet-center sheet-small-label">
+                                            <input title="@{repeating_lvl-6-spells_$X_targets}" type="text" value="" name="attr_targets" placeholder="Targets/Area/Effect" accept="Target">
 											<input type="hidden" value="" name="attr_targets" accept="Area">
 											<input type="hidden" value="" name="attr_targets" accept="Effect">
 											<br>Targets/Area/Effect
@@ -8709,7 +8713,7 @@
 										</span>
 									</div>
 									<b>Misc</b>
-									<input type="checkbox" class="sheet-spell-misc-show" title="@{repeating_lvl-6-spells_$X_spell-misc-show}" name="attr_spell-misc-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" checked="checked" /><span></span>				
+                                    <input type="checkbox" class="sheet-spell-misc-show" title="@{repeating_lvl-6-spells_$X_spell-misc-show}" name="attr_spell-misc-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
 									<b>Description</b>
 									<input type="checkbox" class="sheet-desc-show" title="@{repeating_lvl-6-spells_$X_description-show}" name="attr_description-show" value="1" style="opacity:0; width:90px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -75px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
 									<b>Macro Text</b>
@@ -8722,16 +8726,16 @@
 									<div class="sheet-table sheet-spell-misc">					
 										<span class="sheet-table-data" style="width:15%;"></span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-6-spells_$X_CL_misc}" type="number" value="0" name="attr_CL_misc" placeholder="CL Mod" /> <br>CL Mod</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-6-spells_$X_casterlevel}" type="number" value="0" name="attr_casterlevel" class="sheet-calc" readonly="readonly" /> <br>CL</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-6-spells_$X_casterlevel}" type="number" value="0" name="attr_casterlevel" class="sheet-calc" readonly="readonly" /> <br>CL</span>
 										<span class="sheet-table-data sheet-divider-lg" >|<br>&nbsp;</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-6-spells_$X_Concentration_misc}" type="number" value="0" name="attr_Concentration_misc" /> <br>Conc Mod</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-6-spells_$X_Concentration-mod}" type="number" value="0" name="attr_Concentration-mod" class="sheet-calc" readonly="readonly" /> <br>Conc</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-6-spells_$X_Concentration-mod}" type="number" value="0" name="attr_Concentration-mod" class="sheet-calc" readonly="readonly" /> <br>Conc</span>
 										<span class="sheet-table-data sheet-divider-lg" >|<br>&nbsp;</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-6-spells_$X_cast_def-mod}" type="number" value="0" name="attr_cast_def-mod" class="sheet-calc" readonly="readonly" /> <br>Cast Def</span>				
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-6-spells_$X_cast_def_dc}" type="number" value="0" name="attr_cast_def_dc" class="sheet-calc" readonly="readonly" /> <br>Cast Def DC</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-6-spells_$X_cast_def-mod}" type="number" value="0" name="attr_cast_def-mod" class="sheet-calc" readonly="readonly" /> <br>Cast Def</span>
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-6-spells_$X_cast_def_dc}" type="number" value="0" name="attr_cast_def_dc" class="sheet-calc" readonly="readonly" /> <br>Cast Def DC</span>
 										<span class="sheet-table-data sheet-divider-lg" >|<br>&nbsp;</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-6-spells_$X_SP_misc}" type="number" value="0" name="attr_SP_misc" placeholder="Spell Penetration Mod" /> <br>Spell Pen Mod</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-6-spells_$X_SP-mod}" type="number" value="0" name="attr_SP-mod" class="sheet-calc" readonly="readonly" /> <br>Spellpen</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-6-spells_$X_SP-mod}" type="number" value="0" name="attr_SP-mod" class="sheet-calc" readonly="readonly" /> <br>Spellpen</span>
 										<span class="sheet-table-data" style="width:15%;"></span>
 									</div>
 									
@@ -8757,8 +8761,8 @@
 										<input type="hidden" name="attr_var_spellPen_check" value="{{spellPen_chk=[[ 1d20 + [[  @{SP-mod} ]] ]] }}" />
 										<input type="hidden" name="attr_var_Concentration_check" value="{{Concentration_chk=[[ 1d20 + [[ @{Concentration-mod} ]] ]] }}" />
 										<input type="hidden" name="attr_var_cast_def_check" value="{{cast_def_chk=[[ (1d20 + @{cast_def-mod})cs> [[ @{cast_def_dc} ]]cf<[[ @{cast_def_dc} - 1 ]] ]] }}" />
-										<input type="hidden" name="attr_spell_options" value="@{toggle_level_notes}@{toggle_casterlevel_notes}@{toggle_school_notes}@{toggle_casting_time_notes}@{toggle_dc_notes}@{toggle_components_notes}@{toggle_range_notes}@{toggle_targets_notes}@{toggle_duration_notes}@{toggle_saving_throw_notes}@{toggle_sr_notes}@{toggle_casterlevel_check}@{toggle_spellPen_notes}@{toggle_spellPen_check}@{toggle_Concentration_notes}@{toggle_Concentration_check}@{toggle_cast_def_notes}@{toggle_cast_def_check}@{toggle_description_notes}" />			
-									
+                                    <input type="hidden" name="attr_spell_options" value="@{toggle_level_notes}@{toggle_casterlevel_notes}@{toggle_school_notes}@{toggle_casting_time_notes}@{toggle_dc_notes}@{toggle_components_notes}@{toggle_range_notes}@{toggle_targets_notes}@{toggle_duration_notes}@{toggle_saving_throw_notes}@{toggle_sr_notes}@{toggle_casterlevel_check}@{toggle_spellPen_notes}@{toggle_spellPen_check}@{toggle_Concentration_notes}@{toggle_Concentration_check}@{toggle_cast_def_notes}@{toggle_cast_def_check}@{toggle_description_notes}" />
+
 									<div class="sheet-options">
 										<div class="sheet-table">
 											<div class="sheet-table-row">
@@ -8841,7 +8845,8 @@
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-7-spells_$X_components}" type="text" value="" name="attr_components" placeholder="Components" accept="Components"><br>Components</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-7-spells_$X_range}" type="text" value="" name="attr_range" placeholder="Range" accept="Range"><br>Range</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-7-spells_$X_range_numeric}" type="number" value="0" name="attr_range_numeric" placeholder="0" ><br>Range</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-7-spells_$X_targets}" type="text" value="" name="attr_targets" placeholder="Targets/Area/Effect" accept="Target">
+                                        <span class="sheet-table-data sheet-center sheet-small-label">
+                                            <input title="@{repeating_lvl-7-spells_$X_targets}" type="text" value="" name="attr_targets" placeholder="Targets/Area/Effect" accept="Target">
 											<input type="hidden" value="" name="attr_targets" accept="Area">
 											<input type="hidden" value="" name="attr_targets" accept="Effect">
 											<br>Targets/Area/Effect
@@ -8860,7 +8865,7 @@
 										</span>
 									</div>
 									<b>Misc</b>
-									<input type="checkbox" class="sheet-spell-misc-show" title="@{repeating_lvl-7-spells_$X_spell-misc-show}" name="attr_spell-misc-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" checked="checked" /><span></span>				
+                                    <input type="checkbox" class="sheet-spell-misc-show" title="@{repeating_lvl-7-spells_$X_spell-misc-show}" name="attr_spell-misc-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
 									<b>Description</b>
 									<input type="checkbox" class="sheet-desc-show" title="@{repeating_lvl-7-spells_$X_description-show}" name="attr_description-show" value="1" style="opacity:0; width:90px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -75px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
 									<b>Macro Text</b>
@@ -8873,16 +8878,16 @@
 									<div class="sheet-table sheet-spell-misc">					
 										<span class="sheet-table-data" style="width:15%;"></span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-7-spells_$X_CL_misc}" type="number" value="0" name="attr_CL_misc" placeholder="CL Mod" /> <br>CL Mod</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-7-spells_$X_casterlevel}" type="number" value="0" name="attr_casterlevel" class="sheet-calc" readonly="readonly" /> <br>CL</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-7-spells_$X_casterlevel}" type="number" value="0" name="attr_casterlevel" class="sheet-calc" readonly="readonly" /> <br>CL</span>
 										<span class="sheet-table-data sheet-divider-lg" >|<br>&nbsp;</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-7-spells_$X_Concentration_misc}" type="number" value="0" name="attr_Concentration_misc" /> <br>Conc Mod</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-7-spells_$X_Concentration-mod}" type="number" value="0" name="attr_Concentration-mod" class="sheet-calc" readonly="readonly" /> <br>Conc</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-7-spells_$X_Concentration-mod}" type="number" value="0" name="attr_Concentration-mod" class="sheet-calc" readonly="readonly" /> <br>Conc</span>
 										<span class="sheet-table-data sheet-divider-lg" >|<br>&nbsp;</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-7-spells_$X_cast_def-mod}" type="number" value="0" name="attr_cast_def-mod" class="sheet-calc" readonly="readonly" /> <br>Cast Def</span>				
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-7-spells_$X_cast_def_dc}" type="number" value="0" name="attr_cast_def_dc" class="sheet-calc" readonly="readonly" /> <br>Cast Def DC</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-7-spells_$X_cast_def-mod}" type="number" value="0" name="attr_cast_def-mod" class="sheet-calc" readonly="readonly" /> <br>Cast Def</span>
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-7-spells_$X_cast_def_dc}" type="number" value="0" name="attr_cast_def_dc" class="sheet-calc" readonly="readonly" /> <br>Cast Def DC</span>
 										<span class="sheet-table-data sheet-divider-lg" >|<br>&nbsp;</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-7-spells_$X_SP_misc}" type="number" value="0" name="attr_SP_misc" placeholder="Spell Penetration Mod" /> <br>Spell Pen Mod</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-7-spells_$X_SP-mod}" type="number" value="0" name="attr_SP-mod" class="sheet-calc" readonly="readonly" /> <br>Spellpen</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-7-spells_$X_SP-mod}" type="number" value="0" name="attr_SP-mod" class="sheet-calc" readonly="readonly" /> <br>Spellpen</span>
 										<span class="sheet-table-data" style="width:15%;"></span>
 									</div>
 									
@@ -8908,8 +8913,8 @@
 										<input type="hidden" name="attr_var_spellPen_check" value="{{spellPen_chk=[[ 1d20 + [[  @{SP-mod} ]] ]] }}" />
 										<input type="hidden" name="attr_var_Concentration_check" value="{{Concentration_chk=[[ 1d20 + [[ @{Concentration-mod} ]] ]] }}" />
 										<input type="hidden" name="attr_var_cast_def_check" value="{{cast_def_chk=[[ (1d20 + @{cast_def-mod})cs> [[ @{cast_def_dc} ]]cf<[[ @{cast_def_dc} - 1 ]] ]] }}" />
-										<input type="hidden" name="attr_spell_options" value="@{toggle_level_notes}@{toggle_casterlevel_notes}@{toggle_school_notes}@{toggle_casting_time_notes}@{toggle_dc_notes}@{toggle_components_notes}@{toggle_range_notes}@{toggle_targets_notes}@{toggle_duration_notes}@{toggle_saving_throw_notes}@{toggle_sr_notes}@{toggle_casterlevel_check}@{toggle_spellPen_notes}@{toggle_spellPen_check}@{toggle_Concentration_notes}@{toggle_Concentration_check}@{toggle_cast_def_notes}@{toggle_cast_def_check}@{toggle_description_notes}" />			
-									
+                                    <input type="hidden" name="attr_spell_options" value="@{toggle_level_notes}@{toggle_casterlevel_notes}@{toggle_school_notes}@{toggle_casting_time_notes}@{toggle_dc_notes}@{toggle_components_notes}@{toggle_range_notes}@{toggle_targets_notes}@{toggle_duration_notes}@{toggle_saving_throw_notes}@{toggle_sr_notes}@{toggle_casterlevel_check}@{toggle_spellPen_notes}@{toggle_spellPen_check}@{toggle_Concentration_notes}@{toggle_Concentration_check}@{toggle_cast_def_notes}@{toggle_cast_def_check}@{toggle_description_notes}" />
+
 									<div class="sheet-options">
 										<div class="sheet-table">
 											<div class="sheet-table-row">
@@ -8992,7 +8997,8 @@
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-8-spells_$X_components}" type="text" value="" name="attr_components" placeholder="Components" accept="Components"><br>Components</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-8-spells_$X_range}" type="text" value="" name="attr_range" placeholder="Range" accept="Range"><br>Range</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-8-spells_$X_range_numeric}" type="number" value="0" name="attr_range_numeric" placeholder="0" ><br>Range</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-8-spells_$X_targets}" type="text" value="" name="attr_targets" placeholder="Targets/Area/Effect" accept="Target">
+                                        <span class="sheet-table-data sheet-center sheet-small-label">
+                                            <input title="@{repeating_lvl-8-spells_$X_targets}" type="text" value="" name="attr_targets" placeholder="Targets/Area/Effect" accept="Target">
 											<input type="hidden" value="" name="attr_targets" accept="Area">
 											<input type="hidden" value="" name="attr_targets" accept="Effect">
 											<br>Targets/Area/Effect
@@ -9011,7 +9017,7 @@
 										</span>
 									</div>
 									<b>Misc</b>
-									<input type="checkbox" class="sheet-spell-misc-show" title="@{repeating_lvl-8-spells_$X_spell-misc-show}" name="attr_spell-misc-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" checked="checked" /><span></span>				
+                                    <input type="checkbox" class="sheet-spell-misc-show" title="@{repeating_lvl-8-spells_$X_spell-misc-show}" name="attr_spell-misc-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
 									<b>Description</b>
 									<input type="checkbox" class="sheet-desc-show" title="@{repeating_lvl-8-spells_$X_description-show}" name="attr_description-show" value="1" style="opacity:0; width:90px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -75px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
 									<b>Macro Text</b>
@@ -9024,16 +9030,16 @@
 									<div class="sheet-table sheet-spell-misc">					
 										<span class="sheet-table-data" style="width:15%;"></span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-8-spells_$X_CL_misc}" type="number" value="0" name="attr_CL_misc" placeholder="CL Mod" /> <br>CL Mod</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-8-spells_$X_casterlevel}" type="number" value="0" name="attr_casterlevel" class="sheet-calc" readonly="readonly" /> <br>CL</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-8-spells_$X_casterlevel}" type="number" value="0" name="attr_casterlevel" class="sheet-calc" readonly="readonly" /> <br>CL</span>
 										<span class="sheet-table-data sheet-divider-lg" >|<br>&nbsp;</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-8-spells_$X_Concentration_misc}" type="number" value="0" name="attr_Concentration_misc" /> <br>Conc Mod</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-8-spells_$X_Concentration-mod}" type="number" value="0" name="attr_Concentration-mod" class="sheet-calc" readonly="readonly" /> <br>Conc</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-8-spells_$X_Concentration-mod}" type="number" value="0" name="attr_Concentration-mod" class="sheet-calc" readonly="readonly" /> <br>Conc</span>
 										<span class="sheet-table-data sheet-divider-lg" >|<br>&nbsp;</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-8-spells_$X_cast_def-mod}" type="number" value="0" name="attr_cast_def-mod" class="sheet-calc" readonly="readonly" /> <br>Cast Def</span>				
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-8-spells_$X_cast_def_dc}" type="number" value="0" name="attr_cast_def_dc" class="sheet-calc" readonly="readonly" /> <br>Cast Def DC</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-8-spells_$X_cast_def-mod}" type="number" value="0" name="attr_cast_def-mod" class="sheet-calc" readonly="readonly" /> <br>Cast Def</span>
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-8-spells_$X_cast_def_dc}" type="number" value="0" name="attr_cast_def_dc" class="sheet-calc" readonly="readonly" /> <br>Cast Def DC</span>
 										<span class="sheet-table-data sheet-divider-lg" >|<br>&nbsp;</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-8-spells_$X_SP_misc}" type="number" value="0" name="attr_SP_misc" placeholder="Spell Penetration Mod" /> <br>Spell Pen Mod</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-8-spells_$X_SP-mod}" type="number" value="0" name="attr_SP-mod" class="sheet-calc" readonly="readonly" /> <br>Spellpen</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-8-spells_$X_SP-mod}" type="number" value="0" name="attr_SP-mod" class="sheet-calc" readonly="readonly" /> <br>Spellpen</span>
 										<span class="sheet-table-data" style="width:15%;"></span>
 									</div>
 									
@@ -9059,8 +9065,8 @@
 										<input type="hidden" name="attr_var_spellPen_check" value="{{spellPen_chk=[[ 1d20 + [[  @{SP-mod} ]] ]] }}" />
 										<input type="hidden" name="attr_var_Concentration_check" value="{{Concentration_chk=[[ 1d20 + [[ @{Concentration-mod} ]] ]] }}" />
 										<input type="hidden" name="attr_var_cast_def_check" value="{{cast_def_chk=[[ (1d20 + @{cast_def-mod})cs> [[ @{cast_def_dc} ]]cf<[[ @{cast_def_dc} - 1 ]] ]] }}" />
-										<input type="hidden" name="attr_spell_options" value="@{toggle_level_notes}@{toggle_casterlevel_notes}@{toggle_school_notes}@{toggle_casting_time_notes}@{toggle_dc_notes}@{toggle_components_notes}@{toggle_range_notes}@{toggle_targets_notes}@{toggle_duration_notes}@{toggle_saving_throw_notes}@{toggle_sr_notes}@{toggle_casterlevel_check}@{toggle_spellPen_notes}@{toggle_spellPen_check}@{toggle_Concentration_notes}@{toggle_Concentration_check}@{toggle_cast_def_notes}@{toggle_cast_def_check}@{toggle_description_notes}" />			
-									
+                                    <input type="hidden" name="attr_spell_options" value="@{toggle_level_notes}@{toggle_casterlevel_notes}@{toggle_school_notes}@{toggle_casting_time_notes}@{toggle_dc_notes}@{toggle_components_notes}@{toggle_range_notes}@{toggle_targets_notes}@{toggle_duration_notes}@{toggle_saving_throw_notes}@{toggle_sr_notes}@{toggle_casterlevel_check}@{toggle_spellPen_notes}@{toggle_spellPen_check}@{toggle_Concentration_notes}@{toggle_Concentration_check}@{toggle_cast_def_notes}@{toggle_cast_def_check}@{toggle_description_notes}" />
+
 									<div class="sheet-options">
 										<div class="sheet-table">
 											<div class="sheet-table-row">
@@ -9143,7 +9149,8 @@
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-9-spells_$X_components}" type="text" value="" name="attr_components" placeholder="Components" accept="Components"><br>Components</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-9-spells_$X_range}" type="text" value="" name="attr_range" placeholder="Range" accept="Range"><br>Range</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-9-spells_$X_range_numeric}" type="number" value="0" name="attr_range_numeric" placeholder="0" ><br>Range</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-9-spells_$X_targets}" type="text" value="" name="attr_targets" placeholder="Targets/Area/Effect" accept="Target">
+                                        <span class="sheet-table-data sheet-center sheet-small-label">
+                                            <input title="@{repeating_lvl-9-spells_$X_targets}" type="text" value="" name="attr_targets" placeholder="Targets/Area/Effect" accept="Target">
 											<input type="hidden" value="" name="attr_targets" accept="Area">
 											<input type="hidden" value="" name="attr_targets" accept="Effect">
 											<br>Targets/Area/Effect
@@ -9162,7 +9169,7 @@
 										</span>
 									</div>
 									<b>Misc</b>
-									<input type="checkbox" class="sheet-spell-misc-show" title="@{repeating_lvl-9-spells_$X_spell-misc-show}" name="attr_spell-misc-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" checked="checked" /><span></span>				
+                                    <input type="checkbox" class="sheet-spell-misc-show" title="@{repeating_lvl-9-spells_$X_spell-misc-show}" name="attr_spell-misc-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
 									<b>Description</b>
 									<input type="checkbox" class="sheet-desc-show" title="@{repeating_lvl-9-spells_$X_description-show}" name="attr_description-show" value="1" style="opacity:0; width:90px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -75px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
 									<b>Macro Text</b>
@@ -9175,16 +9182,16 @@
 									<div class="sheet-table sheet-spell-misc">					
 										<span class="sheet-table-data" style="width:15%;"></span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-9-spells_$X_CL_misc}" type="number" value="0" name="attr_CL_misc" placeholder="CL Mod" /> <br>CL Mod</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-9-spells_$X_casterlevel}" type="number" value="0" name="attr_casterlevel" class="sheet-calc" readonly="readonly" /> <br>CL</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-9-spells_$X_casterlevel}" type="number" value="0" name="attr_casterlevel" class="sheet-calc" readonly="readonly" /> <br>CL</span>
 										<span class="sheet-table-data sheet-divider-lg" >|<br>&nbsp;</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-9-spells_$X_Concentration_misc}" type="number" value="0" name="attr_Concentration_misc" /> <br>Conc Mod</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-9-spells_$X_Concentration-mod}" type="number" value="0" name="attr_Concentration-mod" class="sheet-calc" readonly="readonly" /> <br>Conc</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-9-spells_$X_Concentration-mod}" type="number" value="0" name="attr_Concentration-mod" class="sheet-calc" readonly="readonly" /> <br>Conc</span>
 										<span class="sheet-table-data sheet-divider-lg" >|<br>&nbsp;</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-9-spells_$X_cast_def-mod}" type="number" value="0" name="attr_cast_def-mod" class="sheet-calc" readonly="readonly" /> <br>Cast Def</span>				
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-9-spells_$X_cast_def_dc}" type="number" value="0" name="attr_cast_def_dc" class="sheet-calc" readonly="readonly" /> <br>Cast Def DC</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-9-spells_$X_cast_def-mod}" type="number" value="0" name="attr_cast_def-mod" class="sheet-calc" readonly="readonly" /> <br>Cast Def</span>
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-9-spells_$X_cast_def_dc}" type="number" value="0" name="attr_cast_def_dc" class="sheet-calc" readonly="readonly" /> <br>Cast Def DC</span>
 										<span class="sheet-table-data sheet-divider-lg" >|<br>&nbsp;</span>
 										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-9-spells_$X_SP_misc}" type="number" value="0" name="attr_SP_misc" placeholder="Spell Penetration Mod" /> <br>Spell Pen Mod</span>
-										<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-9-spells_$X_SP-mod}" type="number" value="0" name="attr_SP-mod" class="sheet-calc" readonly="readonly" /> <br>Spellpen</span>				
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-9-spells_$X_SP-mod}" type="number" value="0" name="attr_SP-mod" class="sheet-calc" readonly="readonly" /> <br>Spellpen</span>
 										<span class="sheet-table-data" style="width:15%;"></span>
 									</div>
 									
@@ -9210,8 +9217,8 @@
 										<input type="hidden" name="attr_var_spellPen_check" value="{{spellPen_chk=[[ 1d20 + [[  @{SP-mod} ]] ]] }}" />
 										<input type="hidden" name="attr_var_Concentration_check" value="{{Concentration_chk=[[ 1d20 + [[ @{Concentration-mod} ]] ]] }}" />
 										<input type="hidden" name="attr_var_cast_def_check" value="{{cast_def_chk=[[ (1d20 + @{cast_def-mod})cs> [[ @{cast_def_dc} ]]cf<[[ @{cast_def_dc} - 1 ]] ]] }}" />
-										<input type="hidden" name="attr_spell_options" value="@{toggle_level_notes}@{toggle_casterlevel_notes}@{toggle_school_notes}@{toggle_casting_time_notes}@{toggle_dc_notes}@{toggle_components_notes}@{toggle_range_notes}@{toggle_targets_notes}@{toggle_duration_notes}@{toggle_saving_throw_notes}@{toggle_sr_notes}@{toggle_casterlevel_check}@{toggle_spellPen_notes}@{toggle_spellPen_check}@{toggle_Concentration_notes}@{toggle_Concentration_check}@{toggle_cast_def_notes}@{toggle_cast_def_check}@{toggle_description_notes}" />			
-									
+                                    <input type="hidden" name="attr_spell_options" value="@{toggle_level_notes}@{toggle_casterlevel_notes}@{toggle_school_notes}@{toggle_casting_time_notes}@{toggle_dc_notes}@{toggle_components_notes}@{toggle_range_notes}@{toggle_targets_notes}@{toggle_duration_notes}@{toggle_saving_throw_notes}@{toggle_sr_notes}@{toggle_casterlevel_check}@{toggle_spellPen_notes}@{toggle_spellPen_check}@{toggle_Concentration_notes}@{toggle_Concentration_check}@{toggle_cast_def_notes}@{toggle_cast_def_check}@{toggle_description_notes}" />
+
 									<div class="sheet-options">
 										<div class="sheet-table">
 											<div class="sheet-table-row">
@@ -9374,7 +9381,7 @@
 	<div>
 		<b>Traits</b>
 		<input type="checkbox" class="sheet-sect-show" title="@{traits-show}" name="attr_traits-show" value="1" style="opacity:0; width:70px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -55px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
-		<input type="checkbox" class="sheet-expand-show" title="Collapse or expand all rows." name="attr_traits-expand-show" value="1" style="opacity: 0;height: 1.5em;width: 38px; margin: 0px -38px 2px 0;help;z-index: 1;cursor: help;" /><span></span>
+        <input type="checkbox" class="sheet-expand-show" title="Collapse or expand all rows." name="attr_traits-expand-show" value="1" style="opacity: 0;height: 1.5em;width: 38px; margin: 0px -38px 2px 0;z-index: 1;cursor: help;" /><span></span>
 		<div class="sheet-table sheet-sect">
 			<span class="sheet-table-name">Traits</span>
 			<div class="sheet-table-row">
@@ -9587,7 +9594,7 @@
 			</div>
 			<div>
 				<b>Options</b>
-				<input type="checkbox" class="sheet-options-show" title="@{options_defense_notes-show}" name="attr_options_defense_notes-show" value="1" style="opacity:0; width:70px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -55px; cursor:pointer; z-index:1;" /><span></span>	
+                    <input type="checkbox" class="sheet-options-show" title="@{options_defense_notes-show}" name="attr_options_defense_notes-show" value="1" style="opacity:0; width:70px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -55px; cursor:pointer; z-index:1;" /><span></span>
 					<input type="hidden" name="attr_var_dr_notes" value="{{dr_notes=@{DR}}}" disabled />
 					<input type="hidden" name="attr_var_resistances_notes" value="{{resistances_notes=@{resistances}}}" disabled />
 					<input type="hidden" name="attr_var_immunities_notes" value="{{immunities_notes=@{immunities}}}" disabled />
@@ -9615,7 +9622,7 @@
 					  <span class="sheet-table-data sheet-center sheet-small-label">&nbsp;</span>
 					</div>
 				</div>
-					<input type="hidden" name="attr_save_options" value="@{toggle_dr_notes} @{toggle_resistances_notes} @{toggle_immunities_notes} @{toggle_weaknesses_notes} @{toggle_sr0_notes} @{toggle_armor_notes} @{toggle_save_notes} @{toggle_cmd_notes} @{toggle_defense_notes}" disabled />	
+                    <input type="hidden" name="attr_save_options" value="@{toggle_dr_notes} @{toggle_resistances_notes} @{toggle_immunities_notes} @{toggle_weaknesses_notes} @{toggle_sr0_notes} @{toggle_armor_notes} @{toggle_save_notes} @{toggle_cmd_notes} @{toggle_defense_notes}" disabled />
 			</div>
 		</div>
 	</div>
@@ -9764,7 +9771,7 @@
 							<span class="sheet-table-data sheet-center sheet-small-label"><input type="number" name="attr_attk-effect-total-copy" title="@{repeating_weapon_$X_attk-effect-total-copy}" value="0" style="width:40px;" class="sheet-calc" readonly="readonly"  /><br><b title="Additional modifier from Attack and Damage Effects.">Other</b></span>
 							<span class="sheet-table-data sheet-divider">=</span>
 							<span class="sheet-table-data sheet-center sheet-small-label"><input type="number" name="attr_total-attack" title="@{repeating_weapon_$X_total-attack}" value="0" style="width:3.5em;" class="sheet-calc" readonly="readonly" /><br>ATK</span>
-							<span class="sheet-table-data sheet-center sheet-small-label"><input type="number" name="attr_crit-target" title="@{repeating_weapon_$X_crit-target}" style="width:40px;" value="20" min="0" max=20 /><br>Crit</span>
+                                <span class="sheet-table-data sheet-center sheet-small-label"><input type="number" name="attr_crit-target" title="@{repeating_weapon_$X_crit-target}" style="width:40px;" value="20" min="0" max="20" /><br>Crit</span>
 							<span class="sheet-table-data sheet-divider-lg" style="padding-bottom:10px;"><b>/x</b></span>
 							<span class="sheet-table-data sheet-center sheet-small-label"><input type="number" name="attr_crit-multiplier" title="@{repeating_weapon_$X_crit-multiplier}" style="width:40px;" value="2" min="0" /><br>Mult</span>
 							<span class="sheet-table-data sheet-center sheet-small-label">
@@ -9962,12 +9969,10 @@
 									</div>
 									<input type="hidden" name="attr_iterative_attacks" value="@{toggle_iterative_attack2} @{toggle_iterative_attack3} @{toggle_iterative_attack4} @{toggle_iterative_attack5} @{toggle_iterative_attack6} @{toggle_iterative_attack7} @{toggle_iterative_attack8}" />
 								</div>
-																	
 								<div class="sheet-table sheet-options">
 									<textarea style="display:none;" name="attr_var_melee_notes">{{melee_notes=@{melee-attack-notes}}}</textarea>
 									<textarea style="display:none;" name="attr_var_ranged_notes">{{ranged_notes=@{ranged-attack-notes}}}</textarea>
 									<textarea style="display:none;" name="attr_var_CMB_notes">{{CMB_notes=@{CMB-notes}}}</textarea>
-
 									<textarea style="display:none;" name="attr_var_attack_notes">{{attack_notes=@{attack-notes}}}</textarea>
 									<textarea style="display:none;" name="attr_var_melee_image">{{header_image=@{header_image-pf_attack-melee}}}</textarea>
 									<textarea style="display:none;" name="attr_var_ranged_image">{{header_image=@{header_image-pf_attack-ranged}}}</textarea>
@@ -9989,10 +9994,8 @@
 										<span class="sheet-table-data sheet-center sheet-small-label"><label><input type="checkbox" name="attr_toggle_header_image" value="@{var_none_image}" title="@{repeating_weapon_$X_toggle_header_image}" checked /><b title="Do not include a header image."> None</b></label></span>
 										<span class="sheet-table-data sheet-center"><textarea class="sheet-weapon-notes" name="attr_macro_options" title="@{repeating_weapon_$X_macro_options}">@{toggle_melee_notes} @{toggle_ranged_notes} @{toggle_CMB_notes} @{toggle_attack_notes} @{toggle_header_image}</textarea></span>
 									</div>	
-
 								</div>									
-
-								<textarea class="sheet-macro-text" title="@{repeating_weapon_$X_NPC-macro-text}" name="attr_NPC-macro-text">@{NPC-whisper} &{template:pf_attack} {{character_name=@{character_name}}} {{character_id=@{character_id}}} {{subtitle}} {{name=@{name}}} {{attack=[[ 1d20cs>[[ @{crit-target} ]] + [[ @{total-attack} ]] ]]}} {{damage=[[ @{damage-dice-num}d@{damage-die} + [[ @{total-damage} ]] ]]}} {{crit_confirm=[[ 1d20 + [[ @{total-attack} ]] ]]}} {{crit_damage=[[ [[ (@{damage-dice-num} * (@{crit-multiplier} - 1)) ]]d@{damage-die} + [[ (@{total-damage} * (@{crit-multiplier} - 1)) ]] ]]}} {{type=@{type}}} {{description=@{notes}}} @{iterative_attacks} @{macro_options}</textarea>									
+                                    <textarea class="sheet-macro-text" title="@{repeating_weapon_$X_NPC-macro-text}" name="attr_NPC-macro-text">@{NPC-whisper} &{template:pf_attack} {{character_name=@{character_name}}} {{character_id=@{character_id}}} {{subtitle}} {{name=@{name}}} {{attack=[[ 1d20cs>[[ @{crit-target} ]] + [[ @{total-attack} ]] ]]}} {{damage=[[ @{damage-dice-num}d@{damage-die} + [[ @{total-damage} ]] ]]}} {{crit_confirm=[[ 1d20 + [[ @{total-attack} ]] ]]}} {{crit_damage=[[ [[ (@{damage-dice-num} * (@{crit-multiplier} - 1)) ]]d@{damage-die} + [[ (@{total-damage} * (@{crit-multiplier} - 1)) ]] ]]}} {{type=@{type}}} {{description=@{notes}}} @{iterative_attacks} @{macro_options}</textarea>
 								<div class="sheet-repeating_ids sheet-table-row">
 									<input type="hidden" name="attr_new_flag" value="0" />
 									<span class="sheet-table-data sheet-small-data">
@@ -10067,7 +10070,7 @@
 					<div>
 						<b>Spell-Like Abilities</b>
 						<input type="checkbox" class="sheet-sect-show" title="@{npc-spell-like-abilities-sect-show}" name="attr_npc-spell-like-abilities-sect-show" value="1" style="opacity:0;width: 150px; height:1.5em; position:relative; top:0; left:0;margin: 0 -15px 0 -133px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
-						<input type="checkbox" class="sheet-expand-show" title="Collapse or expand all rows." name="attr_npc-spell-like-abilities-expand-show" value="1" style="opacity: 0;height: 1.5em;width: 38px; margin: 0px -38px 2px 0;help;z-index: 1;cursor: help;" /><span></span>
+                            <input type="checkbox" class="sheet-expand-show" title="Collapse or expand all rows." name="attr_npc-spell-like-abilities-expand-show" value="1" style="opacity: 0;height: 1.5em;width: 38px; margin: 0px -38px 2px 0;z-index: 1;cursor: help;" /><span></span>
 						<div class="sheet-sect">
 							<div class="sheet-repeating-fields">
 								<fieldset class="repeating_npc-spell-like-abilities">
@@ -10096,8 +10099,8 @@
 										<b>IDs</b>
 										<input type="checkbox" class="sheet-repeating_ids-show" title="@{repeating_npc-spell-like-abilities_$X_ids-show}" name="attr_ids-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" /><span></span>
 										
-										<textarea class="sheet-macro-text" title="@{repeating_npc-spell-like-abilities_$X_macro-text}" name="attr_macro-text">@{NPC-whisper} &{template:pf_generic} {{header_image=@{header_image-pf_generic}}} {{character_name=@{character_name}}} {{character_id=@{character_id}}} {{subtitle}} {{name=@{name}}} {{Level=@{level}}} {{Range=@{range}}} {{Duration=@{duration}}} {{Save=@{save}}} {{SR=@{sr}}} {{description=@{short-description}}}</textarea>										
-										
+                                            <textarea class="sheet-macro-text" title="@{repeating_npc-spell-like-abilities_$X_macro-text}" name="attr_macro-text">@{NPC-whisper} &{template:pf_generic} {{header_image=@{header_image-pf_generic}}} {{character_name=@{character_name}}} {{character_id=@{character_id}}} {{subtitle}} {{name=@{name}}} {{Level=@{level}}} {{Range=@{range}}} {{Duration=@{duration}}} {{Save=@{save}}} {{SR=@{sr}}} {{description=@{short-description}}}</textarea>
+
 										<div class="sheet-repeating_ids sheet-table-row">
 											<input type="hidden" name="attr_new_flag" value="0" />
 											<span class="sheet-table-data sheet-small-data">
@@ -10165,7 +10168,7 @@
 					<div>
 						<b>Spells</b>
 						<input type="checkbox" class="sheet-sect-show" title="@{npc-spell1-sect-show}" name="attr_npc-spell1-sect-show" value="1" style="opacity:0; width:70px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -55px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
-						<input type="checkbox" class="sheet-expand-show" title="Collapse or expand all rows." name="attr_npc-spell1-expand-show" value="1" style="opacity: 0;height: 1.5em;width: 38px; margin: 0px -38px 2px 0;help;z-index: 1;cursor: help;" /><span></span>
+                            <input type="checkbox" class="sheet-expand-show" title="Collapse or expand all rows." name="attr_npc-spell1-expand-show" value="1" style="opacity: 0;height: 1.5em;width: 38px; margin: 0px -38px 2px 0;z-index: 1;cursor: help;" /><span></span>
 						<div class="sheet-sect">
 							<div class="sheet-repeating-fields">
 								<fieldset class="repeating_npc-spells1">
@@ -10193,7 +10196,7 @@
 										<input type="checkbox" class="sheet-macro-text-show" title="@{repeating_npc-spells1_$X_macro-text-show}" name="attr_macro-text-show" value="1" style="opacity:0; width:90px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -75px; cursor:pointer; z-index:1;" /><span></span>
 										<b>IDs</b>
 										<input type="checkbox" class="sheet-repeating_ids-show" title="@{repeating_npc-spells1_$X_ids-show}" name="attr_ids-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" /><span></span>
-										<textarea class="sheet-macro-text" title="@{repeating_npc-spells1_$X_macro-text}" name="attr_macro-text">@{NPC-whisper} &{template:pf_generic} {{header_image=@{header_image-pf_generic}}} {{character_name=@{character_name}}} {{character_id=@{character_id}}} {{subtitle}} {{name=@{name}}} {{Level=@{level}}} {{Range=@{range}}} {{Duration=@{duration}}} {{Save=@{save}}} {{SR=@{sr}}} {{description=@{short-description}}}</textarea>										
+                                            <textarea class="sheet-macro-text" title="@{repeating_npc-spells1_$X_macro-text}" name="attr_macro-text">@{NPC-whisper} &{template:pf_generic} {{header_image=@{header_image-pf_generic}}} {{character_name=@{character_name}}} {{character_id=@{character_id}}} {{subtitle}} {{name=@{name}}} {{Level=@{level}}} {{Range=@{range}}} {{Duration=@{duration}}} {{Save=@{save}}} {{SR=@{sr}}} {{description=@{short-description}}}</textarea>
 										<div class="sheet-repeating_ids sheet-table-row">
 											<input type="hidden" name="attr_new_flag" value="0" />
 											<span class="sheet-table-data sheet-small-data">
@@ -10261,7 +10264,7 @@
 					<div>
 						<b>Spells</b>
 						<input type="checkbox" class="sheet-sect-show" title="@{npc-spell2-sect-show}" name="attr_npc-spell2-sect-show" value="1" style="opacity:0; width:70px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -55px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
-						<input type="checkbox" class="sheet-expand-show" title="Collapse or expand all rows." name="attr_npc-spell2-expand-show" value="1" style="opacity: 0;height: 1.5em;width: 38px; margin: 0px -38px 2px 0;help;z-index: 1;cursor: help;" /><span></span>
+                            <input type="checkbox" class="sheet-expand-show" title="Collapse or expand all rows." name="attr_npc-spell2-expand-show" value="1" style="opacity: 0;height: 1.5em;width: 38px; margin: 0px -38px 2px 0;z-index: 1;cursor: help;" /><span></span>
 						<div class="sheet-sect">
 							<div class="sheet-repeating-fields">
 								<fieldset class="repeating_npc-spells2">
@@ -10289,7 +10292,7 @@
 										<input type="checkbox" class="sheet-macro-text-show" title="@{repeating_npc-spells2_$X_macro-text-show}" name="attr_macro-text-show" value="1" style="opacity:0; width:90px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -75px; cursor:pointer; z-index:1;" /><span></span>
 										<b>IDs</b>
 										<input type="checkbox" class="sheet-repeating_ids-show" title="@{repeating_npc-spells2_$X_ids-show}" name="attr_ids-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" /><span></span>
-										<textarea class="sheet-macro-text" title="@{repeating_npc-spells2_$X_macro-text}" name="attr_macro-text">@{NPC-whisper} &{template:pf_generic} {{header_image=@{header_image-pf_generic}}} {{character_name=@{character_name}}} {{character_id=@{character_id}}} {{subtitle}} {{name=@{name}}} {{Level=@{level}}} {{Range=@{range}}} {{Duration=@{duration}}} {{Save=@{save}}} {{SR=@{sr}}} {{description=@{short-description}}}</textarea>										
+                                            <textarea class="sheet-macro-text" title="@{repeating_npc-spells2_$X_macro-text}" name="attr_macro-text">@{NPC-whisper} &{template:pf_generic} {{header_image=@{header_image-pf_generic}}} {{character_name=@{character_name}}} {{character_id=@{character_id}}} {{subtitle}} {{name=@{name}}} {{Level=@{level}}} {{Range=@{range}}} {{Duration=@{duration}}} {{Save=@{save}}} {{SR=@{sr}}} {{description=@{short-description}}}</textarea>
 										<div class="sheet-repeating_ids sheet-table-row">
 											<input type="hidden" name="attr_new_flag" value="0" />
 											<span class="sheet-table-data sheet-small-data">
@@ -10372,7 +10375,7 @@
 			<div>
 				<b>Feats</b>
 				<input type="checkbox" class="sheet-sect-show" title="@{npc-feats-show}" name="attr_npc-feats-show" value="1" style="opacity:0;width: 50px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -35px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
-				<input type="checkbox" class="sheet-expand-show" title="Collapse or expand all rows." name="attr_npc-feats-expand-show" value="1" style="opacity: 0;height: 1.5em;width: 38px; margin: 0px -38px 2px 0;help;z-index: 1;cursor: help;" /><span></span>
+                    <input type="checkbox" class="sheet-expand-show" title="Collapse or expand all rows." name="attr_npc-feats-expand-show" value="1" style="opacity: 0;height: 1.5em;width: 38px; margin: 0px -38px 2px 0;z-index: 1;cursor: help;" /><span></span>
 				<div class="sheet-table sheet-sect">
 					<div class="sheet-repeating-fields">
 						<fieldset class="repeating_feat">
@@ -10393,7 +10396,7 @@
 								<input type="checkbox" class="sheet-repeating_ids-show" title="@{repeating_feat_$X_ids-show}" name="attr_ids-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" /><span></span>
 								
 								<textarea class="sheet-desc" title="@{repeating_feat_$X_description}" name="attr_description"></textarea>
-								<textarea class="sheet-macro-text" title="@{repeating_feat_$X_macro-text}" name="attr_macro-text">@{NPC-whisper} &{template:pf_block} {{header_image=@{header_image-pf_block}}} {{character_name=@{character_name}}} {{character_id=@{character_id}}} {{subtitle}} {{name=@{name}}} {{description=@{short-description}}}</textarea>				
+                                    <textarea class="sheet-macro-text" title="@{repeating_feat_$X_macro-text}" name="attr_macro-text">@{NPC-whisper} &{template:pf_block} {{header_image=@{header_image-pf_block}}} {{character_name=@{character_name}}} {{character_id=@{character_id}}} {{subtitle}} {{name=@{name}}} {{description=@{short-description}}}</textarea>
 								<div class="sheet-repeating_ids sheet-table-row">
 									<input type="hidden" name="attr_new_flag" value="0" />
 									<span class="sheet-table-data sheet-small-data">
@@ -10727,7 +10730,7 @@
 		<hr class="sheet-npc-hr sheet-margin-top" />
 		<b>SPECIAL ABILITIES</b>
 		<input type="checkbox" class="sheet-sect-show" title="@{npc-special-abilities-show}" name="attr_npc-special-abilities-show" value="1" style="opacity: 0;width: 140px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -125px; cursor: pointer; z-index: 1" checked="checked" /><span></span>
-		<input type="checkbox" class="sheet-expand-show" title="Collapse or expand all rows." name="attr_npc-special-abilities-expand-show" value="1" style="opacity: 0;height: 1.5em;width: 38px; margin: 0px -38px 2px 0;help;z-index: 1;cursor: help;" /><span></span>
+            <input type="checkbox" class="sheet-expand-show" title="Collapse or expand all rows." name="attr_npc-special-abilities-expand-show" value="1" style="opacity: 0;height: 1.5em;width: 38px; margin: 0px -38px 2px 0;z-index: 1;cursor: help;" /><span></span>
 		<hr class="sheet-npc-hr sheet-margin-bottom" />
 		<div class="sheet-table sheet-sect">
 			<div class="sheet-repeating-fields">
@@ -10900,8 +10903,8 @@
 				</span>
 			</div>
 		</div>
+        <br>
     </div>
-	<br>	
     <div class="sheet-mythic-adventures">
         <b>Pathfinder Mythic Adventures</b>
         <input type="checkbox" class="sheet-sect-show" title="@{pathfinder-mythic-adventures-show}" name="attr_pathfinder-mythic-adventures-show" value="1" style="opacity:0;width: 150px; height:1.5em; position:relative; top:0; left:0;margin: 0 -15px 0 -133px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
@@ -10917,8 +10920,8 @@
                 </span>
             </div>
         </div>
+        <br>
 	</div>
-    <br>
 	<div class="sheet-roll_template_info">
 		<b>Roll Template Info</b>
 		<input type="checkbox" class="sheet-sect-show" title="@{roll-template-info-show}" name="attr_roll-template-info-show" value="1" style="opacity: 0;width: 140px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -125px; cursor: pointer; z-index: 1" /><span></span>
