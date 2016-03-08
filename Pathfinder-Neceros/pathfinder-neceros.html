@@ -13320,7 +13320,11 @@ var ExExp = ExExp|| (function(){
         if (asts.length > 0) {
             // need to finish evaluating some ASTs; recurse directly
             TAS.debug("sendCommand (recurse), asts.length=" + asts.length + ", asts[0].baseValid=" + asts[0].baseValid + ", asts[0].type=" + asts[0].type);
+            if (asts.length == 1 && asts[0].type == "binop") {
+                // HACK! minus (probably) in front; no math needed
+            } else {
             return sendCommand(chunks, asts, [], labels);
+        }
         }
         // if we got here, we're done evaluating everything; submit results via sendChat
         var retval=chunks.join("");
