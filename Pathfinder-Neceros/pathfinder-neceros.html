@@ -12386,8 +12386,8 @@ var TAS = TAS || (function(){
 }());
 
 /* ---- END: TheAaronSheet.js ---- */
-TAS.config({logging:{debug: true}});
-TAS.debugMode();
+//TAS.config({logging:{debug: true}});
+//TAS.debugMode();
 
 
 var ExExp = ExExp|| (function(){
@@ -12805,7 +12805,7 @@ var ExExp = ExExp|| (function(){
     },
 
     write= function (s) {
-        console.log("EXEXP:"+s);
+        TAS.debug("EXEXP:" + s);
     },
 
 
@@ -13014,20 +13014,19 @@ var ExExp = ExExp|| (function(){
             case "binopex":
                 force = force || (t.type !== "binop") || (t.left.datatype === "string") || (t.right.datatype === "string");
                 var forceSubtrees = force || (t.operator === "d") || (t.operator === "t");
-                 //alert('left is: ' + t.left + ', right is:' + t.right);
+                    //TAS.debug('left is: ' + t.left + ', right is:' + t.right);
                 x = lazyEval(t.left, labels, references, unevalRefs, evalReqs, forceSubtrees);
                 y = lazyEval(t.right, labels, references, unevalRefs, evalReqs, forceSubtrees);
-                //    TAS.log("At binop the values are: x:"+x+", y:"+y);
-				//	TAS.log(x);
-				//	TAS.log(y);
+                    //TAS.debug(x);
+                    //TAS.debug(y);
                     force = true;
 				/*****************************************************/
                 if (typeof x === "string") {
-				//	TAS.log(x);
+                        //TAS.debug(x);
                     return x;
                 } // error
                 if (typeof y === "string") {
-				//	TAS.log(y);
+                        //TAS.debug(y);
                     return y;
                 } // error
 				/****************************************************/
@@ -13058,7 +13057,7 @@ var ExExp = ExExp|| (function(){
                         evalReqs.push(t);
                         return t;
                     }
-                    //alert('about to call binary');
+                        //TAS.debug('about to call binary');
                     t.value = BINARY_FUNCTIONS[t.operator](x.value, y.value);
                     delete t.operator;
                     if (t.left.label) {
@@ -13315,11 +13314,12 @@ var ExExp = ExExp|| (function(){
         }
 
         if (evalReqs.length > 0) {
-            Console.log("ERROR: Cannot evaluate");
+            TAS.error("ERROR: Cannot evaluate");
             return "";
         }
         if (asts.length > 0) {
             // need to finish evaluating some ASTs; recurse directly
+            TAS.debug("sendCommand (recurse), asts.length=" + asts.length + ", asts[0].baseValid=" + asts[0].baseValid + ", asts[0].type=" + asts[0].type);
             return sendCommand(chunks, asts, [], labels);
         }
         // if we got here, we're done evaluating everything; submit results via sendChat
@@ -13417,6 +13417,7 @@ var SWUtils = SWUtils || (function() {
             for (i=0;i<numfields;i++) {
                 fieldnames[i]=matches[i].replace("@{","").replace("}","");
             }
+            //TAS.debug("fieldnames=" + fieldnames + ", numfields=" + numfields);
             getAttrs(fieldnames,function(values){
                 var evalstr=fromfield,replacements=[numfields];
                 try {
@@ -13428,14 +13429,14 @@ var SWUtils = SWUtils || (function() {
                         evalstr = evalstr.split(matches[i]).join(replacements[i]);
                     }
                 } catch (err) {
-                    console.log("ERROR:" + err);
+                    TAS.error("ERROR:" + err);
                     evalstr=null;
                 } finally {
                     callback ( evalstr);
                 }
             });
         } catch (err){
-            console.log("ERROR: " + err);
+            TAS.error("ERROR: " + err);
             callback (null);
         }
     },
@@ -13446,28 +13447,30 @@ var SWUtils = SWUtils || (function() {
     *  @callback = a function taking one parameter, either a number or empty string .
     */
     evaluateExpression = function(exprStr,callback) {
+        //TAS.debug("entered evaluateExpression; exprStr=" + exprStr + ", callback=" + callback);
         if (typeof callback !== "function" ) {
             return;
         }
         if (! exprStr) {
             callback("");
         }
+        //TAS.debug("calling searchAndReplaceFields with values=" + exprStr);
         searchAndReplaceFields(exprStr, function(replacedStr) {
             var evaluated;
-            //console.log("cleaning up string replacedStr=" + replacedStr);
+            //TAS.debug("search and replace of " + exprStr + " resulted in " + replacedStr);
             replacedStr=replacedStr.replace(/\s+/g,'').replace(/\[\[/g,"(").replace(/\]\]/g,")");
 			if(!isNaN(parseFloat(replacedStr)) && isFinite(replacedStr)) {
 				evaluated=parseFloat(replacedStr);
-				//console.log("sending back "+evaluated); 
+                //TAS.debug("sending back " + evaluated);
 				callback(evaluated);
 			}
-			if (!isNaN(evaluated)) {  console.log("sending back "+evaluated); callback(evaluated); }
+            if (!isNaN(evaluated)) { TAS.debug("sending back " + evaluated); callback(evaluated); }
             else if (typeof replacedStr !== "undefined" && replacedStr !== null && validNumericStr(replacedStr) ) {
                 evaluated = ExExp.handleExpression(replacedStr);
-                //console.log("sending back "+evaluated);
+                //TAS.debug("sending back " + evaluated);
                 callback( evaluated);
             } else {
-                //console.log("ERROR: cannot evaluate this to number: " + exprStr);
+                TAS.error("ERROR: cannot evaluate this to number: " + exprStr);
                 callback(null);
             }
         });
@@ -13483,10 +13486,12 @@ var SWUtils = SWUtils || (function() {
      * @ensureValidExpr = the field should POTENTIALLY be evalauable to a number, it does not have to finish the evaluation,
     */
     evaluateAndSetString = function (readField,writeField,ensureValidExpr) {
+        //TAS.debug("entered evaluateAndSetString; readField=" + readField + ", writeField=" + writeField + ", ensureValidExpr=" + ensureValidExpr);
         if (!writeField || !readField) {
             return;
         }
         getAttrs([readField], ensureValidExpr,function(values) {
+            //TAS.debug("calling searchAndReplaceFields with values=" + values[readField]);
             searchAndReplaceFields(values[readField], function(replacedStr) {
                 var setter = {};
                 if (typeof replacedStr !== "undefined" && replacedStr !== null ) {
@@ -13513,33 +13518,33 @@ var SWUtils = SWUtils || (function() {
     *
     */
     evaluateAndSetNumber = function(readField,writeField,defaultVal){
-        //console.log("EEEE at evaluateAndSetNumber read:"+readField+", write:"+writeField);
+        //TAS.debug("EEEE at evaluateAndSetNumber read:" + readField + ", write:" + writeField);
         getAttrs([readField,writeField], function (values){
-            //console.log(values);
+            //TAS.debug(values);
             var setter = {},forceUpdate,
                 trueDefault = defaultVal||0,
                 currVal= parseInt(values[writeField],10),
                 value = Number(values[readField]);
-            //console.log("trueDefault:"+trueDefault+", currVal:"+currVal+", value:"+value+", isNaN:"+isNaN(currVal));
+            //TAS.debug("trueDefault:" + trueDefault + ", currVal:" + currVal + ", value:" + value + ", isNaN:" + isNaN(currVal));
 
             if (typeof values[readField] === "undefined" || values[readField]==="" || values[readField]===null ){
                 value=trueDefault;
-				//console.log("evaluateAndSetNumber: BLANK FIELD : "+readField);
+                //TAS.debug("evaluateAndSetNumber: BLANK FIELD : " + readField);
             };
 
             if (!isNaN(value))  {
-                //console.log("it was a number");
+                //TAS.debug("it was a number");
                 if ( isNaN(currVal) ||  currVal!==value) {
 						//TAS.log({"function":"evaluateAndSetNumber","currVal":currVal,"newVal":value});
 						setter[writeField]=value;
                     setAttrs(setter);
                 } else {
-					//console.log("DO NOT SET "+readField + "("+currVal+") to "+ writeField+"("+value+") cause they are the same");
-				}
+                    //TAS.debug("DO NOT SET " + readField + "(" + currVal + ") to " + writeField + "(" + value + ") cause they are the same");
+                }
             } else {
-                //console.log("ok evaluate "+values[readField]);
+                //TAS.debug("ok evaluate " + values[readField]);
                 evaluateExpression(values[readField],function(value2){
-                    //console.log("came back with " + value2 + ", is it NaN?:" + isNaN(value2));
+                    //TAS.debug("came back with " + value2 + ", is it NaN?:" + isNaN(value2));
 					//look for ( and ) at begining and end 
 					
                     value2=isNaN(value2)?trueDefault:value2;
@@ -13559,8 +13564,8 @@ var SWUtils = SWUtils || (function() {
 	*/
     setAttributeNumber=function(fieldToUpdate,newVal) {
         getAttrs([fieldToUpdate],function(v){
-			//console.log("setAttributeNumber setting with "+newVal);
-			//console.log(v);
+            //TAS.debug("setAttributeNumber setting with " + newVal);
+            //TAS.debug(v);
             var setter={},
             val = parseInt(v[fieldToUpdate],10);
             if (newVal !== val || isNaN(val)) {
@@ -13646,10 +13651,10 @@ var SWUtils = SWUtils || (function() {
 			if (typeof writeFields === "string") {
 				getAttrs([writeFields],function(v){
 					var currValue=parseInt(v[writeFields],10),setter={};
-					//console.log("handledropdown, readField:"+readField+ ", currValue:"+currValue+", newValue:"+valueOf);
+                    //TAS.debug("handledropdown, readField:" + readField + ", currValue:" + currValue + ", newValue:" + valueOf);
 					if (currValue!==valueOf || isNaN(currValue)) {
 						//TAS.log("handledropdown",readField,lookupField,currValue,valueOf);
-						//console.log("handledropdown, readField:"+readField+ ", currValue:"+currValue+", newValue:"+valueOf);
+                        //TAS.debug("handledropdown, readField:" + readField + ", currValue:" + currValue + ", newValue:" + valueOf);
 						setter[writeFields]=valueOf;
 						setAttrs(setter);
 						if (typeof callback === "function" ) {
@@ -13817,7 +13822,7 @@ var PFSheet = PFSheet || (function(){
 	
 		
 	isBadRowId=function(section,id,nullok) {
-		//console.log("TRACE: isBadRowId section:"+section+", id:"+id+", null ok?:" + nullok);
+        //TAS.debug("TRACE: isBadRowId section:" + section + ", id:" + id + ", null ok?:" + nullok);
 		if (!nullok &&  !id ) {
 			return true;
 		}
@@ -13861,7 +13866,7 @@ var PFSheet = PFSheet || (function(){
         getSectionIDs("repeating_"+section,function(ids){
             ids.forEach(function(id,index){
 				if (isBadRowId(section,id,false)) {
-                    //console.log("ERROR: handleRepeatingRowOrdering invalid id:" + id);
+                    TAS.error("ERROR: handleRepeatingRowOrdering invalid id:" + id);
 					return;
 				}
 				setRepeatingRowDefaultFields(section,id,forceReset);
@@ -13878,7 +13883,7 @@ var PFSheet = PFSheet || (function(){
 	*/
     checkIsNewRow = function(section,eventInfo) {
 		if (!section || !eventInfo){return;	}
-		//console.log("checkIsNewRow: event:"+eventInfo.sourceAttribute);	
+        //TAS.debug("checkIsNewRow: event:" + eventInfo.sourceAttribute);
 		getAttrs(["repeating_"+section+"_new_flag"],function(v){
 			var startIdx,endIdx,newid,setter={};
 			if (v["repeating_"+section+"_new_flag"]!="1") {
@@ -13928,7 +13933,7 @@ var PFSheet = PFSheet || (function(){
     * checks-cond, Phys-skills-cond, Perception-cond.
     */
     updateConditionCheckPenalty=function(){
-        //console.log("CCCCCCCCCCCCCCCCCCCCCCCCCCCC at updateConditionCheckPenalty");
+        //TAS.debug("CCCCCCCCCCCCCCCCCCCCCCCCCCCC at updateConditionCheckPenalty");
         getAttrs(["condition-Blinded","condition-Fear","condition-Drained","condition-Sickened","condition-Wounds"
 		,"checks-cond","Phys-skills-cond","Perception-cond","buff_Check-total"
 		,"CasterLevel-Penalty"]
@@ -13966,7 +13971,7 @@ var PFSheet = PFSheet || (function(){
                 setter["CasterLevel-Penalty"]=casterlevel;
                 setAny=1;
 			}
-            //console.log("about to set " + setter);
+            //TAS.debug("about to set " + setter);
             if (setAny){
                 setAttrs(setter);
             }
@@ -14107,9 +14112,9 @@ var PFSheet = PFSheet || (function(){
 			var currValue= parseInt(v[fields[0]],10)
 				,newValue=0,setter={},i=1;
             for(i=1;i<11;i++){
-				//console.log("at"+i);
+                //TAS.debug("at" + i);
                 newValue+= (parseFloat(v[fields[i]])||0);
-				//console.log("i:"+i+", val="+newValue);
+                //TAS.debug("i:" + i + ", val=" + newValue);
             }
 			//final total is int.
 			newValue=Math.floor(newValue);
@@ -14155,7 +14160,7 @@ var PFSheet = PFSheet || (function(){
             base = parseInt(v["speed-base"], 10) || 0,
             heavy = parseInt(v["load-heavy"], 10) || 0,
             carried = parseInt(v["carried-total"], 10) || 0;
-            //console.log("speed-modified=" + currMod + ", speed-run=" + currRun + ", current-load=" + load + ", speed-base=" + base + ", load-heavy=" + heavy + ", carried-total=" + carried);
+            //TAS.debug("speed-modified=" + currMod + ", speed-run=" + currRun + ", current-load=" + load + ", speed-base=" + base + ", load-heavy=" + heavy + ", carried-total=" + carried);
 
             var newLoadSpeed, newArmorSpeed, newRun, runMult = 4;
             if (load > 0) { //Medium Or Heavy load
@@ -14175,9 +14180,9 @@ var PFSheet = PFSheet || (function(){
                 newLoadSpeed = base;
                 runMult = 4;
             }
-            //console.log("newLoadSpeed=" + newLoadSpeed + ", newRun=" + newRun + ", runMult=" + runMult);
+            //TAS.debug("newLoadSpeed=" + newLoadSpeed + ", newRun=" + newRun + ", runMult=" + runMult);
 
-            //console.log("race=" + v.race + ", armor-type=" + v["armor-type"] + ", armor-equipped=" + v["armor-equipped"] +
+            //TAS.debug("race=" + v.race + ", armor-type=" + v["armor-type"] + ", armor-equipped=" + v["armor-equipped"] +
             //            ", armor2-type=" + v["armor2-type"] + ", armor2-equipped=" + v["armor2-equipped"] + 
             //            ", armor3-type=" + v["armor3-type"] + ", armor3-equipped=" + v["armor3-equipped"]);
             var isDwarf = typeof v.race === "undefined" ? false : v.race.toLowerCase().indexOf("dwarf") >= 0;
@@ -14187,7 +14192,7 @@ var PFSheet = PFSheet || (function(){
             var inMedium = (v["armor-type"] == "Medium" && (v["armor-equipped"] == "1" || v["armor-equipped"] === "undefined")) ||
                 (v["armor2-type"] == "Medium" && (v["armor2-equipped"] == "1" || typeof v["armor2-equipped"] === "undefined")) ||
                 (v["armor3-type"] == "Medium" && (v["armor3-equipped"] == "1" || typeof v["armor3-equipped"] === "undefined"));
-            //console.log("inHeavy=" + inHeavy + ", inMedium=" + inMedium + ", isDwarf=" + isDwarf);
+            //TAS.debug("inHeavy=" + inHeavy + ", inMedium=" + inMedium + ", isDwarf=" + isDwarf);
             if (inHeavy) { runMult = 3; } // Max x3 run in heavy armor
             if (!isDwarf && (inHeavy || inMedium)) {
                 if (base <= 5) { newArmorSpeed = 5; }
@@ -14197,13 +14202,13 @@ var PFSheet = PFSheet || (function(){
             } else {
                 newArmorSpeed = base;
             }
-            //console.log("newArmorSpeed=" + newArmorSpeed + ", runMult=" + runMult);
+            //TAS.debug("newArmorSpeed=" + newArmorSpeed + ", runMult=" + runMult);
 
             var newSpeed = Math.min(newLoadSpeed, newArmorSpeed);
-            //console.log("newSpeed=" + newSpeed + ", runMult=" + runMult);
+            //TAS.debug("newSpeed=" + newSpeed + ", runMult=" + runMult);
 
             if (runMult > 0) { newRun = newSpeed * runMult; }
-            //console.log("newRun=" + newRun);
+            //TAS.debug("newRun=" + newRun);
 
             if (currMod !== newSpeed) { setAttrs({ "speed-modified": newSpeed }); }
             if (currRun !== newRun) { setAttrs({ "speed-run": newRun }); }
@@ -14298,8 +14303,8 @@ var PFSheet = PFSheet || (function(){
                 currhp=parseInt(v["NPC-HP"],10)||0,
                 updatehp=parseInt(v.sync_npc_pc_hp,10)||0,
                 setter={},setAny=0;
-            //console.log("HHHHHHHHHHHHHHHHHHHHHHHHH updateNPCHP, hp:"+hp+", maxhp:"+maxhp);
-            //console.log(v);
+            //TAS.debug("HHHHHHHHHHHHHHHHHHHHHHHHH updateNPCHP, hp:" + hp + ", maxhp:" + maxhp);
+            //TAS.debug(v);
             if (hp !== maxhp) {
                 setter["NPC-HP_max"]=hp;
                 if (updatehp) { setter["HP"]=hp; }
@@ -14324,7 +14329,7 @@ var PFSheet = PFSheet || (function(){
      *   hp, fchp, bab, skill, fcskill, alt, Fort, Ref, Will, level
      */
     updateClassInformation = function (col) {
-        //console.log("at updateClassInformation");
+        //TAS.debug("at updateClassInformation");
         if (!col ) { return; }
         if (col==="fchp") { col="hp";}
         var getFields=[],totalColName,
@@ -14343,7 +14348,7 @@ var PFSheet = PFSheet || (function(){
                 col5NameTwo="class-5-fc"+col;
                 getFields=getFields.concat([col0NameTwo,col1NameTwo,col2NameTwo,col3NameTwo,col4NameTwo,col5NameTwo]);
             }
-            //console.log(getFields);
+            //TAS.debug(getFields);
             updateRowTotal(getFields);
         } else {
             col0NameTwo="class-0-level";
@@ -14353,7 +14358,7 @@ var PFSheet = PFSheet || (function(){
             col4NameTwo="class-4-level";
             col5NameTwo="class-5-level";
             getFields=getFields.concat([col0NameTwo,col1NameTwo,col2NameTwo,col3NameTwo,col4NameTwo,col5NameTwo]);
-            //console.log(getFields);
+            //TAS.debug(getFields);
             getAttrs(getFields,function(v){
                 var setter = {},currTot,
                 tot = Math.floor(( parseFloat(v[col0Name],10)||0)*( parseInt(v[col0NameTwo],10)||0) +
@@ -14363,7 +14368,7 @@ var PFSheet = PFSheet || (function(){
                         ( parseFloat(v[col4Name],10)||0)* ( parseInt(v[col4NameTwo],10)||0)+
                         ( parseFloat(v[col5Name],10)||0)* ( parseInt(v[col5NameTwo],10)||0));
                 currTot = parseInt(v[totalColName],10);
-                //console.log("tot is "+tot+", currtot = "+currTot);
+                //TAS.debug("tot is " + tot + ", currtot = " + currTot);
                 if ( isNaN(currTot) ||  tot!== currTot) {
                     setter[totalColName]=tot;
                     setAttrs(setter);
@@ -14381,7 +14386,7 @@ var PFSheet = PFSheet || (function(){
         getAttrs(["mythic-tier", "mythic-hp", "total-mythic-hp"], function (values) {
             var tot = (parseInt(values["mythic-tier"], 10) || 0) * (parseInt(values["mythic-hp"], 10) || 0),
             currTot = parseInt(values["total-mythic-hp"], 10) || 0;
-            //console.log("tot=" + tot + ", currTot=" + currTot);
+            //TAS.debug("tot=" + tot + ", currTot=" + currTot);
             if (currTot !== tot) { setAttrs({ "total-mythic-hp": tot }); }
         });
     },
@@ -14390,11 +14395,11 @@ var PFSheet = PFSheet || (function(){
     * sets max MP
     */
     updateMythicPower = function () {
-        //console.log("entered updateMythicPower");
+        //TAS.debug("entered updateMythicPower");
         getAttrs(["mythic-power_max", "tier-mythic-power", "misc-mythic-power"], function (values) {
             var totalMP = (parseInt(values["tier-mythic-power"], 10) || 0) + (parseInt(values["misc-mythic-power"], 10) || 0),
             currMP = parseInt(values["mythic-power_max"], 10) || 0;
-            //console.log("totalMP=" + totalMP + ", currMP=" + currMP);
+            //TAS.debug("totalMP=" + totalMP + ", currMP=" + currMP);
             if (currMP !== totalMP) { setAttrs({ "mythic-power_max": totalMP }); }
         });
     },
@@ -14403,11 +14408,11 @@ var PFSheet = PFSheet || (function(){
     * sets tier mp
     */
     updateTierMythicPower = function () {
-        //console.log("entered updateTierMythicPower");
+        //TAS.debug("entered updateTierMythicPower");
         getAttrs(["tier-mythic-power", "mythic-tier"], function (values) {
             var totalTier = 3 + 2 * (parseInt(values["mythic-tier"], 10) || 0),
             curr = parseInt(values["tier-mythic-power"], 10) || 0;
-            //console.log("totalTier=" + totalTier + ", curr=" + curr);
+            //TAS.debug("totalTier=" + totalTier + ", curr=" + curr);
             if (curr !== totalTier) { setAttrs({ "tier-mythic-power": totalTier }); }
         });
     },
@@ -14424,7 +14429,7 @@ var PFSheet = PFSheet || (function(){
 	* @ffModField {string} = mod field containing value of ffField (to write to if modField is negative)
 	*/
 	handleNonFFDefenseDropdown=function(ddField,modField,ffField,ffModField){
-	    //console.log("at handleNonFFDefenseDropdown ddField=" + ddField + ", modField=" + modField + ", ffField=" + ffField + ", ffModField=" + ffModField);
+        //TAS.debug("at handleNonFFDefenseDropdown ddField=" + ddField + ", modField=" + modField + ", ffField=" + ffField + ", ffModField=" + ffModField);
 		handleDropdown(ddField,modField,function(dexmod,oldmod){
 			var setter={};
 			if(dexmod<0){
@@ -14448,7 +14453,7 @@ var PFSheet = PFSheet || (function(){
 	* @dropdownField {string} = fieldname of dropdown, FROM eventInfo.sourceAttribute
 	*/
 	handleDefenseDropdown= function(dropdownField) {
-		//console.log("at handleDefenseDropdown:"+dropdownField);
+        //TAS.debug("at handleDefenseDropdown:" + dropdownField);
 		switch(dropdownField.toLowerCase()){
 			case "cmd-ability1":
 				handleDropdown("CMD-ability1","CMD-STR");
@@ -14496,8 +14501,8 @@ var PFSheet = PFSheet || (function(){
             "AC","Touch","Flat-Footed","CMD","FF-CMD","AC-ability","FF-ability", "CMD-ability2", "CMD-ability","AC-armor","AC-shield",
 			"condition-Blinded","condition-Pinned","condition-Stunned","condition-Cowering","condition-Drained",
 			"AC-ability-display","FF-DEX-display","CMD-DEX-display","FF-CMD-DEX-display"], function(v) {
-            //console.log("AAAAAAAAAAAAt update defenses");
-            //console.log(v);
+            //TAS.debug("AAAAAAAAAAAAt update defenses");
+            //TAS.debug(v);
             var setter={}, setAny =0,
                 size= parseInt(v["size"],10)||0,
                 dodge =parseInt(v["AC-dodge"],10)||0,
@@ -14526,29 +14531,29 @@ var PFSheet = PFSheet || (function(){
                 cowering = (parseInt(v["condition-Cowering"],10)||0)?1:0,
                 loseDex=0;
 
-            //console.log("DDDDDDDDDD updateDefenses size:"+size+", dodge:"+dodge+", misc:"+miscAC+", def:"+deflect+", cond:"+condPenalty+", buff:"+buffs+", armor:"+armor+", shield:"+shield+
+            //TAS.debug("DDDDDDDDDD updateDefenses size:" + size + ", dodge:" + dodge + ", misc:" + miscAC + ", def:" + deflect + ", cond:" + condPenalty + ", buff:" + buffs + ", armor:" + armor + ", shield:" + shield +
             //  ", natural:"+natural+", bab:"+bab+", miscCMD:"+miscCMD+", maxDex:"+maxDex+", stunned:"+stunned+", ffed:"+ffed+", ability:"+ability+
             //  ", ffAbility:"+ffAbility+", cmdAbility1:"+cmdAbility1+",cmdAbility2:"+cmdAbility2+", cmdFFAbility2:"+cmdFFAbility2
             //  + ", blinded: "+blinded+", pinned:"+pinned +", cowering:"+cowering  );
 
             maxDex=isNaN(maxDex)?99:maxDex; //cannot do "||0" since 0 is valid but falsy
 
-            //console.log("maxDex:" + maxDex);
+            //TAS.debug("maxDex:" + maxDex);
 			if (findAbilityInString(v["AC-ability"]) === "DEX-mod" && maxDex < 99 && maxDex >= 0) {
                 ability = Math.min(ability,maxDex);
-                //console.log("AC-ability is DEX-mod, ability=" + ability);
+                //TAS.debug("AC-ability is DEX-mod, ability=" + ability);
             }
             if (findAbilityInString(v["FF-ability"]) === "DEX-mod" && maxDex < 99 && maxDex >= 0) {
                 ffAbility = Math.min(ffAbility,maxDex);
-                //console.log("FF-ability is DEX-mod, ffAbility=" + ffAbility);
+                //TAS.debug("FF-ability is DEX-mod, ffAbility=" + ffAbility);
             }
             if (findAbilityInString(v["CMD-ability2"]) === "DEX-mod" && maxDex < 99 && maxDex >= 0) {
                 cmdAbility2 = Math.min(cmdAbility2, maxDex);
-                //console.log("CMD-ability2 is DEX-mod, cmdAbility2=" + cmdAbility2);
+                //TAS.debug("CMD-ability2 is DEX-mod, cmdAbility2=" + cmdAbility2);
             }
             if (findAbilityInString(v["CMD-ability"]) === "DEX-mod" && maxDex < 99 && maxDex >= 0) {
                 cmdFFAbility2 = Math.min(cmdFFAbility2, maxDex);
-                //console.log("CMD-ability is DEX-mod, cmdFFAbility2=" + cmdFFAbility2);
+                //TAS.debug("CMD-ability is DEX-mod, cmdFFAbility2=" + cmdFFAbility2);
             }
 
             //lose Dex: you lose your bonus (and dodge) but are not flat footed
@@ -14561,7 +14566,7 @@ var PFSheet = PFSheet || (function(){
                 ability = ffAbility;
                 cmdAbility2=cmdFFAbility2;
 				if (ability ===0) {dodge=0;}
-                //console.log("blinded loseDex=" + loseDex + ", ability=" + ability + ", cmdAbility2=" + cmdAbility2);
+                //TAS.debug("blinded loseDex=" + loseDex + ", ability=" + ability + ", cmdAbility2=" + cmdAbility2);
             }
 
             //Uncanny dodge still loses dex in these conditions, so set both to 0
@@ -14572,7 +14577,7 @@ var PFSheet = PFSheet || (function(){
                 cmdFFAbility2=Math.min(0,cmdFFAbility2);
                 cmdAbility2=cmdFFAbility2; 
                 dodge=0;
-                //console.log("pinned, cowering, or stunned loseDex=" + loseDex + ", ffAbility=" + ffAbility + ", ability=" + ability + ", cmdFFAbility2=" + cmdFFAbility2 + ", cmdAbility2=" + cmdAbility2 + ", dodge=" + dodge);
+                //TAS.debug("pinned, cowering, or stunned loseDex=" + loseDex + ", ffAbility=" + ffAbility + ", ability=" + ability + ", cmdFFAbility2=" + cmdFFAbility2 + ", cmdAbility2=" + cmdAbility2 + ", dodge=" + dodge);
             }
 
             var ac = 10+ armor+shield+natural+size+dodge + ability  +deflect+miscAC+condPenalty +buffs;
@@ -14581,14 +14586,14 @@ var PFSheet = PFSheet || (function(){
             var cmd = 10+bab+cmdAbility1+cmdAbility2+ (-1*size) +dodge+deflect+miscCMD+cmdPenalty+buffsCMD ;
             var cmdFF = 10+bab+cmdAbility1+cmdFFAbility2+ (-1*size) +deflect+miscCMD+cmdPenalty+buffsCMD+( cmdFFAbility2 >0 ? dodge:0  ) ;
 
-            //console.log("ac=" + ac + ", touch=" + touch + ", ff=" + ff + ", cmd=" + cmd + ", cmdFF=" + cmdFF);
+            //TAS.debug("ac=" + ac + ", touch=" + touch + ", ff=" + ff + ", cmd=" + cmd + ", cmdFF=" + cmdFF);
             var currAC= parseInt(v["AC"],10);
             var currTouch= parseInt(v["Touch"],10);
             var currFF= parseInt(v["Flat-Footed"],10);
             var currCMD = parseInt(v["CMD"],10);
             var currCMDFF = parseInt(v["FF-CMD"],10);
 
-            //console.log("currAC=" + currAC + ", currTouch=" + currTouch + ", currFF=" + currFF + ", currCMD=" + currCMD + ", currCMDFF=" + currCMDFF);
+            //TAS.debug("currAC=" + currAC + ", currTouch=" + currTouch + ", currFF=" + currFF + ", currCMD=" + currCMD + ", currCMDFF=" + currCMDFF);
 			//default 10
             if (ac !== currAC || isNaN(currAC) ) {setter["AC"]=ac;setAny+=1;}
             if (touch !== currTouch || isNaN(currTouch) ) {setter["Touch"]=touch;setAny+=1;}
@@ -14622,8 +14627,8 @@ var PFSheet = PFSheet || (function(){
 		 "armor3-equipped", "armor3-acbonus", "armor3-max-dex", "armor3-acp", "armor3-spell-fail", "armor3-proficiency",
          "acp","max-dex","AC-armor","AC-shield","spell-fail","acp-attack-mod",
         "max-dex-source", "acp-source", "current-load"], function (v) {
-         //console.log("updateArmor");
-         //console.log(v);
+            //TAS.debug("updateArmor");
+            //TAS.debug(v);
          var acp=0,maxDex=99,acA=0,acS=0,sp=0,atk=0
 			,subAC=0,subD=0,subAcp=0,nonProf=0,subsp=0
             , currACP = 0, currMaxDex = 99, currACArmor = 0, currACShield = 0, currSpellFail = 0, currAtkMod = 0
@@ -14645,8 +14650,8 @@ var PFSheet = PFSheet || (function(){
              acp+=subAcp;
              sp+=subsp;
              if(nonProf) {atk+=subAcp; }
-		      //console.log("subAC=" + subAC + ", subD=" + subD + ", subAcp=" + subAcp + ", nonProf=" + nonProf + ", subsp=" + subsp + ", acA=" + acA + ", maxDex=" + maxDex + ", acp=" + acp + ", sp=" + sp + ", atk=" + atk);
-         }
+                //TAS.debug("subAC=" + subAC + ", subD=" + subD + ", subAcp=" + subAcp + ", nonProf=" + nonProf + ", subsp=" + subsp + ", acA=" + acA + ", maxDex=" + maxDex + ", acp=" + acp + ", sp=" + sp + ", atk=" + atk);
+            }
          if (v["armor2-equipped"]=="1" ) {
              subAC=parseInt(v["armor2-acbonus"],10)||0;
              subD=parseInt(v["armor2-max-dex"],10);subD=isNaN(subD)?99:subD; //cannot do "or 0" since 0 is valid but falsy
@@ -14658,8 +14663,8 @@ var PFSheet = PFSheet || (function(){
              acp+=subAcp;
              sp+=subsp;
              if(nonProf) {atk+=subAcp;}
-			 //console.log("subAC=" + subAC + ", subD=" + subD + ", subAcp=" + subAcp + ", nonProf=" + nonProf + ", subsp=" + subsp + ", acA=" + acA + ", maxDex=" + maxDex + ", acp=" + acp + ", sp=" + sp + ", atk=" + atk);
-         }
+                //TAS.debug("subAC=" + subAC + ", subD=" + subD + ", subAcp=" + subAcp + ", nonProf=" + nonProf + ", subsp=" + subsp + ", acA=" + acA + ", maxDex=" + maxDex + ", acp=" + acp + ", sp=" + sp + ", atk=" + atk);
+            }
 		 if (v["armor3-equipped"] == "1") {
 			 subAC = parseInt(v["armor3-acbonus"], 10) || 0;
 			 subD = parseInt(v["armor3-max-dex"], 10); subD = isNaN(subD) ? 99 : subD; //cannot do "or 0" since 0 is valid but falsy
@@ -14671,8 +14676,8 @@ var PFSheet = PFSheet || (function(){
 			 acp += subAcp;
 			 sp += subsp;
 			 if (nonProf) { atk += subAcp; }
-		     //console.log("subAC=" + subAC + ", subD=" + subD + ", subAcp=" + subAcp + ", nonProf=" + nonProf + ", subsp=" + subsp + ", acA=" + acA + ", maxDex=" + maxDex + ", acp=" + acp + ", sp=" + sp + ", atk=" + atk);
-		 }
+                //TAS.debug("subAC=" + subAC + ", subD=" + subD + ", subAcp=" + subAcp + ", nonProf=" + nonProf + ", subsp=" + subsp + ", acA=" + acA + ", maxDex=" + maxDex + ", acp=" + acp + ", sp=" + sp + ", atk=" + atk);
+            }
          if (v["shield-equipped"]=="1" ) {
              subAC=parseInt(v["shield-acbonus"],10)||0;
              subD=parseInt(v["shield-max-dex"],10);subD=isNaN(subD)?99:subD; //cannot do "or 0" since 0 is valid but falsy
@@ -14684,8 +14689,8 @@ var PFSheet = PFSheet || (function(){
              acp+=subAcp;
              sp+=subsp;
              if(nonProf) {atk+=subAcp;}
-		     //console.log("subAC=" + subAC + ", subD=" + subD + ", subAcp=" + subAcp + ", nonProf=" + nonProf + ", subsp=" + subsp + ", acA=" + acA + ", maxDex=" + maxDex + ", acp=" + acp + ", sp=" + sp + ", atk=" + atk);
-         }
+                //TAS.debug("subAC=" + subAC + ", subD=" + subD + ", subAcp=" + subAcp + ", nonProf=" + nonProf + ", subsp=" + subsp + ", acA=" + acA + ", maxDex=" + maxDex + ", acp=" + acp + ", sp=" + sp + ", atk=" + atk);
+            }
          if (v["shield2-equipped"]=="1" ) {
              subAC=parseInt(v["shield2-acbonus"],10)||0;
              subD=parseInt(v["shield2-max-dex"],10);subD=isNaN(subD)?99:subD; //cannot do "or 0" since 0 is valid but falsy
@@ -14697,8 +14702,8 @@ var PFSheet = PFSheet || (function(){
              acp+=subAcp;
              sp+=subsp;
              if(nonProf) {atk+=subAcp;}
-		     //console.log("subAC=" + subAC + ", subD=" + subD + ", subAcp=" + subAcp + ", nonProf=" + nonProf + ", subsp=" + subsp + ", acA=" + acA + ", maxDex=" + maxDex + ", acp=" + acp + ", sp=" + sp + ", atk=" + atk);
-         }
+                //TAS.debug("subAC=" + subAC + ", subD=" + subD + ", subAcp=" + subAcp + ", nonProf=" + nonProf + ", subsp=" + subsp + ", acA=" + acA + ", maxDex=" + maxDex + ", acp=" + acp + ", sp=" + sp + ", atk=" + atk);
+            }
 		 if (v["shield3-equipped"] == "1") {
 			 subAC = parseInt(v["shield3-acbonus"], 10) || 0;
 			 subD = parseInt(v["shield3-max-dex"], 10); subD = isNaN(subD) ? 99 : subD; //cannot do "or 0" since 0 is valid but falsy
@@ -14710,8 +14715,8 @@ var PFSheet = PFSheet || (function(){
 			 acp += subAcp;
 			 sp += subsp;
 			 if (nonProf) { atk += subAcp; }
-	         //console.log("subAC=" + subAC + ", subD=" + subD + ", subAcp=" + subAcp + ", nonProf=" + nonProf + ", subsp=" + subsp + ", acA=" + acA + ", maxDex=" + maxDex + ", acp=" + acp + ", sp=" + sp + ", atk=" + atk);
-		 }
+                //TAS.debug("subAC=" + subAC + ", subD=" + subD + ", subAcp=" + subAcp + ", nonProf=" + nonProf + ", subsp=" + subsp + ", acA=" + acA + ", maxDex=" + maxDex + ", acp=" + acp + ", sp=" + sp + ", atk=" + atk);
+            }
 
             // #0: Armor, Shield & Load
             // #1: Armor & Shield only
@@ -14721,13 +14726,13 @@ var PFSheet = PFSheet || (function(){
                 if (maxDexDropdown == 2) { maxDex = 99; }
 
                 //carry capacity / encumbrance / load affect on max dex
-                //console.log("currentLoad=" + currentLoad);
+                //TAS.debug("currentLoad=" + currentLoad);
                 if (currentLoad == 1) { // under medium encumbrance load
                     maxDex = Math.min(maxDex, 3);
-                    //console.log("medium load adjusted maxDex=" + maxDex);
+                    //TAS.debug("medium load adjusted maxDex=" + maxDex);
                 } else if (currentLoad == 2) { // under heavy encumbrance load
                     maxDex = Math.min(maxDex, 1);
-                    //console.log("heavy load adjusted maxDex=" + maxDex);
+                    //TAS.debug("heavy load adjusted maxDex=" + maxDex);
                 }
             } else if (maxDexDropdown == 3) {
                 maxDex = 99;
@@ -14741,13 +14746,13 @@ var PFSheet = PFSheet || (function(){
                 if (acpDropdown == 2) { acp = 0; }
 
                 //carry capacity / encumbrance / load affect on max dex
-                //console.log("currentLoad=" + currentLoad);
+                //TAS.debug("currentLoad=" + currentLoad);
                 if (currentLoad == 1) { // under medium encumbrance load
                     acp -= 3;
-                    //console.log("medium load adjusted acp=" + acp);
+                    //TAS.debug("medium load adjusted acp=" + acp);
                 } else if (currentLoad == 2) { // under heavy encumbrance load
                     acp -= 6;
-                    //console.log("heavy load adjusted acp=" + acp);
+                    //TAS.debug("heavy load adjusted acp=" + acp);
                 }
             } else if (acpDropdown == 3) {
                 acp = 0;
@@ -14755,7 +14760,7 @@ var PFSheet = PFSheet || (function(){
 
          currACP=parseInt(v.acp,10)||0;
          currMaxDex=parseInt(v["max-dex"],10);//cannot do "||0" since 0 is valid but falsy
-            //console.log("currMaxDex:" + currMaxDex);
+            //TAS.debug("currMaxDex:" + currMaxDex);
          currMaxDex=isNaN(currMaxDex)?99:currMaxDex;
 
          currACArmor=parseInt(v["AC-armor"],10)||0;
@@ -14763,8 +14768,8 @@ var PFSheet = PFSheet || (function(){
          currSpellFail=parseInt(v["spell-fail"],10)||0;
          currAtkMod=parseInt(v["acp-attack-mod"],10)||0;
 
-         //console.log(v);
-         //console.log("curr atk mod:"+currAtkMod+", curr acp:"+currACP+", new acp:"+acp+", currMaxDex:"+currMaxDex+", new maxdex:"+maxDex);
+            //TAS.debug(v);
+            //TAS.debug("curr atk mod:" + currAtkMod + ", curr acp:" + currACP + ", new acp:" + acp + ", currMaxDex:" + currMaxDex + ", new maxdex:" + maxDex);
 
          if (currACP!==acp){setter["acp"]=acp;setAny=1;}
          if (currMaxDex!==maxDex){setter["max-dex"]=maxDex;setAny=1;}
@@ -14935,11 +14940,11 @@ var PFSheet = PFSheet || (function(){
 	*/
     handleRepeatingAttackDropdown = function(id,eventInfo){
 		var idStr=getRepeatingIDStr(id),prefix="repeating_weapon_"+idStr;
-		//console.log("TRACE:handleRepeatingAttackDropdown id:" + id+", eventInfo is");
-		//console.log(eventInfo);
-		//console.log("TRACE end");
+        //TAS.debug("TRACE:handleRepeatingAttackDropdown id:" + id + ", eventInfo is");
+        //TAS.debug(eventInfo);
+        //TAS.debug("TRACE end");
 		if (isBadRowId("weapon",id,true)) {
-			console.log("ERROR: handleRepeatingAttackDropdown, invalid id:"+id);
+            TAS.error("ERROR: handleRepeatingAttackDropdown, invalid id:" + id);
 			return;			
 		}		
         handleDropdown(prefix+"attack-type",prefix+"attack-type-mod");
@@ -14954,7 +14959,7 @@ var PFSheet = PFSheet || (function(){
 		,readField=id?"repeating_weapon_"+idStr+"damage-ability":"repeating_weapon_damage-ability"
 		,writeField= id?readField+"-mod":"repeating_weapon_damage-ability-mod";
 		if (isBadRowId("weapon",id,true)) {
-			console.log("ERROR: handleRepeatingDamageDropdown, invalid id:"+id);
+            TAS.error("ERROR: handleRepeatingDamageDropdown, invalid id:" + id);
 			return;			
 		}
         getAttrs([readField,writeField],function(v) {
@@ -14995,7 +15000,7 @@ var PFSheet = PFSheet || (function(){
 		;
 		
 		if (isBadRowId("weapon",id,true)) {
-			console.log("ERROR: updateRepeatingWeaponAttack, invalid id:"+id);
+            TAS.error("ERROR: updateRepeatingWeaponAttack, invalid id:" + id);
 			return;			
 		}
 
@@ -15044,7 +15049,7 @@ var PFSheet = PFSheet || (function(){
 			dmgEffectCopy="repeating_weapon_"+idStr+"dmg-effect-total-copy",
 			dmgModCopy="repeating_weapon_"+idStr+"DMG-mod-copy";
 		if (isBadRowId("weapon",id,true)) {
-			console.log("ERROR: updateRepeatingWeaponDamage, invalid id:"+id);
+            TAS.error("ERROR: updateRepeatingWeaponDamage, invalid id:" + id);
 			return;			
 		}
         getAttrs([maxname,modname,dmgEffectCopy,dmgModCopy,"dmg-effect-total","DMG-mod"],function(v){
@@ -15210,15 +15215,15 @@ var PFSheet = PFSheet || (function(){
 	 * col can be: charges, weight, hp, hp_max, or value
 	 */
 	updateWornEquipment = function (col) {
-	    //console.log("entered updateWornEquipment");
+        //TAS.debug("entered updateWornEquipment");
 	    var slot = ["Armor", "Belt", "Body", "Chest", "Eyes", "Feet", "Hands", "Head", "Headband", "Neck", "Ring1", "Ring2", "Shield", "Shoulders", "Wrist"];
-	    //console.log("slot=" + slot);
+        //TAS.debug("slot=" + slot);
 	    var numFlds = slot.length, i, attribList = ["worn-total-" + col];
-	    //console.log("numFlds=" + numFlds + ", attribList=" + attribList);
+        //TAS.debug("numFlds=" + numFlds + ", attribList=" + attribList);
 	    for (i = 0; i < numFlds; i++) {
 	        attribList.push("worn-" + slot[i] + "-" + col);
 	    }
-	    //console.log("attribList=" + attribList);
+        //TAS.debug("attribList=" + attribList);
 	    updateRowTotal(attribList);
 	},
 
@@ -15230,7 +15235,7 @@ var PFSheet = PFSheet || (function(){
 	    getAttrs(["CP", "SP", "GP", "PP", "carried-currency"], function (v) {
 	        var curr = parseInt(v["carried-currency"], 10) || 0,
             carried = ((parseInt(v["CP"], 10) || 0) + (parseInt(v["SP"], 10) || 0) + (parseInt(v["GP"], 10) || 0) + (parseInt(v["PP"], 10) || 0)) / 50;
-	        //console.log("curr=" + curr + ", carried=" + carried);
+            //TAS.debug("curr=" + curr + ", carried=" + carried);
 	        if (curr !== carried) { setAttrs({ "carried-currency": carried }); }
 	    });
 	},
@@ -15243,7 +15248,7 @@ var PFSheet = PFSheet || (function(){
 	    getAttrs(["carried-currency", "item_total_weight", "worn-total-weight", "carried-misc", "carried-total"], function (v) {
 	        var curr = parseFloat(v["carried-total"], 10) || 0,
             carried = (parseFloat(v["carried-currency"], 10) || 0) + (parseFloat(v["item_total_weight"], 10) || 0) + (parseFloat(v["worn-total-weight"], 10) || 0) + (parseFloat(v["carried-misc"], 10) || 0);
-	        //console.log("curr=" + curr + ", carried=" + carried);
+            //TAS.debug("curr=" + curr + ", carried=" + carried);
 	        if (curr !== carried) { setAttrs({ "carried-total": carried }); }
 	    });
 	},
@@ -15258,15 +15263,15 @@ var PFSheet = PFSheet || (function(){
             carried = parseInt(v["carried-total"], 10) || 0,
             light = parseInt(v["load-light"], 10) || 0,
             medium = parseInt(v["load-medium"], 10) || 0;
-	        //console.log("current-load=" + curr + ", carried-total=" + carried + ", load-light=" + light + ", load-medium=" + medium);
+            //TAS.debug("current-load=" + curr + ", carried-total=" + carried + ", load-light=" + light + ", load-medium=" + medium);
 	        if (carried <= light) {
-	            //console.log("light load");
+                //TAS.debug("light load");
 	            if (curr !== 0) { setAttrs({ "current-load": 0 }); }
 	        } else if (carried <= medium) {
-	            //console.log("medium load");
+                //TAS.debug("medium load");
 	            if (curr !== 1) { setAttrs({ "current-load": 1 }); }
 	        } else {
-	            //console.log("heavy load");
+                //TAS.debug("heavy load");
 	            if (curr !== 2) { setAttrs({ "current-load": 2 }); }
 	        }
 	    });
@@ -15330,7 +15335,7 @@ var PFSheet = PFSheet || (function(){
             strmod = parseInt(v["load-str-bonus"], 10) || 0,
             loadmult = parseInt(v["load-multiplier"], 10) || 0,
             misc = parseInt(v["load-misc"], 10) || 0;
-            //console.log("STR=" + str + ", legs=" + legs + ", load-light=" + light + ", load-medium=" + medium + ", load-heavy=" + heavy + ", lift-above-head=" + abovehead + ", lift-off-ground=" + offground + ", lift-drag-and-push=" + drag + ", load-str-bonus=" + strmod + ", load-multiplier=" + loadmult + ", load-misc=" + misc);
+            //TAS.debug("STR=" + str + ", legs=" + legs + ", load-light=" + light + ", load-medium=" + medium + ", load-heavy=" + heavy + ", lift-above-head=" + abovehead + ", lift-off-ground=" + offground + ", lift-drag-and-push=" + drag + ", load-str-bonus=" + strmod + ", load-multiplier=" + loadmult + ", load-misc=" + misc);
             if (loadmult < 1) { loadmult = 1; }
             loadmult--;
             var l = getCarryingCapacity(str + strmod, "light") + misc,
@@ -15365,7 +15370,7 @@ var PFSheet = PFSheet || (function(){
             l *= mult; m *= mult; h *= mult;
             var a = h, o = h * 2, d = h * 5;
 
-            //console.log("new light load=" + l + ", new medium load=" + m + ", new heavy load=" + h + ", new above head=" + a + ", new off ground=" + o + ", new drag=" + d);
+            //TAS.debug("new light load=" + l + ", new medium load=" + m + ", new heavy load=" + h + ", new above head=" + a + ", new off ground=" + o + ", new drag=" + d);
             if (light !== l) { setAttrs({ "load-light": l }); }
             if (medium !== m) { setAttrs({ "load-medium": m }); }
             if (heavy !== h) { setAttrs({ "load-heavy": h }); }
@@ -15380,12 +15385,12 @@ var PFSheet = PFSheet || (function(){
     *
     */
     updateRepeatingItemTotalWeight = function (repeatName, totalVar) {
-        //console.log("repeatName=" + repeatName + ", totalVar=" + totalVar);
+        //TAS.debug("repeatName=" + repeatName + ", totalVar=" + totalVar);
         getAttrs([totalVar], function (w) {
             var currentTotal = parseFloat(w[totalVar], 10) || 0;
-            //console.log("currentTotal=" + currentTotal);
+            //TAS.debug("currentTotal=" + currentTotal);
             getSectionIDs("repeating_" + repeatName, function (idarray) { // get the repeating set
-                //console.log("idarray.length=" + idarray.length);
+                //TAS.debug("idarray.length=" + idarray.length);
                 var newTotal = 0.0,
                 setter = {};
                 if (idarray.length > 0) {
@@ -15398,19 +15403,19 @@ var PFSheet = PFSheet || (function(){
                             qty = parseInt(v["repeating_" + repeatName + "_" + currentID + "_qty"]) || 0,
                             max = parseInt(v["repeating_" + repeatName + "_" + currentID + "_qty_max"]) || 0,
                             location = parseInt(v["repeating_" + repeatName + "_" + currentID + "_location"]) || 0;
-                            //console.log("weight=" + weight + ", qty=" + qty + ", max=" + ", location=" + location + ", newTotal=" + newTotal);
+                            //TAS.debug("weight=" + weight + ", qty=" + qty + ", max=" + ", location=" + location + ", newTotal=" + newTotal);
                             if (qty > 0 && location == 0) { // Location #0 = Carried, #1 = Not Carried, #2+ = Worn
                                 if (max == 0) { // max charges is 0, so qty is the number of items; not charges
                                     newTotal += weight * qty;
                                 } else { // this is a single item with charges, so just add the weight once
                                     newTotal += weight;
                                 }
-                                //console.log("change newTotal=" + newTotal);
+                                //TAS.debug("change newTotal=" + newTotal);
                             }
                             if (i === idarray.length - 1) {
-                                //console.log("loop finished newTotal=" + newTotal + ", currentTotal=" + currentTotal);
+                                //TAS.debug("loop finished newTotal=" + newTotal + ", currentTotal=" + currentTotal);
                                 if (currentTotal !== newTotal) {
-                                    //console.log("changing " + totalVar + " to " + newTotal);
+                                    //TAS.debug("changing " + totalVar + " to " + newTotal);
                                     setter[totalVar] = newTotal;
                                     setAttrs(setter); // could not simply set totalVar to newTotal since it would set newTotal to the attribute named totalVar instead
                                 }
@@ -15418,9 +15423,9 @@ var PFSheet = PFSheet || (function(){
                         });
                     });
                 } else {
-                    //console.log("no loop? newTotal=" + newTotal + ", currentTotal=" + currentTotal + ", totalVar=" + totalVar);
+                    //TAS.debug("no loop? newTotal=" + newTotal + ", currentTotal=" + currentTotal + ", totalVar=" + totalVar);
                     if (currentTotal !== newTotal) {
-                        //console.log("changing " + totalVar + " to " + newTotal);
+                        //TAS.debug("changing " + totalVar + " to " + newTotal);
                         setter[totalVar] = newTotal;
                         setAttrs(setter);
                     }
@@ -15578,7 +15583,7 @@ var PFSheet = PFSheet || (function(){
 	* updates the ranges at the top for this spellcasting class
 	*/
 	updateSpellClassRange =function(spellclassidx,eventInfo,force) {
-	//console.log("at updateSpellClassRange, spellclass:"+spellclassidx);
+        //TAS.debug("at updateSpellClassRange, spellclass:" + spellclassidx);
 		var prefix="spellclass-"+spellclassidx
 		  ,lvlField=prefix+"-level-total"
 		  ,closeField=prefix+"-close"
@@ -15606,9 +15611,11 @@ var PFSheet = PFSheet || (function(){
 	* When the spell class dropdown is changed to one of the 5 classees, update the spellclass name and level.
 	*/
     handleSpellClassDropdown = function(spellclassidx) {
+        //TAS.debug("SSSSSSSSSSSSSSSSSSSSS handleSpellClassDropdown, level is :"+spellclassidx);
         var spellclassdropdown="spellclass-"+spellclassidx;
         var spellclasslevel="spellclass-"+spellclassidx+"-level";
         getAttrs([spellclassdropdown,spellclasslevel],function(va){
+            //TAS.debug(va);
             var classidx=(parseInt(va[spellclassdropdown],10))
 				,sl=parseInt(va[spellclasslevel],10)
 				,spellclassname,classname,classlevel;
@@ -15618,8 +15625,11 @@ var PFSheet = PFSheet || (function(){
 			spellclassname="spellclass-"+spellclassidx+"-name";
 			classname="class-"+classidx+"-name";
 			classlevel="class-"+classidx+"-level";
+            //TAS.debug("classname:"+classname+", level:"+ classlevel+", spellname:"+spellclassname);
 			getAttrs([classname,classlevel,spellclassname],function(v){
 				var setter={},setAny=0,cl=parseInt(v[classlevel],10)||0;
+                //TAS.debug("made it into get attrs");
+                //TAS.debug(v);
 				if ( v[classname] && v[classname] !== v[spellclassname] ) {
 					setter[spellclassname]=v[classname];
 					setAny=1;
@@ -15628,6 +15638,8 @@ var PFSheet = PFSheet || (function(){
 					setter[spellclasslevel]=cl;
 					setAny=1;
 				}
+                //TAS.debug("SETTING");
+                //TAS.debug(setter);
 				if (setAny) { setAttrs(setter);}
 				//if (setAny) { setAttrs(setter,{quiet:true},updateCasterLevel(spellclassidx,null,cl););}
 				//if (setAny) { 
@@ -15691,11 +15703,11 @@ var PFSheet = PFSheet || (function(){
 	* @classidx {number} = 0,1,2 the spellclass
 	*/
     updateSaveDCs = function(classidx) {
-        //console.log("DDDDDDCCCCCC at updateSaveDCs");
+        //TAS.debug("DDDDDDCCCCCC at updateSaveDCs");
         getAttrs(["spellclass-"+classidx+"-level"],function(va){
             var fields,classlevel;
             classlevel=parseInt(va["spellclass-"+classidx+"-level"],10);
-            //console.log("the spellclass level is "+classlevel);
+            //TAS.debug("the spellclass level is " + classlevel);
             if(isNaN(classlevel) || classlevel < 1) {
                 return;
             }
@@ -15710,31 +15722,31 @@ var PFSheet = PFSheet || (function(){
                 "spellclass-"+classidx+"-level-7-savedc",
                 "spellclass-"+classidx+"-level-8-savedc",
                 "spellclass-"+classidx+"-level-9-savedc"];
-            //console.log(fields);
+            //TAS.debug(fields);
 
             getAttrs(fields,function(v){
-                //console.log(v);
+                //TAS.debug(v);
                 var mod,fieldname,dcBeforeLvl,currDC=0,newDC=0,setter={},setAny=0,i;
                 mod=parseInt(v["Concentration-"+classidx+"-mod"],10)||0;
                 dcBeforeLvl=10+mod;
 
                 fieldname="spellclass-"+classidx+"-level-0-savedc";
-                //console.log("the base save dc is: "+dcBeforeLvl+" see if it matches " + fieldname);
+                //TAS.debug("the base save dc is: " + dcBeforeLvl + " see if it matches " + fieldname);
                 currDC=parseInt(v[fieldname],10);
-                //console.log("the old base dc is : "+ currDC);
+                //TAS.debug("the old base dc is : " + currDC);
                 //if 0 is different then rest are different. if 0 is same, rest are same.
                 if (isNaN(currDC) || currDC !== dcBeforeLvl) {
                     setter[fieldname]=dcBeforeLvl;
                     for( i=1;i<10;i++) {
-                        //console.log("we are at "+i);
+                        //TAS.debug("we are at " + i);
                         fieldname="spellclass-"+classidx+"-level-"+i+"-savedc";
                         currDC=parseInt(v[fieldname],10);
                         newDC = dcBeforeLvl+i;
-                        //console.log(" field "+fieldname+ " is "+currDC+" but new is "+newDC);
+                        //TAS.debug(" field " + fieldname + " is " + currDC + " but new is " + newDC);
                         if (isNaN(currDC) || currDC !== newDC) {
                             setter[fieldname]=newDC;
                         }
-                        //console.log("at "+i+", the field to find is "+fieldname);
+                        //TAS.debug("at " + i + ", the field to find is " + fieldname);
                     }
                     setAttrs(setter);
                 }
@@ -15801,7 +15813,7 @@ var PFSheet = PFSheet || (function(){
 			,spellclassField= prefix+"spellclass"
 			,spellLevelField=prefix+"spell_level"
 			;
-		//console.log("At updateSpell prefix: "+prefix+", classfield="+spellclassField);
+        //TAS.debug("At updateSpell prefix: " + prefix + ", classfield=" + spellclassField);
 		//TAS.log(eventInfo);
 		getAttrs([spellLevelField,spellclassField,"spellclass-0-name","spellclass-1-name","spellclass-2-name"],function(va){
 			var  currSpellLevel=parseInt(va[spellLevelField],10)
@@ -15862,11 +15874,11 @@ var PFSheet = PFSheet || (function(){
 				//TAS.log(v);
 				//Caster level check mod
 				newCL = (parseInt(v[spellCLUserField],10)||0) + classCL;
-				//console.log("new class level: "+newCL+", old class level = "+currCL +", default class level:" +classCL );
+                //TAS.debug("new class level: " + newCL + ", old class level = " + currCL + ", default class level:" + classCL);
 				if (newCL !== currCL || isNaN(currCL)) {
 					setter[spellCLField]=newCL;
 					setAny=1;
-					console.log("caster level changed! that means range, concentration and spell pen change" );
+                    //TAS.debug("caster level changed! that means range, concentration and spell pen change");
 					updateRange = true;
 				}
 				if (defDC !== currdefDC || isNaN(currdefDC)) {
@@ -15909,11 +15921,11 @@ var PFSheet = PFSheet || (function(){
 				if ( updateRange || forceRange ) {
 					newRange = findSpellRange(v[spellRangeText],calculateSpellRanges (newCL),v[spellRangeTarget],newCL);
 					if (eventInfo && eventInfo.sourceAttribute) {
-						console.log("the new range is : " + newRange+" for id"+ id+", updated by " +eventInfo.sourceAttribute );
+                        //TAS.debug("the new range is : " + newRange + " for id" + id + ", updated by " + eventInfo.sourceAttribute);
 					} else {
-						console.log("the new range is : " + newRange+" for id"+ id);
-					}
-					
+                        //TAS.debug("the new range is : " + newRange + " for id" + id);
+                    }
+
 					if (newRange !== currRange || isNaN(currRange)) {
 						setter[spellRangeNum]=newRange;
 						setAny=1;
@@ -16083,10 +16095,10 @@ var PFSheet = PFSheet || (function(){
                 ids.forEach(function(id,index){
                     var readField= "repeating_weapon_" +id+"_" ;
 					if (isBadRowId("weapon",id,false)) {
-						console.log("ERROR: recalculateRepeatingWeapons, invalid id:"+id+", index:" +index);
+                        TAS.error("ERROR: recalculateRepeatingWeapons, invalid id:" + id + ", index:" + index);
 						return;
 					}
-                    //console.log("TRACE: recalculateRepeatingWeapons id="+id);
+                    //TAS.debug("TRACE: recalculateRepeatingWeapons id=" + id);
 					SWUtils.setAttributeNumber(readField+"attk-effect-total-copy",(parseInt(v["attk-effect-total"],10)||0));
 					SWUtils.setAttributeNumber(readField+"dmg-effect-total-copy",(parseInt(v["dmg-effect-total"],10)||0));
 					SWUtils.setAttributeNumber(readField+"DMG-mod-copy",(parseInt(v["DMG-mod"],10)||0));					
@@ -16112,7 +16124,7 @@ var PFSheet = PFSheet || (function(){
             ids.forEach(function(id,index){
 				var prefix="repeating_"+section +"_" +id;
 				if (isBadRowId(section,id,false)) {
-					console.log("ERROR: recalculateRepeatingMaxUsed, invalid id:"+id+", index:" +index);
+                    TAS.error("ERROR: recalculateRepeatingMaxUsed, invalid id:" + id + ", index:" + index);
 					return;
 				}
 				SWUtils.evaluateAndSetNumber(prefix+"_max-calculation",prefix+"_used_max");
@@ -16569,8 +16581,8 @@ var PFSheet = PFSheet || (function(){
         getAttrs(["PFSheet_Version","PFSheet_forcesync","recalc1"],function(v){
             var setter={},currVer=0,setAny=0,recalc=false;
             currVer=parseFloat(v["PFSheet_Version"],10)||0;
-            console.log("Current Pathfinder sheet data version:"+currVer+", Sheet code version:" + version );
-			
+            TAS.notice("Current Pathfinder sheet data version:" + currVer + ", Sheet code version:" + version);
+
 			if ( currVer!== version ) {
 				recalc=true;
                 setter["PFSheet_Version"]= version;
@@ -17196,7 +17208,7 @@ on("change:init-ability-mod change:init-trait change:init-misc change:condition-
 
 //speed
 on("change:current-load change:speed-base change:load-heavy change:carried-total change:race change:armor-equipped change:armor2-eqipped change:armor3-eqipped change:armor-type change:armor2-type change:armor3-type", function (eventInfo) {
-    //console.log("caught " + eventInfo.sourceAttribute + " event");
+    //TAS.debug("caught " + eventInfo.sourceAttribute + " event");
     PFSheet.updateModifiedSpeed();
 });
 
@@ -17236,7 +17248,7 @@ on("change:repeating_mythic-feat:max-calculation", function () { SWUtils.evaluat
 
 //class abilities
 on("change:repeating_class-ability:max-calculation",function(){ SWUtils.evaluateAndSetNumber("repeating_class-ability_max-calculation","repeating_class-ability_used_max");});
-//on("change:repeating_class-ability:max-calculation",function(eventInfo){ console.log("Detected change to "+eventInfo.sourceAttribute);});
+//on("change:repeating_class-ability:max-calculation",function(eventInfo){ TAS.debug("Detected change to "+eventInfo.sourceAttribute);});
 
 on("change:ac-ability change:ff-ability change:cmd-ability1 change:cmd-ability2 change:cmd-ability"
 	, function (eventInfo) {PFSheet.handleDefenseDropdown(eventInfo.sourceAttribute);});
@@ -17368,7 +17380,7 @@ on("change:worn-Armor-hp change:worn-Belt-hp change:worn-Body-hp change:worn-Che
 on("change:worn-Armor-hp_max change:worn-Belt-hp_max change:worn-Body-hp_max change:worn-Chest-hp_max change:worn-Eyes-hp_max change:worn-Feet-hp_max change:worn-Hands-hp_max change:worn-Head-hp_max change:worn-Headband-hp_max change:worn-Neck-hp_max change:worn-Ring1-hp_max change:worn-Ring2-hp_max change:worn-Shield-hp_max change:worn-Shoulders-hp_max change:worn-Wrist-hp_max", function () { PFSheet.updateWornEquipment("hp_max"); });
 on("change:worn-Armor-value change:worn-Belt-value change:worn-Body-value change:worn-Chest-value change:worn-Eyes-value change:worn-Feet-value change:worn-Hands-value change:worn-Head-value change:worn-Headband-value change:worn-Neck-value change:worn-Ring1-value change:worn-Ring2-value change:worn-Shield-value change:worn-Shoulders-value change:worn-Wrist-value", function () { PFSheet.updateWornEquipment("value"); });
 on('change:repeating_item:weight change:repeating_item:qty change:repeating_item:qty_max change:repeating_item:location', function (eventInfo) {
-    //console.log("caught " + eventInfo.sourceAttribute + " event");
+    //TAS.debug("caught " + eventInfo.sourceAttribute + " event");
     PFSheet.updateRepeatingItemTotalWeight("item", "item_total_weight");
 });
 on('change:repeating_item:hp', function (eventInfo) {
@@ -17376,27 +17388,27 @@ on('change:repeating_item:hp', function (eventInfo) {
     TAS.repeatingSimpleSum('item', 'hp', 'item-total-hp');
 });
 on('change:repeating_item:hp_max', function (eventInfo) {
-    //console.log("caught " + eventInfo.sourceAttribute + " event");
+    //TAS.debug("caught " + eventInfo.sourceAttribute + " event");
     TAS.repeatingSimpleSum('item', 'hp_max', 'item-total-hp_max');
 });
 on('change:repeating_item:value', function (eventInfo) {
-    //console.log("caught " + eventInfo.sourceAttribute + " event");
+    //TAS.debug("caught " + eventInfo.sourceAttribute + " event");
     TAS.repeatingSimpleSum('item', 'value', 'item-total-value');
 });
 on('change:CP change:SP change:GP change:PP', function (eventInfo) {
-    //console.log("caught " + eventInfo.sourceAttribute + " event");
+    //TAS.debug("caught " + eventInfo.sourceAttribute + " event");
     PFSheet.updateCarriedCurrency();
 });
 on('change:carried-currency change:item_total_weight change:worn-total-weight change:carried-misc', function (eventInfo) {
-    //console.log("caught " + eventInfo.sourceAttribute + " event");
+    //TAS.debug("caught " + eventInfo.sourceAttribute + " event");
     PFSheet.updateCarriedTotal();
 });
 on('change:load-light change:load-medium change:carried-total', function (eventInfo) {
-    //console.log("checking current-load radio buttons");
+    //TAS.debug("checking current-load radio buttons");
     PFSheet.updateCurrentLoad();
 });
 on("change:STR change:size change:legs change:load-str-bonus change:load-multiplier change:load-misc", function (eventInfo) {
-    //console.log("caught " + eventInfo.sourceAttribute + " event");
+    //TAS.debug("caught " + eventInfo.sourceAttribute + " event");
     PFSheet.updateLoadsAndLift();
 });
 
