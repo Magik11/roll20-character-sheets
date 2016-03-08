@@ -12391,8 +12391,9 @@ TAS.debugMode();
 
 
 var ExExp = ExExp|| (function(){
+    'use strict';
 
-    parseExpression = function (s, until) {
+    var parseExpression = function (s, until) {
         var untilCb = (typeof until === "function" ? until : function (tok) {
             return (tok == until);
         });
@@ -12726,12 +12727,11 @@ var ExExp = ExExp|| (function(){
         if (err) {
             return err;
         }
-        for (popToken(s);
-            (s.tok) && (!untilCb(s.tok.text)) && ((until) || (s.tok.type !== "raw")); popToken(s)) {
+        for (popToken(s); (s.tok) && (!untilCb(s.tok.text)) && ((until) || (s.tok.type !== "raw")) ; popToken(s)) {
             switch (s.tok.type) {
             case "extoperator":
             case "baseoperator":
-                rollOperator = (s.tok.text === "d" ? s.tok : null);
+                    var rollOperator = (s.tok.text === "d" ? s.tok : null);
                 err = pushOperator(s.tok);
                 if (err) {
                     return err;
@@ -12932,7 +12932,7 @@ var ExExp = ExExp|| (function(){
                     if (x.type === "number") {
                         // number node; coerce to string
                         x.value = "" + x.value;
-                        x.type = "string"
+                        x.type = "string";
                     }
                     if (x.type !== "string") {
                         // unable to fully evaluate table name
@@ -13110,7 +13110,7 @@ var ExExp = ExExp|| (function(){
                     if (x.type === "number") {
                         // number node; coerce to string
                         x.value = "" + x.value;
-                        x.type = "string"
+                        x.type = "string";
                     }
                     if (x.type !== "string") {
                         // unable to fully evaluate variable name
@@ -13320,7 +13320,7 @@ var ExExp = ExExp|| (function(){
         }
         if (asts.length > 0) {
             // need to finish evaluating some ASTs; recurse directly
-            return sendCommand(chunks, asts, [], labels)
+            return sendCommand(chunks, asts, [], labels);
         }
         // if we got here, we're done evaluating everything; submit results via sendChat
         var retval=chunks.join("");
@@ -13362,6 +13362,7 @@ var ExExp = ExExp|| (function(){
 
 
 var SWUtils = SWUtils || (function() {
+    'use strict';
 
     /*no macro calls, dropdowns, or keep  highest/lowest more than 1
     * currently support floor, abs, kh1, kl1 , also extended: ceil, round, max, min
@@ -13425,7 +13426,6 @@ var SWUtils = SWUtils || (function() {
                     for (i=0;i<numfields;i++){
                         //easier than escaping special regex and double escaping $
                         evalstr = evalstr.split(matches[i]).join(replacements[i]);
-
                     }
                 } catch (err) {
                     console.log("ERROR:" + err);
@@ -13696,6 +13696,7 @@ var SWUtils = SWUtils || (function() {
 
 
 var PFSheet = PFSheet || (function(){
+    'use strict';
 
     var version = 0.37,
 	pfDebug = false,
@@ -14467,8 +14468,6 @@ var PFSheet = PFSheet || (function(){
 		}
 	},
 
-	
-	
     /*updateConditionDefensePenalty
     * Updates the AC-penalty and CMD-penalty field based on conditions
 	*only difference is CMD penalty affected by energy drain for some reason
