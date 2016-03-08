@@ -16566,10 +16566,33 @@ var PFSheet = PFSheet || (function(){
             updateWornEquipment("hp");
             updateWornEquipment("hp_max");
             updateWornEquipment("value");
-            updateRepeatingItemTotalWeight("item", "item_total_weight");
-            TAS.repeatingSimpleSum('item', 'hp', 'item-total-hp');
-            TAS.repeatingSimpleSum('item', 'hp_max', 'item-total-hp_max');
-            TAS.repeatingSimpleSum('item', 'value', 'item-total-value');
+            TAS.repeating('item')
+                .attrs('item_total_weight', 'item-total-hp', 'item-total-hp_max', 'item-total-value')
+                .fields('weight', 'qty', 'qty_max', 'location', 'hp', 'hp_max', 'value')
+                .reduce(function (m, r) {
+                    if (r.I.qty > 0 && r.I.location == 0) {
+                        if (r.I.qty_max == 0) {
+                            m.weight += r.I.weight * r.I.qty;
+                        } else {
+                            m.weight += r.I.weight;
+                        }
+                    }
+                    m.hp += r.I.hp;
+                    m.hp_max += r.I.hp_max;
+                    m.value += r.I.value;
+                    return m;
+                }, {
+                    weight: 0,
+                    hp: 0,
+                    hp_max: 0,
+                    value: 0
+                }, function (m, r, a) {
+                    a.S['item_total_weight'] = m.weight;
+                    a.S['item-total-hp'] = m.hp;
+                    a.S['item-total-hp_max'] = m.hp_max;
+                    a.S['item-total-value'] = m.value;
+                })
+                .execute();
             updateCarriedCurrency();
             updateCarriedTotal();
             updateLoadsAndLift();
@@ -17385,19 +17408,58 @@ on("change:worn-Armor-hp_max change:worn-Belt-hp_max change:worn-Body-hp_max cha
 on("change:worn-Armor-value change:worn-Belt-value change:worn-Body-value change:worn-Chest-value change:worn-Eyes-value change:worn-Feet-value change:worn-Hands-value change:worn-Head-value change:worn-Headband-value change:worn-Neck-value change:worn-Ring1-value change:worn-Ring2-value change:worn-Shield-value change:worn-Shoulders-value change:worn-Wrist-value", function () { PFSheet.updateWornEquipment("value"); });
 on('change:repeating_item:weight change:repeating_item:qty change:repeating_item:qty_max change:repeating_item:location', function (eventInfo) {
     //TAS.debug("caught " + eventInfo.sourceAttribute + " event");
-    PFSheet.updateRepeatingItemTotalWeight("item", "item_total_weight");
+    TAS.repeating('item')
+        .attrs('item_total_weight')
+        .fields('weight', 'qty', 'qty_max', 'location')
+        .reduce(function (m, r) {
+            if (r.I.qty > 0 && r.I.location == 0) {
+                if (r.I.qty_max == 0) {
+                    m.weight += r.I.weight * r.I.qty;
+                } else {
+                    m.weight += r.I.weight;
+                }
+            }
+            return m;
+        }, {
+            weight: 0
+        }, function (m, r, a) {
+            a.S['item_total_weight'] = m.weight;
+        })
+        .execute();
+
 });
-on('change:repeating_item:hp', function (eventInfo) {
-    //console.log("caught " + eventInfo.sourceAttribute + " event");
-    TAS.repeatingSimpleSum('item', 'hp', 'item-total-hp');
-});
-on('change:repeating_item:hp_max', function (eventInfo) {
+on('change:repeating_item:hp change:repeating_item:hp_max', function (eventInfo) {
     //TAS.debug("caught " + eventInfo.sourceAttribute + " event");
-    TAS.repeatingSimpleSum('item', 'hp_max', 'item-total-hp_max');
+    TAS.repeating('item')
+        .attrs('item-total-hp', 'item-total-hp_max')
+        .fields('hp', 'hp_max')
+        .reduce(function (m, r) {
+            m.hp += r.I.hp;
+            m.hp_max += r.I.hp_max;
+            return m;
+        }, {
+            hp: 0,
+            hp_max: 0
+        }, function (m, r, a) {
+            a.S['item-total-hp'] = m.hp;
+            a.S['item-total-hp_max'] = m.hp_max;
+        })
+        .execute();
 });
 on('change:repeating_item:value', function (eventInfo) {
     //TAS.debug("caught " + eventInfo.sourceAttribute + " event");
-    TAS.repeatingSimpleSum('item', 'value', 'item-total-value');
+    TAS.repeating('item')
+        .attrs('item-total-value')
+        .fields('value')
+        .reduce(function (m, r) {
+            m.value += r.I.value;
+            return m;
+        }, {
+            value: 0
+        }, function (m, r, a) {
+            a.S['item-total-value'] = m.value;
+        })
+        .execute();
 });
 on('change:CP change:SP change:GP change:PP', function (eventInfo) {
     //TAS.debug("caught " + eventInfo.sourceAttribute + " event");
