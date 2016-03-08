@@ -16552,7 +16552,7 @@ var PFSheet = PFSheet || (function(){
                 currHP = parseInt(v["armor3-hp"], 10) || 0,
                 currHPMax = parseInt(v["armor3-hp_max"], 10) || 0,
                 currWeight = parseFloat(v["armor3-weight"], 10) || 0;
-                if (currName.length > 0) { setter["worn-Armor"] = currName; setAny = 1; }
+                if (typeof currName !== "undefined" && currName.length > 0) { setter["worn-Armor"] = currName; setter["armor3"] = ""; setAny = 1; }
                 if (currHardness !== 0) { setter["worn-Armor-hardness"] = currHardness; setAny = 1; }
                 if (currHP !== 0) { setter["worn-Armor-hp"] = currHP; setAny = 1; }
                 if (currHPMax !== 0) { setter["worn-Armor-hp_max"] = currHPMax; setAny = 1; }
