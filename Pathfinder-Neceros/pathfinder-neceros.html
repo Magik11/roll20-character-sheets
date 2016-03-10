@@ -14911,7 +14911,7 @@ var PFSheet = PFSheet || (function(){
 	* @attype = the type of attack: Melee, Ranged, CMB  IS CASE SENSITIVE
      */
 	updateAttack = function (attype, eventInfo) {
-		if (eventInfo && eventInfo.sourceAttribute.toLower() === "buff_melee-total") {
+		if (eventInfo && eventInfo.sourceAttribute.toLowerCase() === "buff_melee-total") {
 			updateAttack("CMB");
 		}
 		updateRowTotal([attackGridFields[attype].atk,"bab","attk-penalty"
