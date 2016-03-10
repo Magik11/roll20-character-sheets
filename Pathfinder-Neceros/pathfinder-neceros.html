@@ -962,24 +962,24 @@
 		<div class="sheet-table sheet-sect">
 			<span class="sheet-table-name">Health and Wounds</span>
 			<div class="sheet-table-row">
-				<span class="sheet-table-header">Current HP</span>
+                <span class="sheet-table-header" title="Player adjustable hit points that reflects the character’s current hit points remaining.">Current HP</span>
 				<span class="sheet-table-header">/</span>
-				<span class="sheet-table-header">Max HP</span>
+                <span class="sheet-table-header" title="Automatically calculated using Class hit points, Favored Class hit points (see Classes tab), Ability bonus/penalty & Level, HP Adj1, Mod2, Drained condition and Mythic Adventures hit points (if enabled).">Max HP</span>
 				<span class="sheet-table-header">&nbsp;</span>
-				<span class="sheet-table-header">Ability</span>
-				<span class="sheet-table-header">Mod</span>
+                <span class="sheet-table-header" title="The Ability Score that contributes a bonus/penalty to the overall character hit points by level.">Ability</span>
+                <span class="sheet-table-header" title="The modifier that comes from the Ability Score chosen to adjust hit points per level.">Mod</span>
 				<span class="sheet-table-header">&nbsp;</span>
-				<span class="sheet-table-header">HP adj1</span>
-				<span class="sheet-table-header">HP adj2</span>
-				<span class="sheet-table-header">Mod2</span>
+                <span class="sheet-table-header" title="Player configurable flat adjustment to maximum hit points.">HP adj1</span>
+                <span class="sheet-table-header" title="Player configurable adjustment to maximum hit points by way of a formula.">HP adj2</span>
+                <span class="sheet-table-header" title="The value produced by the HP adj2 formula.">Mod2</span>
 				<span class="sheet-table-header">&nbsp;</span>
-				<span class="sheet-table-header">Temp HP</span>
+                <span class="sheet-table-header" title="Temporary hit points that are manually deducted from the character and are not otherwise reflected elsewhere on the character sheet.">Temp HP</span>
 				<span class="sheet-table-header">&nbsp;</span>
-				<span class="sheet-table-header">Temp HP Misc</span>
+                <span class="sheet-table-header" title="Player configurable temporary hit points that add to the total Temp HP value.">Temp HP Misc</span>
 				<span class="sheet-table-header"></span>
-				<span class="sheet-table-header">Buffs</span>
+                <span class="sheet-table-header" title="Temporary hit points that come from active Buffs (see Core tab).">Buffs</span>
 				<span class="sheet-table-header">&nbsp;</span>
-				<span class="sheet-table-header">Nonlethal Dmg</span>
+                <span class="sheet-table-header" title="Player adjustable tracking of non-lethal damage.">Nonlethal Dmg</span>
 			</div>
 			<div class="sheet-table-row" style="line-height:.1em;">
                 <span class="sheet-table-data sheet-center"><input type="number" style="width:100%;" title="@{HP}" name="attr_HP" value="0" /></span>
