@@ -1951,7 +1951,7 @@
 			</div>
 			<div class="sheet-table-row">
                 <span class="sheet-table-data sheet-center"><label><input title="@{armor3-equipped}" type="checkbox" name="attr_armor3-equipped" value="1" checked="checked" /><b title="Worn Armor">&nbsp;&nbsp;Worn Armor</b></label></span>
-                <span class="sheet-table-data sheet-center"><input title="@{worn-Armor}" type="text" name="attr_worn-Armor" value="0" class="sheet-detail-medium" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{armor3}" type="text" name="attr_armor3" value="0" class="sheet-detail-medium" /></span>
                 <span class="sheet-table-data sheet-center"><input title="@{armor3-acbonus}" type="number" name="attr_armor3-acbonus" value="0" min="0" /></span>
                 <span class="sheet-table-data sheet-center"><input title="@{armor3-max-dex}" type="number" name="attr_armor3-max-dex" value="99" min="0" /></span>
                 <span class="sheet-table-data sheet-center"><input title="@{armor3-acp}" type="number" name="attr_armor3-acp" value="0" max="0" /></span>
@@ -1969,11 +1969,11 @@
                         <option value="1">No</option>
                     </select>
                 </span>
-                <span class="sheet-table-data sheet-center"><input title="@{worn-Armor-hardness}" type="number" name="attr_worn-Armor-hardness" value="0" /></span>
-                <span class="sheet-table-data sheet-center"><input title="@{worn-Armor-hp}" type="number" name="attr_worn-Armor-hp" value="0" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{armor3-hardness}" type="number" name="attr_armor3-hardness" value="0" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{armor3-hp}" type="number" name="attr_armor3-hp" value="0" /></span>
 				<span class="sheet-table-data sheet-divider-lg">/</span>
-                <span class="sheet-table-data sheet-center"><input title="@{worn-Armor-hp|max}" type="number" name="attr_worn-Armor-hp_max" value="0" /></span>
-                <span class="sheet-table-data sheet-center"><input title="@{worn-Armor-weight}" type="number" name="attr_worn-Armor-weight" value="0" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{armor3-hp|max}" type="number" name="attr_armor3-hp_max" value="0" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{armor3-weight}" type="number" name="attr_armor3-weight" value="0" /></span>
             </div>
             <div class="sheet-table-row">
                 <span class="sheet-table-data sheet-center"><label><input title="@{armor-equipped}" type="checkbox" name="attr_armor-equipped" value="1" checked="checked" /><b title="Additional Armor">&nbsp;&nbsp;Armor 1</b></label></span>
@@ -2029,7 +2029,7 @@
 			</div>
 			<div class="sheet-table-row">
                 <span class="sheet-table-data sheet-center"><label><input title="@{shield3-equipped}" type="checkbox" name="attr_shield3-equipped" value="1" checked="checked" /><b title="Worn Shield">&nbsp;&nbsp;Worn Shield</b></label></span>
-                <span class="sheet-table-data sheet-center"><input title="@{worn-Shield}" type="text" name="attr_worn-Shield" value="0" class="sheet-detail-medium" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{shield3}" type="text" name="attr_shield3" value="0" class="sheet-detail-medium" /></span>
                 <span class="sheet-table-data sheet-center"><input title="@{shield3-acbonus}" type="number" name="attr_shield3-acbonus" value="0" min="0" /></span>
                 <span class="sheet-table-data sheet-center"><input title="@{shield3-max-dex}" type="number" name="attr_shield3-max-dex" value="99" min="0" max="99" /></span>
                 <span class="sheet-table-data sheet-center"><input title="@{shield3-acp}" type="number" name="attr_shield3-acp" value="0" max="0" /></span>
@@ -2046,11 +2046,11 @@
                         <option value="1">No</option>
                     </select>
                 </span>
-                <span class="sheet-table-data sheet-center"><input title="@{worn-Shield-hardness}" type="number" name="attr_worn-Shield-hardness" value="0" /></span>
-                <span class="sheet-table-data sheet-center"><input title="@{worn-Shield-hp}" type="number" name="attr_worn-Shield-hp" value="0" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{shield3-hardness}" type="number" name="attr_shield3-hardness" value="0" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{shield3-hp}" type="number" name="attr_shield3-hp" value="0" /></span>
 				<span class="sheet-table-data sheet-divider-lg">/</span>
-                <span class="sheet-table-data sheet-center"><input title="@{worn-Shield-hp|max}" type="number" name="attr_worn-Shield-hp_max" value="0" /></span>
-                <span class="sheet-table-data sheet-center"><input title="@{worn-Shield-weight}" type="number" name="attr_worn-Shield-weight" value="0" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{shield3-hp|max}" type="number" name="attr_shield3-hp_max" value="0" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{shield3-weight}" type="number" name="attr_shield3-weight" value="0" /></span>
             </div>
             <div class="sheet-table-row">
                 <span class="sheet-table-data sheet-center"><label><input title="@{shield-equipped}" type="checkbox" name="attr_shield-equipped" value="1" checked="checked" /><b title="Additional Shield">&nbsp;&nbsp;Shield 1</b></label></span>
@@ -6644,18 +6644,6 @@
                 <span class="sheet-table-header" style="width:10%;" title="The value of the item measured in gold pieces">Value (GP)</span>
             </div>
             <div class="sheet-table-row">
-                <span class="sheet-table-data sheet-right">Armor:</span>
-                <span class="sheet-table-data sheet-left"><input title="@{worn-Armor}" type="text" name="attr_worn-Armor" placeholder="Item Name"></span>
-                <span class="sheet-table-data sheet-left"><input title="@{worn-Armor-description}" type="text" name="attr_worn-Armor-description" placeholder="Short Description"></span>
-                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Armor-charges}" type="number" name="attr_worn-Armor-charges" value="0"></span>
-                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Armor-weight}" type="number" name="attr_worn-Armor-weight" value="0"></span>
-                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Armor-hardness}" type="number" name="attr_worn-Armor-hardness" value="0"></span>
-                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Armor-hp}" type="number" name="attr_worn-Armor-hp" value="0"></span>
-                <span class="sheet-table-data sheet-divider-lg">/</span>
-                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Armor-hp|max}" type="number" name="attr_worn-Armor-hp_max" value="0"></span>
-                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Armor-value}" type="number" name="attr_worn-Armor-value" value="0"></span>
-            </div>
-            <div class="sheet-table-row">
                 <span class="sheet-table-data sheet-right">Belt:</span>
                 <span class="sheet-table-data sheet-left"><input title="@{worn-Belt}" type="text" name="attr_worn-Belt" placeholder="Item Name"></span>
                 <span class="sheet-table-data sheet-left"><input title="@{worn-Belt-description}" type="text" name="attr_worn-Belt-description" placeholder="Short Description"></span>
@@ -6786,18 +6774,6 @@
                 <span class="sheet-table-data sheet-divider-lg">/</span>
                 <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Ring2-hp|max}" type="number" name="attr_worn-Ring2-hp_max" value="0"></span>
                 <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Ring2-value}" type="number" name="attr_worn-Ring2-value" value="0"></span>
-			</div>
-			<div class="sheet-table-row">
-                <span class="sheet-table-data sheet-right">Shield:</span>
-                <span class="sheet-table-data sheet-left"><input title="@{worn-Shield}" type="text" name="attr_worn-Shield" placeholder="Item Name"></span>
-                <span class="sheet-table-data sheet-left"><input title="@{worn-Shield-description}" type="text" name="attr_worn-Shield-description" placeholder="Short Description"></span>
-                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Shield-charges}" type="number" name="attr_worn-Shield-charges" value="0"></span>
-                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Shield-weight}" type="number" name="attr_worn-Shield-weight" value="0"></span>
-                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Shield-hardness}" type="number" name="attr_worn-Shield-hardness" value="0"></span>
-                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Shield-hp}" type="number" name="attr_worn-Shield-hp" value="0"></span>
-                <span class="sheet-table-data sheet-divider-lg">/</span>
-                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Shield-hp|max}" type="number" name="attr_worn-Shield-hp_max" value="0"></span>
-                <span class="sheet-table-data sheet-left"><input style="width:100%;" title="@{worn-Shield-value}" type="number" name="attr_worn-Shield-value" value="0"></span>
 			</div>
 			<div class="sheet-table-row">
                 <span class="sheet-table-data sheet-right">Shoulders:</span>
@@ -16342,22 +16318,6 @@ var PFSheet = PFSheet || (function(){
 			updateSpellsAll(null, null, true);
 		}
         if (oldversion < 0.37) {
-            // v.36 had armor3, which got converted into worn-Armor in v.37
-            getAttrs(["armor3", "armor3-hardness", "armor3-hp", "armor3-hp_max", "armor3-weight"], function (v) {
-                var setter = {}, setAny = 0,
-                currName = v["armor3"],
-                currHardness = parseInt(v["armor3-hardness"], 10) || 0,
-                currHP = parseInt(v["armor3-hp"], 10) || 0,
-                currHPMax = parseInt(v["armor3-hp_max"], 10) || 0,
-                currWeight = parseFloat(v["armor3-weight"], 10) || 0;
-                if (typeof currName !== "undefined" && currName.length > 0) { setter["worn-Armor"] = currName; setter["armor3"] = ""; setAny = 1; }
-                if (currHardness !== 0) { setter["worn-Armor-hardness"] = currHardness; setAny = 1; }
-                if (currHP !== 0) { setter["worn-Armor-hp"] = currHP; setAny = 1; }
-                if (currHPMax !== 0) { setter["worn-Armor-hp_max"] = currHPMax; setAny = 1; }
-                if (currWeight !== 0) { setter["worn-Armor-weight"] = currWeight; setAny = 1; }
-                if (setAny > 0) { setAttrs(setter); }
-            });
-            // New functions to support v.37
             updateModifiedSpeed();
             updateWornEquipment("charges");
             updateWornEquipment("weight");
@@ -16878,11 +16838,11 @@ on("change:npc-hd change:npc-hd-num change:npc-hd2 change:npc-hd-num2 change:npc
 on("change:npc-hd-misc",function(){ SWUtils.evaluateAndSetNumber("NPC-HD-misc","NPC-HD-misc-mod");});
 
 //items
-on("change:worn-Armor-charges change:worn-Belt-charges change:worn-Body-charges change:worn-Chest-charges change:worn-Eyes-charges change:worn-Feet-charges change:worn-Hands-charges change:worn-Head-charges change:worn-Headband-charges change:worn-Neck-charges change:worn-Ring1-charges change:worn-Ring2-charges change:worn-Shield-charges change:worn-Shoulders-charges change:worn-Wrist-charges", function () { PFSheet.updateWornEquipment("charges"); });
-on("change:worn-Armor-weight change:worn-Belt-weight change:worn-Body-weight change:worn-Chest-weight change:worn-Eyes-weight change:worn-Feet-weight change:worn-Hands-weight change:worn-Head-weight change:worn-Headband-weight change:worn-Neck-weight change:worn-Ring1-weight change:worn-Ring2-weight change:worn-Shield-weight change:worn-Shoulders-weight change:worn-Wrist-weight", function () { PFSheet.updateWornEquipment("weight"); });
-on("change:worn-Armor-hp change:worn-Belt-hp change:worn-Body-hp change:worn-Chest-hp change:worn-Eyes-hp change:worn-Feet-hp change:worn-Hands-hp change:worn-Head-hp change:worn-Headband-hp change:worn-Neck-hp change:worn-Ring1-hp change:worn-Ring2-hp change:worn-Shield-hp change:worn-Shoulders-hp change:worn-Wrist-hp", function () { PFSheet.updateWornEquipment("hp"); });
-on("change:worn-Armor-hp_max change:worn-Belt-hp_max change:worn-Body-hp_max change:worn-Chest-hp_max change:worn-Eyes-hp_max change:worn-Feet-hp_max change:worn-Hands-hp_max change:worn-Head-hp_max change:worn-Headband-hp_max change:worn-Neck-hp_max change:worn-Ring1-hp_max change:worn-Ring2-hp_max change:worn-Shield-hp_max change:worn-Shoulders-hp_max change:worn-Wrist-hp_max", function () { PFSheet.updateWornEquipment("hp_max"); });
-on("change:worn-Armor-value change:worn-Belt-value change:worn-Body-value change:worn-Chest-value change:worn-Eyes-value change:worn-Feet-value change:worn-Hands-value change:worn-Head-value change:worn-Headband-value change:worn-Neck-value change:worn-Ring1-value change:worn-Ring2-value change:worn-Shield-value change:worn-Shoulders-value change:worn-Wrist-value", function () { PFSheet.updateWornEquipment("value"); });
+on("change:worn-Belt-charges change:worn-Body-charges change:worn-Chest-charges change:worn-Eyes-charges change:worn-Feet-charges change:worn-Hands-charges change:worn-Head-charges change:worn-Headband-charges change:worn-Neck-charges change:worn-Ring1-charges change:worn-Ring2-charges change:worn-Shield-charges change:worn-Shoulders-charges change:worn-Wrist-charges", function () { PFSheet.updateWornEquipment("charges"); });
+on("change:worn-Belt-weight change:worn-Body-weight change:worn-Chest-weight change:worn-Eyes-weight change:worn-Feet-weight change:worn-Hands-weight change:worn-Head-weight change:worn-Headband-weight change:worn-Neck-weight change:worn-Ring1-weight change:worn-Ring2-weight change:worn-Shield-weight change:worn-Shoulders-weight change:worn-Wrist-weight", function () { PFSheet.updateWornEquipment("weight"); });
+on("change:worn-Belt-hp change:worn-Body-hp change:worn-Chest-hp change:worn-Eyes-hp change:worn-Feet-hp change:worn-Hands-hp change:worn-Head-hp change:worn-Headband-hp change:worn-Neck-hp change:worn-Ring1-hp change:worn-Ring2-hp change:worn-Shield-hp change:worn-Shoulders-hp change:worn-Wrist-hp", function () { PFSheet.updateWornEquipment("hp"); });
+on("change:worn-Belt-hp_max change:worn-Body-hp_max change:worn-Chest-hp_max change:worn-Eyes-hp_max change:worn-Feet-hp_max change:worn-Hands-hp_max change:worn-Head-hp_max change:worn-Headband-hp_max change:worn-Neck-hp_max change:worn-Ring1-hp_max change:worn-Ring2-hp_max change:worn-Shield-hp_max change:worn-Shoulders-hp_max change:worn-Wrist-hp_max", function () { PFSheet.updateWornEquipment("hp_max"); });
+on("change:worn-Belt-value change:worn-Body-value change:worn-Chest-value change:worn-Eyes-value change:worn-Feet-value change:worn-Hands-value change:worn-Head-value change:worn-Headband-value change:worn-Neck-value change:worn-Ring1-value change:worn-Ring2-value change:worn-Shield-value change:worn-Shoulders-value change:worn-Wrist-value", function () { PFSheet.updateWornEquipment("value"); });
 on('change:repeating_item:weight change:repeating_item:qty change:repeating_item:qty_max change:repeating_item:location', function (eventInfo) {
     //TAS.debug("caught " + eventInfo.sourceAttribute + " event");
     TAS.repeating('item')
