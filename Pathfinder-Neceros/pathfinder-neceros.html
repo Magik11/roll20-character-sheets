@@ -15265,7 +15265,7 @@ var PFSheet = PFSheet || (function(){
 	updateCarriedTotal = function () {
 	    getAttrs(["carried-currency", "item_total_weight", "worn-total-weight", "carried-misc", "carried-total"], function (v) {
 	        var curr = parseFloat(v["carried-total"], 10) || 0,
-            carried = (parseFloat(v["carried-currency"], 10) || 0) + (parseFloat(v["item_total_weight"], 10) || 0) + (parseFloat(v["worn-total-weight"], 10) || 0) + (parseFloat(v["carried-misc"], 10) || 0);
+			carried = ((parseFloat(v["carried-currency"], 10) || 0) * 100 + (parseFloat(v["item_total_weight"], 10) || 0) * 100 + (parseFloat(v["worn-total-weight"], 10) || 0) * 100 + (parseFloat(v["carried-misc"], 10) || 0) * 100) / 100; // Fix bad javascript math
             //TAS.debug("curr=" + curr + ", carried=" + carried);
 	        if (curr !== carried) { setAttrs({ "carried-total": carried }); }
 	    });
