@@ -12401,6 +12401,8 @@ var TAS = TAS || (function(){
 }());
 
 /* ---- END: TheAaronSheet.js ---- */
+TAS.config({ logging: { debug: true } });
+TAS.debugMode();
 
 var ExExp = ExExp|| (function(){
     'use strict';
@@ -12824,8 +12826,8 @@ var ExExp = ExExp|| (function(){
 
     sendCommand= function (chunks, asts, evalResults, labels) {
 		//infinite loop
-		//TAS.log("at sendCommand");
-		//TAS.log(chunks);TAS.log(asts); TAS.log(evalResults);TAS.log(labels);
+		//TAS.debug("at sendCommand");
+		//TAS.debug(chunks, asts, evalResults, labels);
         // constants
         var FUNCTION_FUNCTIONS = {
             'abs': Math.abs
@@ -13327,7 +13329,7 @@ var ExExp = ExExp|| (function(){
         }
 
         if (evalReqs.length > 0) {
-            TAS.error("ERROR: Cannot evaluate");
+			TAS.error("Cannot evaluate");
             return "";
         }
         if (asts.length > 0) {
@@ -13353,9 +13355,9 @@ var ExExp = ExExp|| (function(){
             's': cmd
         };
         var ast ;
-		//TAS.log(msg);
+		//TAS.debug(msg);
 		ast= parseExpression(state, null);
-		//TAS.log(ast);
+		//TAS.debug(ast);
         if (typeof (ast) === "string") {
             ExExp.write("could not parse"+msg);
             return "";
@@ -13452,7 +13454,7 @@ var SWUtils = SWUtils || (function() {
                 }
             });
         } catch (err){
-            TAS.error("ERROR: " + err);
+			TAS.error(err);
             callback (null);
         }
     },
@@ -13486,7 +13488,7 @@ var SWUtils = SWUtils || (function() {
                 //TAS.debug("sending back " + evaluated);
                 callback( evaluated);
             } else {
-                TAS.error("ERROR: cannot evaluate this to number: " + exprStr);
+				TAS.error("cannot evaluate this to number: " + exprStr);
                 callback(null);
             }
         });
@@ -13551,7 +13553,7 @@ var SWUtils = SWUtils || (function() {
             if (!isNaN(value))  {
                 //TAS.debug("it was a number");
                 if ( isNaN(currVal) ||  currVal!==value) {
-						//TAS.log({"function":"evaluateAndSetNumber","currVal":currVal,"newVal":value});
+					//TAS.debug({ "function": "evaluateAndSetNumber", "currVal": currVal, "newVal": value });
 						setter[writeField]=value;
                     setAttrs(setter);
                 } else {
@@ -13565,7 +13567,7 @@ var SWUtils = SWUtils || (function() {
 
                     value2=isNaN(value2)?trueDefault:value2;
                     if (isNaN(currVal) || currVal!==value2) {
-						//TAS.log({"function":"evaluateAndSetNumber","currVal":currVal,"newVal":value2});
+						//TAS.debug({ "function": "evaluateAndSetNumber", "currVal": currVal, "newVal": value2 });
                         setter[writeField]=value2;
                         setAttrs(setter);
                     }
@@ -13673,7 +13675,7 @@ var SWUtils = SWUtils || (function() {
 					var currValue=parseInt(v[writeFields],10),setter={};
                     //TAS.debug("handledropdown, readField:" + readField + ", currValue:" + currValue + ", newValue:" + valueOf);
 					if (currValue!==valueOf || isNaN(currValue)) {
-						//TAS.log("handledropdown",readField,lookupField,currValue,valueOf);
+						//TAS.debug("handledropdown", readField, lookupField, currValue, valueOf);
                         //TAS.debug("handledropdown, readField:" + readField + ", currValue:" + currValue + ", newValue:" + valueOf);
 						setter[writeFields]=valueOf;
 						setAttrs(setter, params);
@@ -13883,7 +13885,7 @@ var PFSheet = PFSheet || (function(){
         getSectionIDs("repeating_"+section,function(ids){
             ids.forEach(function(id,index){
 				if (isBadRowId(section,id,false)) {
-                    TAS.error("ERROR: handleRepeatingRowOrdering invalid id:" + id);
+					TAS.error("handleRepeatingRowOrdering invalid id:" + id);
 					return;
 				}
 				setRepeatingRowDefaultFields(section,id,forceReset);
@@ -14025,7 +14027,7 @@ var PFSheet = PFSheet || (function(){
             if (currMod !== mod || isNaN(currMod)){setter[ability+"-mod"]=mod;setAny=1;}
 
             if (setAny){
-				//TAS.log({"function":updateAbility,"ability":ability,"currAbility":currAbility,"currMod":currMod,"newAbility":base,"newMod":mod});
+				//TAS.debug({ "function": updateAbility, "ability": ability, "currAbility": currAbility, "currMod": currMod, "newAbility": base, "newMod": mod });
 				if (quietly) { params.quiet = true; }
 				setAttrs(setter, params);
 			}
@@ -14074,7 +14076,7 @@ var PFSheet = PFSheet || (function(){
 	updateBuff = function (buffname, row, eventInfo) {
         var fieldtoUpdate = "buff"+row+"_"+buffname
         ,fieldtoRead = fieldtoUpdate + "_macro-text";
-		//TAS.log(eventInfo);
+		//TAS.debug(eventInfo);
 		if (eventInfo && eventInfo.sourceAttribute === fieldtoRead.toLowerCase()) {
 			//eventInfo.sourceType==="player"
 			var toggleField = "buff" + row + "_Toggle";
@@ -14107,7 +14109,7 @@ var PFSheet = PFSheet || (function(){
             if (v[toggle] == "0") {
                 for (i=0;i<numFlds;i++) {
                     if (parseInt(v[buffFlds[i]],10) !== 0 ){
-						//TAS.log("updateBuffRow",v[buffFlds[i]]);
+						//TAS.debug("updateBuffRow", v[buffFlds[i]]);
 						valuesToSet[buffFlds[i]]=0;
 						numSet++;
 					}
@@ -14137,8 +14139,8 @@ var PFSheet = PFSheet || (function(){
             "buff6_"+col,"buff7_"+col,"buff8_"+col,"buff9_"+col,"buff10_"+col];
         //updateRowTotal(fields);
 		getAttrs(fields,function(v){
-			//TAS.log("updateBuffColumn",col);
-			//TAS.log(v);
+			//TAS.debug("updateBuffColumn", col);
+			//TAS.debug(v);
 			var currValue= parseInt(v[fields[0]],10)
 				,newValue=0,setter={},i=1;
             for(i=1;i<11;i++){
@@ -14149,7 +14151,7 @@ var PFSheet = PFSheet || (function(){
 			//final total is int.
 			newValue=Math.floor(newValue);
             if (isNaN(currValue) || currValue !== newValue) {
-				//TAS.log({"function":"updateBuffColumn","column":col,"field":fields[0],"currValue":currValue,"newValue":newValue});
+				//TAS.debug({ "function": "updateBuffColumn", "column": col, "field": fields[0], "currValue": currValue, "newValue": newValue });
                 setter[fields[0]]=newValue;
                 setAttrs(setter);
 				switch(col) {
@@ -14966,7 +14968,7 @@ var PFSheet = PFSheet || (function(){
         //TAS.debug(eventInfo);
         //TAS.debug("TRACE end");
 		if (isBadRowId("weapon",id,true)) {
-            TAS.error("ERROR: handleRepeatingAttackDropdown, invalid id:" + id);
+			TAS.error("handleRepeatingAttackDropdown, invalid id:" + id);
 			return;			
 		}		
         handleDropdown(prefix+"attack-type",prefix+"attack-type-mod");
@@ -14981,7 +14983,7 @@ var PFSheet = PFSheet || (function(){
 		,readField=id?"repeating_weapon_"+idStr+"damage-ability":"repeating_weapon_damage-ability"
 		,writeField= id?readField+"-mod":"repeating_weapon_damage-ability-mod";
 		if (isBadRowId("weapon",id,true)) {
-            TAS.error("ERROR: handleRepeatingDamageDropdown, invalid id:" + id);
+			TAS.error("handleRepeatingDamageDropdown, invalid id:" + id);
 			return;			
 		}
         getAttrs([readField,writeField],function(v) {
@@ -15022,7 +15024,7 @@ var PFSheet = PFSheet || (function(){
 		;
 		
 		if (isBadRowId("weapon",id,true)) {
-            TAS.error("ERROR: updateRepeatingWeaponAttack, invalid id:" + id);
+			TAS.error("updateRepeatingWeaponAttack, invalid id:" + id);
 			return;			
 		}
 
@@ -15071,7 +15073,7 @@ var PFSheet = PFSheet || (function(){
 			dmgEffectCopy="repeating_weapon_"+idStr+"dmg-effect-total-copy",
 			dmgModCopy="repeating_weapon_"+idStr+"DMG-mod-copy";
 		if (isBadRowId("weapon",id,true)) {
-            TAS.error("ERROR: updateRepeatingWeaponDamage, invalid id:" + id);
+			TAS.error("updateRepeatingWeaponDamage, invalid id:" + id);
 			return;			
 		}
         getAttrs([maxname,modname,dmgEffectCopy,dmgModCopy,"dmg-effect-total","DMG-mod"],function(v){
@@ -15217,7 +15219,7 @@ var PFSheet = PFSheet || (function(){
                 setAny++;
             }
             if (setAny) {
-				//TAS.log({"function":"updateSkill","currSkill":currSkill,"newSkill":skillTot,"oldmods":v[classNm],"mods":mods				});
+				//TAS.debug({"function":"updateSkill","currSkill":currSkill,"newSkill":skillTot,"oldmods":v[classNm],"mods":mods				});
 				setAttrs(setter);
 			}
         });
@@ -15561,7 +15563,7 @@ var PFSheet = PFSheet || (function(){
 	* only check level, not level-total, since modifiers could cause it to drop
 	*/
 	ifSpellClassExists = function(classidx,callback) {
-		//TAS.log("ifSpellClassExists",classidx,typeof callback);
+		//TAS.debug("ifSpellClassExists",classidx,typeof callback);
 		getAttrs(["spellclass-"+classidx+"-level"],function(v){
 			if ((parseInt(v["spellclass-"+classidx+"-level"],10)||0) > 0) {
 				if (typeof callback === "function") {
@@ -15611,14 +15613,14 @@ var PFSheet = PFSheet || (function(){
 		  ,medField=prefix+"-medium"
 		  ,longField=prefix+"-long";
 		getAttrs([lvlField,closeField,medField,longField],function(v){
-			//TAS.log(v);
+			//TAS.debug(v);
 			var level = (parseInt(v[lvlField],10)||0)
 			,ranges= calculateSpellRanges (level)
 			,closeRng= parseInt(v[closeField],10)||0
 			,medRng= parseInt(v[medField],10)||0
 			,longRng= parseInt(v[longField],10)||0
 			,setter={};
-			//TAS.log(level,closeRng,medRng,longRng,ranges);
+			//TAS.debug(level,closeRng,medRng,longRng,ranges);
 			if (force || ranges.close !== closeRng || ranges.medium !== medRng || ranges["long"] !== longRng ) {
 				setter[closeField]=ranges.close;
 				setter[medField]=ranges.medium;
@@ -15835,7 +15837,7 @@ var PFSheet = PFSheet || (function(){
 			,spellLevelField=prefix+"spell_level"
 			;
         //TAS.debug("At updateSpell prefix: " + prefix + ", classfield=" + spellclassField);
-		//TAS.log(eventInfo);
+		//TAS.debug(eventInfo);
 		getAttrs([spellLevelField,spellclassField,"spellclass-0-name","spellclass-1-name","spellclass-2-name"],function(va){
 			var  currSpellLevel=parseInt(va[spellLevelField],10)
 				,spellLevel=isNaN(currSpellLevel)?parseInt(section.substring(4),10):currSpellLevel
@@ -15860,8 +15862,8 @@ var PFSheet = PFSheet || (function(){
 				,spellRangeText= prefix+"range"
 				,spellRangeNum=prefix+"range_numeric"
 				,spellRangeTarget=prefix+"targets";
-			//TAS.log(va);
-			
+			//TAS.debug(va);
+
 			getAttrs([hiddenclassNumField,spellDCField,spellDCUserField,spellCLField,spellCLUserField
 				,spellConField,spellConUserField,spellDefConField,spellDefCastDCField
 				,spellSpellPenField,spellSpellPenUserField,classDCField,classCLField
@@ -15893,7 +15895,7 @@ var PFSheet = PFSheet || (function(){
 					updateRange = true;
 				}		
 
-				//TAS.log(v);
+				//TAS.debug(v);
 				//Caster level check mod
 				newCL = (parseInt(v[spellCLUserField],10)||0) + classCL;
                 //TAS.debug("new class level: " + newCL + ", old class level = " + currCL + ", default class level:" + classCL);
@@ -16110,7 +16112,7 @@ var PFSheet = PFSheet || (function(){
                 ids.forEach(function(id,index){
 					var prefix = "repeating_weapon_" + id + "_";
 					if (isBadRowId("weapon",id,false)) {
-                        TAS.error("ERROR: recalculateRepeatingWeapons, invalid id:" + id + ", index:" + index);
+						TAS.error("recalculateRepeatingWeapons, invalid id:" + id + ", index:" + index);
 						return;
 					}
                     //TAS.debug("TRACE: recalculateRepeatingWeapons id=" + id);
@@ -16139,7 +16141,7 @@ var PFSheet = PFSheet || (function(){
             ids.forEach(function(id,index){
 				var prefix="repeating_"+section +"_" +id;
 				if (isBadRowId(section,id,false)) {
-                    TAS.error("ERROR: recalculateRepeatingMaxUsed, invalid id:" + id + ", index:" + index);
+					TAS.error("recalculateRepeatingMaxUsed, invalid id:" + id + ", index:" + index);
 					return;
 				}
 				SWUtils.evaluateAndSetNumber(prefix+"_max-calculation",prefix+"_used_max");
@@ -16183,7 +16185,7 @@ var PFSheet = PFSheet || (function(){
 				else if(v[csNm]) { cs = 3;}  
 				else if (!v[csNm]) { cs = 0;}
 				if (cs===3) {
-					//TAS.log({"function":"fixClassSkill","raw":v[csNm],"cs":cs});
+					//TAS.debug({"function":"fixClassSkill","raw":v[csNm],"cs":cs});
 					setter[csNm]=cs;
 					setAttrs(setter);
 				}
@@ -16676,24 +16678,37 @@ var PFSheet = PFSheet || (function(){
 //ABILITY SCORES
 _.each(PFSheet.lists.abilities, function (ability) {
 	on((PFSheet.lists.abilityEvents.replace(/REPLACE/g, ability)),
-	function (eventInfo) { PFSheet.updateAbility(ability, eventInfo); }
+		TAS.callback(function eventUpdateAbility(eventInfo) {
+			TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+			PFSheet.updateAbility(ability, eventInfo);
+		})
 	);
 });
-
 
 //CONDITIONS
 _.each(PFSheet.lists.conditionEvents, function (functions, eventToWatch) {
 	_.each(functions, function (methodToCall) {
-		on(eventToWatch, function (eventInfo) { methodToCall(eventInfo); });
+		on(eventToWatch,
+			TAS.callback(function eventConditionEvents(eventInfo) {
+				TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+				methodToCall(eventInfo);
+			})
+		);
 	});
 });
-on("change:Perception-cond", function (eventInfo) {
+on("change:Perception-cond",
+	TAS.callback(function eventUpdateSkillPerceptionCond(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
 	PFSheet.updateSkill("Perception", eventInfo);
 	PFSheet.updateSkill("CS-Perception", eventInfo);
-});
-on("change:acp-attack-mod", function () {
+	})
+);
+on("change:acp-attack-mod",
+	TAS.callback(function eventUpdateConditionAttackPenalty(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
     PFSheet.updateConditionAttackPenalty();
-});
+	})
+);
 
 //BUFFS
 //for each column set eventhandlers
@@ -16702,110 +16717,250 @@ _.each(PFSheet.lists.buffColumns, function (col) {
 		var prefix = "change:buff" + row + "_" + col
 		, eventToWatch = prefix + "_macro-text";
 		//update each calculated buff field when its macro text is updated 
-		on(eventToWatch, function (eventInfo) { PFSheet.updateBuff(col, row, eventInfo); });
+		on(eventToWatch,
+			TAS.callback(function eventUpdateBuff(eventInfo) {
+				TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+				PFSheet.updateBuff(col, row, eventInfo);
+			})
+		);
 		return prefix;
 	});
 	//update column total when a calculated field is updated
-	on(prefixes.join(" "), function (eventInfo) { PFSheet.updateBuffColumn(col, eventInfo); });
+	on(prefixes.join(" "),
+		TAS.callback(function eventUpdateBuffColumn(eventInfo) {
+			TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+			PFSheet.updateBuffColumn(col, eventInfo);
+		})
+	);
 });
 
 //update each row when toggled
 _.each(PFSheet.lists.buffRows, function (row) {
 	var eventToWatch = "change:buff" + row + "_toggle";
-	on(eventToWatch, function (eventInfo) { PFSheet.updateBuffRow(row, eventInfo); });
+	on(eventToWatch,
+		TAS.callback(function eventUpdateBuffRow(eventInfo) {
+			TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+			PFSheet.updateBuffRow(row, eventInfo);
+		})
+	);
 });
 //generic easy buff total updates
 _.each(PFSheet.lists.buffEvents, function (functions, col) {
 	var eventToWatch = "change:buff_" + col + "-total";
 	_.each(functions, function (methodToCall) {
-		on(eventToWatch, function (eventInfo) { methodToCall(col, eventInfo); });
+		on(eventToWatch,
+			TAS.callback(function eventBuffEvents(eventInfo) {
+				TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+				methodToCall(col, eventInfo);
+			})
+		);
 	});
 });
 _.each(PFSheet.lists.buffEventsNoParam, function (functions, col) {
 	var eventToWatch = "change:buff_" + col + "-total";
 	_.each(functions, function (methodToCall) {
-		on(eventToWatch, function (eventInfo) { methodToCall(eventInfo); });
+		on(eventToWatch,
+			TAS.callback(function eventBuffEventsNoParam(eventInfo) {
+				TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+				methodToCall(eventInfo);
+			})
+		);
 	});
 });
 
 //SKILLS
-on("change:total-skill change:total-fcskill change:int-mod change:level change:max-skill-ranks-mod change:Max-Skill-Ranks-Misc2 change:unchained_skills-show change:BG-Skill-Use", function (eventInfo) { PFSheet.updateMaxSkills(eventInfo); });
-on("change:max-skill-ranks-misc", function () { SWUtils.evaluateAndSetNumber("Max-Skill-Ranks-Misc", "Max-Skill-Ranks-mod"); });
+on("change:total-skill change:total-fcskill change:int-mod change:level change:max-skill-ranks-mod change:Max-Skill-Ranks-Misc2 change:unchained_skills-show change:BG-Skill-Use",
+	TAS.callback(function eventUpdateMaxSkills(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		PFSheet.updateMaxSkills(eventInfo);
+	})
+);
+on("change:max-skill-ranks-misc",
+	TAS.callback(function eventMaxSkillRanksMisc(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		SWUtils.evaluateAndSetNumber("Max-Skill-Ranks-Misc", "Max-Skill-Ranks-mod");
+	})
+);
 //each skill has a dropdown handler and a skill update handler
 //normal skills
 _.each(PFSheet.lists.allCoreSkills, function (skill) {
-	on((PFSheet.lists.skillEvents.replace(/REPLACE/g, skill)), function (eventInfo) { PFSheet.updateSkill(skill, eventInfo); });
-	on("change:" + skill + "-ability", function () { PFSheet.util.handleDropdown(skill + "-ability", skill + "-ability-mod"); });
+	on((PFSheet.lists.skillEvents.replace(/REPLACE/g, skill)),
+		TAS.callback(function eventUpdateAllCoreSkills(eventInfo) {
+			TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+			PFSheet.updateSkill(skill, eventInfo);
+		})
+	);
+	on("change:" + skill + "-ability",
+		TAS.callback(function eventNormalSkillAbility(eventInfo) {
+			TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+			PFSheet.util.handleDropdown(skill + "-ability", skill + "-ability-mod");
+		})
+	);
 });
 //consolidated skills
 _.each(PFSheet.lists.consolidatedSkills, function (skill) {
-	on((PFSheet.lists.skillEvents.replace(/REPLACE/g, skill)), function (eventInfo) { PFSheet.updateSkill(skill, eventInfo); });
-	on("change:" + skill + "-ability", function () { PFSheet.util.handleDropdown(skill + "-ability", skill + "-ability-mod"); });
+	on((PFSheet.lists.skillEvents.replace(/REPLACE/g, skill)),
+		TAS.callback(function eventUpdateConsolidatedSkills(eventInfo) {
+			TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+			PFSheet.updateSkill(skill, eventInfo);
+		})
+	);
+	on("change:" + skill + "-ability",
+		TAS.callback(function eventConsolidatedSkillAbility(eventInfo) {
+			TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+			PFSheet.util.handleDropdown(skill + "-ability", skill + "-ability-mod");
+		})
+	);
 });
 //background only skills
 _.each(PFSheet.lists.backgroundSkills, function (skill) {
-	on((PFSheet.lists.skillEvents.replace(/REPLACE/g, skill)), function (eventInfo) { PFSheet.updateSkill(skill, eventInfo); });
-	on("change:" + skill + "-ability", function () { PFSheet.util.handleDropdown(skill + "-ability", skill + "-ability-mod"); });
+	on((PFSheet.lists.skillEvents.replace(/REPLACE/g, skill)),
+		TAS.callback(function eventUpdateBackgroundSkills(eventInfo) {
+			TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+			PFSheet.updateSkill(skill, eventInfo);
+		})
+	);
+	on("change:" + skill + "-ability",
+		TAS.callback(function eventBackgroundSkillAbility(eventInfo) {
+			TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+			PFSheet.util.handleDropdown(skill + "-ability", skill + "-ability-mod");
+		})
+	);
 }); 
 //skills affected by size
 _.each(PFSheet.lists.sizeSkills, function (mult, skill) {
 	if (mult === 1) {
-		on("change:size_skill", function (eventInfo) { PFSheet.updateSkill(skill, eventInfo); });
+		on("change:size_skill",
+			TAS.callback(function eventUpdateSizeSkill(eventInfo) {
+				TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+				PFSheet.updateSkill(skill, eventInfo);
+			})
+		);
 	} else if (mult === 2) {
-		on("change:size_skill_double", function (eventInfo) { PFSheet.updateSkill(skill, eventInfo); });
+		on("change:size_skill_double",
+			TAS.callback(function eventUpdateSizeSkillDouble(eventInfo) {
+				TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+				PFSheet.updateSkill(skill, eventInfo);
+			})
+		);
 	}
 });
 
 
 //init 
-on("change:init-ability-mod change:init-trait change:init-misc", function () { PFSheet.updateInit(); });
+on("change:init-ability-mod change:init-trait change:init-misc",
+	TAS.callback(function eventUpdateInit(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		PFSheet.updateInit();
+	})
+);
 
 //speed
-on("change:current-load change:speed-base change:load-heavy change:carried-total change:race change:armor-equipped change:armor2-equipped change:armor3-equipped change:armor-type change:armor2-type change:armor3-type", function (eventInfo) {
-    //TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+on("change:current-load change:speed-base change:load-heavy change:carried-total change:race change:armor-equipped change:armor2-equipped change:armor3-equipped change:armor-type change:armor2-type change:armor3-type",
+	TAS.callback(function eventUpdateModifiedSpeed(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
     PFSheet.updateModifiedSpeed();
-});
+	})
+);
 
 //hp
-on("change:hp-ability-mod change:level change:total-hp change:total-mythic-hp change:hp-formula-mod change:HP-misc change:mythic-adventures-show", function () { PFSheet.updateHP(); });
-on("change:hp-temp-misc", function () { PFSheet.updateTempHP(); });
-on("change:hp-formula-macro-text",function(){SWUtils.evaluateAndSetNumber("HP-formula-macro-text","HP-formula-mod");});
+on("change:hp-ability-mod change:level change:total-hp change:total-mythic-hp change:hp-formula-mod change:HP-misc change:mythic-adventures-show",
+	TAS.callback(function eventUpdateHP(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		PFSheet.updateHP();
+	})
+);
+on("change:hp-temp-misc",
+	TAS.callback(function eventUpdateTempHP(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		PFSheet.updateTempHP();
+	})
+);
+on("change:hp-formula-macro-text",
+	TAS.callback(function updateEvaluateAndSetNumber(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		SWUtils.evaluateAndSetNumber("HP-formula-macro-text", "HP-formula-mod");
+	})
+);
 
 //CLASSES
 _.each(PFSheet.lists.classColumns, function (col) {
 	var eventsToWatch = _.map(PFSheet.lists.classRows, function (row) {
 		return "change:class-" + row + "-" + col;
 	}).join(" ");
-	on(eventsToWatch, function (eventInfo) { PFSheet.updateClassInformation(col, eventInfo); });
+	on(eventsToWatch,
+		TAS.callback(function eventUpdateClassInformation(eventInfo) {
+			TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+			PFSheet.updateClassInformation(col, eventInfo);
+		})
+	);
 	if (col === "level") {
-		on(eventsToWatch, function (eventInfo) { PFSheet.updateClassInformation("skill", eventInfo); });
+		on(eventsToWatch,
+			TAS.callback(function eventUpdateClassInformationLevel(eventInfo) {
+				TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+				PFSheet.updateClassInformation("skill", eventInfo);
+			})
+		);
 	}
 });
 //rows class level updates spell class level 
 _.each(PFSheet.lists.classRows, function (row) {
-	on("change:class-" + row + "-level", function (eventInfo) { PFSheet.updateSpellClassLevel(parseInt(row, 10), eventInfo); });
+	on("change:class-" + row + "-level",
+		TAS.callback(function eventUpdateSpellClassLevel(eventInfo) {
+			TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+			PFSheet.updateSpellClassLevel(parseInt(row, 10), eventInfo);
+		})
+	);
 });
 
 //GENERIC DROPDOWNS	
 _.each(PFSheet.lists.dropdowns, function (write, read) {
-	on("change:" + read, function () { PFSheet.util.handleDropdown(read, write); });
+	on("change:" + read,
+		TAS.callback(function eventGenericDropdowns(eventInfo) {
+			TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+			PFSheet.util.handleDropdown(read, write);
+		})
+	);
 });
 //DEFENSE DROPDOWNS 
 _.each(PFSheet.lists.defenseDropdowns, function (write, read) {
-	on("change:" + read, function () { PFSheet.handleDefenseDropdown(read); });
+	on("change:" + read,
+		TAS.callback(function eventHandleDefenseDropdown(eventInfo) {
+			TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+			PFSheet.handleDefenseDropdown(read);
+		})
+	);
 });
 
 //mythic paths
-on("change:mythic-tier change:mythic-hp", function () { PFSheet.updateMythicPathInformation(); });
+on("change:mythic-tier change:mythic-hp",
+	TAS.callback(function eventUpdateMythicPathInformation(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		PFSheet.updateMythicPathInformation();
+	})
+);
 
 //mythic power
-on("change:mythic-tier", function () { PFSheet.updateTierMythicPower(); });
-on("change:misc-mythic-power change:tier-mythic-power", function () { PFSheet.updateMythicPower(); });
-
+on("change:mythic-tier",
+	TAS.callback(function eventUpdateTierMythicPower(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		PFSheet.updateTierMythicPower();
+	})
+);
+on("change:misc-mythic-power change:tier-mythic-power",
+	TAS.callback(function eventUpdateMythicPower(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		PFSheet.updateMythicPower();
+	})
+);
 
 //defenses
-on("change:ac-ability-mod change:ff-dex change:ac-penalty change:cmd-penalty change:size change:ac-dodge change:ac-natural change:ac-deflect change:ac-misc change:ac-shield change:ac-armor change:cmd-dex change:ff-cmd-dex change:cmd-str change:cmd-misc change:bab change:max-dex"
-	,function(eventInfo) { PFSheet.updateDefenses(eventInfo); });
+on("change:ac-ability-mod change:ff-dex change:ac-penalty change:cmd-penalty change:size change:ac-dodge change:ac-natural change:ac-deflect change:ac-misc change:ac-shield change:ac-armor change:cmd-dex change:ff-cmd-dex change:cmd-str change:cmd-misc change:bab change:max-dex",
+	TAS.callback(function eventUpdateDefenses(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		PFSheet.updateDefenses(eventInfo);
+	})
+);
 
 on("change:shield-equipped change:shield-acbonus change:shield-max-dex change:shield-acp change:shield-spell-fail change:shield-proficiency "
 	+"change:shield2-equipped change:shield2-acbonus change:shield2-max-dex change:shield2-acp change:shield2-spell-fail change:shield2-proficiency "
@@ -16813,81 +16968,202 @@ on("change:shield-equipped change:shield-acbonus change:shield-max-dex change:sh
 	+"change:armor-equipped change:armor-acbonus change:armor-max-dex change:armor-acp change:armor-spell-fail change:armor-proficiency "
 	+"change:armor2-equipped change:armor2-acbonus change:armor2-max-dex change:armor2-acp change:armor2-spell-fail change:armor2-proficiency "
 	+ "change:armor3-equipped change:armor3-acbonus change:armor3-max-dex change:armor3-acp change:armor3-spell-fail change:armor3-proficiency "
-+ "change:max-dex-source change:acp-source change:current-load"
-	,function(eventInfo){PFSheet.updateArmor(eventInfo.sourceAttribute); });
++ "change:max-dex-source change:acp-source change:current-load",
+	TAS.callback(function eventUpdateArmor(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		PFSheet.updateArmor(eventInfo.sourceAttribute);
+	})
+);
 
 //saves
 _.each(PFSheet.lists.saveTypes, function (save) {
 	var eventToWatch = PFSheet.lists.saveEvents.replace(/REPLACE/g, save);
-	on(eventToWatch, function (eventInfo) { PFSheet.updateSave(save, eventInfo); });
+	on(eventToWatch,
+		TAS.callback(function eventUpdateSave(eventInfo) {
+			TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+			PFSheet.updateSave(save, eventInfo);
+		})
+	);
 });
 
 //attacks
-on("change:bab change:size change:melee-ability-mod change:attk-melee-misc change:attk-penalty", function () { PFSheet.updateAttack("Melee"); });
-on("change:bab change:size change:ranged-ability-mod change:attk-ranged-misc change:attk-penalty", function () { PFSheet.updateAttack("Ranged"); });
-on("change:bab change:CMD-size change:cmb-ability-mod change:attk-cmb-misc change:attk-penalty", function () { PFSheet.updateAttack("CMB"); });
+on("change:bab change:size change:melee-ability-mod change:attk-melee-misc change:attk-penalty",
+	TAS.callback(function eventUpdateMeleeAttack(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		PFSheet.updateAttack("Melee");
+	})
+);
+on("change:bab change:size change:ranged-ability-mod change:attk-ranged-misc change:attk-penalty",
+	TAS.callback(function eventUpdateRangedAttack(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		PFSheet.updateAttack("Ranged");
+	})
+);
+on("change:bab change:CMD-size change:cmb-ability-mod change:attk-cmb-misc change:attk-penalty",
+	TAS.callback(function eventUpdateCmbAttack(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		PFSheet.updateAttack("CMB");
+	})
+);
 
 //attack effects
-on("change:attk-effect_mod_1 change:attk-effect_mod_1_Toggle change:attk-effect_mod_2 change:attk-effect_mod_2_Toggle change:attk-effect_mod_3 change:attk-effect_mod_3_Toggle change:attk-effect_mod_4 change:attk-effect_mod_4_Toggle"
-, function () {
+on("change:attk-effect_mod_1 change:attk-effect_mod_1_Toggle change:attk-effect_mod_2 change:attk-effect_mod_2_Toggle change:attk-effect_mod_3 change:attk-effect_mod_3_Toggle change:attk-effect_mod_4 change:attk-effect_mod_4_Toggle",
+	TAS.callback(function eventUpdateAttackEffectTotals(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
     PFSheet.updateAttackEffectTotals();
-});
-on("change:dmg-effect_mod_1 change:dmg-effect_mod_1_Toggle change:dmg-effect_mod_2 change:dmg-effect_mod_2_Toggle change:dmg-effect_mod_3 change:dmg-effect_mod_3_Toggle change:dmg-effect_mod_4 change:dmg-effect_mod_4_Toggle"
-, function () {
+	})
+);
+on("change:dmg-effect_mod_1 change:dmg-effect_mod_1_Toggle change:dmg-effect_mod_2 change:dmg-effect_mod_2_Toggle change:dmg-effect_mod_3 change:dmg-effect_mod_3_Toggle change:dmg-effect_mod_4 change:dmg-effect_mod_4_Toggle",
+	TAS.callback(function eventUpdateDmgEffectTotals(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
     PFSheet.updateDMGEffectTotals();
-});
+	})
+);
 
 //repeating weapons
-on("change:attk-effect-total",function(eventInfo){PFSheet.updateRepeatingWeaponAttacks(eventInfo);});
-on("change:dmg-effect-total change:dmg-mod", function(){PFSheet.updateRepeatingWeaponDamages();});
+on("change:attk-effect-total",
+	TAS.callback(function eventUpdateRepeatingWeaponAttackTotal(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		PFSheet.updateRepeatingWeaponAttacks(eventInfo);
+	})
+);
+on("change:dmg-effect-total change:dmg-mod",
+	TAS.callback(function eventUpdateRepeatingWeaponDamageTotal(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		PFSheet.updateRepeatingWeaponDamages();
+	})
+);
 
-on("change:repeating_weapon:attack-type-mod change:repeating_weapon:masterwork change:repeating_weapon:proficiency change:repeating_weapon:attack-mod"
-	, function (eventInfo) {
+on("change:repeating_weapon:attack-type-mod change:repeating_weapon:masterwork change:repeating_weapon:proficiency change:repeating_weapon:attack-mod",
+	TAS.callback(function eventUpdateRepeatingWeaponAttack(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
 	    PFSheet.updateRepeatingWeaponAttack(null, eventInfo);
-});
-on("change:repeating_weapon:damage-ability-mod change:repeating_weapon:damage-mod change:repeating_weapon:damage-ability-max"
-	, function () {
+	})
+);
+on("change:repeating_weapon:damage-ability-mod change:repeating_weapon:damage-mod change:repeating_weapon:damage-ability-max",
+	TAS.callback(function eventUpdateRepeatingWeaponDamage(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
 	    PFSheet.updateRepeatingWeaponDamage();
-});
+	})
+);
 
-on("change:repeating_weapon:attack-type",function(eventInfo) {PFSheet.handleRepeatingAttackDropdown(null,eventInfo);});
-on("change:repeating_weapon:damage-ability",function() {PFSheet.handleRepeatingDamageDropdown();});
-on("change:repeating_weapon:damage",function(){SWUtils.evaluateAndSetNumber("repeating_weapon_damage","repeating_weapon_damage-mod");});
-on("change:repeating_weapon:attack",function(){SWUtils.evaluateAndSetNumber("repeating_weapon_attack","repeating_weapon_attack-mod");});
+on("change:repeating_weapon:attack-type",
+	TAS.callback(function eventHandleRepeatingAttackDropdown(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		PFSheet.handleRepeatingAttackDropdown(null, eventInfo);
+	})
+);
+on("change:repeating_weapon:damage-ability",
+	TAS.callback(function eventHandleRepeatingDamageDropdown(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		PFSheet.handleRepeatingDamageDropdown();
+	})
+);
+on("change:repeating_weapon:damage",
+	TAS.callback(function eventRepeatingWeaponDamage(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		SWUtils.evaluateAndSetNumber("repeating_weapon_damage", "repeating_weapon_damage-mod");
+	})
+);
+on("change:repeating_weapon:attack",
+	TAS.callback(function eventRepeatingWeaponAttack(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		SWUtils.evaluateAndSetNumber("repeating_weapon_attack", "repeating_weapon_attack-mod");
+	})
+);
 
-on("change:repeating_weapon:enhance",function(eventInfo) {
+on("change:repeating_weapon:enhance",
+	TAS.callback(function eventUpdateRepeatingWeaponAttackAndDamage(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
 	PFSheet.updateRepeatingWeaponAttack(null,eventInfo);
 	PFSheet.updateRepeatingWeaponDamage();
-});
+	})
+);
 
 //size
-on("change:size",function(){ 
+on("change:size",
+	TAS.callback(function eventUpdateSizeAndDamageNote(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
 	PFSheet.updateSize();
 	PFSheet.updateDamageNote();
-});
+	})
+);
 
 //GENERIC REPEATING LISTS USED MAX
 _.each(PFSheet.lists.repeatingMaxUseSections, function (section) {
 	var eventToWatch = "change:repeating_" + section + ":max-calculation";
-	on(eventToWatch, function (eventInfo) { SWUtils.evaluateAndSetNumber("repeating_" + section + "_max-calculation", "repeating_" + section + "_used_max"); });
+	on(eventToWatch,
+		TAS.callback(function eventRepeatingMaxUseSections(eventInfo) {
+			TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+			SWUtils.evaluateAndSetNumber("repeating_" + section + "_max-calculation", "repeating_" + section + "_used_max");
+		})
+	);
 });
 
 //sheet
-on("sheet:opened",function(){PFSheet.checkForUpdate();});
-on("change:recalc1",function(){PFSheet.checkForUpdate();});
+on("sheet:opened",
+	TAS.callback(function eventSheetOpened(eventInfo) {
+		//TAS.debug("caught " + eventInfo.sourceAttribute + " event"); // sourceAttribute is undefined in this event
+		PFSheet.checkForUpdate();
+	})
+);
+on("change:recalc1",
+	TAS.callback(function eventRecaluateSheet(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		PFSheet.checkForUpdate();
+	})
+);
 
 //npc sheet
-on("change:npc-hd change:npc-hd-num change:npc-hd2 change:npc-hd-num2 change:npc-hd-misc-mod",function() {PFSheet.updateNPCHP();});
-on("change:npc-hd-misc",function(){ SWUtils.evaluateAndSetNumber("NPC-HD-misc","NPC-HD-misc-mod");});
+on("change:npc-hd change:npc-hd-num change:npc-hd2 change:npc-hd-num2 change:npc-hd-misc-mod",
+	TAS.callback(function eventUpdateNpcHp(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		PFSheet.updateNPCHP();
+	})
+);
+on("change:npc-hd-misc",
+	TAS.callback(function eventNpcHdMisc(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		SWUtils.evaluateAndSetNumber("NPC-HD-misc", "NPC-HD-misc-mod");
+	})
+);
 
 //items
-on("change:worn-Belt-charges change:worn-Body-charges change:worn-Chest-charges change:worn-Eyes-charges change:worn-Feet-charges change:worn-Hands-charges change:worn-Head-charges change:worn-Headband-charges change:worn-Neck-charges change:worn-Ring1-charges change:worn-Ring2-charges change:worn-Shield-charges change:worn-Shoulders-charges change:worn-Wrist-charges", function () { PFSheet.updateWornEquipment("charges"); });
-on("change:worn-Belt-weight change:worn-Body-weight change:worn-Chest-weight change:worn-Eyes-weight change:worn-Feet-weight change:worn-Hands-weight change:worn-Head-weight change:worn-Headband-weight change:worn-Neck-weight change:worn-Ring1-weight change:worn-Ring2-weight change:worn-Shield-weight change:worn-Shoulders-weight change:worn-Wrist-weight", function () { PFSheet.updateWornEquipment("weight"); });
-on("change:worn-Belt-hp change:worn-Body-hp change:worn-Chest-hp change:worn-Eyes-hp change:worn-Feet-hp change:worn-Hands-hp change:worn-Head-hp change:worn-Headband-hp change:worn-Neck-hp change:worn-Ring1-hp change:worn-Ring2-hp change:worn-Shield-hp change:worn-Shoulders-hp change:worn-Wrist-hp", function () { PFSheet.updateWornEquipment("hp"); });
-on("change:worn-Belt-hp_max change:worn-Body-hp_max change:worn-Chest-hp_max change:worn-Eyes-hp_max change:worn-Feet-hp_max change:worn-Hands-hp_max change:worn-Head-hp_max change:worn-Headband-hp_max change:worn-Neck-hp_max change:worn-Ring1-hp_max change:worn-Ring2-hp_max change:worn-Shield-hp_max change:worn-Shoulders-hp_max change:worn-Wrist-hp_max", function () { PFSheet.updateWornEquipment("hp_max"); });
-on("change:worn-Belt-value change:worn-Body-value change:worn-Chest-value change:worn-Eyes-value change:worn-Feet-value change:worn-Hands-value change:worn-Head-value change:worn-Headband-value change:worn-Neck-value change:worn-Ring1-value change:worn-Ring2-value change:worn-Shield-value change:worn-Shoulders-value change:worn-Wrist-value", function () { PFSheet.updateWornEquipment("value"); });
-on('change:repeating_item:weight change:repeating_item:qty change:repeating_item:qty_max change:repeating_item:location', function (eventInfo) {
+on("change:worn-Belt-charges change:worn-Body-charges change:worn-Chest-charges change:worn-Eyes-charges change:worn-Feet-charges change:worn-Hands-charges change:worn-Head-charges change:worn-Headband-charges change:worn-Neck-charges change:worn-Ring1-charges change:worn-Ring2-charges change:worn-Shoulders-charges change:worn-Wrist-charges",
+	TAS.callback(function eventUpdateWornEquipmentCharges(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		PFSheet.updateWornEquipment("charges");
+	})
+);
+on("change:worn-Belt-weight change:worn-Body-weight change:worn-Chest-weight change:worn-Eyes-weight change:worn-Feet-weight change:worn-Hands-weight change:worn-Head-weight change:worn-Headband-weight change:worn-Neck-weight change:worn-Ring1-weight change:worn-Ring2-weight change:worn-Shoulders-weight change:worn-Wrist-weight",
+	TAS.callback(function eventUpdateWornEquipmentWeight(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		PFSheet.updateWornEquipment("weight");
+	})
+);
+on("change:worn-Belt-hp change:worn-Body-hp change:worn-Chest-hp change:worn-Eyes-hp change:worn-Feet-hp change:worn-Hands-hp change:worn-Head-hp change:worn-Headband-hp change:worn-Neck-hp change:worn-Ring1-hp change:worn-Ring2-hp change:worn-Shoulders-hp change:worn-Wrist-hp",
+	TAS.callback(function eventUpdateWornEquipmentHp(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		PFSheet.updateWornEquipment("hp");
+	})
+);
+// The on...hp above catches hp_max as well
+//on("change:worn-Belt-hp_max change:worn-Body-hp_max change:worn-Chest-hp_max change:worn-Eyes-hp_max change:worn-Feet-hp_max change:worn-Hands-hp_max change:worn-Head-hp_max change:worn-Headband-hp_max change:worn-Neck-hp_max change:worn-Ring1-hp_max change:worn-Ring2-hp_max change:worn-Shoulders-hp_max change:worn-Wrist-hp_max",
+//	TAS.callback(function eventUpdateWornEquipment(eventInfo) {
     //TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+//		PFSheet.updateWornEquipment("hp_max");
+//	})
+//);
+on("change:worn-Belt-value change:worn-Body-value change:worn-Chest-value change:worn-Eyes-value change:worn-Feet-value change:worn-Hands-value change:worn-Head-value change:worn-Headband-value change:worn-Neck-value change:worn-Ring1-value change:worn-Ring2-value change:worn-Shoulders-value change:worn-Wrist-value",
+	TAS.callback(function eventUpdateWornEquipmentValue(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		PFSheet.updateWornEquipment("value");
+	})
+);
+on('change:repeating_item:weight change:repeating_item:qty change:repeating_item:qty_max change:repeating_item:location',
+    TAS.callback(function eventUpdateItemTotalWeight(eventInfo) {
+    	TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+    	//PFSheet.updateRepeatingItemTotalWeight("item", "item_total_weight"); // Kept around for a speed test comparison to TAS
     TAS.repeating('item')
         .attrs('item_total_weight')
         .fields('weight', 'qty', 'qty_max', 'location')
@@ -16906,9 +17182,11 @@ on('change:repeating_item:weight change:repeating_item:qty change:repeating_item
             a.S['item_total_weight'] = m.weight;
         })
         .execute();
-});
-on('change:repeating_item:hp change:repeating_item:hp_max', function (eventInfo) {
-    //TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+    })
+);
+on('change:repeating_item:hp change:repeating_item:hp_max',
+	TAS.callback(function eventUpdateItemTotalHp(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
     TAS.repeating('item')
         .attrs('item-total-hp', 'item-total-hp_max')
         .fields('hp', 'hp_max')
@@ -16924,9 +17202,11 @@ on('change:repeating_item:hp change:repeating_item:hp_max', function (eventInfo)
             a.S['item-total-hp_max'] = m.hp_max;
         })
         .execute();
-});
-on('change:repeating_item:value', function (eventInfo) {
-    //TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+	})
+);
+on('change:repeating_item:value',
+	TAS.callback(function eventUpdateItemTotalValue(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
     TAS.repeating('item')
         .attrs('item-total-value')
         .fields('value')
@@ -16939,23 +17219,32 @@ on('change:repeating_item:value', function (eventInfo) {
             a.S['item-total-value'] = m.value;
         })
         .execute();
-});
-on('change:CP change:SP change:GP change:PP', function (eventInfo) {
-    //TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+	})
+);
+on('change:CP change:SP change:GP change:PP',
+    TAS.callback(function eventUpdateCarriedCurrency(eventInfo) {
+    	TAS.debug("caught " + eventInfo.sourceAttribute + " event");
     PFSheet.updateCarriedCurrency();
-});
-on('change:carried-currency change:item_total_weight change:worn-total-weight change:carried-misc', function (eventInfo) {
-    //TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+    })
+);
+on('change:carried-currency change:item_total_weight change:worn-total-weight change:carried-misc',
+    TAS.callback(function eventUpdateCarriedTotal(eventInfo) {
+    	TAS.debug("caught " + eventInfo.sourceAttribute + " event");
     PFSheet.updateCarriedTotal();
-});
-on('change:load-light change:load-medium change:carried-total', function (eventInfo) {
-    //TAS.debug("checking current-load radio buttons");
+    })
+);
+on('change:load-light change:carried-total',
+    TAS.callback(function eventUpdateCurrentLoad(eventInfo) {
+    	TAS.debug("caught " + eventInfo.sourceAttribute + " event");
     PFSheet.updateCurrentLoad();
-});
-on("change:STR change:size change:legs change:load-str-bonus change:load-multiplier change:load-misc", function (eventInfo) {
-    //TAS.debug("caught " + eventInfo.sourceAttribute + " event");
-	TAS.callback(PFSheet.updateLoadsAndLift);
-});
+    })
+);
+on("change:STR change:size change:legs change:load-str-bonus change:load-multiplier change:load-misc",
+    TAS.callback(function eventUpdateLoadsAndLift(eventInfo) {
+    	TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+    	PFSheet.updateLoadsAndLift();
+    })
+);
 
 //SPELLS
 //spellclass section (3 tabs at top of spell page)
@@ -16964,7 +17253,12 @@ _.each(PFSheet.lists.spellClassIndexes, function (spellClassIdx) {
 	_.each(PFSheet.lists.spellClassEvents, function (functions, event) {
 		var eventToWatch = event.replace(/REPLACE/g, spellClassIdx);
 		_.each(functions, function (methodToCall) {
-			on(eventToWatch, function (eventInfo) { PFSheet.ifSpellClassExists(spellClassIdx, _.bind(methodToCall, {}, numberIdx, eventInfo)); });
+			on(eventToWatch,
+				TAS.callback(function eventIfSpellClassExists(eventInfo) {
+					TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+					PFSheet.ifSpellClassExists(spellClassIdx, _.bind(methodToCall, {}, numberIdx, eventInfo));
+				})
+			);
 	});
 });
 	});
@@ -16974,7 +17268,12 @@ _.each(PFSheet.lists.spellLevels, function (spellLevel) {
 	_.each(PFSheet.lists.spellLevelEvents, function (functions, event) {
 		var eventToWatch = event.replace(/REPLACE/g, spellLevel);
 		_.each(functions, function (methodToCall) {
-			on(eventToWatch, function (eventInfo) { methodToCall(section, null, eventInfo); });
+			on(eventToWatch,
+				TAS.callback(function eventSpellLevelEvents(eventInfo) {
+					TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+					methodToCall(section, null, eventInfo);
+				})
+			);
 			//_.bind(methodToCall,{},section,null,eventInfo)
 });
 	});
@@ -16986,7 +17285,12 @@ _.each(PFSheet.lists.spellClassIndexes, function (spellClassIdx) {
 	_.each(PFSheet.lists.spellLevels, function (spellLevel) {
 		var spellNumber = parseInt(spellLevel, 10)
 		, eventToWatch = PFSheet.lists.spellClassLevelsEvents.replace(/CLASSIDX/g, spellClassIdx).replace(/SPELLLEVEL/g, spellLevel);
-		on(eventToWatch, function (eventInfo) { PFSheet.ifSpellClassExists(classNumber, _.bind(PFSheet.updateMaxSpellsPerDay, {}, classNumber, spellNumber)); });
+		on(eventToWatch,
+			TAS.callback(function eventSpellsPerDay(eventInfo) {
+				TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+				PFSheet.ifSpellClassExists(classNumber, _.bind(PFSheet.updateMaxSpellsPerDay, {}, classNumber, spellNumber));
+			})
+		);
 		//PFSheet.updateMaxSpellsPerDay(classNumber,spellNumber)); results in "callback is not a function"
 });
 });
@@ -16994,13 +17298,20 @@ _.each(PFSheet.lists.spellClassIndexes, function (spellClassIdx) {
 //REPEATING SECTIONS set IDs
 _.each(PFSheet.lists.repeatingSections, function (section) {
 	var eventToWatch = "change:repeating_" + section + ":ids-show";
-	on(eventToWatch, function (eventInfo) { PFSheet.checkIsNewRow(section, eventInfo); });
+	on(eventToWatch,
+		TAS.callback(function eventCheckIsNewRow(eventInfo) {
+			TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+			PFSheet.checkIsNewRow(section, eventInfo);
+		})
+	);
 });
 
 //reset based on config changes
-on("change:wound_threshold-show", function (eventInfo) { setAttrs({"condition-Wounds":0}); });
-
-TAS.config({ logging: { debug: true } });
-TAS.debugMode();
+on("change:wound_threshold-show",
+	TAS.callback(function eventResetConditionWounds(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		setAttrs({ "condition-Wounds": 0 });
+	})
+);
 
 </script>
