@@ -10578,6 +10578,49 @@
 					</div>
 				</div>
 			</div>
+                <!-- Mythic Adventures display option toggled from Config -->
+                <div style="margin:-15px 0px 15px 0px;">
+                    <input type="checkbox" class="sheet-sect-show" title="@{mythic-adventures-show}" name="attr_mythic-adventures-show" value="1" style="margin:-9999px;" /><span></span>
+                    <div class="sheet-sect">
+                        <div>
+                            <b>Mythic Feats</b>
+                            <input type="checkbox" class="sheet-sect-show" title="@{npc-mythic-feats-show}" name="attr_npc-mythic-feats-show" value="1" style="opacity:0;width: 50px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -35px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
+                            <input type="checkbox" class="sheet-expand-show" title="Collapse or expand all rows." name="attr_npc-mythic-feats-expand-show" value="1" style="opacity: 0;height: 1.5em;width: 38px; margin: 0px -38px 2px 0;z-index: 1;cursor: help;" /><span></span>
+                            <div class="sheet-table sheet-sect">
+                                <div class="sheet-repeating-fields">
+                                    <fieldset class="repeating_mythic-feat">
+                                        <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_mythic-feat_$X_feat-show}" name="attr_feat-show" value="1" style="opacity: 0 ; height: 1.5em ; position: absolute; top: 15px; width: 5.5% ; cursor: pointer ; z-index: 1" checked="checked" />
+                                        <span class="sheet-table-data sheet-center" style="width:8%; padding-bottom: 15px;"></span>
+                                        <span class="sheet-table-data sheet-center sheet-small-label" style="width:4%;"><button type="roll" name="attr_npc-roll" title="%{selected|repeating_mythic-feat_$X_npc-roll" value="@{npc-macro-text}"></button><br>&nbsp;</span>
+                                        <span class="sheet-table-data sheet-center sheet-small-label" style="width:32%;"><input title="@{repeating_mythic-feat_$X_name}" type="text" name="attr_name" placeholder="Feat Name"><br>Name</span>
+                                        <span class="sheet-table-data sheet-center sheet-small-label" style="width:32%;"><textarea class="sheet-weapon-notes" title="@{repeating_mythic-feat_$X_short-description}" name="attr_short-description" placeholder="Short Desc"></textarea><br>Short Desc</span>
+                                        <span class="sheet-table-data sheet-center sheet-small-label" style="width:4%;"><input title="@{repeating_mythic-feat_$X_used}" type="number" name="attr_used" value="0" /><br>Used</span>
+                                        <span class="sheet-table-data sheet-divider-lg">/<br>&nbsp;</span>
+                                        <span class="sheet-table-data sheet-center sheet-small-label" style="width:4%;"><input title="@{repeating_mythic-feat_$X_used|max" type="text" name="attr_used_max" value="0" class="sheet-calc" readonly="readonly" /><br>Max</span>
+                                        <span class="sheet-table-data sheet-center sheet-small-label" style="width:16%;"><input title="@{repeating_mythic-feat_$X_max-calculation}" type="text" name="attr_max-calculation" value="" Placeholder="macro" /><br>Calc</span>
+                                        <div class="sheet-sect sheet-expand">
+                                            <b>Description</b>
+                                            <input type="checkbox" class="sheet-desc-show" title="@{repeating_mythic-feat_$X_description-show}" name="attr_description-show" value="1" style="opacity:0; width:90px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -75px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
+                                            <b>Macro Text</b>
+                                            <input type="checkbox" class="sheet-macro-text-show" title="@{repeating_mythic-feat_$X_macro-text-show}" name="attr_macro-text-show" value="1" style="opacity:0; width:90px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -75px; cursor:pointer; z-index:1;" /><span></span>
+                                            <b>IDs</b>
+                                            <input type="checkbox" class="sheet-repeating_ids-show" title="@{repeating_mythic-feat_$X_ids-show}" name="attr_ids-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" /><span></span>
+                                            <textarea class="sheet-desc" title="@{repeating_mythic-feat_$X_description}" name="attr_description"></textarea>
+                                            <textarea class="sheet-macro-text" title="@{repeating_mythic-feat_$X_npc-macro-text}" name="attr_npc-macro-text">@{NPC-whisper} &{template:pf_block} {{header_image=@{header_image-pf_block}}} {{character_name=@{character_name}}} {{character_id=@{character_id}}} {{subtitle}} {{name=@{name}}} {{description=@{short-description}}}</textarea>
+                                            <div class="sheet-repeating_ids sheet-table-row">
+                                                <input type="hidden" name="attr_new_flag" value="0" />
+                                                <span class="sheet-table-data sheet-small-data">
+                                                    <input type="text" name="attr_row_id" value="" class="sheet-calc" style="width:15em;" readonly="readonly" />
+                                                    <button class="sheet-blank-roll-button" style="font-size: 85%;" type="roll" name="attr_row_id_roll" value="/w @{character_name} &{template:pf_generic} {{Row id=@{row_id}}}"> Post ID</button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 			<br>
 			<div>
 				<b>Skills</b>
