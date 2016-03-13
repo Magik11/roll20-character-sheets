@@ -1091,6 +1091,7 @@
 				<span class="sheet-table-header sheet-center" title="Adverse conditions may apply if applicable. (e.g. sunlight powerlessness/staggered)">Weaknesses</span>
 				<span class="sheet-table-header sheet-center" title="Low-light vision('...see twice as far as normal in dim light.'), Darkvision('...see with no light source at all'), etc.">Vision</span>
 				<span class="sheet-table-header sheet-center" title="Spell Resistance: Avoids the effects of spells and spell-like abilities that directly affect it. Caster Level check vs SR to negate resistance.">SR</span>
+                <span class="sheet-table-header sheet-center" title="Spell Resistance Modifier that is the result of the macro formula.">Mod</span>
 			</div>
 			<div class="sheet-table-row">
 				<span class="sheet-table-data sheet-center"><input title="@{DR}" type="text" name="attr_DR" placeholder="Damage Reduction"></span>
@@ -1098,7 +1099,8 @@
 				<span class="sheet-table-data sheet-center"><input title="@{immunities}" type="text" name="attr_immunities" placeholder="Immunities"></span>
 				<span class="sheet-table-data sheet-center"><input title="@{weaknesses}" type="text" name="attr_weaknesses" placeholder="Weaknesses"></span>
 				<span class="sheet-table-data sheet-center"><input title="@{vision}" type="text" name="attr_vision" placeholder="Vision Details"></span>
-				<span class="sheet-table-data sheet-center"><input title="@{SR}" type="number" name="attr_SR" value="0" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{SR-macro-text}" type="text" name="attr_SR-macro-text" placeholder="macro" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{SR}" type="number" name="attr_SR" value="0" style="width:40px" class="sheet-calc" readonly="readonly" /></span>
 			</div>
 		</div>
 	  <br>
@@ -16211,6 +16213,13 @@ _.each(PFSheet.lists.defenseDropdowns, function (write, read) {
 		})
 	);
 });
+//Spell Resistance
+on("change:SR-macro-text",
+	TAS.callback(function eventSRMacroText(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		SWUtils.evaluateAndSetNumber("SR-macro-text", "SR");
+	})
+);
 
 //mythic paths
 on("change:mythic-tier change:mythic-hp",
