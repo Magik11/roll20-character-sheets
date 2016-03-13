@@ -195,6 +195,7 @@ input[type="text"], input[type="number"] {
 	background-color: transparent;
 	border: 0 solid #000;
 	border-bottom-width: 1px;
+    margin-top: 1px;
 }
 span.sheet-table-data.sheet-center, span.sheet-table-data {
 	padding-left:1px;
@@ -234,7 +235,7 @@ input.sheet-calc, textarea.sheet-calc {
 }
 input[type="text"], select {
 	width: 100%;
-	margin: 0;
+    margin: 1px 0 0 0;
 }
 select {
 	min-width:6em;
@@ -402,6 +403,8 @@ input.sheet-spellclass-tab2:checked + span.sheet-spellclass-tab2 {
 	font-family: "Pictos";
 	font-size: 14px;
 }
+
+
 .sheet-text-button {
 	font-size: 100%;
 	color: #FFF;
@@ -431,29 +434,36 @@ input[type="checkbox"]:hover + span:not(.sheet-not-sheet-show) {
 input[type="checkbox"].sheet-expand-show + span:not(.sheet-not-sheet-show)::before {	
 	content: '☰ )';
 	display: inline-block;
-	width: auto;
-	font-size: .75em;
+	width: 1.2em;
+	font-size: .85em;
 	background-color: rgba(0, 0, 0, 0);
 	color: #000;
-	border-radius: 5px;
-	border: 1px solid #808080;
-	padding: 0 5px 1px 5px;
-	height:1.4em;
-	margin-bottom: 2px;
+	border-radius: 50%;
+	border: 1px solid rgba(0, 0, 0, 0.21);
+	padding: 0px 1px 4px 1px;
+	margin: 2px;
+	height: 1.2em;
 	font-family: "Pictos";
+	text-align: center;
+	vertical-align: middle;
 }
 input[type="checkbox"].sheet-expand-show:checked + span:not(.sheet-not-sheet-show)::before {
 	content: '⚌ (';
 	display: inline-block;
-	width: auto;
-	font-size: .75em;
+	width: 1.2em;
+	font-size: .85em;
 	background-color: #4a6486;
 	color: #FFF;
-	padding: 0 5px 2px 5px;
-	height:1.4em;
-	margin-bottom: 2px;
+	border-radius: 50%;
+	border: 1px solid rgba(0, 0, 0, 0);
+	padding: 0 1px 4px 1px;
+	margin: 2px;
+	height: 1.2em;
 	font-family: "Pictos";
+	text-align: center;
+	vertical-align: middle;
 }
+
 input[name*="condition"]:checked + b:not(.sheet-offCase),
 input[name*="notes"]:checked + b:not(.sheet-offCase),
 input[name*="iterative"]:checked + b:not(.sheet-offCase),
@@ -481,6 +491,7 @@ input[type="checkbox"].sheet-counted:checked + span:not(.sheet-not-sheet-show)::
 	content: counter(sheet-rep-items) '. ▼' !important;
 	width: auto !important;
 }
+
 /* end repeating item counter*/
 .sheet-no-pad-right {
 	padding-right: 0 !important;
@@ -542,6 +553,7 @@ textarea {
 	resize:vertical;
 }
 .charsheet .sheet-weapon-notes,
+.sheet-buff-notes,
 .sheet-init-notes,
 .sheet-speed-notes {
 	height: 2.15em;
@@ -550,13 +562,117 @@ textarea {
 	resize:vertical;
 }
 .charsheet .repcontainer .repitem {
-	padding: 5px 0 5px 0 !important;
-	margin: 5px 0 5px 0 !important;
-	border: 2px solid #CCCCCC !important;
-	border-radius: 3px !important;	
+    padding: 1px;
+    margin: 1px 0 1px 0;
+    border: 2px solid #CCCCCC;
+    border-radius: 3px;
+	vertical-align:top;
 }
-.charsheet button[type=roll] {
+
+.sheet-repeating-sect {
+	position:relative;
+}
+
+input[type="checkbox"].sheet-split-column-show, 
+input[type="checkbox"].sheet-split-column-show + span:not(.sheet-not-sheet-show)::before  {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+input[type="checkbox"].sheet-split-column-show + span:not(.sheet-not-sheet-show)::before  {
+	width:1.2em;
+	height:1em;
+}
+input[type="checkbox"].sheet-split-column-show {	
+    opacity: 0;
+    z-index: 1;
+	width:2em;
+	height:1.2em;
+}
+
+
+input[type="checkbox"].sheet-split-column-show + span:not(.sheet-not-sheet-show)::before {
+	content:'☷';
+	display: inline-block;
+	font-weight:bold;
+	font-size: 1.2em;
+	background-color: rgba(0, 0, 0, 0);
+	color: #000;
+	border-radius: 5px;
+	border: 1px solid #808080;
+	padding: 0 1px 1px 4px;
+	margin-bottom: 2px;
+}
+
+input[type="checkbox"].sheet-split-column-show:checked {	
+	width:2em;
+	height:1.2em;
+}
+
+input[type="checkbox"].sheet-split-column-show:checked + span:not(.sheet-not-sheet-show)::before {
+	content:'☰';
+	background-color: #4a6486;
+	color: #FFF;
+	width:1.2em;
+	height:1em;
+}
+
+input.sheet-counted {
+	width:3.5%;
+}
+input.sheet-counted + span {
+	width:4%;
+}
+span.sheet-repeating-rollbutton {
+	width:4%;
+}
+input[type="checkbox"].sheet-split-column-show:checked input.sheet-counted {
+	width:5.5%;
+}
+input[type="checkbox"].sheet-split-column-show:checked input.sheet-counted + span {
+	width:8%;
+}
+input[type="checkbox"].sheet-split-column-show:checked span.sheet-repeating-rollbutton {
+	width:6%;
+}
+/*Expand to cross both columns */
+.sheet-repeating-sect .repcontrol {
+	display:block;
+	clear:both;
+}
+/* 2-column repeating section */
+.sheet-repeating-sect  .repitem { 
+	display: block; 
+	width:100%;
+	padding-top:2px;
+}
+input.sheet-split-column-show:not(:checked)  ~div .repitem {
+	clear:both;
+}
+
+input.sheet-split-column-show:checked  ~div .repitem {
+	width:50%;
+	display:inline-block;
+}
+input.sheet-split-column-show:checked  ~div .repitem:nth-child(even){
+	float:right;
+}
+input.sheet-split-column-show:checked  ~div .repitem:nth-child(odd){
+	float:left;
+}
+
+
+/* shrink when moving and hide button decorations */
+.sheet-repeating-sect .repcontainer.ui-sortable.editmode  .sheet-expand {
+	display:none;
+}
+
+.charsheet button[type="roll"] {
 	margin: 2px 2px 0 2px !important;
+}
+
+[data-groupname=repeating_buff] > button.btn.repcontrol_add::after {
+    content: " New Buff";
 }
 
 [data-groupname=repeating_class-ability] > button.btn.repcontrol_add::after {
@@ -581,6 +697,7 @@ textarea {
 [data-groupname=repeating_item] > button.btn.repcontrol_add::after {
 	content: " New Item";
 }
+
 [data-groupname=repeating_racial-trait] > button.btn.repcontrol_add::after {
 	content: " New Racial Trait";
 }
@@ -600,7 +717,7 @@ textarea {
 	margin-right: 5px;
 	width: 1.5em;
 }
-button[type=roll].sheet-blank-roll-button::before { 
+button[type="roll"].sheet-blank-roll-button::before {
 	content: ' ';
 }
 .sheet-options {
@@ -1033,4 +1150,57 @@ button[type=roll].sheet-blank-roll-button::before {
 .sheet-rolltemplate-pf_block .inlinerollresult.importantroll {
 	color: #FFF;
 	background-color: #4A57ED;
+    }
+
+div.sheet-table-data.sheet-cssbutton {
+    margin: 0px;
+    padding: 8px 4px 20px 4px;
+    font-family: arial;
+    font-weight: bold;
+    font-size: .85em;
+    color: #000000;
+    background: #FFFFFF;
+}
+    div.sheet-table-data.sheet-cssbutton label {
+        float: left;
+    }
+/* turn off the arrow */
+.sheet-cssbutton input[type="checkbox"] + span:not(.sheet-not-sheet-show)::before {
+    content: none;
+    width: 0;
+    height: 0;
+}
+
+div.sheet-table-data.sheet-cssbutton label span,
+div.sheet-table-data.sheet-cssbutton input:not(:checked) + span
+ {
+    background: #FFFFFF;
+    color: #000000;
+    font-family: arial;
+    font-weight: bold;
+    font-size: 1em;
+    text-align: center;
+    padding: 2px 2px;
+    display: block;
+    border: 2px solid #000000;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    content: none;
+}
+div.sheet-table-data.sheet-cssbutton label input {
+    position: absolute;
+    top: -15px;
+    content: none;
+}
+
+    div.sheet-table-data.sheet-cssbutton label input:hover + span {
+        background: #E8E8E8;
+        color: #000000;
+    }
+
+div.sheet-table-data.sheet-cssbutton input:checked + span,
+div.sheet-table-data.sheet-cssbutton  input:checked + span:hover  {
+	background-color: #4a6486;
+    color: #000000;
 }
