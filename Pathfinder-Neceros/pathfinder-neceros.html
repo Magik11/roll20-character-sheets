@@ -716,8 +716,75 @@
 						</div>
 					</div>
 				</div>
+                <br>
+            </div>
+        </div>
+    </div>
+    <!-- Psionics display option toggled from Config -->
+    <div style="margin:-15px 0px 15px 0px;">
+        <input type="checkbox" class="sheet-sect-show" title="@{psionics-show}" name="attr_psionics-show" value="1" style="margin:-9999px;" /><span></span>
+        <div class="sheet-sect">
+            <b>Psionic Information</b>
+            <input type="checkbox" class="sheet-sect-show" title="@{psionic-info-show}" name="attr_psionic-info-show" value="1" style="opacity: 0;width: 290px;height: 1.5em;position: relative;top: 0;left: 0;margin: 0 -15px 0 -272px;cursor: pointer;z-index: 1;" checked="checked" /><span></span>
+            <div class="sheet-table sheet-sect">
+                <div class="sheet-table-row" style="vertical-align:top;">
+                    <div class="sheet-table-data sheet-center">
+                        <div class="sheet-table">
+                            <span class="sheet-table-name">Psionic Manifester Level and Power Points</span>
+                            <div class="sheet-table-row">
+                                <span class="sheet-table-header" title="The sum of the levels of psionic classes that have a key ability score selected on the right.">Manifester Levels</span>
+                                <span class="sheet-table-header"></span>
+                                <span class="sheet-table-header" title="Any miscellaneous modifiers to the manifester level.">Misc</span>
+                                <span class="sheet-table-header"></span>
+                                <span class="sheet-table-header" title="The total adjusted manifester level.">Total</span>
+                                <span class="sheet-table-header">|</span>
+                                <span class="sheet-table-header" title="How many power points you have available to use.">Current PP</span>
+                                <span class="sheet-table-header">/</span>
+                                <span class="sheet-table-header" title="Your power point reserve is equal to your base power points gained from your class, bonus power points from a high key ability score, and any additional bonus power points from sources such as your character race and feat selections.">Power Point Reserve</span>
+                                <span class="sheet-table-header"></span>
+                                <span class="sheet-table-header" title="The amount of base bonus power points you gain from you class(es).">Class Power Points</span>
+                                <span class="sheet-table-header"></span>
+                                <span class="sheet-table-header" title="The psionic class key ability modifier source.">Key Ability</span>
+                                <span class="sheet-table-header" title="The amount of bonus power points you gain from manifester level and key ability modifier.">Bonus PP</span>
+                                <span class="sheet-table-header"></span>
+                                <span class="sheet-table-header" title="Any additional power points you gain from race, traits or feats.">Misc</span>
+                            </div>
+                            <div class="sheet-table-row">
+                                <span class="sheet-table-data sheet-center"><input style="width:100%;" type="number" title="@{psionic-level}" name="attr_psionic-level" value="0" min="0" /></span>
+                                <span class="sheet-table-data sheet-divider">+</span>
+                                <span class="sheet-table-data sheet-center"><input style="width:100%;" type="number" title="@{psionic-level-misc}" name="attr_psionic-level-misc" value="0" /></span>
+                                <span class="sheet-table-data sheet-divider">=</span>
+                                <span class="sheet-table-data sheet-center"><input style="width:100%;" type="number" title="@{psionic-level-total}" name="attr_psionic-level-total" value="0" class="sheet-calc" readonly="readonly" /></span>
+                                <span class="sheet-table-data sheet-divider">|</span>
+                                <span class="sheet-table-data sheet-center"><input style="width:100%;" type="number" title="@{psionic-power}" name="attr_psionic-power" value="0" min="0" /></span>
+                                <span class="sheet-table-data sheet-divider">/</span>
+                                <span class="sheet-table-data sheet-center"><input style="width:100%;" type="number" title="@{psionic-power|max}" name="attr_psionic-power_max" value="0" class="sheet-calc" readonly="readonly" /></span>
+                                <span class="sheet-table-data sheet-divider">=</span>
+                                <span class="sheet-table-data sheet-center"><input style="width:100%;" type="number" title="@{class-psionic-power}" name="attr_class-psionic-power" value="0" /></span>
+                                <span class="sheet-table-data sheet-divider">+</span>
+                                <span class="sheet-table-data sheet-center" style="width:8%;">
+                                    <select title="@{selected-ability-psionic-power}" name="attr_selected-ability-psionic-power" style="font-size:1em;">
+                                        <option value="0 - [[ @{condition-sickened} ]]" selected>&#8226;None</option>
+                                        <option value="@{STR-mod} - [[ @{condition-sickened} ]]">STR</option>
+                                        <option value="@{DEX-mod} - [[ @{condition-sickened} ]]">DEX</option>
+                                        <option value="@{CON-mod} - [[ @{condition-sickened} ]]">CON</option>
+                                        <option value="@{INT-mod} - [[ @{condition-sickened} ]]">INT</option>
+                                        <option value="@{WIS-mod} - [[ @{condition-sickened} ]]">WIS</option>
+                                        <option value="@{CHA-mod} - [[ @{condition-sickened} ]]">CHA</option>
+                                    </select>
+                                </span>
+                                <span class="sheet-table-data sheet-center"><input style="width:100%;" type="number" title="@{ability-psionic-power}" name="attr_ability-psionic-power" value="0" class="sheet-calc" readonly="readonly" /></span>
+                                <span class="sheet-table-data sheet-divider">+</span>
+                                <span class="sheet-table-data sheet-center"><input style="width:100%;" type="number" title="@{misc-psionic-power}" name="attr_misc-psionic-power" value="0" /></span>
 			</div>
+                            <div class="sheet-table-row" style="height:2em;">
+                                <span class="sheet-table-data sheet-center"><label style="white-space:nowrap;"><input type="checkbox" title="@{psionic-focus}" name="attr_psionic-focus" value="1" /><b title="Is maintaining psionic focus."> Psionic Focus</b></label></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 			<br>
+            </div>
         </div>
 	</div>
     <div class="sheet-repeating-sect" style="margin-top:-15px;">
@@ -10763,7 +10830,7 @@
     </div>
     <div class="sheet-mythic-adventures">
         <b>Pathfinder Mythic Adventures</b>
-        <input type="checkbox" class="sheet-sect-show" title="@{pathfinder-mythic-adventures-show}" name="attr_pathfinder-mythic-adventures-show" value="1" style="opacity: 0;width: 205px;height: 1.5em;position: relative;top: 0;left: 0;margin: 0 -15px 0 -188px;cursor: pointer;z-index: 1;;" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{pathfinder-mythic-adventures-show}" name="attr_pathfinder-mythic-adventures-show" value="1" style="opacity: 0;width: 205px;height: 1.5em;position: relative;top: 0;left: 0;margin: 0 -15px 0 -188px;cursor: pointer;z-index: 1;" checked="checked" /><span></span>
         <div class="sheet-table sheet-sect">
             <span class="sheet-table-name">Pathfinder Mythic Adventures</span>
             <div class="sheet-table-row">
@@ -10778,6 +10845,23 @@
         </div>
         <br>
 	</div>
+    <div class="sheet-psionics">
+        <b>Pathfinder Psionics</b>
+        <input type="checkbox" class="sheet-sect-show" title="@{pathfinder-psioncis-show}" name="attr_pathfinder-psionics-show" value="1" style="opacity: 0;width: 205px;height: 1.5em;position: relative;top: 0;left: 0;margin: 0 -15px 0 -188px;cursor: pointer;z-index: 1;" checked="checked" /><span></span>
+        <div class="sheet-table sheet-sect">
+            <span class="sheet-table-name">Pathfinder Psionics</span>
+            <div class="sheet-table-row">
+                <span class="sheet-table-data sheet-left">
+                    <label>
+                        <span title="Use Psionics.">
+                            <input type="checkbox" title="@{psionics-show}" name="attr_psionics-show" value="1" /> Display/Enable Psionics Character Sheet Items
+                        </span>
+                    </label>
+                </span>
+            </div>
+        </div>
+        <br>
+    </div>
 	<div class="sheet-roll_template_info">
 		<b>Roll Template Info</b>
 		<input type="checkbox" class="sheet-sect-show" title="@{roll-template-info-show}" name="attr_roll-template-info-show" value="1" style="opacity: 0;width: 140px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -125px; cursor: pointer; z-index: 1" /><span></span>
@@ -16552,6 +16636,49 @@ on("change:misc-mythic-power change:tier-mythic-power",
 	TAS.callback(function eventUpdateMythicPower(eventInfo) {
 		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
 		PFSheet.updateMythicPower();
+	})
+);
+
+//psionics
+on("change:psionic-level change:psionic-level-misc",
+	TAS.callback(function eventUpdatePsionicLevel(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		getAttrs(["psionic-level", "psionic-level-misc", "psionic-level-total"], function (v) {
+			var newTotal = (parseInt(v["psionic-level"], 10) || 0) + (parseInt(v["psionic-level-misc"], 10) || 0),
+			currentTotal = parseInt(v["psionic-level-total"], 10) || 0;
+			//TAS.debug("newTotal=" + newTotal, "currentTotal=" + currentTotal);
+			if (currentTotal !== newTotal) { setAttrs({ "psionic-level-total": newTotal }); }
+		});
+	})
+);
+on("change:class-psionic-power change:ability-psionic-power change:misc-psionic-power",
+	TAS.callback(function eventUpdatePsionicPower(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		getAttrs(["class-psionic-power", "ability-psionic-power", "misc-psionic-power", "psionic-power_max"], function (v) {
+			var newTotal = (parseInt(v["class-psionic-power"], 10) || 0) + (parseInt(v["ability-psionic-power"], 10) || 0) + (parseInt(v["misc-psionic-power"], 10) || 0),
+			currentTotal = parseInt(v["psionic-power_max"], 10) || 0;
+			//TAS.debug("newTotal=" + newTotal, "currentTotal=" + currentTotal);
+			if (currentTotal !== newTotal) { setAttrs({ "psionic-power_max": newTotal }); }
+		});
+	})
+);
+on("change:selected-ability-psionic-power change:psionic-level-total",
+	TAS.callback(function eventUpdatePsionicBonusPower(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		getAttrs(["selected-ability-psionic-power", "psionic-level-total", "ability-psionic-power"], function (v) {
+			SWUtils.evaluateExpression(v["selected-ability-psionic-power"], function (value) {
+		        var ability = 0;
+				//TAS.debug("value=" + value);
+				if (typeof value !== "undefined" && value !== null && !isNaN(value)) {
+					ability = parseInt(value, 10) || 0;
+				}
+                //TAS.debug("ability=" + ability);
+			    var currentTotal = parseInt(v["ability-psionic-power"], 10) || 0,
+			    newTotal = ability * (parseInt(v["psionic-level-total"], 10) || 0) * 0.5;
+			    //TAS.debug("ability=" + ability, "newTotal=" + newTotal, "currentTotal=" + currentTotal);
+			    if (currentTotal !== newTotal) { setAttrs({ "ability-psionic-power": newTotal }); }
+			});
+		});
 	})
 );
 
