@@ -16437,7 +16437,7 @@ _.each(PFSheet.lists.buffColumns, function (col) {
 	);
 });
 
-on("change:repeating_buff:buff-enable_toggle",
+on("change:repeating_buff:buff-enable_toggle remove:repeating_buff",
 	TAS.callback(function eventUpdateBuffToggle(eventInfo) {
 		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
 		_.each(PFSheet.lists.buffColumns, function (col) {
@@ -16950,6 +16950,40 @@ on('change:repeating_item:value',
 			.execute();
 	})
 );
+on('remove:repeating_item',
+	TAS.callback(function eventRemoveItem(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+
+		TAS.repeating('item')
+			.attrs('item_total_weight', 'item-total-hp', 'item-total-hp_max', 'item-total-value')
+			.fields('weight', 'qty', 'qty_max', 'location', 'hp', 'hp_max', 'value')
+			.reduce(function (m, r) {
+				if (r.I.qty > 0 && r.I.location == 0) {
+					if (r.I.qty_max == 0) {
+						m.weight += r.I.weight * r.I.qty;
+					} else {
+						m.weight += r.I.weight;
+					}
+				}
+				m.hp += r.I.hp;
+				m.hp_max += r.I.hp_max;
+				m.value += r.I.value;
+				return m;
+			}, {
+				weight: 0,
+				hp: 0,
+				hp_max: 0,
+				value: 0
+			}, function (m, r, a) {
+				a.S['item_total_weight'] = m.weight;
+				a.S['item-total-hp'] = m.hp;
+				a.S['item-total-hp_max'] = m.hp_max;
+				a.S['item-total-value'] = m.value;
+			})
+			.execute();
+	})
+);
+
 on('change:CP change:SP change:GP change:PP',
     TAS.callback(function eventUpdateCarriedCurrency(eventInfo) {
     	TAS.debug("caught " + eventInfo.sourceAttribute + " event");
