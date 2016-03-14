@@ -9,7 +9,7 @@
 .sheet-spell-misc-show:not(:checked)~.sheet-spell-misc,
 .sheet-buffs-show:not(:checked)~.sheet-buffs,
 .sheet-buffs2-show:not(:checked)~.sheet-buffs2 {
-	display: none;
+	display:none !important;
 }
 .sheet-expand-show:checked ~div .sheet-sect-show:checked ~.sheet-expand { 
 	display:none;
@@ -26,6 +26,10 @@ div.repitem.repitembroken,
 }
 .sheet-table-buff {
 	display: table;
+	float: left;
+}
+.sheet-table-buff .sheet-skill-macro-text {
+	max-width:5em;
 }
 .sheet-small-label {
 	font-size: 85% !important;
@@ -438,9 +442,9 @@ input[type="checkbox"].sheet-expand-show + span:not(.sheet-not-sheet-show)::befo
 	font-size: .85em;
 	background-color: rgba(0, 0, 0, 0);
 	color: #000;
-	border-radius: 50%;
+	border-radius: 5px;
 	border: 1px solid rgba(0, 0, 0, 0.21);
-	padding: 0px 1px 4px 1px;
+	padding: 0px 2px 4px 2px;
 	margin: 2px;
 	height: 1.2em;
 	font-family: "Pictos";
@@ -454,9 +458,9 @@ input[type="checkbox"].sheet-expand-show:checked + span:not(.sheet-not-sheet-sho
 	font-size: .85em;
 	background-color: #4a6486;
 	color: #FFF;
-	border-radius: 50%;
+	border-radius: 5px;
 	border: 1px solid rgba(0, 0, 0, 0);
-	padding: 0 1px 4px 1px;
+	padding: 0 2px 4px 2px;
 	margin: 2px;
 	height: 1.2em;
 	font-family: "Pictos";
@@ -567,6 +571,7 @@ textarea {
     border: 2px solid #CCCCCC;
     border-radius: 3px;
 	vertical-align:top;
+	overflow: hidden;
 }
 
 .sheet-repeating-sect {
@@ -590,31 +595,30 @@ input[type="checkbox"].sheet-split-column-show {
 	height:1.2em;
 }
 
-
 input[type="checkbox"].sheet-split-column-show + span:not(.sheet-not-sheet-show)::before {
 	content:'☷';
 	display: inline-block;
 	font-weight:bold;
-	font-size: 1.2em;
+	font-size: .85em;
 	background-color: rgba(0, 0, 0, 0);
 	color: #000;
 	border-radius: 5px;
 	border: 1px solid #808080;
-	padding: 0 1px 1px 4px;
-	margin-bottom: 2px;
+	padding: 0 1px 5px 4px;
+	margin-top: 3px;
+	vertical-align: middle;
 }
 
 input[type="checkbox"].sheet-split-column-show:checked {	
-	width:2em;
-	height:1.2em;
+	width:1.5em;
+	height:1.5em;
 }
 
 input[type="checkbox"].sheet-split-column-show:checked + span:not(.sheet-not-sheet-show)::before {
 	content:'☰';
 	background-color: #4a6486;
 	color: #FFF;
-	width:1.2em;
-	height:1em;
+	margin-top: 3px;
 }
 
 input.sheet-counted {
@@ -761,7 +765,7 @@ button[type="roll"].sheet-blank-roll-button::before {
 .sheet-rolltemplate-pf_spell .sheet-header-image {
 	float: right;
 	display: table-cell;
-	padding: 2px 0px 2px 2px;
+	padding: 0;
 	vertical-align: middle;
 	min-width: 30px;
 }
@@ -846,7 +850,7 @@ button[type="roll"].sheet-blank-roll-button::before {
 .sheet-rolltemplate-pf_attack .sheet-header-image {
 	float: right;
 	display: table-cell;
-	padding: 2px 0px 2px 2px;
+	padding: 0;
 	vertical-align: middle;
 	min-width: 30px;
 }
@@ -930,7 +934,7 @@ button[type="roll"].sheet-blank-roll-button::before {
 .sheet-rolltemplate-pf_defense .sheet-header-image {
 	float: right;
 	display: table-cell;
-	padding: 2px 0px 2px 2px;
+	padding: 0;
 	vertical-align: middle;
 	min-width: 30px;
 }
@@ -1015,7 +1019,7 @@ button[type="roll"].sheet-blank-roll-button::before {
 .sheet-rolltemplate-pf_generic .sheet-header-image {
 	float: right;
 	display: table-cell;
-	padding: 2px 0px 2px 2px;
+	padding: 0;
 	vertical-align: middle;
 	min-width: 30px;
 }
@@ -1101,7 +1105,7 @@ button[type="roll"].sheet-blank-roll-button::before {
 .sheet-rolltemplate-pf_block .sheet-header-image {
 	float: right;
 	display: table-cell;
-	padding: 2px 0px 2px 2px;
+	padding: 0;
 	vertical-align: middle;
 	min-width: 30px;
 }
@@ -1181,6 +1185,7 @@ div.sheet-table-data.sheet-cssbutton input:not(:checked) + span
     font-size: 1em;
     text-align: center;
     padding: 2px 2px;
+	margin-top: -4px;
     display: block;
     border: 2px solid #000000;
     -moz-border-radius: 6px;
@@ -1203,4 +1208,136 @@ div.sheet-table-data.sheet-cssbutton input:checked + span,
 div.sheet-table-data.sheet-cssbutton  input:checked + span:hover  {
 	background-color: #4a6486;
     color: #000000;
+}
+
+/* Header Colors */
+.sheet-rolltemplate-pf_spell.sheet-color-white tr td.sheet-header,.sheet-rolltemplate-pf_spell.sheet-color-white .sheet-subtitle,
+.sheet-rolltemplate-pf_attack.sheet-color-white tr td.sheet-header,.sheet-rolltemplate-pf_attack.sheet-color-white .sheet-subtitle,
+.sheet-rolltemplate-pf_generic.sheet-color-white tr td.sheet-header,.sheet-rolltemplate-pf_generic.sheet-color-white .sheet-subtitle,
+.sheet-rolltemplate-pf_defense.sheet-color-white tr td.sheet-header,.sheet-rolltemplate-pf_defense.sheet-color-white .sheet-subtitle,
+.sheet-rolltemplate-pf_block.sheet-color-white tr td.sheet-header,.sheet-rolltemplate-pf_block.sheet-color-white .sheet-subtitle {
+    background-color:#ffffff;
+	border-color:#ffffff;
+}
+.sheet-rolltemplate-pf_spell.sheet-color-grey tr td.sheet-header,.sheet-rolltemplate-pf_spell.sheet-color-grey .sheet-subtitle,
+.sheet-rolltemplate-pf_attack.sheet-color-grey tr td.sheet-header,.sheet-rolltemplate-pf_attack.sheet-color-grey .sheet-subtitle,
+.sheet-rolltemplate-pf_generic.sheet-color-grey tr td.sheet-header,.sheet-rolltemplate-pf_generic.sheet-color-grey .sheet-subtitle,
+.sheet-rolltemplate-pf_defense.sheet-color-grey tr td.sheet-header,.sheet-rolltemplate-pf_defense.sheet-color-grey .sheet-subtitle,
+.sheet-rolltemplate-pf_block.sheet-color-grey tr td.sheet-header,.sheet-rolltemplate-pf_block.sheet-color-grey .sheet-subtitle {
+    background-color:#A3A3A3;
+	border-color:#A3A3A3;
+}
+.sheet-rolltemplate-pf_spell.sheet-color-darkgrey tr td.sheet-header,.sheet-rolltemplate-pf_spell.sheet-color-darkgrey .sheet-subtitle,
+.sheet-rolltemplate-pf_attack.sheet-color-darkgrey tr td.sheet-header,.sheet-rolltemplate-pf_attack.sheet-color-darkgrey .sheet-subtitle,
+.sheet-rolltemplate-pf_generic.sheet-color-darkgrey tr td.sheet-header,.sheet-rolltemplate-pf_generic.sheet-color-darkgrey .sheet-subtitle,
+.sheet-rolltemplate-pf_defense.sheet-color-darkgrey tr td.sheet-header,.sheet-rolltemplate-pf_defense.sheet-color-darkgrey .sheet-subtitle,
+.sheet-rolltemplate-pf_block.sheet-color-darkgrey tr td.sheet-header,.sheet-rolltemplate-pf_block.sheet-color-darkgrey .sheet-subtitle {
+    background-color:#525252;
+	border-color:#525252;
+}
+.sheet-rolltemplate-pf_spell.sheet-color-red tr td.sheet-header,.sheet-rolltemplate-pf_spell.sheet-color-red .sheet-subtitle,
+.sheet-rolltemplate-pf_attack.sheet-color-red tr td.sheet-header,.sheet-rolltemplate-pf_attack.sheet-color-red .sheet-subtitle,
+.sheet-rolltemplate-pf_generic.sheet-color-red tr td.sheet-header,.sheet-rolltemplate-pf_generic.sheet-color-red .sheet-subtitle,
+.sheet-rolltemplate-pf_defense.sheet-color-red tr td.sheet-header,.sheet-rolltemplate-pf_defense.sheet-color-red .sheet-subtitle,
+.sheet-rolltemplate-pf_block.sheet-color-red tr td.sheet-header,.sheet-rolltemplate-pf_block.sheet-color-red .sheet-subtitle {
+    background-color:#D60010;
+	border-color:#D60010;
+}
+.sheet-rolltemplate-pf_spell.sheet-color-darkred tr td.sheet-header,.sheet-rolltemplate-pf_spell.sheet-color-darkred .sheet-subtitle,
+.sheet-rolltemplate-pf_attack.sheet-color-darkred tr td.sheet-header,.sheet-rolltemplate-pf_attack.sheet-color-darkred .sheet-subtitle,
+.sheet-rolltemplate-pf_generic.sheet-color-darkred tr td.sheet-header,.sheet-rolltemplate-pf_generic.sheet-color-darkred .sheet-subtitle,
+.sheet-rolltemplate-pf_defense.sheet-color-darkred tr td.sheet-header,.sheet-rolltemplate-pf_defense.sheet-color-darkred .sheet-subtitle,
+.sheet-rolltemplate-pf_block.sheet-color-darkred tr td.sheet-header,.sheet-rolltemplate-pf_block.sheet-color-darkred .sheet-subtitle {
+    background-color:#85000A;
+	border-color:#85000A;
+}
+
+.sheet-rolltemplate-pf_spell.sheet-color-orange tr td.sheet-header,.sheet-rolltemplate-pf_spell.sheet-color-orange .sheet-subtitle,
+.sheet-rolltemplate-pf_attack.sheet-color-orange tr td.sheet-header,.sheet-rolltemplate-pf_attack.sheet-color-orange .sheet-subtitle,
+.sheet-rolltemplate-pf_generic.sheet-color-orange tr td.sheet-header,.sheet-rolltemplate-pf_generic.sheet-color-orange .sheet-subtitle,
+.sheet-rolltemplate-pf_defense.sheet-color-orange tr td.sheet-header,.sheet-rolltemplate-pf_defense.sheet-color-orange .sheet-subtitle,
+.sheet-rolltemplate-pf_block.sheet-color-orange tr td.sheet-header,.sheet-rolltemplate-pf_block.sheet-color-orange .sheet-subtitle {
+    background-color:#DC6B00;
+	border-color:#DC6B00;
+}
+
+.sheet-rolltemplate-pf_spell.sheet-color-darkorange tr td.sheet-header,.sheet-rolltemplate-pf_spell.sheet-color-darkorange .sheet-subtitle,
+.sheet-rolltemplate-pf_attack.sheet-color-darkorange tr td.sheet-header,.sheet-rolltemplate-pf_attack.sheet-color-darkorange .sheet-subtitle,
+.sheet-rolltemplate-pf_generic.sheet-color-darkorange tr td.sheet-header,.sheet-rolltemplate-pf_generic.sheet-color-darkorange .sheet-subtitle,
+.sheet-rolltemplate-pf_defense.sheet-color-darkorange tr td.sheet-header,.sheet-rolltemplate-pf_defense.sheet-color-darkorange .sheet-subtitle,
+.sheet-rolltemplate-pf_block.sheet-color-darkorange tr td.sheet-header,.sheet-rolltemplate-pf_block.sheet-color-darkorange .sheet-subtitle {
+    background-color:#7F3E00;
+	border-color:#7F3E00;
+}
+
+.sheet-rolltemplate-pf_spell.sheet-color-yellow tr td.sheet-header,.sheet-rolltemplate-pf_spell.sheet-color-yellow .sheet-subtitle,
+.sheet-rolltemplate-pf_attack.sheet-color-yellow tr td.sheet-header,.sheet-rolltemplate-pf_attack.sheet-color-yellow .sheet-subtitle,
+.sheet-rolltemplate-pf_generic.sheet-color-yellow tr td.sheet-header,.sheet-rolltemplate-pf_generic.sheet-color-yellow .sheet-subtitle,
+.sheet-rolltemplate-pf_defense.sheet-color-yellow tr td.sheet-header,.sheet-rolltemplate-pf_defense.sheet-color-yellow .sheet-subtitle,
+.sheet-rolltemplate-pf_block.sheet-color-yellow tr td.sheet-header,.sheet-rolltemplate-pf_block.sheet-color-yellow .sheet-subtitle {
+    background-color:#FCED24;
+	border-color:#FCED24;
+}
+
+.sheet-rolltemplate-pf_spell.sheet-color-darkyellow tr td.sheet-header,.sheet-rolltemplate-pf_spell.sheet-color-darkyellow .sheet-subtitle,
+.sheet-rolltemplate-pf_attack.sheet-color-darkyellow tr td.sheet-header,.sheet-rolltemplate-pf_attack.sheet-color-darkyellow .sheet-subtitle,
+.sheet-rolltemplate-pf_generic.sheet-color-darkyellow tr td.sheet-header,.sheet-rolltemplate-pf_generic.sheet-color-darkyellow .sheet-subtitle,
+.sheet-rolltemplate-pf_defense.sheet-color-darkyellow tr td.sheet-header,.sheet-rolltemplate-pf_defense.sheet-color-darkyellow .sheet-subtitle,
+.sheet-rolltemplate-pf_block.sheet-color-darkyellow tr td.sheet-header,.sheet-rolltemplate-pf_block.sheet-color-darkyellow .sheet-subtitle {
+    background-color:#dbcb00;
+	border-color:#dbcb00;
+}
+
+.sheet-rolltemplate-pf_spell.sheet-color-green tr td.sheet-header,.sheet-rolltemplate-pf_spell.sheet-color-green .sheet-subtitle,
+.sheet-rolltemplate-pf_attack.sheet-color-green tr td.sheet-header,.sheet-rolltemplate-pf_attack.sheet-color-green .sheet-subtitle,
+.sheet-rolltemplate-pf_generic.sheet-color-green tr td.sheet-header,.sheet-rolltemplate-pf_generic.sheet-color-green .sheet-subtitle,
+.sheet-rolltemplate-pf_defense.sheet-color-green tr td.sheet-header,.sheet-rolltemplate-pf_defense.sheet-color-green .sheet-subtitle,
+.sheet-rolltemplate-pf_block.sheet-color-green tr td.sheet-header,.sheet-rolltemplate-pf_block.sheet-color-green .sheet-subtitle {
+    background-color:#11B400;
+	border-color:#11B400;
+}
+
+.sheet-rolltemplate-pf_spell.sheet-color-darkgreen tr td.sheet-header,.sheet-rolltemplate-pf_spell.sheet-color-darkgreen .sheet-subtitle,
+.sheet-rolltemplate-pf_attack.sheet-color-darkgreen tr td.sheet-header,.sheet-rolltemplate-pf_attack.sheet-color-darkgreen .sheet-subtitle,
+.sheet-rolltemplate-pf_generic.sheet-color-darkgreen tr td.sheet-header,.sheet-rolltemplate-pf_generic.sheet-color-darkgreen .sheet-subtitle,
+.sheet-rolltemplate-pf_defense.sheet-color-darkgreen tr td.sheet-header,.sheet-rolltemplate-pf_defense.sheet-color-darkgreen .sheet-subtitle,
+.sheet-rolltemplate-pf_block.sheet-color-darkgreen tr td.sheet-header,.sheet-rolltemplate-pf_block.sheet-color-darkgreen .sheet-subtitle {
+    background-color:#0B7000;
+	border-color:#0B7000;
+}
+
+.sheet-rolltemplate-pf_spell.sheet-color-blue tr td.sheet-header,.sheet-rolltemplate-pf_spell.sheet-color-blue .sheet-subtitle,
+.sheet-rolltemplate-pf_attack.sheet-color-blue tr td.sheet-header,.sheet-rolltemplate-pf_attack.sheet-color-blue .sheet-subtitle,
+.sheet-rolltemplate-pf_generic.sheet-color-blue tr td.sheet-header,.sheet-rolltemplate-pf_generic.sheet-color-blue .sheet-subtitle,
+.sheet-rolltemplate-pf_defense.sheet-color-blue tr td.sheet-header,.sheet-rolltemplate-pf_defense.sheet-color-blue .sheet-subtitle,
+.sheet-rolltemplate-pf_block.sheet-color-blue tr td.sheet-header,.sheet-rolltemplate-pf_block.sheet-color-blue .sheet-subtitle {
+    background-color:#325eff;
+	border-color:#325eff;
+}
+
+.sheet-rolltemplate-pf_spell.sheet-color-darkblue tr td.sheet-header,.sheet-rolltemplate-pf_spell.sheet-color-darkblue .sheet-subtitle,
+.sheet-rolltemplate-pf_attack.sheet-color-darkblue tr td.sheet-header,.sheet-rolltemplate-pf_attack.sheet-color-darkblue .sheet-subtitle,
+.sheet-rolltemplate-pf_generic.sheet-color-darkblue tr td.sheet-header,.sheet-rolltemplate-pf_generic.sheet-color-darkblue .sheet-subtitle,
+.sheet-rolltemplate-pf_defense.sheet-color-darkblue tr td.sheet-header,.sheet-rolltemplate-pf_defense.sheet-color-darkblue .sheet-subtitle,
+.sheet-rolltemplate-pf_block.sheet-color-darkblue tr td.sheet-header,.sheet-rolltemplate-pf_block.sheet-color-darkblue .sheet-subtitle {
+    background-color:#001896;
+	border-color:#001896;
+}
+
+.sheet-rolltemplate-pf_spell.sheet-color-purple tr td.sheet-header,.sheet-rolltemplate-pf_spell.sheet-color-purple .sheet-subtitle,
+.sheet-rolltemplate-pf_attack.sheet-color-purple tr td.sheet-header,.sheet-rolltemplate-pf_attack.sheet-color-purple .sheet-subtitle,
+.sheet-rolltemplate-pf_generic.sheet-color-purple tr td.sheet-header,.sheet-rolltemplate-pf_generic.sheet-color-purple .sheet-subtitle,
+.sheet-rolltemplate-pf_defense.sheet-color-purple tr td.sheet-header,.sheet-rolltemplate-pf_defense.sheet-color-purple .sheet-subtitle,
+.sheet-rolltemplate-pf_block.sheet-color-purple tr td.sheet-header,.sheet-rolltemplate-pf_block.sheet-color-purple .sheet-subtitle {
+    background-color:#740091;
+	border-color:#740091;
+}
+
+.sheet-rolltemplate-pf_spell.sheet-color-darkpurple tr td.sheet-header,.sheet-rolltemplate-pf_spell.sheet-color-darkpurple .sheet-subtitle,
+.sheet-rolltemplate-pf_attack.sheet-color-darkpurple tr td.sheet-header,.sheet-rolltemplate-pf_attack.sheet-color-darkpurple .sheet-subtitle,
+.sheet-rolltemplate-pf_generic.sheet-color-darkpurple tr td.sheet-header,.sheet-rolltemplate-pf_generic.sheet-color-darkpurple .sheet-subtitle,
+.sheet-rolltemplate-pf_defense.sheet-color-darkpurple tr td.sheet-header,.sheet-rolltemplate-pf_defense.sheet-color-darkpurple .sheet-subtitle,
+.sheet-rolltemplate-pf_block.sheet-color-darkpurple tr td.sheet-header,.sheet-rolltemplate-pf_block.sheet-color-darkpurple .sheet-subtitle {
+    background-color:#430054;
+	border-color:#430054;
 }
