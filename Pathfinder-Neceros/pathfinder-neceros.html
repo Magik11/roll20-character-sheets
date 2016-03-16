@@ -574,7 +574,7 @@
 
             <div class="sheet-table-row" style="vertical-align:top;">
                 <span class="sheet-table-data sheet-center">
-                    <textarea class="sheet-init-notes" name="attr_init-macro-text" title="@{init-macro-text}" placeholder="Initiative macro-text">@{PC-whisper} &{template:pf_generic} {{color}} {{header_image=@{header_image-pf_generic}}} {{character_name=@{character_name}}} {{character_id=@{character_id}}} {{subtitle}} {{name=Initiative}} {{check=[[ (1d20 + [[ @{init} ]][init] + [[ abs(0.01 * @{init}) ]][tie-breaker]) &{tracker} ]]}} @{init_options}</textarea>
+                    <textarea class="sheet-init-notes" name="attr_init-macro-text" title="@{init-macro-text}" placeholder="Initiative macro-text">@{PC-whisper} &{template:pf_generic} {{color}} {{header_image=@{header_image-pf_generic}}} {{character_name=@{character_name}}} {{character_id=@{character_id}}} {{subtitle}} {{name=Initiative}} {{check=[[ (1d20 + [[ @{init} ]][init] + [[ {(0.01 * @{init}),0}kh1 ]][tie-breaker]) &{tracker} ]]}} @{init_options}</textarea>
                     <label class="sheet-center sheet-small-label"><b> Macro-text</b></label>
                 </span>
                 <span class="sheet-table-data sheet-center">&nbsp;</span>
@@ -1048,7 +1048,7 @@
                 <input type="hidden" name="attr_AC-ability-mod" value="0" />
                 <span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{AC-ability-mod}" type="number" name="attr_AC-ability-display" value="0" class="sheet-calc" readonly="readonly" /></span>
 				<span class="sheet-table-data sheet-divider">+</span>
-				<span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{size}" type="number" name="attr_size_display" value="0"  class="sheet-calc" readonly="readonly" /></span>
+                <span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{size}" type="number" name="attr_size" value="0" class="sheet-calc" readonly="readonly" /></span>
 				<span class="sheet-table-data sheet-divider">+</span>
 				<span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{AC-dodge}" type="number" name="attr_AC-dodge" value="0" /></span>
 				<span class="sheet-table-data sheet-divider">+</span>
@@ -1082,7 +1082,7 @@
 				</span>
                 <span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{AC-ability-mod}" type="number" name="attr_AC-ability-display" value="0" class="sheet-calc" readonly="readonly" /></span>
 				<span class="sheet-table-data sheet-divider">+</span>
-				<span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{size}" type="number" name="attr_size_display" value="0"  class="sheet-calc" readonly="readonly" /></span>
+                <span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{size}" type="number" name="attr_size" value="0" class="sheet-calc" readonly="readonly" /></span>
 				<span class="sheet-table-data sheet-divider">+</span>
 				<span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{AC-dodge}" type="number" name="attr_AC-dodge" value="0" /></span>
 				<span class="sheet-table-data sheet-divider">+</span>
@@ -1118,7 +1118,7 @@
                 <input type="hidden" name="attr_FF-DEX" value="0" />
                 <span class="sheet-table-data sheet-center"><input title="@{FF-DEX}" type="number" name="attr_FF-DEX-display" value="0" class="sheet-calc" readonly="readonly" /></span>
 				<span class="sheet-table-data sheet-divider">+</span>
-				<span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{size}" type="number" name="attr_size_display" value="0"  class="sheet-calc" readonly="readonly" /></span>
+                <span class="sheet-table-data sheet-center"><input style="width:100%;" title="@{size}" type="number" name="attr_size" value="0" class="sheet-calc" readonly="readonly" /></span>
 				<span class="sheet-table-data sheet-center"></span>
 				<span class="sheet-table-data sheet-center"></span>
 				<span class="sheet-table-data sheet-divider">+</span>
@@ -1723,7 +1723,7 @@
 				</span>
 				<span class="sheet-table-data sheet-left"><input title="@{melee-ability-mod}" type="number" name="attr_melee-ability-mod" value="0" style="width:3.5em;"  class="sheet-calc" readonly="readonly" /></span>
 				<span class="sheet-table-data sheet-divider">+</span>
-				<span class="sheet-table-data sheet-center"><input title="@{size}" type="number" name="attr_size_display" value="0"  style="width:3.5em;" class="sheet-calc" readonly="readonly" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{size}" type="number" name="attr_size" value="0" style="width:3.5em;" class="sheet-calc" readonly="readonly" /></span>
 				<span class="sheet-table-data sheet-divider">+</span>
 				<span class="sheet-table-data sheet-center"><input title="@{attk-melee-misc}" type="number" name="attr_attk-melee-misc" value="0" /></span>
 				<span class="sheet-table-data sheet-divider">+</span>
@@ -1752,7 +1752,7 @@
 				</span>
 				<span class="sheet-table-data sheet-left"><input title="@{ranged-ability-mod}" type="number" name="attr_ranged-ability-mod" value="0" style="width:3.5em;" class="sheet-calc" readonly="readonly" /></span>
 				<span class="sheet-table-data sheet-divider">+</span>
-				<span class="sheet-table-data sheet-center"><input title="@{size}" type="number" name="attr_size_display" value="0"  style="width:3.5em;" class="sheet-calc" readonly="readonly" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{size}" type="number" name="attr_size" value="0" style="width:3.5em;" class="sheet-calc" readonly="readonly" /></span>
 				<span class="sheet-table-data sheet-divider">+</span>
 				<span class="sheet-table-data sheet-center"><input title="@{attk-ranged-misc}" type="number" name="attr_attk-ranged-misc" value="0" /></span>
 				<span class="sheet-table-data sheet-divider">+</span>
@@ -9253,10 +9253,11 @@
 				</select>
 				<br>Size
 			</span>
-            <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{size}" type="number" name="attr_size_display" value="0" class="sheet-calc" readonly="readonly" hidden /><br>Size-Mod</span>
-            <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{CMD-size}" type="number" name="attr_CMD-size" value="0" class="sheet-calc" readonly="readonly" hidden /><br>Size-CMD</span>
-            <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{size_skill}" type="number" name="attr_size_skill" value="0" class="sheet-calc" readonly="readonly" hidden /><br>Size-Skills</span>
-            <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{size_skill_double}" type="number" name="attr_size_skill_double" value="0" class="sheet-calc" readonly="readonly" hidden /><br>Size-Skills x2</span>
+            <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{size}" type="number" name="attr_size" value="Medium" class="sheet-calc" readonly="readonly" /><br>Size-Mod</span>
+            <span class="sheet-table-data sheet-center sheet-small-label" style="display:none;"><input title="@{size_display}" type="text" name="attr_size_display" value="Medium" accept="Size" /><br>Size</span>
+            <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{CMD-size}" type="number" name="attr_CMD-size" value="0" class="sheet-calc" readonly="readonly" /><br>Size-CMD</span>
+            <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{size_skill}" type="number" name="attr_size_skill" value="0" class="sheet-calc" readonly="readonly" /><br>Size-Skills</span>
+            <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{size_skill_double}" type="number" name="attr_size_skill_double" value="0" class="sheet-calc" readonly="readonly" /><br>Size-Skills x2</span>
             <span class="sheet-table-data sheet-center sheet-small-label" style="width:11%;" title="How many legs the character has. Affects carrying capacity">
                 <select title="@{legs}" name="attr_legs">
                     <option value="2" selected>&#8226;Bipedal</option>
@@ -9391,7 +9392,7 @@
 				<div class="sheet-table-row">
                     <span class="sheet-table-data sheet-center sheet-small-label" style="width:10%;"><input title="@{alignment}" type="text" name="attr_alignment" placeholder="Alignment" accept="Alignment" /><br>Alignment</span>
 				<span class="sheet-table-data sheet-center sheet-small-label" style="width:15%;">
-					<select title="@{size}" name="attr_size" accept="Size">
+                        <select title="@{size}" name="attr_size">
 						<option value="-8">Colossal</option>
 						<option value="-4">Gargantuan</option>
 						<option value="-2">Huge</option>
@@ -9404,12 +9405,13 @@
 					</select>
 					<br>Size
 				</span>
+                    <span class="sheet-table-data sheet-center sheet-small-label" style="display:none;"><input title="@{size_display}" type="text" name="attr_size_display" value="Medium" accept="Size" /><br>Size</span>
 				<span class="sheet-table-data sheet-center sheet-small-label" style="width:75%;"><input title="@{npc-type}" type="text" name="attr_npc-type" placeholder="Type (sub-type)" accept="Creature Type"/><br>Type/(sub-type)</span>
 			</div>
 		</div>
 		<div class="sheet-table">
 			<div class="sheet-table-row">
-                    <span class="sheet-table-data sheet-center" style="width: 10%; vertical-align: top;"><button title="%{selected|NPC-Initiative-Roll}" style="margin-top:-20px !important;" type="roll" name="roll_NPC-Initiative-Roll" value="@{NPC-whisper} &{template:pf_generic} {{color}} {{header_image=@{header_image-pf_generic}}} {{character_name=@{character_name}}} {{character_id=@{character_id}}} {{subtitle}} {{name=Initiative}} {{check=[[ ((1d20 + [[ @{init} ]]) + [[ abs((0.01 * @{init})) ]]) &{tracker} ]]}}">&nbsp;INIT</button></span>
+                    <span class="sheet-table-data sheet-center" style="width:10%; vertical-align: top;"><button title="%{selected|NPC-Initiative-Roll}" style="margin-top:-20px !important;" type="roll" name="roll_NPC-Initiative-Roll" value="@{NPC-whisper} &{template:pf_generic} {{color}} {{header_image=@{header_image-pf_generic}}} {{character_name=@{character_name}}} {{character_id=@{character_id}}} {{subtitle}} {{name=Initiative}} {{check=[[ ((1d20 + [[ @{init} ]]) + [[ {(0.01 * @{init}),0}kh1 ]]) &{tracker} ]]}}">&nbsp;INIT</button></span>
 				<span class="sheet-table-data sheet-center sheet-small-label" style="width:5%;"><input type="number" title="@{init}" name="attr_init" value="0"  class="sheet-calc" readonly="readonly" /><br>Init</span>
 				<span class="sheet-table-data sheet-center sheet-small-label">=&nbsp;<br>&nbsp;</span>
 				<span class="sheet-table-data sheet-center sheet-small-label" style="width:5%;"><input style="width:100%;" type="number" title="@{init-ability-mod}" name="attr_init-ability-mod" value="0"  class="sheet-calc" readonly="readonly" /><br>DEX</span>
@@ -9982,13 +9984,13 @@
 						</div>
 						<div class="sheet-table-row">
                                 <span class="sheet-table-data sheet-center"><button style="font-size:100%;" title="%{selected|NPC-Spell-Class-0-CL-Check}" type="roll" name="roll_NPC-Spell-Class-0-CL-Check" value="@{NPC-whisper} &{template:pf_generic} {{color}} {{header_image=@{header_image-pf_generic}}} {{character_name=@{character_name}}} {{character_id=@{character_id}}} {{subtitle}} {{name=CL Check}} {{Class=**@{spellclass-0-name} @{spellclass-0-level}**}} {{Check=[[ 1d20 + @{spellclass-0-level} + @{spellclass-0-level-misc} ]]}}">CL Check</button></span>
-							<span class="sheet-table-data sheet-center"><input title="@{spellclass-0-level-total}" type="number" name="attr_spellclass-0-level-total" value="(@{spellclass-0-level} + @{spellclass-0-level-misc})" disabled /></span>
+                                <span class="sheet-table-data sheet-center"><input title="@{spellclass-0-level-total}" type="number" name="attr_spellclass-0-level-total" value="0" class="sheet-calc" readonly="readonly" /></span>
 							<span class="sheet-table-data sheet-divider">=</span>
 							<span class="sheet-table-data sheet-center"><input title="@{spellclass-0-level}" type="number" name="attr_spellclass-0-level" value="0" /></span>
 							<span class="sheet-table-data sheet-divider">+</span>
 							<span class="sheet-table-data sheet-center"><input title="@{spellclass-0-level-misc}" type="number" name="attr_spellclass-0-level-misc" value="0" /></span>
                                 <span class="sheet-table-data sheet-center"><button style="font-size:100%;" title="%{selected|NPC-Concentration-Check-0}" type="roll" name="roll_NPC-Concentration-Check-0" value="@{NPC-whisper} &{template:pf_generic} {{color}} {{header_image=@{header_image-pf_generic}}} {{character_name=@{character_name}}} {{character_id=@{character_id}}} {{subtitle}} {{name=Concentration Check}} {{Class=**@{spellclass-0-name} @{spellclass-0-level}**}} {{Check=[[ 1d20 + @{Concentration-0} ]]}}">Concentration</button></span>
-							<span class="sheet-table-data sheet-center"><input title="@{Concentration-0}" type="number" name="attr_Concentration-0" value="(@{spellclass-0-level} + @{Concentration-0-ability} + @{Concentration-0-misc})" disabled /></span>
+                                <span class="sheet-table-data sheet-center"><input title="@{Concentration-0}" type="number" name="attr_Concentration-0" value="0" class="sheet-calc" readonly="readonly" /></span>
 							<span class="sheet-table-data sheet-divider">=</span>
 							<span class="sheet-table-data sheet-center">
 								<select title="@{Concentration-0-ability}" name="attr_Concentration-0-ability">
@@ -10021,9 +10023,9 @@
 									<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_npc-spell-like-abilities_$X_used}" type="number" name="attr_used" value="0" /><br>Uses/Day</span>
 									<span class="sheet-table-data sheet-center sheet-small-label" style="width:20%;"><input title="@{repeating_npc-spell-like-abilities_$X_name}" type="text" name="attr_name" placeholder="Name" /><br>Name</span>
                                         <span class="sheet-table-data sheet-center sheet-small-label" style="width:25%;"><input title="@{repeating_npc-spell-like-abilities_$X_short-description}" type="text" name="attr_short-description" placeholder="Short Description" /><br>Short Desc</span>
-									<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_npc-spell-like-abilities_$X_level}" type="text" name="attr_level" value="0" placeholder="N/A" /><br>Level</span>
-									<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_npc-spell-like-abilities_$X_range}" type="text" name="attr_range" value="" placeholder="N/A" /><br>Range</span>
-									<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_npc-spell-like-abilities_$X_duration}" type="text" name="attr_duration" value="" placeholder="N/A" /><br>Duration</span>
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_npc-spell-like-abilities_$X_level}" type="text" name="attr_level" value="0" placeholder="Spell Level" /><br>Level</span>
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_npc-spell-like-abilities_$X_range}" type="text" name="attr_range" value="" placeholder="Range" /><br>Range</span>
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_npc-spell-like-abilities_$X_duration}" type="text" name="attr_duration" value="" placeholder="Duration" /><br>Duration</span>
 									<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_npc-spell-like-abilities_$X_save}" type="text" name="attr_save" value="" placeholder="Save" /><br>Save</span>
 									<span class="sheet-table-data sheet-center sheet-small-label" style="width:5.5em;">
 										<select title="@{repeating_npc-spell-like-abilities_$X_sr}" name="attr_sr">
@@ -10082,13 +10084,13 @@
 						</div>
 						<div class="sheet-table-row">
                                 <span class="sheet-table-data sheet-center"><button style="font-size:100%;" title="%{selected|NPC-Spell-Class-1-CL-Check}" type="roll" name="roll_NPC-Spell-Class-1-CL-Check" value="@{NPC-whisper} &{template:pf_generic} {{color}} {{header_image=@{header_image-pf_generic}}} {{character_name=@{character_name}}} {{character_id=@{character_id}}} {{subtitle}} {{name=CL Check}} {{Class=**@{spellclass-1-name} @{spellclass-1-level}**}} {{Check=[[ 1d20 + @{spellclass-1-level} + @{spellclass-1-level-misc} ]]}}">CL Check</button></span>
-							<span class="sheet-table-data sheet-center"><input title="@{spellclass-1-level-total}" type="number" name="attr_spellclass-1-level-total" value="(@{spellclass-1-level} + @{spellclass-1-level-misc})" disabled /></span>
+                                <span class="sheet-table-data sheet-center"><input title="@{spellclass-1-level-total}" type="number" name="attr_spellclass-1-level-total" value="0" class="sheet-calc" readonly="readonly" /></span>
 							<span class="sheet-table-data sheet-divider">=</span>
 							<span class="sheet-table-data sheet-center"><input title="@{spellclass-1-level}" type="number" name="attr_spellclass-1-level" value="0" /></span>
 							<span class="sheet-table-data sheet-divider">+</span>
 							<span class="sheet-table-data sheet-center"><input title="@{spellclass-1-level-misc}" type="number" name="attr_spellclass-1-level-misc" value="0" /></span>
                                 <span class="sheet-table-data sheet-center"><button style="font-size:100%;" title="%{selected|NPC-Concentration-Check-1}" type="roll" name="roll_NPC-Concentration-Check-1" value="@{NPC-whisper} &{template:pf_generic} {{color}} {{header_image=@{header_image-pf_generic}}} {{character_name=@{character_name}}} {{character_id=@{character_id}}} {{subtitle}} {{name=Concentration Check}} {{Class=**@{spellclass-1-name} @{spellclass-1-level}**}} {{Check=[[ 1d20 + @{Concentration-1} ]]}}">Concentration</button></span>
-							<span class="sheet-table-data sheet-center"><input title="@{Concentration-1}" type="number" name="attr_Concentration-1" value="(@{spellclass-1-level} + @{Concentration-1-ability} + @{Concentration-1-misc})" disabled /></span>
+                                <span class="sheet-table-data sheet-center"><input title="@{Concentration-1}" type="number" name="attr_Concentration-1" value="0" class="sheet-calc" readonly="readonly" /></span>
 							<span class="sheet-table-data sheet-divider">=</span>
 							<span class="sheet-table-data sheet-center">
 								<select title="@{Concentration-1-ability}" name="attr_Concentration-1-ability">
@@ -10121,10 +10123,10 @@
 									<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_npc-spells1_$X_used}" type="number" name="attr_used" value="0" /><br>Uses/Day</span>
 									<span class="sheet-table-data sheet-center sheet-small-label" style="width:20%;"><input title="@{repeating_npc-spells1_$X_name}" type="text" name="attr_name" placeholder="Name" /><br>Name</span>
                                         <span class="sheet-table-data sheet-center sheet-small-label" style="width:25%;"><input title="@{repeating_npc-spells1_$X_short-description}" type="text" name="attr_short-description" placeholder="Short Description" /><br>Short Desc</span>
-									<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_npc-spells1_$X_level}" type="text" name="attr_level" value="N/A" placeholder="N/A" /><br>Level</span>
-									<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_npc-spells1_$X_range}" type="text" name="attr_range" value="N/A" placeholder="N/A" /><br>Range</span>
-									<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_npc-spells1_$X_duration}" type="text" name="attr_duration" value="N/A" placeholder="N/A" /><br>Duration</span>
-									<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_npc-spells1_$X_save}" type="text" name="attr_save" value="N/A" placeholder="Save" /><br>Save</span>
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_npc-spells1_$X_level}" type="text" name="attr_level" value="" placeholder="Spell Level" /><br>Level</span>
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_npc-spells1_$X_range}" type="text" name="attr_range" value="" placeholder="Range" /><br>Range</span>
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_npc-spells1_$X_duration}" type="text" name="attr_duration" value="" placeholder="Duration" /><br>Duration</span>
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_npc-spells1_$X_save}" type="text" name="attr_save" value="" placeholder="Save" /><br>Save</span>
 									<span class="sheet-table-data sheet-center sheet-small-label" style="width:5.5em;">
 										<select title="@{repeating_npc-spells1_$X_sr}" name="attr_sr">
 											<option value="" selected>&#8226;Select SR</option>
@@ -10180,13 +10182,13 @@
 						</div>
 						<div class="sheet-table-row">
                                 <span class="sheet-table-data sheet-center"><button style="font-size:100%;" title="%{selected|NPC-Spell-Class-2-CL-Check}" type="roll" name="roll_NPC-Spell-Class-2-CL-Check" value="@{NPC-whisper} &{template:pf_generic} {{color}} {{header_image=@{header_image-pf_generic}}} {{character_name=@{character_name}}} {{character_id=@{character_id}}} {{subtitle}} {{name=CL Check}} {{Class=**@{spellclass-2-name} @{spellclass-2-level}**}} {{Check=[[ 1d20 + @{spellclass-2-level} + @{spellclass-2-level-misc} ]]}}">CL Check</button></span>
-							<span class="sheet-table-data sheet-center"><input title="@{spellclass-2-level-total}" type="number" name="attr_spellclass-2-level-total" value="(@{spellclass-2-level} + @{spellclass-2-level-misc})" disabled /></span>
+                                <span class="sheet-table-data sheet-center"><input title="@{spellclass-2-level-total}" type="number" name="attr_spellclass-2-level-total" value="0" class="sheet-calc" readonly="readonly" /></span>
 							<span class="sheet-table-data sheet-divider">=</span>
 							<span class="sheet-table-data sheet-center"><input title="@{spellclass-2-level}" type="number" name="attr_spellclass-2-level" value="0" /></span>
 							<span class="sheet-table-data sheet-divider">+</span>
 							<span class="sheet-table-data sheet-center"><input title="@{spellclass-2-level-misc}" type="number" name="attr_spellclass-2-level-misc" value="0" /></span>
                                 <span class="sheet-table-data sheet-center"><button style="font-size:100%;" title="%{selected|NPC-Concentration-Check-2}" type="roll" name="roll_NPC-Concentration-Check-2" value="@{NPC-whisper} &{template:pf_generic} {{color}} {{header_image=@{header_image-pf_generic}}} {{character_name=@{character_name}}} {{character_id=@{character_id}}} {{subtitle}} {{name=Concentration Check}} {{Class=**@{spellclass-2-name} @{spellclass-2-level}**}} {{Check=[[ 1d20 + @{Concentration-2} ]]}}">Concentration</button></span>
-							<span class="sheet-table-data sheet-center"><input title="@{Concentration-2}" type="number" name="attr_Concentration-2" value="(@{spellclass-2-level} + @{Concentration-2-ability} + @{Concentration-2-misc})" disabled /></span>
+                                <span class="sheet-table-data sheet-center"><input title="@{Concentration-2}" type="number" name="attr_Concentration-2" value="0" class="sheet-calc" readonly="readonly" /></span>
 							<span class="sheet-table-data sheet-divider">=</span>
 							<span class="sheet-table-data sheet-center">
 								<select title="@{Concentration-2-ability}" name="attr_Concentration-2-ability">
@@ -10219,10 +10221,10 @@
 									<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_npc-spells2_$X_used}" type="number" name="attr_used" value="0" /><br>Uses/Day</span>
 									<span class="sheet-table-data sheet-center sheet-small-label" style="width:20%;"><input title="@{repeating_npc-spells2_$X_name}" type="text" name="attr_name" placeholder="Name" /><br>Name</span>
                                         <span class="sheet-table-data sheet-center sheet-small-label" style="width:25%;"><input title="@{repeating_npc-spells2_$X_short-description}" type="text" name="attr_short-description" placeholder="Short Description" /><br>Short Desc</span>
-									<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_npc-spells2_$X_level}" type="text" name="attr_level" value="N/A" placeholder="N/A" /><br>Level</span>
-									<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_npc-spells2_$X_range}" type="text" name="attr_range" value="N/A" placeholder="N/A" /><br>Range</span>
-									<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_npc-spells2_$X_duration}" type="text" name="attr_duration" value="N/A" placeholder="N/A" /><br>Duration</span>
-									<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_npc-spells2_$X_save}" type="text" name="attr_save" value="N/A" placeholder="Save" /><br>Save</span>
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_npc-spells2_$X_level}" type="text" name="attr_level" value="" placeholder="Spell Level" /><br>Level</span>
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_npc-spells2_$X_range}" type="text" name="attr_range" value="" placeholder="Range" /><br>Range</span>
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_npc-spells2_$X_duration}" type="text" name="attr_duration" value="" placeholder="Duration" /><br>Duration</span>
+                                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_npc-spells2_$X_save}" type="text" name="attr_save" value="" placeholder="Save" /><br>Save</span>
 									<span class="sheet-table-data sheet-center sheet-small-label" style="width:5.5em;">
 										<select title="@{repeating_npc-spells2_$X_sr}" name="attr_sr">
 											<option value="" selected>&#8226;Select SR</option>
@@ -13718,25 +13720,65 @@ var PFSheet = PFSheet || (function () {
     /*updateSize
     * When size attribute is changed, update CMD-size, size_display, size_skill, size_skill_double
     */
-    updateSize = function () {
+	updateSizeFromText = function () {
     	getAttrs(["size", "size_display"], function (v) {
-    		var size = parseInt(v.size, 10) || 0, currsize = parseInt(v.size_display, 10) || 0,
-            skillSize, cmbsize, doubleSkill;
-    		switch (Math.abs(size)) {
-    			case 0: skillSize = 0; break;
-    			case 1: skillSize = 2; break;
-    			case 2: skillSize = 4; break;
-    			case 4: skillSize = 6; break;
-    			case 8: skillSize = 8; break;
-    			case 16: skillSize = 10; break;
-    			default: skillSize = 0;
-    		}
-    		if (size < 0) { skillSize = skillSize * -1; }
+			var currSize = parseInt(v.size, 10) || 0,
+				sizeDisplay = v["size_display"],
+				size = 0, cmbsize = 0, skillSize = 0, doubleSkill = 0, badsize = false;
+			//TAS.debug("updateSizeFromText","sizeDisplay",sizeDisplay,"currsize",currSize);
+			if (!sizeDisplay) { return; }
+			sizeDisplay = sizeDisplay.toLowerCase();
+			switch (sizeDisplay) {
+				case "medium": break;
+				case "colossal": size = -8; skillSize = -8; break;
+				case "gargantuan": size = -4; skillSize = -6; break;
+				case "huge": size = -2; skillSize = -4; break;
+				case "large": size = -1; skillSize = -2; break;
+				case "small": size = 1; skillSize = 2; break;
+				case "tiny": size = 2; skillSize = 4; break;
+				case "diminutive": size = 4; skillSize = 6; break;
+				case "fine": size = 8; skillSize = 8; break;
+				default:
+					return;
+			}
+			//TAS.debug("updateSizeFromText","badsize",badsize,"size",size,"skillSize",skillSize);
+			doubleSkill = 2 * skillSize;
     		cmbsize = size * -1;
+			if (size !== currSize) {
+				setAttrs({ "size": size, "size_skill": skillSize, "CMD-size": cmbsize, "size_skill_double": doubleSkill });
+				updateDamageNote(size, currSize);
+			}
+
+		});
+	},
+	updateSize = function () {
+		getAttrs(["size", "CMD-size", "size_display"], function (v) {
+			var size = parseInt(v.size, 10) || 0, currsize = (parseInt(v["CMD-size"], 10) || 0) * -1,
+				cmbsize = 0, skillSize = 0, doubleSkill = 0, sizeDisplay = "Medium";
+
+			switch (size) {
+				case 0: break;
+				case -8: skillSize = -8; sizeDisplay = "Colossal"; break;
+				case -4: skillSize = -6; sizeDisplay = "Gargantuan"; break;
+				case -2: skillSize = -4; sizeDisplay = "Huge"; break;
+				case -1: skillSize = -2; sizeDisplay = "Large"; break;
+				case 1: skillSize = 2; sizeDisplay = "Small"; break;
+				case 2: skillSize = 4; sizeDisplay = "Tiny"; break;
+				case 4: skillSize = 6; sizeDisplay = "Diminutive"; break;
+				case 8: skillSize = 8; sizeDisplay = "Fine"; break;
+				default:
+					return;
+			}
     		doubleSkill = 2 * skillSize;
+			cmbsize = size * -1;
     		if (size !== currsize) {
-    			setAttrs({ "size_display": size, "size_skill": skillSize, "CMD-size": cmbsize, "size_skill_double": doubleSkill });
-    		}
+				setAttrs({ "size_skill": skillSize, "CMD-size": cmbsize, "size_skill_double": doubleSkill });
+				setAttrs({ "size_display": sizeDisplay }, { quiet: true });
+				updateDamageNote(size, currsize);
+			} else if (v["size_display"] !== sizeDisplay) {
+				//fix size display for old sheets
+				setAttrs({ "size_display": sizeDisplay }, { quiet: true });
+			}
     	});
     },
 
@@ -14662,15 +14704,14 @@ var PFSheet = PFSheet || (function () {
 	/* updates notes for damage row of grid
 	* sets reminder on @{DMG-cnote} to increase the damage die if size changes.
 	* CB: DO WE REALLY NEED THIS? IT DOESN'T GET REMOVED IF THEY DO SO IT"S PRETTY USLESS
-	* Plus it's not even in the rolltable. so safe to remove :)
+	* Plus it's not even in the rolltable. so safe to remove 
 	*/
-     updateDamageNote = function () {
-     	getAttrs(["size", "DMG-cnote"], function (v) {
-     		var size = (parseInt(v["size"], 10) || 0),
-                note = "";
-     		if (size < 0) {
+	updateDamageNote = function (size, currsize) {
+		getAttrs(["DMG-cnote"], function (v) {
+			var note = "";
+			if (size > currsize) {
      			note = "Increase damage die";
-     		} else if (size > 0) {
+			} else if (size < currsize) {
      			note = "Decrease damage die";
      		}
      		if (v["DMG-cnote"] !== note) {
@@ -16229,7 +16270,7 @@ var PFSheet = PFSheet || (function () {
     			updateClassInformation(col);
     		});
 
-    		updateSize();
+
     		updateInit();
     		SWUtils.evaluateAndSetNumber("HP-formula-macro-text", "HP-formula-mod");
     		updateHP();
@@ -16393,7 +16434,8 @@ var PFSheet = PFSheet || (function () {
     		// Find old buff data then create repeating_buff entries for them then clear out old attributes
     		migrateBuffs();
     		recalculateAllBuffs();
-    	}
+			updateSize();
+		}
     },
 
 
@@ -16473,6 +16515,7 @@ var PFSheet = PFSheet || (function () {
 		},
 		version: version,
 		updateSize: updateSize,
+		updateSizeFromText: updateSizeFromText,
 		updateAbility: updateAbility,
 		updateModifiedSpeed: updateModifiedSpeed,
 		updateGrapple: updateGrapple,
@@ -16980,10 +17023,17 @@ on("change:repeating_weapon:enhance",
 
 //size
 on("change:size",
-	TAS.callback(function eventUpdateSizeAndDamageNote(eventInfo) {
+	TAS.callback(function eventUpdateSize(eventInfo) {
 		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
 		PFSheet.updateSize();
-		PFSheet.updateDamageNote();
+	})
+);
+//compendium copy will fire this one
+on("change:size_display",
+	TAS.callback(function eventUpdateSizeText(eventInfo) {
+		TAS.debug("caught size_display event");
+		TAS.notice("YEAH BABY YEAH");
+		PFSheet.updateSizeFromText();
 	})
 );
 

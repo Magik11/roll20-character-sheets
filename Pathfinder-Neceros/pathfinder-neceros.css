@@ -40,7 +40,6 @@ input[type="checkbox"].sheet-options-show, input[type="checkbox"].sheet-desc-sho
 input[type="checkbox"].sheet-repeating_ids-show {
 	opacity: 0;height: 1.5em; position: relative; top: 0; left: 0; cursor: pointer; z-index: 1;
 }
-
 input[type="checkbox"].sheet-options-show{
 width:70px;
 margin:0px -15px 0px -55px;
@@ -192,12 +191,12 @@ span.sheet-table-header.sheet-divider-lg,span.sheet-table-header.sheet-divider {
 .sheet-sect-buff input.sheet-options-show, .sheet-sect-buff input.sheet-desc-show,
 .sheet-sect-buff input.sheet-repeating_ids-show {
 	width:auto;
-    margin-left: 0px;
+	margin-left:0;
 }
 .sheet-sect-buff .sheet-options-show + span,
 .sheet-sect-buff input.sheet-desc-show + span,
 .sheet-sect-buff input.sheet-repeating_ids-show + span {
-	margin-right:1em;
+	margin-right:0;
 }
 
 /* narrow when two columns */
@@ -220,26 +219,6 @@ input[type="checkbox"].sheet-split-column-show:checked  ~div.sheet-sect-buff .re
 	margin-right:.5em;
 }
 
-/* try two 
-input[type="checkbox"].sheet-split-column-show:checked  ~div .sheet-buff-name input[type="text"]  {
-	width:8em;
-}
-input[type="checkbox"].sheet-split-column-show:checked  ~div .sheet-table-buff  .sheet-skill-macro-text {
-	width:3.5em;
-}
-input[type="checkbox"].sheet-split-column-show:checked  ~div .sheet-table-buff  input.sheet-calc {
-	width:3.5em;
-}
-
-input[type="checkbox"].sheet-split-column-show:checked ~div input[type="checkbox"].sheet-counted,
-input[type="checkbox"].sheet-split-column-show:checked ~div input[type="checkbox"].sheet-counted + span,
-input[type="checkbox"].sheet-split-column-show:checked ~div .sheet-buff-toggle {
-	width:2.5em;
-}
-input[type="checkbox"].sheet-split-column-show:checked  ~div .sheet-options span {
-	margin-right:.5em;
-}
-*/
 
 .sheet-center {
 	text-align: center;
@@ -717,6 +696,15 @@ input.sheet-counted + span {
 span.sheet-repeating-rollbutton {
 	width:4%;
 }
+input[type="checkbox"].sheet-split-column-show:checked input.sheet-counted {
+	width:5.5%;
+}
+input[type="checkbox"].sheet-split-column-show:checked input.sheet-counted + span {
+	width:8%;
+}
+input[type="checkbox"].sheet-split-column-show:checked span.sheet-repeating-rollbutton {
+	width:6%;
+}
 /*Expand to cross both columns */
 .sheet-repeating-sect .repcontrol {
 	display:block;
@@ -742,16 +730,6 @@ input.sheet-split-column-show:checked  ~div .repitem:nth-child(even){
 }
 input.sheet-split-column-show:checked  ~div .repitem:nth-child(odd){
 	float:left;
-}
-
-input[type="checkbox"].sheet-split-column-show:checked ~div .repitem  input.sheet-counted {
-	width:5.5%;
-}
-input[type="checkbox"].sheet-split-column-show:checked ~div .repitem  input.sheet-counted + span {
-	width:8%;
-}
-input[type="checkbox"].sheet-split-column-show:checked ~div .repitem span.sheet-repeating-rollbutton {
-	width:6%;
 }
 
 /* shrink when moving and hide button decorations */
