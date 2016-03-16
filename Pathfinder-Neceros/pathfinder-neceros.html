@@ -1,6 +1,6 @@
 <div>
 	<b style="color:red;font-size:150%;">Attention: </b>
-	<input type="checkbox" class="sheet-sect-show" title="@{attention-show}" name="attr_attention-show" value="1" style="opacity: 0;width: 115px;height: 1.5em;position: relative;top: 0;left: 0;margin: -5px -15px 0 -100px;cursor: pointer;z-index: 1;" checked="checked" /><span></span>
+    <input type="checkbox" class="sheet-sect-show" title="@{attention-show}" name="attr_attention-show" value="1" style="width:115px; margin:-5px -15px 0 -100px;" checked="checked" /><span></span>
 	<div class="sheet-footer sheet-sect" style="text-align:left; padding:5px; margin:5px;">
 		<ol>
 			<li>Buttons within repeating sections can now be dragged to the macro quick bar. To learn the id/name of a button, drag/drop it to the macro quick bar, use the button, click in chat and hit the UP arrow. Each repeating row now includes the row ID.</li>
@@ -58,7 +58,7 @@
 	<div class="sheet-table sheet-header-row">&nbsp;</div>
 	<div>
 		<b>Ability Scores</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{ability-scores-show}" name="attr_ability-scores-show" value="1" style="opacity:0;width: 105px; height:1.5em; position:relative; top:0; left:0;margin: 0 -15px 0 -90px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{ability-scores-show}" name="attr_ability-scores-show" value="1" style="width:105px; margin:0 -15px 0 -90px;" checked="checked" /><span></span>
 		<div class="sheet-table sheet-sect">
 			<span class="sheet-table-name">Ability Scores</span>
 			<div class="sheet-table-row">
@@ -176,75 +176,183 @@
 		</div>
 		<br>
 	</div>
-    <div class="sheet-repeating-sect" style="margin-top:-15px;">
+    <div class="sheet-repeating-sect">
 		<b>Buffs</b>
 		<input type="checkbox" class="sheet-sect-show" title="@{buffs-show}" name="attr_buffs-show" value="1" style="opacity:0;width: 50px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -35px; cursor:pointer; z-index:1;" /><span></span>
         <input type="checkbox" class="sheet-sect sheet-expand-show" title="Collapse or expand all rows." name="attr_buff-expand-show" value="1" style="opacity: 0;height: 1.5em;width: 20px; margin: 0px -20px 2px 0;z-index: 1;cursor: help;" /><span></span>
         <input type="checkbox" class="sheet-sect sheet-split-column-show" value="1" name="attr_buff-column-show" title="Two or one column rows" /><span class="sheet-sect"></span>
         <div class="sheet-table sheet-sect">
 				<span class="sheet-table-name">Buffs</span>
-            <div class="sheet-repeating-fields">
+        </div>
+        <div class="sheet-sect sheet-repeating-fields sheet-sect-buff">
                 <fieldset class="repeating_buff">
-                    <input type="checkbox" class="sheet-counted sheet-sect-show" name="attr_buff-show" title="@{repeating_buff_$X_buff-show}" value="1" style="opacity:0 ; height:1.5em ; position: absolute ; top:20px; width:3.5% ; cursor:pointer ; z-index:1" checked="checked" />
-                    <span class="sheet-table-data sheet-center" style="width:4%;"></span>
-                    <span class="sheet-table-data sheet-center sheet-small-label" style="padding-top: 8px;"><input type="checkbox" name="attr_buff-enable_toggle" title="@{repeating_buff_$X_buff-enable_toggle}" value="1" style="width:15px;height:15px;" /><br>Enabled</span>
-                    <span class="sheet-table-data sheet-center sheet-small-label" style="width:30%"><input type="text" name="attr_buff-name" title="@{repeating_buff_$X_buff-name}" placeholder="Name" /><br>Name</span>
-                    <span class="sheet-table-data sheet-center" style="width:70%">
-                        <textarea class="sheet-buff-notes" name="attr_buff-notes" title="@{repeating_buff_$X_buff-notes}" placeholder="Buff Notes"></textarea>
-                        <label class="sheet-center sheet-small-label">Notes</label>
-                    </span>
-                    <div class="sheet-sect sheet-expand">
-                        <div class="sheet-table">
+                <input type="checkbox" class="sheet-counted sheet-sect-show" name="attr_buff-show" title="@{repeating_buff_$X_buff-show}" value="1" style="opacity:0; cursor:pointer; z-index:1;" checked="checked" />
+                <span class="sheet-table-data sheet-center"></span>
+                <span class="sheet-table-data sheet-center sheet-small-label sheet-buff-toggle" style="padding-top: 8px;" title="When checked, this buff is active and will count towards the totals, which will then affect the rest of the sheet. Also, only the visible/selected buffs will count towards the totals."><input type="checkbox" name="attr_buff-enable_toggle" title="@{repeating_buff_$X_buff-enable_toggle}" value="1" /><br>Enabled</span>
+                <span class="sheet-table-data sheet-center sheet-small-label sheet-buff-name" style="padding-left:1em;padding-right:1em;"><input type="text" name="attr_buff-name" title="@{repeating_buff_$X_buff-name}" placeholder="Name" /><br>Name</span>
+
+                <input class="sheet-b-str-show" type="checkbox" title="@{repeating_buff_$X_buff-STR-show}" name="attr_buff-STR-show" value="1" style="display:none;" />
+                <input class="sheet-b-dex-show" type="checkbox" title="@{repeating_buff_$X_buff-DEX-show}" name="attr_buff-DEX-show" value="1" style="display:none;" />
+                <input class="sheet-b-con-show" type="checkbox" title="@{repeating_buff_$X_buff-CON-show}" name="attr_buff-CON-show" value="1" style="display:none;" />
+                <input class="sheet-b-int-show" type="checkbox" title="@{repeating_buff_$X_buff-INT-show}" name="attr_buff-INT-show" value="1" style="display:none;" />
+                <input class="sheet-b-wis-show" type="checkbox" title="@{repeating_buff_$X_buff-WIS-show}" name="attr_buff-WIS-show" value="1" style="display:none;" />
+                <input class="sheet-b-cha-show" type="checkbox" title="@{repeating_buff_$X_buff-CHA-show}" name="attr_buff-CHA-show" value="1" style="display:none;" />
+                <input class="sheet-b-ranged-show" type="checkbox" title="@{repeating_buff_$X_buff-Ranged-show}" name="attr_buff-Ranged-show" value="1" style="display:none;" />
+                <input class="sheet-b-melee-show" type="checkbox" title="@{repeating_buff_$X_buff-Melee-show}" name="attr_buff-Melee-show" value="1" style="display:none;" />
+                <input class="sheet-b-dmg-show" type="checkbox" title="@{repeating_buff_$X_buff-DMG-show}" name="attr_buff-DMG-show" value="1" style="display:none;" />
+                <input class="sheet-b-ac-show" type="checkbox" title="@{repeating_buff_$X_buff-AC-show}" name="attr_buff-AC-show" value="1" style="display:none;" />
+                <input class="sheet-b-touch-show" type="checkbox" title="@{repeating_buff_$X_buff-Touch-show}" name="attr_buff-Touch-show" value="1" style="display:none;" />
+                <input class="sheet-b-cmd-show" type="checkbox" title="@{repeating_buff_$X_buff-CMD-show}" name="attr_buff-CMD-show" value="1" style="display:none;" />
+                <input class="sheet-b-hp-temp-show" type="checkbox" title="@{repeating_buff_$X_buff-HP-temp-show}" name="attr_buff-HP-temp-show" value="1" style="display:none;" />
+                <input class="sheet-b-fort-show" type="checkbox" title="@{repeating_buff_$X_buff-Fort-show}" name="attr_buff-Fort-show" value="1" style="display:none;" />
+                <input class="sheet-b-will-show" type="checkbox" title="@{repeating_buff_$X_buff-Will-show}" name="attr_buff-Will-show" value="1" style="display:none;" />
+                <input class="sheet-b-ref-show" type="checkbox" title="@{repeating_buff_$X_buff-Ref-show}" name="attr_buff-Ref-show" value="1" style="display:none;" />
+                <input class="sheet-b-check-show" type="checkbox" title="@{repeating_buff_$X_buff-Check-show}" name="attr_buff-Check-show" value="1" style="display:none;" />
+                <input class="sheet-b-casterlevel-show" type="checkbox" title="@{repeating_buff_$X_buff-CasterLevel-show}" name="attr_buff-CasterLevel-show" value="1" style="display:none;" />
+
+                <div class="sheet-table-buff sheet-sect sheet-b-str">
+                    <div class="sheet-table-row">
+                        <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-STR_macro-text" title="@{repeating_buff_$X_buff-STR_macro-text}" placeholder="# or macro" value="" /><br>STR</span>
+                        <span class="sheet-table-data sheet-center sheet-small-label"><input type="number" min="0" name="attr_buff-STR" title="@{repeating_buff_$X_buff-STR}" value="0" style="width:40px;" class="sheet-calc" readonly="readonly" /><br>Mod</span>
+                    </div>
+                </div>
+                <div class="sheet-table-buff sheet-sect sheet-b-dex">
+                    <div class="sheet-table-row">
+                        <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-DEX_macro-text" title="@{repeating_buff_$X_buff-DEX_macro-text}" placeholder="# or macro" value="" /><br>DEX</span>
+                        <span class="sheet-table-data sheet-center sheet-small-label"><input type="number" min="0" name="attr_buff-DEX" title="@{repeating_buff_$X_buff-DEX}" value="0" style="width:40px;" class="sheet-calc" readonly="readonly" /><br>Mod</span>
+                    </div>
+                </div>
+                <div class="sheet-table-buff sheet-sect sheet-b-con">
+                    <div class="sheet-table-row">
+                        <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-CON_macro-text" title="@{repeating_buff_$X_buff-CON_macro-text}" placeholder="# or macro" value="" /><br>CON</span>
+                        <span class="sheet-table-data sheet-center sheet-small-label"><input type="number" min="0" name="attr_buff-CON" title="@{repeating_buff_$X_buff-CON}" value="0" style="width:40px;" class="sheet-calc" readonly="readonly" /><br>Mod</span>
+                    </div>
+                </div>
+                <div class="sheet-table-buff sheet-sect sheet-b-int">
+                    <div class="sheet-table-row">
+                        <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-INT_macro-text" title="@{repeating_buff_$X_buff-INT_macro-text}" placeholder="# or macro" value="" /><br>INT</span>
+                        <span class="sheet-table-data sheet-center sheet-small-label"><input type="number" min="0" name="attr_buff-INT" title="@{repeating_buff_$X_buff-INT}" value="0" style="width:40px;" class="sheet-calc" readonly="readonly" /><br>Mod</span>
+                    </div>
+                </div>
+                <div class="sheet-table-buff sheet-sect sheet-b-wis">
+                    <div class="sheet-table-row">
+                        <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-WIS_macro-text" title="@{repeating_buff_$X_buff-WIS_macro-text}" placeholder="# or macro" value="" /><br>WIS</span>
+                        <span class="sheet-table-data sheet-center sheet-small-label"><input type="number" min="0" name="attr_buff-WIS" title="@{repeating_buff_$X_buff-WIS}" value="0" style="width:40px;" class="sheet-calc" readonly="readonly" /><br>Mod</span>
+                    </div>
+                </div>
+                <div class="sheet-table-buff sheet-sect sheet-b-cha">
                             <div class="sheet-table-row">
-                                <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-STR_macro-text" title="@{repeating_buff_$X_buff-STR_macro-text}" placeholder="0" /><br>STR</span>
-                                <span class="sheet-table-data sheet-center sheet-small-label"><input type="number" name="attr_buff-STR" title="@{repeating_buff_$X_buff-STR}" value="0" style="width:40px;" class="sheet-calc" readonly="readonly" /><br>Mod</span>
-                                <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-DEX_macro-text" title="@{repeating_buff_$X_buff-DEX_macro-text}" placeholder="0" /><br>DEX</span>
-                                <span class="sheet-table-data sheet-center sheet-small-label"><input type="number" name="attr_buff-DEX" title="@{repeating_buff_$X_buff-DEX}" value="0" style="width:40px;" class="sheet-calc" readonly="readonly" /><br>Mod</span>
-                                <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-CON_macro-text" title="@{repeating_buff_$X_buff-CON_macro-text}" placeholder="0" /><br>CON</span>
-                                <span class="sheet-table-data sheet-center sheet-small-label"><input type="number" name="attr_buff-CON" title="@{repeating_buff_$X_buff-CON}" value="0" style="width:40px;" class="sheet-calc" readonly="readonly" /><br>Mod</span>
-                                <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-INT_macro-text" title="@{repeating_buff_$X_buff-INT_macro-text}" placeholder="0" /><br>INT</span>
-                                <span class="sheet-table-data sheet-center sheet-small-label"><input type="number" name="attr_buff-INT" title="@{repeating_buff_$X_buff-INT}" value="0" style="width:40px;" class="sheet-calc" readonly="readonly" /><br>Mod</span>
-                                <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-WIS_macro-text" title="@{repeating_buff_$X_buff-WIS_macro-text}" placeholder="0" /><br>WIS</span>
-                                <span class="sheet-table-data sheet-center sheet-small-label"><input type="number" name="attr_buff-WIS" title="@{repeating_buff_$X_buff-WIS}" value="0" style="width:40px;" class="sheet-calc" readonly="readonly" /><br>Mod</span>
-                                <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-CHA_macro-text" title="@{repeating_buff_$X_buff-CHA_macro-text}" placeholder="0" /><br>CHA</span>
-                                <span class="sheet-table-data sheet-center sheet-small-label"><input type="number" name="attr_buff-CHA" title="@{repeating_buff_$X_buff-CHA}" value="0" style="width:40px;" class="sheet-calc" readonly="readonly" /><br>Mod</span>
+                        <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-CHA_macro-text" title="@{repeating_buff_$X_buff-CHA_macro-text}" placeholder="# or macro" value="" /><br>CHA</span>
+                        <span class="sheet-table-data sheet-center sheet-small-label"><input type="number" min="0" name="attr_buff-CHA" title="@{repeating_buff_$X_buff-CHA}" value="0" style="width:40px;" class="sheet-calc" readonly="readonly" /><br>Mod</span>
                             </div>
 					</div>
-                        <div class="sheet-table">
+                <div class="sheet-table-buff sheet-sect sheet-b-fort">
                             <div class="sheet-table-row">
-                                <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-HP-temp_macro-text" title="@{repeating_buff_$X_buff-HP-temp_macro-text}" placeholder="0" /><br>Temp HP</span>
-                                <span class="sheet-table-data sheet-center sheet-small-label"><input type="number" name="attr_buff-HP-temp" title="@{repeating_buff_$X_buff-HP-temp}" value="0" style="width:40px;" class="sheet-calc" readonly="readonly" /><br>Mod</span>
-                                <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-Fort_macro-text" title="@{repeating_buff_$X_buff-Fort_macro-text}" placeholder="0" /><br>Fort</span>
+                        <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-Fort_macro-text" title="@{repeating_buff_$X_buff-Fort_macro-text}" placeholder="# or macro" value="" /><br>Fort</span>
                                 <span class="sheet-table-data sheet-center sheet-small-label"><input type="number" name="attr_buff-Fort" title="@{repeating_buff_$X_buff-Fort}" value="0" style="width:40px;" class="sheet-calc" readonly="readonly" /><br>Mod</span>
-                                <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-Ref_macro-text" title="@{repeating_buff_$X_buff-Ref_macro-text}" placeholder="0" /><br>Ref</span>
+                    </div>
+                </div>
+                <div class="sheet-table-buff sheet-sect sheet-b-ref">
+                    <div class="sheet-table-row">
+                        <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-Ref_macro-text" title="@{repeating_buff_$X_buff-Ref_macro-text}" placeholder="# or macro" value="" /><br>Ref</span>
                                 <span class="sheet-table-data sheet-center sheet-small-label"><input type="number" name="attr_buff-Ref" title="@{repeating_buff_$X_buff-Ref}" value="0" style="width:40px;" class="sheet-calc" readonly="readonly" /><br>Mod</span>
-                                <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-Will_macro-text" title="@{repeating_buff_$X_buff-Will_macro-text}" placeholder="0" /><br>Will</span>
+                    </div>
+                </div>
+                <div class="sheet-table-buff sheet-sect sheet-b-will">
+                    <div class="sheet-table-row">
+                        <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-Will_macro-text" title="@{repeating_buff_$X_buff-Will_macro-text}" placeholder="# or macro" value="" /><br>Will</span>
                                 <span class="sheet-table-data sheet-center sheet-small-label"><input type="number" name="attr_buff-Will" title="@{repeating_buff_$X_buff-Will}" value="0" style="width:40px;" class="sheet-calc" readonly="readonly" /><br>Mod</span>
-                                <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-AC_macro-text" title="@{repeating_buff_$X_buff-AC_macro-text}" placeholder="0" /><br>AC</span>
+                    </div>
+                </div>
+                <div class="sheet-table-buff sheet-sect sheet-b-ac">
+                    <div class="sheet-table-row">
+                        <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-AC_macro-text" title="@{repeating_buff_$X_buff-AC_macro-text}" placeholder="# or macro" value="" /><br>AC</span>
                                 <span class="sheet-table-data sheet-center sheet-small-label"><input type="number" name="attr_buff-AC" title="@{repeating_buff_$X_buff-AC}" value="0" style="width:40px;" class="sheet-calc" readonly="readonly" /><br>Mod</span>
-                                <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-Touch_macro-text" title="@{repeating_buff_$X_buff-Touch_macro-text}" placeholder="0" /><br>Touch AC</span>
+                    </div>
+                </div>
+                <div class="sheet-table-buff sheet-sect sheet-b-touch">
+                    <div class="sheet-table-row">
+                        <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-Touch_macro-text" title="@{repeating_buff_$X_buff-Touch_macro-text}" placeholder="# or macro" value="" /><br>Touch AC</span>
                                 <span class="sheet-table-data sheet-center sheet-small-label"><input type="number" name="attr_buff-Touch" title="@{repeating_buff_$X_buff-Touch}" value="0" style="width:40px;" class="sheet-calc" readonly="readonly" /><br>Mod</span>
-                                <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-CMD_macro-text" title="@{repeating_buff_$X_buff-CMD_macro-text}" placeholder="0" /><br>CMD</span>
+                    </div>
+                </div>
+                <div class="sheet-table-buff sheet-sect sheet-b-cmd">
+                    <div class="sheet-table-row">
+                        <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-CMD_macro-text" title="@{repeating_buff_$X_buff-CMD_macro-text}" placeholder="# or macro" value="" /><br>CMD</span>
                                 <span class="sheet-table-data sheet-center sheet-small-label"><input type="number" name="attr_buff-CMD" title="@{repeating_buff_$X_buff-CMD}" value="0" style="width:40px;" class="sheet-calc" readonly="readonly" /><br>Mod</span>
 					</div>
 					</div>			
-                        <div class="sheet-table">
+                <div class="sheet-table-buff sheet-sect sheet-b-melee">
                             <div class="sheet-table-row">
-                                <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-Melee_macro-text" title="@{repeating_buff_$X_buff-Melee_macro-text}" placeholder="0" /><br>Melee</span>
+                        <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-Melee_macro-text" title="@{repeating_buff_$X_buff-Melee_macro-text}" placeholder="# or macro" value="" /><br>Melee</span>
                                 <span class="sheet-table-data sheet-center sheet-small-label"><input type="number" name="attr_buff-Melee" title="@{repeating_buff_$X_buff-Melee}" value="0" style="width:40px;" class="sheet-calc" readonly="readonly" /><br>Mod</span>
-                                <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-Ranged_macro-text" title="@{repeating_buff_$X_buff-Ranged_macro-text}" placeholder="0" /><br>Ranged</span>
+                    </div>
+                </div>
+                <div class="sheet-table-buff sheet-sect sheet-b-ranged">
+                    <div class="sheet-table-row">
+                        <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-Ranged_macro-text" title="@{repeating_buff_$X_buff-Ranged_macro-text}" placeholder="# or macro" value="" /><br>Ranged</span>
                                 <span class="sheet-table-data sheet-center sheet-small-label"><input type="number" name="attr_buff-Ranged" title="@{repeating_buff_$X_buff-Ranged}" value="0" style="width:40px;" class="sheet-calc" readonly="readonly" /><br>Mod</span>
-                                <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-DMG_macro-text" title="@{repeating_buff_$X_buff-DMG_macro-text}" placeholder="0" /><br>Damage</span>
+                    </div>
+                </div>
+                <div class="sheet-table-buff sheet-sect sheet-b-dmg">
+                    <div class="sheet-table-row">
+                        <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-DMG_macro-text" title="@{repeating_buff_$X_buff-DMG_macro-text}" placeholder="# or macro" value="" /><br>Damage</span>
                                 <span class="sheet-table-data sheet-center sheet-small-label"><input type="number" name="attr_buff-DMG" title="@{repeating_buff_$X_buff-DMG}" value="0" style="width:40px;" class="sheet-calc" readonly="readonly" /><br>Mod</span>
-                                <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-Check_macro-text" title="@{repeating_buff_$X_buff-Check_macro-text}" placeholder="0" /><br>Skill Check</span>
-                                <span class="sheet-table-data sheet-center sheet-small-label"><input type="number" name="attr_buff-Check" title="@{repeating_buff_$X_buff-Check}" value="0" style="width:40px;" class="sheet-calc" readonly="readonly" /><br>Mod</span>
-                                <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-CasterLevel_macro-text" title="@{repeating_buff_$X_buff-CasterLevel_macro-text}" placeholder="0" /><br>Caster Level</span>
+                    </div>
+                </div>
+                <div class="sheet-table-buff sheet-sect sheet-b-check">
+                    <div class="sheet-table-row">
+                        <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-Check_macro-text" title="@{repeating_buff_$X_buff-Check_macro-text} Skill and ability check" placeholder="# or macro" value="" /><br>Check</span>
+                        <span class="sheet-table-data sheet-center sheet-small-label"><input type="number" name="attr_buff-Check" title="@{repeating_buff_$X_buff-Check} Skill and ability check" value="0" style="width:40px;" class="sheet-calc" readonly="readonly" /><br>Mod</span>
+                    </div>
+                </div>
+                <div class="sheet-table-buff sheet-sect sheet-b-casterlevel">
+                    <div class="sheet-table-row">
+                        <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-CasterLevel_macro-text" title="@{repeating_buff_$X_buff-CasterLevel_macro-text}" placeholder="# or macro" value="" /><br>Caster Level</span>
                                 <span class="sheet-table-data sheet-center sheet-small-label"><input type="number" name="attr_buff-CasterLevel" title="@{repeating_buff_$X_buff-CasterLevel}" value="0" style="width:40px;" class="sheet-calc" readonly="readonly" /><br>Mod</span>
 					</div>
 					</div>
+                <div class="sheet-table-buff sheet-sect sheet-b-hp-temp">
+                    <div class="sheet-table-row">
+                        <span class="sheet-table-data sheet-center sheet-small-label"><input type="text" class="sheet-skill-macro-text" name="attr_buff-HP-temp_macro-text" title="@{repeating_buff_$X_buff-HP-temp_macro-text}" placeholder="# or macro" value="" /><br>Temp HP</span>
+                        <span class="sheet-table-data sheet-center sheet-small-label"><input type="number" name="attr_buff-HP-temp" title="@{repeating_buff_$X_buff-HP-temp}" value="0" style="width:40px;" class="sheet-calc" readonly="readonly" /><br>Mod</span>
+                    </div>
+                </div>
+
+                <div class="sheet-expand" style="width:100%;display:block;clear:both;"></div>
                         <div class="sheet-sect sheet-expand">
-                            <b>IDs</b>
-                            <input type="checkbox" class="sheet-repeating_ids-show" title="@{repeating_buff_$X_ids-show}" name="attr_ids-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" /><span></span>
+                    <b class="sheet-sect sheet-expand">Select Buffs</b>
+                    <input type="checkbox" class="sheet-options-show sheet-sect sheet-expand" title="@{repeating_buff_$X_options-show}" name="attr_options-show" value="1" style="width:115px; margin:0 -15px 0 -100px;" checked="checked" /><span></span>
+                    <b class="sheet-sect sheet-expand">Notes</b>
+                    <input type="checkbox" class="sheet-desc-show sheet-sect sheet-expand" title="@{repeating_buff_$X_description-show}" name="attr_description-show" value="1" style="width:55px; margin:0 -15px 0 -40px;" /><span></span>
+                    <b class="sheet-sect sheet-expand">IDs</b>
+                    <input type="checkbox" class="sheet-repeating_ids-show sheet-sect sheet-expand" title="@{repeating_buff_$X_ids-show}" name="attr_ids-show" value="1" style="width: 40px; margin: 0px -15px 0 -25px;" /><span></span>
+                    <div class="sheet-expand" style="width:100%;display:block;clear:both;"></div>
+                    <div class="sheet-table sheet-options">
+                        <div class="sheet-table-row ">
+                            <!-- wrap do not make into table cells for 1/2 size col -->
+                            <span title="Bonus to strength ability score."><b>STR:</b><input class="sheet-b-str-show" type="checkbox" title="@{repeating_buff_$X_buff-STR-show}" name="attr_buff-STR-show" value="1" /></span>
+                            <span title="Bonus to dexterity ability score."><b>DEX:</b><input class="sheet-b-dex-show" type="checkbox" title="@{repeating_buff_$X_buff-DEX-show}" name="attr_buff-DEX-show" value="1" /></span>
+                            <span title="Bonus to constitution ability score."><b>CON:</b><input class="sheet-b-con-show" type="checkbox" title="@{repeating_buff_$X_buff-CON-show}" name="attr_buff-CON-show" value="1" /></span>
+                            <span title="Bonus to intelligence ability score."><b>INT:</b><input class="sheet-b-int-show" type="checkbox" title="@{repeating_buff_$X_buff-INT-show}" name="attr_buff-INT-show" value="1" /></span>
+                            <span title="Bonus to wisdom ability score."><b>WIS:</b><input class="sheet-b-wis-show" type="checkbox" title="@{repeating_buff_$X_buff-WIS-show}" name="attr_buff-WIS-show" value="1" /></span>
+                            <span title="Bonus to charisma ability score."><b>CHA:</b><input class="sheet-b-cha-show" type="checkbox" title="@{repeating_buff_$X_buff-CHA-show}" name="attr_buff-CHA-show" value="1" /></span>
+                            <span title="Bonus to fortitude saving throws."><b>Fort:</b><input class="sheet-b-fort-show" type="checkbox" title="@{repeating_buff_$X_buff-Fort-show}" name="attr_buff-Fort-show" value="1" /></span>
+                            <span title="Bonus to reflex saving throws."><b>Ref:</b><input class="sheet-b-ref-show" type="checkbox" title="@{repeating_buff_$X_buff-Ref-show}" name="attr_buff-Ref-show" value="1" /></span>
+                            <span title="Bonus to will saving throws."><b>Will:</b><input class="sheet-b-will-show" type="checkbox" title="@{repeating_buff_$X_buff-Will-show}" name="attr_buff-Will-show" value="1" /></span>
+                            <span title="Bonus to armor class."><b>AC:</b><input class="sheet-b-ac-show" type="checkbox" title="@{repeating_buff_$X_buff-AC-show}" name="attr_buff-AC-show" value="1" /></span>
+                            <span title="Bonus to touch attack armor class."><b>Touch AC:</b><input class="sheet-b-touch-show" type="checkbox" title="@{repeating_buff_$X_buff-Touch-show}" name="attr_buff-Touch-show" value="1" /></span>
+                            <span title="Bonus to combat maneuver defense."><b>CMD:</b><input class="sheet-b-cmd-show" type="checkbox" title="@{repeating_buff_$X_buff-CMD-show}" name="attr_buff-CMD-show" value="1" /></span>
+                            <span title="Bonus to all melee attack rolls."><b>Melee:</b><input class="sheet-b-melee-show" type="checkbox" title="@{repeating_buff_$X_buff-Melee-show}" name="attr_buff-Melee-show" value="1" /></span>
+                            <span title="Bonus to all ranged attack rolls."><b>Ranged:</b><input class="sheet-b-ranged-show" type="checkbox" title="@{repeating_buff_$X_buff-Ranged-show}" name="attr_buff-Ranged-show" value="1" /></span>
+                            <span title="Bonus to all attack damage."><b>Dmg:</b><input class="sheet-b-dmg-show" type="checkbox" title="@{repeating_buff_$X_buff-DMG-show}" name="attr_buff-DMG-show" value="1" /></span>
+                            <span title="Bonus to all skill and ability checks."><b>Check:</b><input class="sheet-b-check-show" type="checkbox" title="@{repeating_buff_$X_buff-Check-show}" name="attr_buff-Check-show" value="1" /></span>
+                            <span title="Bonus to spell caster level."><b>Caster Lvl:</b><input class="sheet-b-casterlevel-show" type="checkbox" title="@{repeating_buff_$X_buff-CasterLevel-show}" name="attr_buff-CasterLevel-show" value="1" /></span>
+                            <span title="Temporary hit points."><b>Temp HP:</b><input class="sheet-b-hp-temp-show" type="checkbox" title="@{repeating_buff_$X_buff-HP-temp-show}" name="attr_buff-HP-temp-show" value="1" /></span>
+                        </div>
+                    </div>
+                    <textarea class="sheet-desc" style="width:100%;display:block;clear:both;" name="attr_buff-notes" title="@{repeating_buff_$X_buff-notes}" placeholder="Buff Notes"></textarea>
+
                             <div class="sheet-repeating_ids sheet-table-row">
                                 <input type="hidden" name="attr_new_flag" value="0" />
                                 <span class="sheet-table-data sheet-small-data">
@@ -253,53 +361,40 @@
                                 </span>
 					</div>
 					</div>
-					</div>
+
                 </fieldset>
 					</div>
-            <div class="sheet-table sheet-sect">
-                <span class="sheet-table-data sheet-entry_med"><b>Totals</b></span>
-                <div class="sheet-table">
+        <div class="sheet-table sheet-sect" style="margin-top:13px;">
+
+            <span class="sheet-table-name">Buff Totals</span>
                     <div class="sheet-table-row">
-                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{buff_STR-total}" name="attr_buff_STR-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>STR</span>
-                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{buff_DEX-total}" name="attr_buff_DEX-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>DEX</span>
-                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{buff_CON-total}" name="attr_buff_CON-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>CON</span>
-                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{buff_INT-total}" name="attr_buff_INT-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>INT</span>
-                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{buff_WIS-total}" name="attr_buff_WIS-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>WIS</span>
-                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{buff_CHA-total}" name="attr_buff_CHA-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>CHA</span>
+                <span class="sheet-table-data sheet-center sheet-small-label" title="Bonus to strength ability score."><input title="@{buff_STR-total}" name="attr_buff_STR-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>STR</span>
+                <span class="sheet-table-data sheet-center sheet-small-label" title="Bonus to dexterity ability score."><input title="@{buff_DEX-total}" name="attr_buff_DEX-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>DEX</span>
+                <span class="sheet-table-data sheet-center sheet-small-label" title="Bonus to constitution ability score."><input title="@{buff_CON-total}" name="attr_buff_CON-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>CON</span>
+                <span class="sheet-table-data sheet-center sheet-small-label" title="Bonus to intelligence ability score."><input title="@{buff_INT-total}" name="attr_buff_INT-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>INT</span>
+                <span class="sheet-table-data sheet-center sheet-small-label" title="Bonus to wisdom ability score."><input title="@{buff_WIS-total}" name="attr_buff_WIS-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>WIS</span>
+                <span class="sheet-table-data sheet-center sheet-small-label" title="Bonus to charisma ability score."><input title="@{buff_CHA-total}" name="attr_buff_CHA-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>CHA</span>
+                <span class="sheet-table-data sheet-center sheet-small-label" title="Bonus to fortitude saving throws."><input title="@{buff_Fort-total}" name="attr_buff_Fort-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>Fort</span>
+                <span class="sheet-table-data sheet-center sheet-small-label" title="Bonus to reflex saving throws."><input title="@{buff_Ref-total}" name="attr_buff_Ref-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>Ref</span>
+                <span class="sheet-table-data sheet-center sheet-small-label" title="Bonus to will saving throws."><input title="@{buff_Will-total}" name="attr_buff_Will-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>Will</span>
 					</div>
-					</div>
-                <div class="sheet-table">
                     <div class="sheet-table-row">
-                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{buff_HP-temp-total}" name="attr_buff_HP-temp-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>Temp HP</span>
-						<span class="sheet-table-data sheet-divider-lg"></span>	
-                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{buff_Fort-total}" name="attr_buff_Fort-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>Fort</span>
-                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{buff_Ref-total}" name="attr_buff_Ref-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>Ref</span>
-                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{buff_Will-total}" name="attr_buff_Will-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>Will</span>
-						<span class="sheet-table-data sheet-divider-lg"></span>
-                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{buff_AC-total}" name="attr_buff_AC-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>AC</span>
-                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{buff_Touch-total}" name="attr_buff_Touch-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>Touch AC</span>
-                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{buff_CMD-total}" name="attr_buff_CMD-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>CMD</span>
-					</div>
-				</div>
-                <div class="sheet-table">
-                    <div class="sheet-table-row">
-                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{buff_Melee-total}" name="attr_buff_Melee-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>Melee</span>
-						<span class="sheet-table-data sheet-divider-lg"></span>	
-                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{buff_Ranged-total}" name="attr_buff_Ranged-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>Ranged</span>
-						<span class="sheet-table-data sheet-divider-lg"></span>
-                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{buff_DMG-total}" name="attr_buff_DMG-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>Damage</span>
-						<span class="sheet-table-data sheet-divider-lg"></span>
-                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{buff_Check-total}" name="attr_buff_Check-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>Skill Check</span>
-                        <span class="sheet-table-data sheet-center sheet-small-label"><input title="@{buff_CasterLevel-total}" name="attr_buff_CasterLevel-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>Caster Level</span>
+                <span class="sheet-table-data sheet-center sheet-small-label" title="Bonus to armor class."><input title="@{buff_AC-total}" name="attr_buff_AC-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>AC</span>
+                <span class="sheet-table-data sheet-center sheet-small-label" title="Bonus to touch attack armor class."><input title="@{buff_Touch-total}" name="attr_buff_Touch-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>Touch AC</span>
+                <span class="sheet-table-data sheet-center sheet-small-label" title="Bonus to combat maneuver defense."><input title="@{buff_CMD-total}" name="attr_buff_CMD-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>CMD</span>
+                <span class="sheet-table-data sheet-center sheet-small-label" title="Bonus to all melee attack rolls."><input title="@{buff_Melee-total}" name="attr_buff_Melee-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>Melee</span>
+                <span class="sheet-table-data sheet-center sheet-small-label" title="Bonus to all ranged attack rolls."><input title="@{buff_Ranged-total}" name="attr_buff_Ranged-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>Ranged</span>
+                <span class="sheet-table-data sheet-center sheet-small-label" title="Bonus to all attack damage."><input title="@{buff_DMG-total}" name="attr_buff_DMG-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>Damage</span>
+                <span class="sheet-table-data sheet-center sheet-small-label" title="Bonus to all skill and ability checks."><input title="@{buff_Check-total}" name="attr_buff_Check-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>Check</span>
+                <span class="sheet-table-data sheet-center sheet-small-label" title="Bonus to spell caster level."><input title="@{buff_CasterLevel-total}" name="attr_buff_CasterLevel-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>Caster Level</span>
+                <span class="sheet-table-data sheet-center sheet-small-label" title="Temporary hit points."><input title="@{buff_HP-temp-total}" name="attr_buff_HP-temp-total" type="number" value="0" class="sheet-calc" readonly="readonly" /><br>Temp HP</span>
                     </div>
 					</div>
-				</div>
-		</div>
         <br />
 	</div>
 	<div>
 		<b title="Toggle common conditions.">Conditions</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{conditions-show}" name="attr_conditions-show" value="1" style="opacity:0; width:90px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -75px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{conditions-show}" name="attr_conditions-show" value="1" style="width:90px; margin:0 -15px 0 -75px;" checked="checked" /><span></span>
 		<div class="sheet-table sheet-sect">
 			<span class="sheet-table-name">Conditions</span>
 			<div class="sheet-table-row" style="line-height:1.85em;">
@@ -340,7 +435,7 @@
 	</div>
 	<div>
 		<b>Health and Wounds</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{health-and-wounds-show}" name="attr_health-and-wounds-show" value="1" style="opacity: 0;width: 140px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -125px; cursor: pointer; z-index: 1" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{health-and-wounds-show}" name="attr_health-and-wounds-show" value="1" style="width:140px; margin:0 -15px 0 -125px;" checked="checked" /><span></span>
 		<div class="sheet-table sheet-sect">
 			<span class="sheet-table-name">Health and Wounds</span>
 			<div class="sheet-table-row">
@@ -394,8 +489,8 @@
 				<span class="sheet-table-data sheet-center"><input type="number" style="width:100%;" title="@{non-lethal-damage}" name="attr_non-lethal-damage" value="0" min="0"></span>
 			</div>
 		</div>
-		<div class="sheet-table sheet-sect" style="margin:-10px 0px -10px 0px;">
-            <input type="checkbox" class="sheet-sect-show" title="@{wound_threshold-show}" name="attr_wound_threshold-show" value="1" style="opacity:0;width: 35px;height: 16px;position: relative;top: 0;left: 0;margin: -9999px;cursor: pointer;z-index: 1;" /><span></span>
+        <div class="sheet-table sheet-sect" style="margin:-10px 0 -10px 0;">
+            <input type="checkbox" class="sheet-sect-show" title="@{wound_threshold-show}" name="attr_wound_threshold-show" value="1" style="width:35px; margin:-9999px;" /><span></span>
 			<div class="sheet-table-row sheet-sect">
 				<span class="sheet-table-data sheet-center" style="background-color:#000;color:#FFF;font-weight:bold;">Wound Threshold</span>
 				<span class="sheet-table-data">&nbsp;</span>
@@ -409,7 +504,7 @@
 	</div>
 	<div>
 		<b>Initiative and Speeds</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{initiative-and-speeds-show}" name="attr_initiative-and-speeds-show" value="1" style="opacity:0;width: 150px; height:1.5em; position:relative; top:0; left:0;margin: 0 -15px 0 -133px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{initiative-and-speeds-show}" name="attr_initiative-and-speeds-show" value="1" style="width:150px; margin:0 -15px 0 -133px;" checked="checked" /><span></span>
 		<div class="sheet-table sheet-sect">
 			<div class="sheet-table-row" style="vertical-align:top;">
 				<div class="sheet-table-data sheet-center">
@@ -504,7 +599,7 @@
 	</div>
 	<div>
 		<b>Experience and Hero Points</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{experience-and-hero-points-show}" name="attr_experience-and-hero-points-show" value="1" style="opacity: 0;width: 195px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -176px; cursor: pointer; z-index: 1" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{experience-and-hero-points-show}" name="attr_experience-and-hero-points-show" value="1" style="width:195px; margin:0 -15px 0 -176px;" checked="checked" /><span></span>
 		<div class="sheet-table sheet-sect">
 			<span class="sheet-table-name">Experience and Hero Points</span>
 			<div class="sheet-table-row">
@@ -537,7 +632,7 @@
 	<div class="sheet-table sheet-header-row">&nbsp;</div>
 	<div>
 		<b>Class Information</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{class-info-show}" name="attr_class-info-show" value="1" style="opacity: 0;width: 140px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -125px; cursor: pointer; z-index: 1" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{class-info-show}" name="attr_class-info-show" value="1" style="width:140px; margin:0 -15px 0 -125px;" checked="checked" /><span></span>
 		<div class="sheet-table sheet-sect">
 			<span class="sheet-table-name">Class Information</span>
 			<div class="sheet-table-row">
@@ -656,11 +751,11 @@
 		</div>
     </div>
     <!-- Mythic Adventures display option toggled from Config -->
-    <div style="margin:-15px 0px 15px 0px;">
+    <div style="margin-top:-15px;">
         <input type="checkbox" class="sheet-sect-show" title="@{mythic-adventures-show}" name="attr_mythic-adventures-show" value="1" style="margin:-9999px;" /><span></span>
         <div class="sheet-sect">
 			<b>Mythic Hero Information and Mythic Power</b>
-            <input type="checkbox" class="sheet-sect-show" title="@{mythic-info-show}" name="attr_mythic-info-show" value="1" style="opacity: 0;width: 290px;height: 1.5em;position: relative;top: 0;left: 0;margin: 0 -15px 0 -272px;cursor: pointer;z-index: 1;" checked="checked" /><span></span>
+            <input type="checkbox" class="sheet-sect-show" title="@{mythic-info-show}" name="attr_mythic-info-show" value="1" style="width:290px; margin:0 -15px 0 -272px;" checked="checked" /><span></span>
 			<div class="sheet-table sheet-sect">
 				<div class="sheet-table-row" style="vertical-align:top;">
 					<div class="sheet-table-data sheet-center">
@@ -690,7 +785,7 @@
 						&nbsp;
 					</div>
                         <div class="sheet-table-data sheet-center">
-						<div class="sheet-table">
+                        <div class="sheet-table" style="margin-top: -1px;">
 							<span class="sheet-table-name">Mythic Power</span>
 							<div class="sheet-table-row">
                                 <span class="sheet-table-header" title="How much mythic power you have available to use">Current MP</span>
@@ -721,11 +816,11 @@
         </div>
     </div>
     <!-- Psionics display option toggled from Config -->
-    <div style="margin:-15px 0px 15px 0px;">
+    <div style="margin:-15px 0 15px 0;">
         <input type="checkbox" class="sheet-sect-show" title="@{psionics-show}" name="attr_psionics-show" value="1" style="margin:-9999px;" /><span></span>
         <div class="sheet-sect">
             <b>Psionic Information</b>
-            <input type="checkbox" class="sheet-sect-show" title="@{psionic-info-show}" name="attr_psionic-info-show" value="1" style="opacity: 0;width: 290px;height: 1.5em;position: relative;top: 0;left: 0;margin: 0 -15px 0 -272px;cursor: pointer;z-index: 1;" checked="checked" /><span></span>
+            <input type="checkbox" class="sheet-sect-show" title="@{psionic-info-show}" name="attr_psionic-info-show" value="1" style="width:150px; margin:0px -15px 0 -132px;" checked="checked" /><span></span>
             <div class="sheet-table sheet-sect">
                 <div class="sheet-table-row" style="vertical-align:top;">
                     <div class="sheet-table-data sheet-center">
@@ -740,9 +835,9 @@
                                 <span class="sheet-table-header">|</span>
                                 <span class="sheet-table-header" title="How many power points you have available to use.">Current PP</span>
                                 <span class="sheet-table-header">/</span>
-                                <span class="sheet-table-header" title="Your power point reserve is equal to your base power points gained from your class, bonus power points from a high key ability score, and any additional bonus power points from sources such as your character race and feat selections.">Power Point Reserve</span>
+                                <span class="sheet-table-header" title="Your power point reserve is equal to your base power points gained from your class, bonus power points from a high key ability score, and any additional bonus power points from sources such as your character race and feat selections.">PP Reserve</span>
                                 <span class="sheet-table-header"></span>
-                                <span class="sheet-table-header" title="The amount of base bonus power points you gain from you class(es).">Class Power Points</span>
+                                <span class="sheet-table-header" title="The amount of base bonus power points you gain from you class(es).">Class PP</span>
                                 <span class="sheet-table-header"></span>
                                 <span class="sheet-table-header" title="The psionic class key ability modifier source.">Key Ability</span>
                                 <span class="sheet-table-header" title="The amount of bonus power points you gain from manifester level and key ability modifier.">Bonus PP</span>
@@ -789,7 +884,7 @@
 	</div>
     <div class="sheet-repeating-sect" style="margin-top:-15px;">
 		<b>Class Features and Abilities</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{class-features-show}" name="attr_class-features-show" value="1" style="opacity: 0;width: 195px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -176px; cursor: pointer; z-index: 1" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{class-features-show}" name="attr_class-features-show" value="1" style="width:195px; margin:0 -15px 0 -176px;" checked="checked" /><span></span>
         <input type="checkbox" class="sheet-sect sheet-expand-show" title="Collapse or expand all rows." name="attr_class-expand-show" value="1" style="opacity: 0;height: 1.5em;width: 20px; margin: 0px -22px 2px 0; z-index: 1;cursor: help;" /><span class="sheet-sect"></span>
         <input type="checkbox" class="sheet-sect sheet-split-column-show" value="1" name="attr_class-ability-column-show" title="Two or one column rows" /><span class="sheet-sect"></span>
 		<div class="sheet-table sheet-sect">
@@ -799,8 +894,8 @@
 			<div class="sheet-repeating-fields">
 				<fieldset class="repeating_class-ability">
                     <div class="sheet-compendium-drop-target">
-					<input type="checkbox" class="sheet-counted sheet-sect-show" name="attr_class-show" title="@{repeating_class-ability_$X_class-show}" value="1" style="opacity: 0 ; height: 1.5em ; position: absolute; top: 10px; width: 3.5% ; cursor: pointer ; z-index: 1" checked="checked" />
-						<span class="sheet-table-data sheet-center" style="width:4%;"></span>
+                        <input type="checkbox" class="sheet-counted sheet-sect-show" name="attr_class-show" title="@{repeating_class-ability_$X_class-show}" value="1" checked="checked" />
+                        <span class="sheet-table-data sheet-center"></span>
                         <span class="sheet-table-data sheet-center sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_class-ability_$X_roll}" value="@{macro-text}"></button></span>
                         <span class="sheet-table-data sheet-center sheet-small-label" style="width:8%">
 							<select title="@{repeating_class-ability_$X_class-number}" name="attr_class-number" style="min-width:3.5em;">
@@ -843,12 +938,12 @@
         </div>
     </div>
     <!-- Mythic Adventures display option toggled from Config -->
-    <div style="margin:-15px 0px 15px 0px;">
+    <div style="margin:-15px 0 15px 0;">
         <input type="checkbox" class="sheet-sect-show" title="@{mythic-adventures-show}" name="attr_mythic-adventures-show" value="1" style="margin:-9999px;" /><span></span>
         <div class="sheet-sect">
             <div class="sheet-repeating-sect">
                 <b>Mythic Path Features and Abilities</b>
-                <input type="checkbox" class="sheet-sect-show" title="@{mythic-features-show}" name="attr_mythic-features-show" value="1" style="opacity: 0;width: 235px;height: 1.5em;position: relative;top: 0;left: 0;margin: 0 -15px 0 -220px;cursor: pointer;z-index: 1;" checked="checked" /><span></span>
+                <input type="checkbox" class="sheet-sect-show" title="@{mythic-features-show}" name="attr_mythic-features-show" value="1" style="width:235px; margin:0 -15px 0 -220px;" checked="checked" /><span></span>
                 <input type="checkbox" class="sheet-sect sheet-expand-show" title="Collapse or expand all rows." name="attr_mythic-expand-show" value="1" style="opacity: 0;height: 1.5em;width: 20px; margin: 0px -22px 2px 0; z-index: 1;cursor: help;" /><span class="sheet-sect"></span>
                 <input type="checkbox" class="sheet-sect sheet-split-column-show" value="1" name="attr_mythic-column-show" title="Two or one column rows" /><span class="sheet-sect"></span>
                 <div class="sheet-table sheet-sect">
@@ -858,9 +953,9 @@
                     <div class="sheet-repeating-fields">
                         <fieldset class="repeating_mythic-ability">
                             <div class="sheet-compendium-drop-target">
-                            <input type="checkbox" class="sheet-counted sheet-sect-show" name="attr_mythic-show" title="@{repeating_mythic-ability_$X_mythic-show}" value="1" style="opacity: 0 ; height: 1.5em ; position: absolute; top: 10px; width: 3.5% ; cursor: pointer ; z-index: 1" checked="checked" />
-                                <span class="sheet-table-data sheet-center sheet-small-label" style="width:4%;"></span>
-                                <span class="sheet-table-data sheet-center sheet-small-label" sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_mythic-ability_$X_roll}" value="@{macro-text}"></button></span>
+                                <input type="checkbox" class="sheet-counted sheet-sect-show" name="attr_mythic-show" title="@{repeating_mythic-ability_$X_mythic-show}" value="1" checked="checked" />
+                                <span class="sheet-table-data sheet-center"></span>
+                                <span class="sheet-table-data sheet-center sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_mythic-ability_$X_roll}" value="@{macro-text}"></button></span>
                                 <span class="sheet-table-data sheet-center sheet-small-label" style="width:8%">
 								<select title="@{repeating_mythic-ability_$X_mythic-number}" name="attr_mythic-number" style="min-width:3.5em;">
 									<option value="@{mythic-0-path}" selected>0</option>
@@ -904,7 +999,7 @@
 	<div class="sheet-table sheet-header-row">&nbsp;</div>
 	<div>
 		<b>Defense Values</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{defense-values-show}" name="attr_defense-values-show" value="1" style="opacity: 0;width: 125px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -110px; cursor: pointer; z-index: 1" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{defense-values-show}" name="attr_defense-values-show" value="1" style="width:125px; margin:0 -15px 0 -110px;" checked="checked" /><span></span>
 		<div class="sheet-table sheet-sect">
 			<span class="sheet-table-name">Defense Values</span>
 			<div class="sheet-table-row">
@@ -1156,7 +1251,7 @@
 	</div>
 	<div>
 		<b>Special Defenses</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{special-defenses-show}" name="attr_special-defenses-show" value="1" style="opacity: 0;width: 125px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -110px; cursor: pointer; z-index: 1" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{special-defenses-show}" name="attr_special-defenses-show" value="1" style="width:125px; margin:0 -15px 0 -110px;" checked="checked" /><span></span>
 		<div class="sheet-table sheet-sect">
 			<span class="sheet-table-name">Special Defenses</span>
 			<div class="sheet-table-row">
@@ -1175,14 +1270,14 @@
 				<span class="sheet-table-data sheet-center"><input title="@{weaknesses}" type="text" name="attr_weaknesses" placeholder="Weaknesses"></span>
 				<span class="sheet-table-data sheet-center"><input title="@{vision}" type="text" name="attr_vision" placeholder="Vision Details"></span>
                 <span class="sheet-table-data sheet-center"><input title="@{SR-macro-text}" type="text" name="attr_SR-macro-text" placeholder="macro" /></span>
-                <span class="sheet-table-data sheet-center"><input title="@{SR}" type="number" name="attr_SR" value="0" style="width:40px" class="sheet-calc" readonly="readonly" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{SR}" type="number" name="attr_SR" value="0" style="width:40px;" class="sheet-calc" readonly="readonly" /></span>
 			</div>
 		</div>
 	  <br>
 	</div>
 	<div>
 		<b>Armor Penalties</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{armor-penalties-show}" name="attr_armor-penalties-show" value="1" style="opacity: 0;width: 120px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -105px; cursor: pointer; z-index: 1" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{armor-penalties-show}" name="attr_armor-penalties-show" value="1" style="width:120px; margin:0 -15px 0 -105px;" checked="checked" /><span></span>
 		<div class="sheet-table sheet-sect">
 			<span class="sheet-table-name">Armor Penalties</span>
 			<div class="sheet-table-row">
@@ -1217,7 +1312,7 @@
 	</div>
 	<div>
 		<b>Saving Throws</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{saves-show}" name="attr_saves-show" value="1" style="opacity:0;width: 105px; height:1.5em; position:relative; top:0; left:0;margin: 0 -15px 0 -90px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{saves-show}" name="attr_saves-show" value="1" style="width:105px; margin:0 -15px 0 -90px;" checked="checked" /><span></span>
 		<div class="sheet-sect">
 			<span class="sheet-table-name">Saving Throws</span>
 			<div class="sheet-table-row">
@@ -1367,7 +1462,7 @@
 	</div>
 	<div>
 		<b>Armor and Shield</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{armor-shield-show}" name="attr_armor-shield-show" value="1" style="opacity: 0;width: 140px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -125px; cursor: pointer; z-index: 1" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{armor-shield-show}" name="attr_armor-shield-show" value="1" style="width:140px; margin:0 -15px 0 -125px;" /><span></span>
 		<div class="sheet-table sheet-sect">
 			<span class="sheet-table-name">Armor and Shield</span>
 			<div class="sheet-table-row">
@@ -1543,7 +1638,7 @@
 	</div>
 	<div>
 		<b>Defense Notes</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{defense-notes-show}" name="attr_defense-notes-show" value="1" style="opacity:0;width: 105px; height:1.5em; position:relative; top:0; left:0;margin: 0 -15px 0 -90px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{defense-notes-show}" name="attr_defense-notes-show" value="1" style="width:105px; margin:0 -15px 0 -90px;" checked="checked" /><span></span>
 		<div class="sheet-table sheet-sect">
 			<div class="sheet-table-row">
 				<div class="sheet-table-data sheet-center">
@@ -1587,7 +1682,7 @@
 	<div class="sheet-table sheet-header-row">&nbsp;</div>
 	<div>
 		<b>Attack and Combat Maneuver Bonuses</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{attack-bonuses-show}" name="attr_attack-bonuses-show" value="1" style="opacity: 0;width: 260px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0px -15px 0 -245px; cursor: pointer; z-index: 1" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{attack-bonuses-show}" name="attr_attack-bonuses-show" value="1" style="width:260px; margin:0px -15px 0 -245px;" checked="checked" /><span></span>
 		<div class="sheet-table sheet-sect">
 			<span class="sheet-table-name">Attack and Combat Maneuver Bonuses</span>
 			<div class="sheet-table-row">
@@ -1720,7 +1815,7 @@
 	</div>
 	<div>
 		<b title="Apply attack and damage modifiers to all attacks.">Attack and Damage Effects</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{attack_damage_status_effects-show}" name="attr_attack_damage_status_effects-show" value="1" style="opacity: 0;width: 190px;height: 1.5em;position: relative;top: 0;left: 0;margin: 0 -15px 0 -180px;cursor: pointer;z-index: 1;" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{attack_damage_status_effects-show}" name="attr_attack_damage_status_effects-show" value="1" style="width:190px; margin:0 -15px 0 -180px;" checked="checked" /><span></span>
 		<div class="sheet-table sheet-sect">
 			<span class="sheet-table-name">Attack and Damage Effects</span>
 			<div class="sheet-table-row">
@@ -1815,7 +1910,7 @@
 	</div>
 	<div>
 		<b>Attack Notes</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{attack-notes-show}" name="attr_attack-notes-show" value="1" style="opacity:0;width: 100px; height:1.5em; position:relative; top:0; left:0;margin: 0 -15px 0 -83px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{attack-notes-show}" name="attr_attack-notes-show" value="1" style="width:100px; margin:0 -15px 0 -83px;" checked="checked" /><span></span>
 		<div class="sheet-table sheet-sect">
 			<div class="sheet-table">
 				<div class="sheet-table-row">
@@ -1858,7 +1953,7 @@
 	</div>
     <div class="sheet-repeating-sect">
 		<b>Attacks</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{attacks-show}" name="attr_attacks-show" value="1" style="opacity:0; width:70px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -55px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{attacks-show}" name="attr_attacks-show" value="1" style="width:70px; margin:0 -15px 0 -55px;" checked="checked" /><span></span>
         <input type="checkbox" class="sheet-sect sheet-expand-show" title="Collapse or expand all rows." name="attr_attacks-expand-show" value="1" style="opacity: 0;height: 1.5em;width: 20px; margin: 0px -22px 2px 0; z-index: 1;cursor: help;" /><span class="sheet-sect"></span>
         <input type="checkbox" class="sheet-sect sheet-split-column-show" value="1" name="attr_weapon-column-show" title="Two or one column rows" /><span class="sheet-sect"></span>
 		<div class="sheet-table sheet-sect">
@@ -1867,7 +1962,7 @@
 		<div class="sheet-sect">
 			<div class="sheet-repeating-fields">
 				<fieldset class="repeating_weapon">
-					<input type="checkbox" class="sheet-counted sheet-sect-show" name="attr_attack-show" title="@{repeating_weapon_$X_attack-show}" value="1" style="opacity:0 ; height:1.5em ; position: absolute ; top:20px; width:3.5% ; cursor:pointer ; z-index:1" checked="checked" />
+                    <input type="checkbox" class="sheet-counted sheet-sect-show" name="attr_attack-show" title="@{repeating_weapon_$X_attack-show}" value="1" checked="checked" />
                     <span class="sheet-table-data sheet-center"></span>
                     <span class="sheet-table-data sheet-center sheet-repeating-rollbutton"><button type="roll" name="attr_attack-roll" title="%{selected|repeating_weapon_$X_attack-roll}" value="@{macro-text}"></button></span>
 					<span class="sheet-table-data sheet-center sheet-small-label"><input type="number"  name="attr_enhance" title="@{repeating_weapon_$X_enhance}" value="0" style="width:40px;"  /><br>Enh</span>
@@ -1966,7 +2061,7 @@
 						<b title="Add additional attacks for this weapon.">
                             Iterative Attacks
                         </b>
-						<input type="checkbox" class="sheet-sect-show" title="@{repeating_weapon_$X_iterative-attacks-show}" name="attr_iterative-attacks-show" value="1" style="opacity:0; width:120px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -105px; cursor:pointer; z-index:1;" /><span></span>
+                        <input type="checkbox" class="sheet-sect-show" title="@{repeating_weapon_$X_iterative-attacks-show}" name="attr_iterative-attacks-show" value="1" style="width:120px; margin:0 -15px 0 -105px;" /><span></span>
 						<b>Options</b>
 						<input type="checkbox" class="sheet-options-show" title="@{options-show}" name="attr_options-show" value="1" style="opacity:0; width:70px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -55px; cursor:pointer; z-index:1;" /><span></span>
 						<b>Macro Text</b>
@@ -2133,7 +2228,7 @@
 	<div class="sheet-table sheet-header-row">&nbsp;</div>
     <div>
         <b>Skill Ranks</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{skill-ranks-show}" name="attr_skill-ranks-show" value="1" style="opacity:0; width:90px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -75px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{skill-ranks-show}" name="attr_skill-ranks-show" value="1" style="width:90px; margin:0 -15px 0 -75px;" checked="checked" /><span></span>
 		<div class="sheet-table sheet-sect">
 			<span class="sheet-table-name">Skill Ranks</span>
 			<div class="sheet-table-row">
@@ -2168,13 +2263,13 @@
 		</div>
 	</div>
 	<!-- Unchained Skills display option toggled from Config-->
-	<div style="margin:-15px 0px 15px 0px;">
+    <div style="margin:-15px 0 15px 0;">
 
 		<input type="checkbox" class="sheet-sect-show" title="@{unchained_skills-show}" name="attr_unchained_skills-show" value="1" style="margin:-9999px;" /><span></span>
 		<div class="sheet-sect">
             <div>
                 <b>Unchained Skills</b>
-				<input type="checkbox" class="sheet-sect-show" title="@{unchained_skill_sub-show}" name="attr_unchained_skill_sub-show" value="1" style="opacity: 0;width: 140px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -125px; cursor: pointer; z-index: 1" checked="checked" /><span></span>
+                <input type="checkbox" class="sheet-sect-show" title="@{unchained_skill_sub-show}" name="attr_unchained_skill_sub-show" value="1" style="width:140px; margin:0 -15px 0 -125px;" checked="checked" /><span></span>
 
 				<div class="sheet-sect">
 					<input type="radio" name="attr_skills_tab" class="sheet-tab sheet-skill-tab sheet-skills-tab1" value="1" title="Adventure Skills" checked="checked" />
@@ -4396,7 +4491,7 @@
 	</div>
     <div style="margin-top:-15px;">
         <b>Skills</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{skills-show}" name="attr_skills-show" value="1" style="opacity:0; width:70px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -55px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{skills-show}" name="attr_skills-show" value="1" style="width:70px; margin:0 -15px 0 -55px;" checked="checked" /><span></span>
 		<div class="sheet-table sheet-sect">
 					<span class="sheet-table-name">Skills</span>
 					<div class="sheet-table-row">
@@ -6133,7 +6228,7 @@
 	</div>
     <div>
         <b>Skill Notes</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{skill-notes-show}" name="attr_skill-notes-show" value="1" style="opacity:0; width:90px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -75px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{skill-notes-show}" name="attr_skill-notes-show" value="1" style="width:90px; margin:0 -15px 0 -75px;" checked="checked" /><span></span>
 		<div class="sheet-table sheet-center sheet-sect">
 			<span class="sheet-table-name">Skill Notes</span>
 			<div class="sheet-table-row">
@@ -6147,7 +6242,7 @@
 	<div class="sheet-table sheet-header-row">&nbsp;</div>
 	<div>
 		<b>Feats Available</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{feats-available-show}" name="attr_feats-available-show" value="1" style="opacity: 0;width: 130px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -115px; cursor: pointer; z-index: 1" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{feats-available-show}" name="attr_feats-available-show" value="1" style="width:130px; margin:0 -15px 0 -115px;" checked="checked" /><span></span>
 		<div class="sheet-table sheet-sect">
 			<span class="sheet-table-name">Feats Available</span>
 			<div class="sheet-table-row">
@@ -6177,7 +6272,7 @@
 	</div>
     <div class="sheet-repeating-sect">
 		<b>Feats</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{feats-show}" name="attr_feats-show" value="1" style="opacity:0;width: 50px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -35px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{feats-show}" name="attr_feats-show" value="1" style="width:50px; margin:0px -15px 0 -35px;" checked="checked" /><span></span>
         <input type="checkbox" class="sheet-sect sheet-expand-show" title="Collapse or expand all rows." name="attr_feats-expand-show" value="1" style="opacity: 0;height: 1.5em;width: 20px; margin: 0px -22px 2px 0; z-index: 1;cursor: help;" /><span class="sheet-sect"></span>
         <input type="checkbox" class="sheet-sect sheet-split-column-show" value="1" name="attr_feat-column-show" title="Two or one column rows" /><span class="sheet-sect"></span>
 		<div class="sheet-table sheet-sect">
@@ -6187,7 +6282,7 @@
 			<div class="sheet-repeating-fields">
 				<fieldset class="repeating_feat">
                     <div class="sheet-compendium-drop-target">
-                        <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_feat_$X_feat-show}" name="attr_feat-show" value="1" style="opacity: 0 ; height: 1.5em ; position: absolute; top: 10px;  cursor: pointer ; z-index: 1" checked="checked" />
+                        <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_feat_$X_feat-show}" name="attr_feat-show" value="1" checked="checked" />
                         <span class="sheet-table-data sheet-center"></span>
                         <span class="sheet-table-data sheet-center sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_feat_$X_roll}" value="@{macro-text}"></button></span>
                             <span class="sheet-table-data sheet-center sheet-small-label" style="width:32%;"><input title="@{repeating_feat_$X_name}" type="text" name="attr_name" placeholder="Feat Name" accept="Name"><br>Name</span>
@@ -6222,12 +6317,12 @@
         <br>
 	</div>
     <!-- Mythic Adventures display option toggled from Config -->
-    <div style="margin:-15px 0px 15px 0px;">
+    <div style="margin:-15px 0 15px 0;">
         <input type="checkbox" class="sheet-sect-show" title="@{mythic-adventures-show}" name="attr_mythic-adventures-show" value="1" style="margin:-9999px;" /><span></span>
         <div class="sheet-sect">
             <div class="sheet-repeating-sect">
                 <b>Mythic Feats</b>
-                <input type="checkbox" class="sheet-sect-show" title="@{mythic-feats-show}" name="attr_mythic-feats-show" value="1" style="opacity: 0;width: 100px;height: 1.5em;position: relative;top: 0;left: 0;margin: 0px -15px 0 -82px;cursor: pointer;z-index: 1;" checked="checked" /><span></span>
+                <input type="checkbox" class="sheet-sect-show" title="@{mythic-feats-show}" name="attr_mythic-feats-show" value="1" style="width:100px; margin:0px -15px 0 -82px;" checked="checked" /><span></span>
                 <input type="checkbox" class="sheet-sect sheet-expand-show" title="Collapse or expand all rows." name="attr_mythic-feats-expand-show" value="1" style="opacity: 0;height: 1.5em;width: 20px; margin: 0px -22px 2px 0; z-index: 1;cursor: help;" /><span class="sheet-sect"></span>
                 <input type="checkbox" class="sheet-sect sheet-split-column-show" value="1" name="attr_mythic-feats-column-show" title="Two or one column rows" /><span class="sheet-sect"></span>
                 <div class="sheet-table sheet-sect">
@@ -6236,8 +6331,8 @@
                 <div class="sheet-table sheet-sect">
                     <div class="sheet-repeating-fields">
                         <fieldset class="repeating_mythic-feat">
-                            <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_mythic-feat_$X_mythic-feat-show}" name="attr_mythic-feat-show" value="1" style="opacity: 0 ; height: 1.5em ; position: absolute; top: 10px; width: 3.5% ; cursor: pointer ; z-index: 1" checked="checked" />
-							<span class="sheet-table-data sheet-center" style="width:4%;"></span>
+                            <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_mythic-feat_$X_mythic-feat-show}" name="attr_mythic-feat-show" value="1" checked="checked" />
+                            <span class="sheet-table-data sheet-center"></span>
                             <span class="sheet-table-data sheet-center sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_mythic-feat_$X_roll}" value="@{macro-text}"></button></span>
                             <span class="sheet-table-data sheet-center sheet-small-label" style="width:24%;"><input title="@{repeating_mythic-feat_$X_name}" type="text" name="attr_name" placeholder="Mythic Feat Name"><br>Name</span>
                             <span class="sheet-table-data sheet-center sheet-small-label" style="width:40%;"><input title="@{repeating_mythic-feat_$X_short-description}" type="text" name="attr_short-description" placeholder="Short Description"><br>Short Desc</span>
@@ -6275,7 +6370,7 @@
 	<div class="sheet-table sheet-header-row">&nbsp;</div>
 	<div>
 		<b>Currency</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{currency-show}" name="attr_currency-show" value="1" style="opacity:0; width:80px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -65px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{currency-show}" name="attr_currency-show" value="1" style="width:80px; margin:0 -15px 0 -65px;" checked="checked" /><span></span>
 		<div class="sheet-table sheet-sect">
             <div class="sheet-table-row" style="vertical-align:top;">
                 <div class="sheet-table-data sheet-center">
@@ -6310,7 +6405,7 @@
 	</div>
 	<div>
         <b>Worn Equipment</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{worn-equipment-show}" name="attr_worn-equipment-show" value="1" style="opacity:0;width: 150px; height:1.5em; position:relative; top:0; left:0;margin: 0 -15px 0 -133px; cursor:pointer; z-index:1;" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{worn-equipment-show}" name="attr_worn-equipment-show" value="1" style="width:150px; margin:0 -15px 0 -133px;" /><span></span>
 		<div class="sheet-table sheet-sect">
             <span class="sheet-table-name" title="The equipment currently worn by the character">Worn Equipment</span>
             <div class="sheet-table-row">
@@ -6513,7 +6608,7 @@
 	</div>
     <div class="sheet-repeating-sect">
         <b>Equipment</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{inventory-show}" name="attr_inventory-show" value="1" style="opacity:0; width:90px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -75px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{inventory-show}" name="attr_inventory-show" value="1" style="width:90px; margin:0 -15px 0 -75px;" checked="checked" /><span></span>
         <input type="checkbox" class="sheet-sect sheet-expand-show" title="Collapse or expand all rows." name="attr_inventory-expand-show" value="1" style="opacity: 0;height: 1.5em;width: 20px; margin: 0px -20px 2px 0;z-index: 1;cursor: help;" /><span class="sheet-sect"></span>
         <input type="checkbox" class="sheet-sect sheet-split-column-show" value="1" name="attr_item-column-show" title="Two or one column rows" /><span class="sheet-sect"></span>
 		<div class="sheet-table sheet-sect">
@@ -6522,7 +6617,8 @@
 		<div class="sheet-table sheet-sect">
 			<div class="sheet-repeating-fields">
 				<fieldset class="repeating_item">
-                    <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_item_$X_item-show}" name="attr_item-show" value="1" style="opacity: 0 ; height: 1.5em ; position: absolute; top: 10px; width: 3.5% ; cursor: pointer ; z-index: 1" checked="checked" /><span class="sheet-table-data sheet-center" style="width:4%;"></span>
+                    <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_item_$X_item-show}" name="attr_item-show" value="1" checked="checked" />
+                    <span class="sheet-table-data sheet-center"></span>
                     <span class="sheet-table-data sheet-center sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_item_$X_item-roll}" value="@{macro-text}"></button></span>
                     <span class="sheet-table-data sheet-center sheet-small-label" style="width:18%;"><input title="@{repeating_item_$X_name}" type="text" name="attr_name" placeholder="Item Name"><br>Name</span>
                     <span class="sheet-table-data sheet-center sheet-small-label" style="width:40%;"><input title="@{repeating_item_$X_short-description}" type="text" name="attr_short-description" placeholder="Short Description"><br>Short Desc</span>
@@ -6582,7 +6678,7 @@
 		</div>
 	<div>
 		<b>Carried Weight</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{carried-weight-show}" name="attr_carried-weight-show" value="1" style="opacity: 0;width: 125px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -110px; cursor: pointer; z-index: 1" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{carried-weight-show}" name="attr_carried-weight-show" value="1" style="width:125px; margin:0 -15px 0 -110px;" checked="checked" /><span></span>
 		<div class="sheet-table sheet-sect">
 			<span class="sheet-table-name">Carried Weight</span>
 			<div class="sheet-table-row">
@@ -6612,7 +6708,7 @@
 	</div>
 	<div>
 		<b>Loads and Lift</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{loads-show}" name="attr_loads-show" value="1" style="opacity: 0;width: 125px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -110px; cursor: pointer; z-index: 1" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{loads-show}" name="attr_loads-show" value="1" style="width:125px; margin:0 -15px 0 -110px;" /><span></span>
 		<div class="sheet-table sheet-sect">
 			<span class="sheet-table-name">Loads and Lift</span>
 			<div class="sheet-table-row">
@@ -6658,7 +6754,7 @@
 <!-- Spell Classes 0,1,2 -->	
 	<div>
 		<b>Spells Classes</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{spellclasses-show}" name="attr_spellclasses-show" value="1" style="opacity: 0;width: 125px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -110px; cursor: pointer; z-index: 1" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{spellclasses-show}" name="attr_spellclasses-show" value="1" style="width:125px; margin:0 -15px 0 -110px;" checked="checked" /><span></span>
 		<div class="sheet-sect">
 			<input type="radio" name="attr_spellclass_tab" value="0"  title="Spell Class 0" class="sheet-tab sheet-spellclass sheet-spellclass-tab0" checked="checked" />
 			<span class="sheet-tab sheet-spellclass sheet-spellclass-tab0">Spell Class 0</span>
@@ -6720,7 +6816,7 @@
 						<span class="sheet-table-data"><input title="@{CasterLevel-0-note}" type="text" name="attr_CasterLevel-0-note" value="" Placeholder="notes" style="width:100%;" /></span>
 					</div>
 				</div>
-				<div class="sheet-table" style="margin-top:2px" >
+                <div class="sheet-table" style="margin-top:2px;">
 					<span class="sheet-table-name">Concentration</span>
 					<div class="sheet-table-row">
 						<span class="sheet-table-header">Check</span>
@@ -6757,9 +6853,9 @@
 						<span class="sheet-table-data sheet-center"><input title="@{Concentration-0-def}" type="number" name="attr_Concentration-0-def" value="0" /></span>
 					</div>
 				</div>
-				<div class="sheet-table" style="margin-top:4px" >
+                <div class="sheet-table" style="margin-top:4px;">
 					<b>Domains / SubDomains / Bloodlines / Patrons / Schools</b>
-                    <input type="checkbox" class="sheet-sect-show" title="@{domains-0-show}" name="attr_domains-0-show" value="1" style="opacity: 0 ; width: 375px ; height: 1.5em ; position: relative ; top: 0 ; left: 0 ; margin: 0 -15px 0 -355px ; cursor: pointer ; z-index: 1" /><span></span>
+                    <input type="checkbox" class="sheet-sect-show" title="@{domains-0-show}" name="attr_domains-0-show" value="1" style="width:375px; margin:0 -15px 0 -355px;" /><span></span>
 					<div class="sheet-table sheet-sect">
                         <span class="sheet-table-name">Known / Specialties</span>
 						<div class="sheet-table-row">
@@ -6800,7 +6896,7 @@
 				</div>
 				<div>
 					<b>Spells Per Day</b>
-					<input type="checkbox" class="sheet-sect-show" title="@{spellsPerDay-0-show}" name="attr_spellsPerDay-0-show" value="1" style="opacity: 0;width: 125px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -110px; cursor: pointer; z-index: 1" checked="checked" /><span></span>
+                    <input type="checkbox" class="sheet-sect-show" title="@{spellsPerDay-0-show}" name="attr_spellsPerDay-0-show" value="1" style="width:125px; margin:0 -15px 0 -110px;" checked="checked" /><span></span>
 					<div class="sheet-table sheet-sect">
 						<span class="sheet-table-name">Spells Per Day</span>
 						<div class="sheet-table-row">
@@ -7016,7 +7112,7 @@
 						<span class="sheet-table-data"><input title="@{CasterLevel-1-note}" type="text" name="attr_CasterLevel-1-note" value="" Placeholder="notes" style="width:100%;" /></span>
 					</div>
 				</div>
-				<div class="sheet-table" style="margin-top:2px" >
+                <div class="sheet-table" style="margin-top:2px;">
 					<span class="sheet-table-name">Concentration</span>
 					<div class="sheet-table-row">
 						<span class="sheet-table-header">Check</span>
@@ -7057,9 +7153,9 @@
 						<span class="sheet-table-data sheet-center"><input title="@{Concentration-1-def}" type="number" name="attr_Concentration-1-def" value="0" /></span>
 					</div>
 				</div>
-				<div class="sheet-table" style="margin-top:4px" >
+                <div class="sheet-table" style="margin-top:4px;">
 					<b>Domains / SubDomains / Bloodlines / Patrons / Schools</b>
-                    <input type="checkbox" class="sheet-sect-show" title="@{domains-1-show}" name="attr_domains-1-show" value="1" style="opacity: 0 ; width: 375px ; height: 1.5em ; position: relative ; top: 0 ; left: 0 ; margin: 0 -15px 0 -355px ; cursor: pointer ; z-index: 1" checked="checked" /><span></span>
+                    <input type="checkbox" class="sheet-sect-show" title="@{domains-1-show}" name="attr_domains-1-show" value="1" style="width:375px; margin:0 -15px 0 -355px;" checked="checked" /><span></span>
 					<div class="sheet-table sheet-sect">
                         <span class="sheet-table-name">Known / Specialties</span>
 						<div class="sheet-table-row">
@@ -7100,7 +7196,7 @@
 				</div>
 				<div>
 					<b>Spells Per Day</b>
-					<input type="checkbox" class="sheet-sect-show" title="@{spellsPerDay-1-show}" name="attr_spellsPerDay-1-show" value="1" style="opacity: 0;width: 125px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -110px; cursor: pointer; z-index: 1" checked="checked" /><span></span>
+                    <input type="checkbox" class="sheet-sect-show" title="@{spellsPerDay-1-show}" name="attr_spellsPerDay-1-show" value="1" style="width:125px; margin:0 -15px 0 -110px;" checked="checked" /><span></span>
 					<div class="sheet-table sheet-sect">
 						<span class="sheet-table-name">Spells Per Day</span>
 						<div class="sheet-table-row">
@@ -7316,7 +7412,7 @@
 						<span class="sheet-table-data"><input title="@{CasterLevel-2-note}" type="text" name="attr_CasterLevel-2-note" value="" Placeholder="notes" style="width:100%;" /></span>
 					</div>
 				</div>
-				<div class="sheet-table" style="margin-top:2px">
+                <div class="sheet-table" style="margin-top:2px;">
 					<span class="sheet-table-name">Concentration</span>
 					<div class="sheet-table-row">
 						<span class="sheet-table-header">Check</span>
@@ -7357,9 +7453,9 @@
 						<span class="sheet-table-data sheet-center"><input title="@{Concentration-2-def}" type="number" name="attr_Concentration-2-def" value="0" /></span>
 					</div>
 				</div>
-				<div class="sheet-table" style="margin-top:4px" >
+                <div class="sheet-table" style="margin-top:4px;">
 					<b>Domains / SubDomains / Bloodlines / Patrons / Schools</b>
-                    <input type="checkbox" class="sheet-sect-show" title="@{domains-2-show}" name="attr_domains-2-show" value="1" style="opacity: 0 ; width: 375px ; height: 1.5em ; position: relative ; top: 0 ; left: 0 ; margin: 0 -15px 0 -355px ; cursor: pointer ; z-index: 1" checked="checked" /><span></span>
+                    <input type="checkbox" class="sheet-sect-show" title="@{domains-2-show}" name="attr_domains-2-show" value="1" style="width:375px; margin:0 -15px 0 -355px;" checked="checked" /><span></span>
 					<div class="sheet-table sheet-sect">
                         <span class="sheet-table-name">Known / Specialties</span>
 						<div class="sheet-table-row">
@@ -7400,7 +7496,7 @@
 				</div>
 				<div>
 					<b>Spells Per Day</b>
-					<input type="checkbox" class="sheet-sect-show" title="@{spellsPerDay-2-show}" name="attr_spellsPerDay-2-show" value="1" style="opacity: 0;width: 125px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -110px; cursor: pointer; z-index: 1" checked="checked" /><span></span>
+                    <input type="checkbox" class="sheet-sect-show" title="@{spellsPerDay-2-show}" name="attr_spellsPerDay-2-show" value="1" style="width:125px; margin:0 -15px 0 -110px;" checked="checked" /><span></span>
 					<div class="sheet-table sheet-sect">
 						<span class="sheet-table-name">Spells Per Day</span>
 						<div class="sheet-table-row">
@@ -7567,7 +7663,7 @@
 <!-- Spells Levels 0-9 -->
     <div class="sheet-repeating-sect">
 		<b>Spells</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{spells-show}" name="attr_spells-show" value="1" style="opacity:0; width:70px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -55px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{spells-show}" name="attr_spells-show" value="1" style="width:70px; margin:0 -15px 0 -55px;" checked="checked" /><span></span>
         <input type="checkbox" class="sheet-sect sheet-expand-show" title="Collapse or expand all rows." name="attr_spells-expand-show" value="1" style="opacity: 0;height: 1.5em;width: 20px; margin: 0px -22px 2px 0; z-index: 1;cursor: help;" /><span class="sheet-sect"></span>
         <input type="checkbox" class="sheet-sect sheet-split-column-show" value="1" name="attr_spells-column-show" title="Two or one column rows" /><span class="sheet-sect"></span>
 		<div class="sheet-sect">
@@ -7602,9 +7698,9 @@
 					<div class="sheet-repeating-fields">
 						<fieldset class="repeating_lvl-0-spells">
                             <div class="sheet-compendium-drop-target">
-								<input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_lvl-0-spells_$X_spells-show}" name="attr_spells-show" value="1" style="opacity: 0 ; height: 1.5em ; position: absolute; top: 20px; width: 3.5% ; cursor: pointer ; z-index: 1" checked="checked" />
-								<span class="sheet-table-data sheet-center" style="width:4%;"></span>
-                                <span class="sheet-table-data sheet-center sheet-small-label" sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_lvl-0-spells_$X_roll}" value="@{macro-text}"></button></span>
+                                <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_lvl-0-spells_$X_spells-show}" name="attr_spells-show" value="1" checked="checked" />
+                                <span class="sheet-table-data sheet-center"></span>
+                                <span class="sheet-table-data sheet-center sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_lvl-0-spells_$X_roll}" value="@{macro-text}"></button></span>
 								<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-0-spells_$X_used}" type="number" name="attr_used" value="0"  placeholder="Number Prepared"><br>Prepped</span>
 								<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-0-spells_$X_name}" type="text" value="" name="attr_name" placeholder="Spell Name" accept="Name" ><br>Name</span>
 								<span class="sheet-table-data sheet-center sheet-small-label">
@@ -7653,7 +7749,7 @@
 									<b>Macro Text</b>
 									<input type="checkbox" class="sheet-macro-text-show" title="@{repeating_lvl-0-spells_$X_macro-text-show}" name="attr_macro-text-show" value="1" style="opacity:0; width:90px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -75px; cursor:pointer; z-index:1;" /><span></span>
 									<b>Options</b>
-									<input type="checkbox" class="sheet-options-show" title="@{repeating_lvl-0-spells_$X_options-show}" name="attr_options-show" value="1" style="opacity: 0;width: 70px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -55px; cursor: pointer; z-index: 1" /><span></span>
+                                    <input type="checkbox" class="sheet-options-show" title="@{repeating_lvl-0-spells_$X_options-show}" name="attr_options-show" value="1" style="opacity: 0;width: 70px; height: 1.5em; position: relative; top: 0; left: 0; margin:0 -15px 0 -55px; cursor: pointer; z-index: 1;" /><span></span>
 									<b>IDs</b>
 									<input type="checkbox" class="sheet-repeating_ids-show" title="@{repeating_lvl-0-spells_$X_ids-show}" name="attr_ids-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" /><span></span>
 									<br>
@@ -7754,9 +7850,9 @@
 					<div class="sheet-repeating-fields">
 						<fieldset class="repeating_lvl-1-spells">
                             <div class="sheet-compendium-drop-target">
-								<input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_lvl-1-spells_$X_spells-show}" name="attr_spells-show" value="1" style="opacity: 0 ; height: 1.5em ; position: absolute; top: 20px; width: 3.5% ; cursor: pointer ; z-index: 1" checked="checked" />
-								<span class="sheet-table-data sheet-center" style="width:4%;"></span>
-                                <span class="sheet-table-data sheet-center sheet-small-label" sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_lvl-1-spells_$X_roll}" value="@{macro-text}"></button></span>
+                                <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_lvl-1-spells_$X_spells-show}" name="attr_spells-show" value="1" checked="checked" />
+                                <span class="sheet-table-data sheet-center"></span>
+                                <span class="sheet-table-data sheet-center sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_lvl-1-spells_$X_roll}" value="@{macro-text}"></button></span>
 								<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-1-spells_$X_used}" type="number" name="attr_used" value="0" placeholder="Number Prepared"><br>Prepped</span>
 								<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-1-spells_$X_name}" type="text" value="" name="attr_name" placeholder="Spell Name" accept="Name"><br>Name</span>
 								<span class="sheet-table-data sheet-center sheet-small-label">
@@ -7805,7 +7901,7 @@
 									<b>Macro Text</b>
 									<input type="checkbox" class="sheet-macro-text-show" title="@{repeating_lvl-1-spells_$X_macro-text-show}" name="attr_macro-text-show" value="1" style="opacity:0; width:90px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -75px; cursor:pointer; z-index:1;" /><span></span>
 									<b>Options</b>
-									<input type="checkbox" class="sheet-options-show" title="@{repeating_lvl-1-spells_$X_options-show}" name="attr_options-show" value="1" style="opacity: 0;width: 70px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -55px; cursor: pointer; z-index: 1" /><span></span>
+                                    <input type="checkbox" class="sheet-options-show" title="@{repeating_lvl-1-spells_$X_options-show}" name="attr_options-show" value="1" style="opacity: 0;width: 70px; height: 1.5em; position: relative; top: 0; left: 0; margin:0 -15px 0 -55px; cursor: pointer; z-index: 1;" /><span></span>
 									<b>IDs</b>
 									<input type="checkbox" class="sheet-repeating_ids-show" title="@{repeating_lvl-1-spells_$X_ids-show}" name="attr_ids-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" /><span></span>
 									<br>
@@ -7906,9 +8002,9 @@
 					<div class="sheet-repeating-fields">
 						<fieldset class="repeating_lvl-2-spells">
                             <div class="sheet-compendium-drop-target">
-								<input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_lvl-2-spells_$X_spells-show}" name="attr_spells-show" value="1" style="opacity: 0 ; height: 1.5em ; position: absolute; top: 20px; width: 3.5% ; cursor: pointer ; z-index: 1" checked="checked" />
-								<span class="sheet-table-data sheet-center" style="width:4%;"></span>
-                                <span class="sheet-table-data sheet-center sheet-small-label" sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_lvl-2-spells_$X_roll}" value="@{macro-text}"></button></span>
+                                <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_lvl-2-spells_$X_spells-show}" name="attr_spells-show" value="1" checked="checked" />
+                                <span class="sheet-table-data sheet-center"></span>
+                                <span class="sheet-table-data sheet-center sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_lvl-2-spells_$X_roll}" value="@{macro-text}"></button></span>
 								<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-2-spells_$X_used}" type="number" name="attr_used" value="0"  placeholder="Number Prepared"><br>Prepped</span>
 								<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-2-spells_$X_name}" type="text" value="" name="attr_name" placeholder="Spell Name" accept="Name"><br>Name</span>
 								<span class="sheet-table-data sheet-center sheet-small-label">
@@ -7957,7 +8053,7 @@
 									<b>Macro Text</b>
 									<input type="checkbox" class="sheet-macro-text-show" title="@{repeating_lvl-2-spells_$X_macro-text-show}" name="attr_macro-text-show" value="1" style="opacity:0; width:90px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -75px; cursor:pointer; z-index:1;" /><span></span>
 									<b>Options</b>
-									<input type="checkbox" class="sheet-options-show" title="@{repeating_lvl-2-spells_$X_options-show}" name="attr_options-show" value="1" style="opacity: 0;width: 70px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -55px; cursor: pointer; z-index: 1" /><span></span>
+                                    <input type="checkbox" class="sheet-options-show" title="@{repeating_lvl-2-spells_$X_options-show}" name="attr_options-show" value="1" style="opacity: 0;width: 70px; height: 1.5em; position: relative; top: 0; left: 0; margin:0 -15px 0 -55px; cursor: pointer; z-index: 1;" /><span></span>
 									<b>IDs</b>
 									<input type="checkbox" class="sheet-repeating_ids-show" title="@{repeating_lvl-2-spells_$X_ids-show}" name="attr_ids-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" /><span></span>
 									<br>
@@ -8058,9 +8154,9 @@
 					<div class="sheet-repeating-fields">
 						<fieldset class="repeating_lvl-3-spells">
                             <div class="sheet-compendium-drop-target">
-								<input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_lvl-3-spells_$X_spells-show}" name="attr_spells-show" value="1" style="opacity: 0 ; height: 1.5em ; position: absolute; top: 20px; width: 3.5% ; cursor: pointer ; z-index: 1" checked="checked" />
-								<span class="sheet-table-data sheet-center" style="width:4%;"></span>
-                                <span class="sheet-table-data sheet-center sheet-small-label" sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_lvl-3-spells_$X_roll}" value="@{macro-text}"></button></span>
+                                <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_lvl-3-spells_$X_spells-show}" name="attr_spells-show" value="1" checked="checked" />
+                                <span class="sheet-table-data sheet-center"></span>
+                                <span class="sheet-table-data sheet-center sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_lvl-3-spells_$X_roll}" value="@{macro-text}"></button></span>
 								<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-3-spells_$X_used}" type="number" name="attr_used" value="0"  placeholder="Number Prepared"><br>Prepped</span>
 								<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-3-spells_$X_name}" type="text" value="" name="attr_name" placeholder="Spell Name" accept="Name"><br>Name</span>
 								<span class="sheet-table-data sheet-center sheet-small-label">
@@ -8109,7 +8205,7 @@
 									<b>Macro Text</b>
 									<input type="checkbox" class="sheet-macro-text-show" title="@{repeating_lvl-3-spells_$X_macro-text-show}" name="attr_macro-text-show" value="1" style="opacity:0; width:90px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -75px; cursor:pointer; z-index:1;" /><span></span>
 									<b>Options</b>
-									<input type="checkbox" class="sheet-options-show" title="@{repeating_lvl-3-spells_$X_options-show}" name="attr_options-show" value="1" style="opacity: 0;width: 70px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -55px; cursor: pointer; z-index: 1" /><span></span>
+                                    <input type="checkbox" class="sheet-options-show" title="@{repeating_lvl-3-spells_$X_options-show}" name="attr_options-show" value="1" style="opacity: 0;width: 70px; height: 1.5em; position: relative; top: 0; left: 0; margin:0 -15px 0 -55px; cursor: pointer; z-index: 1;" /><span></span>
 									<b>IDs</b>
 									<input type="checkbox" class="sheet-repeating_ids-show" title="@{repeating_lvl-3-spells_$X_ids-show}" name="attr_ids-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" /><span></span>
 									<br>
@@ -8210,9 +8306,9 @@
 					<div class="sheet-repeating-fields">
 						<fieldset class="repeating_lvl-4-spells">
                             <div class="sheet-compendium-drop-target">
-								<input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_lvl-4-spells_$X_spells-show}" name="attr_spells-show" value="1" style="opacity: 0 ; height: 1.5em ; position: absolute; top: 20px; width: 3.5% ; cursor: pointer ; z-index: 1" checked="checked" />
-								<span class="sheet-table-data sheet-center" style="width:4%;"></span>
-                                <span class="sheet-table-data sheet-center sheet-small-label" sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_lvl-4-spells_$X_roll}" value="@{macro-text}"></button></span>
+                                <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_lvl-4-spells_$X_spells-show}" name="attr_spells-show" value="1" checked="checked" />
+                                <span class="sheet-table-data sheet-center"></span>
+                                <span class="sheet-table-data sheet-center sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_lvl-4-spells_$X_roll}" value="@{macro-text}"></button></span>
 								<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-4-spells_$X_used}" type="number" name="attr_used" value="0"  placeholder="Number Prepared"><br>Prepped</span>
 								<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-4-spells_$X_name}" type="text" value="" name="attr_name" placeholder="Spell Name" accept="Name"><br>Name</span>
 								<span class="sheet-table-data sheet-center sheet-small-label">
@@ -8261,7 +8357,7 @@
 									<b>Macro Text</b>
 									<input type="checkbox" class="sheet-macro-text-show" title="@{repeating_lvl-4-spells_$X_macro-text-show}" name="attr_macro-text-show" value="1" style="opacity:0; width:90px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -75px; cursor:pointer; z-index:1;" /><span></span>
 									<b>Options</b>
-									<input type="checkbox" class="sheet-options-show" title="@{repeating_lvl-4-spells_$X_options-show}" name="attr_options-show" value="1" style="opacity: 0;width: 70px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -55px; cursor: pointer; z-index: 1" /><span></span>
+                                    <input type="checkbox" class="sheet-options-show" title="@{repeating_lvl-4-spells_$X_options-show}" name="attr_options-show" value="1" style="opacity: 0;width: 70px; height: 1.5em; position: relative; top: 0; left: 0; margin:0 -15px 0 -55px; cursor: pointer; z-index: 1;" /><span></span>
 									<b>IDs</b>
 									<input type="checkbox" class="sheet-repeating_ids-show" title="@{repeating_lvl-4-spells_$X_ids-show}" name="attr_ids-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" /><span></span>
 									<br>
@@ -8362,9 +8458,9 @@
 					<div class="sheet-repeating-fields">
 						<fieldset class="repeating_lvl-5-spells">
                             <div class="sheet-compendium-drop-target">
-								<input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_lvl-5-spells_$X_spells-show}" name="attr_spells-show" value="1" style="opacity: 0 ; height: 1.5em ; position: absolute; top: 20px; width: 3.5% ; cursor: pointer ; z-index: 1" checked="checked" />
-								<span class="sheet-table-data sheet-center" style="width:4%;"></span>
-                                <span class="sheet-table-data sheet-center sheet-small-label" sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_lvl-5-spells_$X_roll}" value="@{macro-text}"></button></span>
+                                <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_lvl-5-spells_$X_spells-show}" name="attr_spells-show" value="1" checked="checked" />
+                                <span class="sheet-table-data sheet-center"></span>
+                                <span class="sheet-table-data sheet-center sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_lvl-5-spells_$X_roll}" value="@{macro-text}"></button></span>
 								<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-5-spells_$X_used}" type="number" name="attr_used" value="0"  placeholder="Number Prepared"><br>Prepped</span>
 								<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-5-spells_$X_name}" type="text" value="" name="attr_name" placeholder="Spell Name" accept="Name"><br>Name</span>
 								<span class="sheet-table-data sheet-center sheet-small-label">
@@ -8413,7 +8509,7 @@
 									<b>Macro Text</b>
 									<input type="checkbox" class="sheet-macro-text-show" title="@{repeating_lvl-5-spells_$X_macro-text-show}" name="attr_macro-text-show" value="1" style="opacity:0; width:90px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -75px; cursor:pointer; z-index:1;" /><span></span>
 									<b>Options</b>
-									<input type="checkbox" class="sheet-options-show" title="@{repeating_lvl-5-spells_$X_options-show}" name="attr_options-show" value="1" style="opacity: 0;width: 70px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -55px; cursor: pointer; z-index: 1" /><span></span>
+                                    <input type="checkbox" class="sheet-options-show" title="@{repeating_lvl-5-spells_$X_options-show}" name="attr_options-show" value="1" style="opacity: 0;width: 70px; height: 1.5em; position: relative; top: 0; left: 0; margin:0 -15px 0 -55px; cursor: pointer; z-index: 1;" /><span></span>
 									<b>IDs</b>
 									<input type="checkbox" class="sheet-repeating_ids-show" title="@{repeating_lvl-5-spells_$X_ids-show}" name="attr_ids-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" /><span></span>
 									<br>
@@ -8514,9 +8610,9 @@
 					<div class="sheet-repeating-fields">
 						<fieldset class="repeating_lvl-6-spells">
                             <div class="sheet-compendium-drop-target">
-								<input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_lvl-6-spells_$X_spells-show}" name="attr_spells-show" value="1" style="opacity: 0 ; height: 1.5em ; position: absolute; top: 20px; width: 3.5% ; cursor: pointer ; z-index: 1" checked="checked" />
-								<span class="sheet-table-data sheet-center" style="width:4%;"></span>
-                                <span class="sheet-table-data sheet-center sheet-small-label" sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_lvl-6-spells_$X_roll}" value="@{macro-text}"></button></span>
+                                <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_lvl-6-spells_$X_spells-show}" name="attr_spells-show" value="1" checked="checked" />
+                                <span class="sheet-table-data sheet-center"></span>
+                                <span class="sheet-table-data sheet-center sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_lvl-6-spells_$X_roll}" value="@{macro-text}"></button></span>
 								<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-6-spells_$X_used}" type="number" name="attr_used" value="0"  placeholder="Number Prepared"><br>Prepped</span>
 								<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-6-spells_$X_name}" type="text" value="" name="attr_name" placeholder="Spell Name" accept="Name"><br>Name</span>
 								<span class="sheet-table-data sheet-center sheet-small-label">
@@ -8565,7 +8661,7 @@
 									<b>Macro Text</b>
 									<input type="checkbox" class="sheet-macro-text-show" title="@{repeating_lvl-6-spells_$X_macro-text-show}" name="attr_macro-text-show" value="1" style="opacity:0; width:90px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -75px; cursor:pointer; z-index:1;" /><span></span>
 									<b>Options</b>
-									<input type="checkbox" class="sheet-options-show" title="@{repeating_lvl-6-spells_$X_options-show}" name="attr_options-show" value="1" style="opacity: 0;width: 70px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -55px; cursor: pointer; z-index: 1" /><span></span>
+                                    <input type="checkbox" class="sheet-options-show" title="@{repeating_lvl-6-spells_$X_options-show}" name="attr_options-show" value="1" style="opacity: 0;width: 70px; height: 1.5em; position: relative; top: 0; left: 0; margin:0 -15px 0 -55px; cursor: pointer; z-index: 1;" /><span></span>
 									<b>IDs</b>
 									<input type="checkbox" class="sheet-repeating_ids-show" title="@{repeating_lvl-6-spells_$X_ids-show}" name="attr_ids-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" /><span></span>
 									<br>
@@ -8666,9 +8762,9 @@
 					<div class="sheet-repeating-fields">
 						<fieldset class="repeating_lvl-7-spells">
                             <div class="sheet-compendium-drop-target">
-								<input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_lvl-7-spells_$X_spells-show}" name="attr_spells-show" value="1" style="opacity: 0 ; height: 1.5em ; position: absolute; top: 20px; width: 3.5% ; cursor: pointer ; z-index: 1" checked="checked" />
-								<span class="sheet-table-data sheet-center" style="width:4%;"></span>
-                                <span class="sheet-table-data sheet-center sheet-small-label" sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_lvl-7-spells_$X_roll}" value="@{macro-text}"></button></span>
+                                <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_lvl-7-spells_$X_spells-show}" name="attr_spells-show" value="1" checked="checked" />
+                                <span class="sheet-table-data sheet-center"></span>
+                                <span class="sheet-table-data sheet-center sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_lvl-7-spells_$X_roll}" value="@{macro-text}"></button></span>
 								<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-7-spells_$X_used}" type="number" name="attr_used" value="0"  placeholder="Number Prepared"><br>Prepped</span>
 								<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-7-spells_$X_name}" type="text" value="" name="attr_name" placeholder="Spell Name" accept="Name"><br>Name</span>
 								<span class="sheet-table-data sheet-center sheet-small-label">
@@ -8717,7 +8813,7 @@
 									<b>Macro Text</b>
 									<input type="checkbox" class="sheet-macro-text-show" title="@{repeating_lvl-7-spells_$X_macro-text-show}" name="attr_macro-text-show" value="1" style="opacity:0; width:90px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -75px; cursor:pointer; z-index:1;" /><span></span>
 									<b>Options</b>
-									<input type="checkbox" class="sheet-options-show" title="@{repeating_lvl-7-spells_$X_options-show}" name="attr_options-show" value="1" style="opacity: 0;width: 70px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -55px; cursor: pointer; z-index: 1" /><span></span>
+                                    <input type="checkbox" class="sheet-options-show" title="@{repeating_lvl-7-spells_$X_options-show}" name="attr_options-show" value="1" style="opacity: 0;width: 70px; height: 1.5em; position: relative; top: 0; left: 0; margin:0 -15px 0 -55px; cursor: pointer; z-index: 1;" /><span></span>
 									<b>IDs</b>
 									<input type="checkbox" class="sheet-repeating_ids-show" title="@{repeating_lvl-7-spells_$X_ids-show}" name="attr_ids-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" /><span></span>
 									<br>
@@ -8818,9 +8914,9 @@
 					<div class="sheet-repeating-fields">
 						<fieldset class="repeating_lvl-8-spells">
                             <div class="sheet-compendium-drop-target">
-								<input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_lvl-8-spells_$X_spells-show}" name="attr_spells-show" value="1" style="opacity: 0 ; height: 1.5em ; position: absolute; top: 20px; width: 3.5% ; cursor: pointer ; z-index: 1" checked="checked" />
-								<span class="sheet-table-data sheet-center" style="width:4%;"></span>
-                                <span class="sheet-table-data sheet-center sheet-small-label" sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_lvl-8-spells_$X_roll}" value="@{macro-text}"></button></span>
+                                <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_lvl-8-spells_$X_spells-show}" name="attr_spells-show" value="1" checked="checked" />
+                                <span class="sheet-table-data sheet-center"></span>
+                                <span class="sheet-table-data sheet-center sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_lvl-8-spells_$X_roll}" value="@{macro-text}"></button></span>
 								<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-8-spells_$X_used}" type="number" name="attr_used" value="0"  placeholder="Number Prepared"><br>Prepped</span>
 								<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-8-spells_$X_name}" type="text" value="" name="attr_name" placeholder="Spell Name" accept="Name"><br>Name</span>
 								<span class="sheet-table-data sheet-center sheet-small-label">
@@ -8869,7 +8965,7 @@
 									<b>Macro Text</b>
 									<input type="checkbox" class="sheet-macro-text-show" title="@{repeating_lvl-8-spells_$X_macro-text-show}" name="attr_macro-text-show" value="1" style="opacity:0; width:90px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -75px; cursor:pointer; z-index:1;" /><span></span>
 									<b>Options</b>
-									<input type="checkbox" class="sheet-options-show" title="@{repeating_lvl-8-spells_$X_options-show}" name="attr_options-show" value="1" style="opacity: 0;width: 70px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -55px; cursor: pointer; z-index: 1" /><span></span>
+                                    <input type="checkbox" class="sheet-options-show" title="@{repeating_lvl-8-spells_$X_options-show}" name="attr_options-show" value="1" style="opacity: 0;width: 70px; height: 1.5em; position: relative; top: 0; left: 0; margin:0 -15px 0 -55px; cursor: pointer; z-index: 1;" /><span></span>
 									<b>IDs</b>
 									<input type="checkbox" class="sheet-repeating_ids-show" title="@{repeating_lvl-8-spells_$X_ids-show}" name="attr_ids-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" /><span></span>
 									<br>
@@ -8970,9 +9066,9 @@
 					<div class="sheet-repeating-fields">
 						<fieldset class="repeating_lvl-9-spells">
                             <div class="sheet-compendium-drop-target">
-								<input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_lvl-9-spells_$X_spells-show}" name="attr_spells-show" value="1" style="opacity: 0 ; height: 1.5em ; position: absolute; top: 20px; width: 3.5% ; cursor: pointer ; z-index: 1" checked="checked" />
-								<span class="sheet-table-data sheet-center" style="width:4%;"></span>
-                                <span class="sheet-table-data sheet-center sheet-small-label" sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_lvl-9-spells_$X_roll}" value="@{macro-text}"></button></span>
+                                <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_lvl-9-spells_$X_spells-show}" name="attr_spells-show" value="1" checked="checked" />
+                                <span class="sheet-table-data sheet-center"></span>
+                                <span class="sheet-table-data sheet-center sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_lvl-9-spells_$X_roll}" value="@{macro-text}"></button></span>
 								<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-9-spells_$X_used}" type="number" name="attr_used" value="0"  placeholder="Number Prepared"><br>Prepped</span>
 								<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_lvl-9-spells_$X_name}" type="text" value="" name="attr_name" placeholder="Spell Name" accept="Name"><br>Name</span>
 								<span class="sheet-table-data sheet-center sheet-small-label">
@@ -9021,7 +9117,7 @@
 									<b>Macro Text</b>
 									<input type="checkbox" class="sheet-macro-text-show" title="@{repeating_lvl-9-spells_$X_macro-text-show}" name="attr_macro-text-show" value="1" style="opacity:0; width:90px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -75px; cursor:pointer; z-index:1;" /><span></span>
 									<b>Options</b>
-									<input type="checkbox" class="sheet-options-show" title="@{repeating_lvl-9-spells_$X_options-show}" name="attr_options-show" value="1" style="opacity: 0;width: 70px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -55px; cursor: pointer; z-index: 1" /><span></span>
+                                    <input type="checkbox" class="sheet-options-show" title="@{repeating_lvl-9-spells_$X_options-show}" name="attr_options-show" value="1" style="opacity: 0;width: 70px; height: 1.5em; position: relative; top: 0; left: 0; margin:0 -15px 0 -55px; cursor: pointer; z-index: 1;" /><span></span>
 									<b>IDs</b>
 									<input type="checkbox" class="sheet-repeating_ids-show" title="@{repeating_lvl-9-spells_$X_ids-show}" name="attr_ids-show" value="1" style="opacity:0;width: 40px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -25px; cursor:pointer; z-index:1;" /><span></span>
 									<br>
@@ -9121,7 +9217,7 @@
 	<div class="sheet-table sheet-header-row">&nbsp;</div>
 	<div>
 		<b>Character Details</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{character-details-show}" name="attr_character-details-show" value="1" style="opacity: 0;width: 140px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -125px; cursor: pointer; z-index: 1" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{character-details-show}" name="attr_character-details-show" value="1" style="width:140px; margin:0 -15px 0 -125px;" checked="checked" /><span></span>
 		<div class="sheet-table sheet-sect">
 			<span class="sheet-table-name">Character Details</span>
 		</div>
@@ -9180,7 +9276,7 @@
 	</div>
     <div class="sheet-repeating-sect">
 		<b>Racial Traits</b>
-        <input type="checkbox" class="sheet-sect-show" title="@{racial-traits-show}" name="attr_racial-trait-show" value="1" style="opacity: 0;width: 125px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -110px; cursor: pointer; z-index: 1" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{racial-traits-show}" name="attr_racial-trait-show" value="1" style="width:125px; margin:0 -15px 0 -110px;" checked="checked" /><span></span>
         <input type="checkbox" class="sheet-sect sheet-expand-show" title="Collapse or expand all rows." name="attr_racial-trait-expand-show" value="1" style="opacity: 0;height: 1.5em;width: 20px; margin: 0px -22px 2px 0; z-index: 1;cursor: help;" /><span class="sheet-sect"></span>
         <input type="checkbox" class="sheet-sect sheet-split-column-show" value="1" name="attr_racial-trait-column-show" title="Two or one column rows" /><span class="sheet-sect"></span>
 		<div class="sheet-table sheet-sect">
@@ -9190,8 +9286,8 @@
 			<div class="sheet-repeating-fields">
 				<fieldset class="repeating_racial-trait">
                     <div class="sheet-compendium-drop-target">
-						<input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_racial-trait_$X_racial-trait-show}" name="attr_racial-trait-show" value="1" style="opacity: 0 ; height: 1.5em ; position: absolute; top: 10px; width: 3.5% ; cursor: pointer ; z-index: 1" checked="checked" />
-						<span class="sheet-table-data sheet-center" style="width:4%;"></span>
+                        <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_racial-trait_$X_racial-trait-show}" name="attr_racial-trait-show" value="1" checked="checked" />
+                        <span class="sheet-table-data sheet-center"></span>
                         <span class="sheet-table-data sheet-center sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_racial-trait_$X_roll}" value="@{macro-text}"></button></span>
                         <span class="sheet-table-data sheet-center sheet-small-label" style="width:24%;"><input title="@{repeating_racial-trait_$X_name}" type="text" name="attr_name" placeholder="Racial Trait Name" accept="Name"><br>Name</span>
                         <span class="sheet-table-data sheet-center sheet-small-label" style="width:40%;"><input title="@{repeating_racial-trait_$X_short-description}" type="text" name="attr_short-description" placeholder="Short Description"><br>Short Desc</span>
@@ -9224,7 +9320,7 @@
 	</div>
     <div class="sheet-repeating-sect">
 		<b>Traits</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{traits-show}" name="attr_traits-show" value="1" style="opacity:0; width:70px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -55px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{traits-show}" name="attr_traits-show" value="1" style="width:70px; margin:0 -15px 0 -55px;" checked="checked" /><span></span>
         <input type="checkbox" class="sheet-sect sheet-expand-show" title="Collapse or expand all rows." name="attr_traits-expand-show" value="1" style="opacity: 0;height: 1.5em;width: 20px; margin: 0px -20px 2px 0;z-index: 1;cursor: help;" /><span class="sheet-sect"></span>
         <input type="checkbox" class="sheet-sect sheet-split-column-show" value="1" name="attr_trait-column-show" title="Two or one column rows" /><span class="sheet-sect"></span>
 		<div class="sheet-table sheet-sect">
@@ -9234,8 +9330,8 @@
 			<div class="sheet-repeating-fields">		
 				<fieldset class="repeating_trait">
                     <div class="sheet-compendium-drop-target">
-                        <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_trait_$X_trait-show}" name="attr_trait-show" value="1" style="opacity: 0 ; height: 1.5em ; position: absolute; top: 10px; width: 3.5% ; cursor: pointer ; z-index: 1" checked="checked" />
-                        <span class="sheet-table-data sheet-center" style="width:4%;"></span>
+                        <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_trait_$X_trait-show}" name="attr_trait-show" value="1" checked="checked" />
+                        <span class="sheet-table-data sheet-center"></span>
                         <span class="sheet-table-data sheet-center sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_trait_$X_roll}" value="@{macro-text}"></button></span>
                         <span class="sheet-table-data sheet-center sheet-small-label" style="width:15%;"><input title="@{repeating_trait_$X_name}" type="text" name="attr_name" placeholder="Trait Name" accept="Name"><br>Name</span>
                         <span class="sheet-table-data sheet-center sheet-small-label" style="width:57%;"><input title="@{repeating_trait_$X_short-description}" type="text" name="attr_short-description" placeholder="Short Description"><br>Short Desc</span>
@@ -9330,7 +9426,7 @@
 	<div>
 		<hr class="sheet-npc-hr sheet-margin-top" />
 		<b>QUICK STATS</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{npc-quick_stats-show}" name="attr_npc-quick_stats-show" value="1" style="opacity: 0;width: 110px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -95px; cursor: pointer; z-index: 1" checked="checked" /><span></span>
+            <input type="checkbox" class="sheet-sect-show" title="@{npc-quick_stats-show}" name="attr_npc-quick_stats-show" value="1" style="width:110px; margin:0 -15px 0 -95px;" checked="checked" /><span></span>
 		<hr class="sheet-npc-hr sheet-margin-bottom" />
 		<div class="sheet-table sheet-sect">
 			<div class="sheet-table-row">
@@ -9352,7 +9448,7 @@
 	<div>
 		<hr class="sheet-npc-hr sheet-margin-top" />
 		<b>DEFENSE</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{npc-defense-show}" name="attr_npc-defense-show" value="1" style="opacity: 0;width: 85px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -65px; cursor: pointer; z-index: 1" checked="checked" /><span></span>
+            <input type="checkbox" class="sheet-sect-show" title="@{npc-defense-show}" name="attr_npc-defense-show" value="1" style="width:85px; margin:0 -15px 0 -65px;" checked="checked" /><span></span>
 		<hr class="sheet-npc-hr sheet-margin-bottom" />
 		<div style="text-align:left;" class="sheet-sect">
 				<div class="sheet-table">
@@ -9405,19 +9501,19 @@
 			</div>
 			<div class="sheet-table">
 				<div class="sheet-table-row">
-                        <span class="sheet-table-data sheet-center sheet-small-label"><button style="font-size:100%;" title="%{selected|NPC-Fort-Save}" type="roll" name="roll_NPC-Fort-Save" value="@{NPC-whisper} &{template:pf_defense} {{color}} {{header_image=@{header_image-pf_defense}}} {{character_name=@{character_name}}} {{character_id=@{character_id}}} {{subtitle}} {{name=Fortitude}} {{Save=[[ 1d20 + [[ @{Fort} ]] ]]}} @{save_options}}}">Fort</button><br>&nbsp;</span>
+                        <span class="sheet-table-data sheet-center sheet-small-label"><button style="font-size:100%;" title="%{selected|NPC-Fort-Save}" type="roll" name="roll_NPC-Fort-Save" value="@{NPC-whisper} &{template:pf_defense} {{color}} {{header_image=@{header_image-pf_defense}}} {{character_name=@{character_name}}} {{character_id=@{character_id}}} {{subtitle}} {{name=Fortitude}} {{Save=[[ 1d20 + [[ @{Fort} ]] ]]}} @{save_options}}}">Fort</button></span>
 					<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{Fort}" type="number" name="attr_Fort" value="0"  class="sheet-calc" readonly="readonly" /><br>Total</span>
 					<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{Fort-misc}" type="number" name="attr_Fort-misc" value="0" /><br>Misc</span>
 					<span class="sheet-table-data sheet-divider-lg">+<br>&nbsp;</span>
 					<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{buff_Fort-total}" name="attr_buff_Fort-total" type="number" value="0"   class="sheet-calc" readonly="readonly" /><br>Buffs</span>
 					<span class="sheet-table-data sheet-divider-lg" >;<br>&nbsp;</span>	
-                        <span class="sheet-table-data sheet-center sheet-small-label"><button style="font-size:100%;" title="%{selected|NPC-Ref-Save}" type="roll" name="roll_NPC-Ref-Save" value="@{NPC-whisper} &{template:pf_defense} {{color}} {{header_image=@{header_image-pf_defense}}} {{character_name=@{character_name}}} {{character_id=@{character_id}}} {{subtitle}} {{name=Reflex}} {{Save=[[ 1d20 + [[ @{Ref} ]] ]]}} @{save_options}}}">Ref</button><br>&nbsp;</span>
+                        <span class="sheet-table-data sheet-center sheet-small-label"><button style="font-size:100%;" title="%{selected|NPC-Ref-Save}" type="roll" name="roll_NPC-Ref-Save" value="@{NPC-whisper} &{template:pf_defense} {{color}} {{header_image=@{header_image-pf_defense}}} {{character_name=@{character_name}}} {{character_id=@{character_id}}} {{subtitle}} {{name=Reflex}} {{Save=[[ 1d20 + [[ @{Ref} ]] ]]}} @{save_options}}}">Ref</button></span>
 					<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{Ref}" type="number" name="attr_Ref" value="0" class="sheet-calc" readonly="readonly" /><br>Total</span>
 					<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{Ref-misc}" type="number" name="attr_Ref-misc" value="0" /><br>Misc</span>
 					<span class="sheet-table-data sheet-divider-lg">+<br>&nbsp;</span>
 					<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{buff_Ref-total}" name="attr_buff_Ref-total" type="number" value="0"  class="sheet-calc" readonly="readonly" /><br>Buffs</span>
 					<span class="sheet-table-data sheet-divider-lg" >;<br>&nbsp;</span>	
-                        <span class="sheet-table-data sheet-center sheet-small-label"><button style="font-size:100%;" title="%{selected|NPC-Will-Save}" type="roll" name="roll_NPC-Will-Save" value="@{NPC-whisper} &{template:pf_defense} {{color}} {{header_image=@{header_image-pf_defense}}} {{character_name=@{character_name}}} {{character_id=@{character_id}}} {{subtitle}} {{name=Will}} {{Save=[[ 1d20 + [[ @{Will} ]] ]]}} @{save_options}}}">Will</button><br>&nbsp;</span>
+                        <span class="sheet-table-data sheet-center sheet-small-label"><button style="font-size:100%;" title="%{selected|NPC-Will-Save}" type="roll" name="roll_NPC-Will-Save" value="@{NPC-whisper} &{template:pf_defense} {{color}} {{header_image=@{header_image-pf_defense}}} {{character_name=@{character_name}}} {{character_id=@{character_id}}} {{subtitle}} {{name=Will}} {{Save=[[ 1d20 + [[ @{Will} ]] ]]}} @{save_options}}}">Will</button></span>
 					<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{Will}" type="number" name="attr_Will" value="0" class="sheet-calc" readonly="readonly" /><br>Total</span>
 					<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{Will-misc}" type="number" name="attr_Will-misc" value="0" /><br>Misc</span>
 					<span class="sheet-table-data sheet-divider">+</span>
@@ -9473,7 +9569,7 @@
 	<div>
 		<hr class="sheet-npc-hr sheet-margin-top" />
 		<b>OFFENSE</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{npc-offense-show}" name="attr_npc-offense-show" value="1" style="opacity: 0;width: 85px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -65px; cursor: pointer; z-index: 1" checked="checked" /><span></span>
+            <input type="checkbox" class="sheet-sect-show" title="@{npc-offense-show}" name="attr_npc-offense-show" value="1" style="width:85px; margin:0 -15px 0 -65px;" checked="checked" /><span></span>
 		<hr class="sheet-npc-hr sheet-margin-bottom" />
 		<div style="text-align:left;" class="sheet-sect">
 			<div class="sheet-table">
@@ -9492,7 +9588,7 @@
 			<br>
 	<div>
 		<b title="Apply attack and damage modifiers to all attacks.">Attack and Damage Effects</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{attack_damage_status_effects-show}" name="attr_attack_damage_status_effects-show" value="1" style="opacity: 0 ; width: 195px ; height: 1.5em ; position: relative ; top: 0 ; left: 0 ; margin: 0 -15px 0 -176px ; cursor: pointer ; z-index: 1" checked="checked" /><span></span>
+                    <input type="checkbox" class="sheet-sect-show" title="@{attack_damage_status_effects-show}" name="attr_attack_damage_status_effects-show" value="1" style="width:195px; margin:0 -15px 0 -176px;" checked="checked" /><span></span>
 		<div class="sheet-table sheet-sect">
 			<span class="sheet-table-name">Attack and Damage Effects</span>
 			<div class="sheet-table-row">
@@ -9587,13 +9683,13 @@
 	</div>
                 <div class="sheet-repeating-sect">
 				<b>Attacks</b>
-				<input type="checkbox" class="sheet-sect-show" title="@{attacks-show}" name="attr_attacks-show" value="1" style="opacity:0; width:70px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -55px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
+                    <input type="checkbox" class="sheet-sect-show" title="@{attacks-show}" name="attr_attacks-show" value="1" style="width:70px; margin:0 -15px 0 -55px;" checked="checked" /><span></span>
                     <input type="checkbox" class="sheet-sect sheet-expand-show" title="Collapse or expand all rows." name="attr_class-expand-show" value="1" style="opacity: 0;height: 1.5em;width: 20px; margin: 0px -22px 2px 0; z-index: 1;cursor: help;" /><span class="sheet-sect"></span>
                     <input type="checkbox" class="sheet-sect sheet-split-column-show" value="1" name="attr_repeating-weapon-column-show" title="Two or one column rows" /><span class="sheet-sect"></span>		<div class="sheet-sect">
 					<div class="sheet-repeating-fields">
 						<fieldset class="repeating_weapon">
-							<input type="checkbox" class="sheet-counted sheet-sect-show" name="attr_attack-show" title="@{repeating_weapon_$X_attack-show}" value="1" style="opacity:0 ; height:1.5em ; position: absolute ; top:20px; width:3.5% ; cursor:pointer ; z-index:1" checked="checked" />
-							<span class="sheet-table-data sheet-center" style="width:4%;"></span>
+                                <input type="checkbox" class="sheet-counted sheet-sect-show" name="attr_attack-show" title="@{repeating_weapon_$X_attack-show}" value="1" checked="checked" />
+                                <span class="sheet-table-data sheet-center"></span>
                                 <span class="sheet-table-data sheet-center sheet-repeating-rollbutton"><button type="roll" name="attr_attack-npc-roll" title="%{selected|repeating_weapon_$X_attack-npc-roll}" value="@{NPC-macro-text}"></button></span>
 							<span class="sheet-table-data sheet-center sheet-small-label"><input type="number"  name="attr_enhance" title="@{repeating_weapon_$X_enhance}" value="0" style="width:40px;"  /><br>Enh</span>
 							<span class="sheet-table-data sheet-center sheet-small-label" style="padding-top: 8px;"><input type="checkbox" name="attr_masterwork" title="@{repeating_weapon_$X_masterwork}" value="1" style="width:15px;height:15px;" /><br>Mwk</span>
@@ -9691,7 +9787,7 @@
 								<b title="Add additional attacks for this weapon.">
                                     Iterative Attacks
                                 </b>
-								<input type="checkbox" class="sheet-sect-show" title="@{repeating_weapon_$X_iterative-attacks-show}" name="attr_iterative-attacks-show" value="1" style="opacity:0; width:120px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -105px; cursor:pointer; z-index:1;" /><span></span>
+                                    <input type="checkbox" class="sheet-sect-show" title="@{repeating_weapon_$X_iterative-attacks-show}" name="attr_iterative-attacks-show" value="1" style="width:120px; margin:0 -15px 0 -105px;" /><span></span>
 								<b>Options</b>
 								<input type="checkbox" class="sheet-options-show" title="@{options-show}" name="attr_options-show" value="1" style="opacity:0; width:70px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -55px; cursor:pointer; z-index:1;" /><span></span>
 								<b>Macro Text</b>
@@ -9859,13 +9955,13 @@
 			<br>
 			<div>
 				<b>Special Attacks</b>
-				<input type="checkbox" class="sheet-sect-show" title="@{npc-special-attacks-show}" name="attr_npc-special-attacks-show" value="1" style="opacity: 0;width: 125px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -110px; cursor: pointer; z-index: 1" checked="checked" /><span></span>
+                    <input type="checkbox" class="sheet-sect-show" title="@{npc-special-attacks-show}" name="attr_npc-special-attacks-show" value="1" style="width:125px; margin:0 -15px 0 -110px;" checked="checked" /><span></span>
 				<textarea style="height:50px;" class="sheet-sect" title="@{npc-special-attacks}" name="attr_npc-special-attacks" placeholder="List all special combat actions here, in alphabetical order. Do not list feats." accept="Special Attacks"></textarea>
 			</div>
 			<br/>
 			<div>
 				<b>Spell-Like Abilities (class-0)</b>
-				<input type="checkbox" class="sheet-sect-show" title="@{npc-spell-like-abilities-show}" name="attr_npc-spell-like-abilities-show" value="1" style="opacity: 0;width: 195px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -176px; cursor: pointer; z-index: 1" checked="checked" /><span></span>
+                    <input type="checkbox" class="sheet-sect-show" title="@{npc-spell-like-abilities-show}" name="attr_npc-spell-like-abilities-show" value="1" style="width:195px; margin:0 -15px 0 -176px;" checked="checked" /><span></span>
 				<div class="sheet-sect">
 					<div class="sheet-table">
 						<span class="sheet-table-name sheet-secondary-table-name">Spell Like Abilities Class 0</span>
@@ -9913,15 +10009,15 @@
 					<br/>
                         <div class="sheet-repeating-sect">
 						<b>Spell-Like Abilities</b>
-						<input type="checkbox" class="sheet-sect-show" title="@{npc-spell-like-abilities-sect-show}" name="attr_npc-spell-like-abilities-sect-show" value="1" style="opacity:0;width: 150px; height:1.5em; position:relative; top:0; left:0;margin: 0 -15px 0 -133px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
+                            <input type="checkbox" class="sheet-sect-show" title="@{npc-spell-like-abilities-sect-show}" name="attr_npc-spell-like-abilities-sect-show" value="1" style="width:150px; margin:0 -15px 0 -133px;" checked="checked" /><span></span>
                             <input type="checkbox" class="sheet-sect sheet-expand-show" title="Collapse or expand all rows." name="attr_npc-spell-like-abilities-expand-show" value="1" style="opacity: 0;height: 1.5em;width: 20px; margin: 0px -20px 2px 0;z-index: 1;cursor: help;" /><span class="sheet-sect"></span>
                             <input type="checkbox" class="sheet-sect sheet-split-column-show" value="1" name="attr_npc-spell-like-abilities-column-show" title="Two or one column rows" /><span class="sheet-sect"></span>
 						<div class="sheet-sect">
 							<div class="sheet-repeating-fields">
 								<fieldset class="repeating_npc-spell-like-abilities">
-                                        <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_npc-spell-like-abilities_$X_spell-show}" name="attr_spell-show" value="1" style="opacity: 0 ; height: 1.5em ; position: absolute; top: 10px; width: 3.5% ; cursor: pointer ; z-index: 1" checked="checked" />
-                                        <span class="sheet-table-data sheet-center" style="width:4%;"></span>
-                                        <span class="sheet-table-data sheet-center sheet-small-label" sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_npc-spell-like-abilities_$X_roll}" value="@{macro-text}"></button><br>&nbsp;</span>
+                                        <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_npc-spell-like-abilities_$X_spell-show}" name="attr_spell-show" value="1" checked="checked" />
+                                        <span class="sheet-table-data sheet-center"></span>
+                                        <span class="sheet-table-data sheet-center sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_npc-spell-like-abilities_$X_roll}" value="@{macro-text}"></button></span>
 									<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_npc-spell-like-abilities_$X_used}" type="number" name="attr_used" value="0" /><br>Uses/Day</span>
 									<span class="sheet-table-data sheet-center sheet-small-label" style="width:20%;"><input title="@{repeating_npc-spell-like-abilities_$X_name}" type="text" name="attr_name" placeholder="Name" /><br>Name</span>
                                         <span class="sheet-table-data sheet-center sheet-small-label" style="width:25%;"><input title="@{repeating_npc-spell-like-abilities_$X_short-description}" type="text" name="attr_short-description" placeholder="Short Description" /><br>Short Desc</span>
@@ -9965,7 +10061,7 @@
 			</div>
 			<div>
 				<b>Spells (class-1)</b>
-				<input type="checkbox" class="sheet-sect-show" title="@{npc-spell1-show}" name="attr_npc-spell1-show" value="0"  style="opacity: 0;width: 140px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -125px; cursor: pointer; z-index: 1" /><span></span>
+                    <input type="checkbox" class="sheet-sect-show" title="@{npc-spell1-show}" name="attr_npc-spell1-show" value="0" style="width:140px; margin:0 -15px 0 -125px;" /><span></span>
 				<div class="sheet-sect">
 					<div class="sheet-table">
 						<span class="sheet-table-name sheet-secondary-table-name">Spell Class 1</span>
@@ -10013,15 +10109,15 @@
 					<br/>
                         <div class="sheet-repeating-sect">
 						<b>Spells</b>
-						<input type="checkbox" class="sheet-sect-show" title="@{npc-spell1-sect-show}" name="attr_npc-spell1-sect-show" value="1" style="opacity:0; width:70px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -55px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
+                            <input type="checkbox" class="sheet-sect-show" title="@{npc-spell1-sect-show}" name="attr_npc-spell1-sect-show" value="1" style="width:70px; margin:0 -15px 0 -55px;" checked="checked" /><span></span>
                             <input type="checkbox" class="sheet-sect sheet-expand-show" title="Collapse or expand all rows." name="attr_npc-spell1-expand-show" value="1" style="opacity: 0;height: 1.5em;width: 20px; margin: 0px -20px 2px 0;z-index: 1;cursor: help;" /><span class="sheet-sect"></span>
                             <input type="checkbox" class="sheet-sect sheet-split-column-show" value="1" name="attr_npc-spells1-column-show" title="Two or one column rows" /><span class="sheet-sect"></span>
 						<div class="sheet-sect">
 							<div class="sheet-repeating-fields">
 								<fieldset class="repeating_npc-spells1">
-                                        <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_npc-spells1_$X_spells1-show}" name="attr_spells1-show" value="1" style="opacity: 0 ; height: 1.5em ; position: absolute; top: 10px; width: 3.5% ; cursor: pointer ; z-index: 1" checked="checked" />
+                                        <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_npc-spells1_$X_spells1-show}" name="attr_spells1-show" value="1" checked="checked" />
                                         <span class="sheet-table-data sheet-center"></span>
-                                        <span class="sheet-table-data sheet-center sheet-small-label" sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_npc-spells1_$X_roll}" value="@{macro-text}"></button><br>&nbsp;</span>
+                                        <span class="sheet-table-data sheet-center sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_npc-spells1_$X_roll}" value="@{macro-text}"></button></span>
 									<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_npc-spells1_$X_used}" type="number" name="attr_used" value="0" /><br>Uses/Day</span>
 									<span class="sheet-table-data sheet-center sheet-small-label" style="width:20%;"><input title="@{repeating_npc-spells1_$X_name}" type="text" name="attr_name" placeholder="Name" /><br>Name</span>
                                         <span class="sheet-table-data sheet-center sheet-small-label" style="width:25%;"><input title="@{repeating_npc-spells1_$X_short-description}" type="text" name="attr_short-description" placeholder="Short Description" /><br>Short Desc</span>
@@ -10063,7 +10159,7 @@
 			</div>
 			<div>
 				<b>Spells (class-2)</b>
-				<input type="checkbox" class="sheet-sect-show" title="@{npc-spell2-show}" name="attr_npc-spell2-show" value="0"  style="opacity: 0;width: 140px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -125px; cursor: pointer; z-index: 1" /><span></span>
+                    <input type="checkbox" class="sheet-sect-show" title="@{npc-spell2-show}" name="attr_npc-spell2-show" value="0" style="width:140px; margin:0 -15px 0 -125px;" /><span></span>
 				<div class="sheet-sect">
 					<div class="sheet-table">
 						<span class="sheet-table-name sheet-secondary-table-name">Spell Class 2</span>
@@ -10111,15 +10207,15 @@
 					<br/>
                         <div class="sheet-repeating-sect">
 						<b>Spells</b>
-						<input type="checkbox" class="sheet-sect-show" title="@{npc-spell2-sect-show}" name="attr_npc-spell2-sect-show" value="1" style="opacity:0; width:70px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -55px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
+                            <input type="checkbox" class="sheet-sect-show" title="@{npc-spell2-sect-show}" name="attr_npc-spell2-sect-show" value="1" style="width:70px; margin:0 -15px 0 -55px;" checked="checked" /><span></span>
                             <input type="checkbox" class="sheet-sect sheet-expand-show" title="Collapse or expand all rows." name="attr_npc-spell2-expand-show" value="1" style="opacity: 0;height: 1.5em;width: 20px; margin: 0px -20px 2px 0;z-index: 1;cursor: help;" /><span class="sheet-sect"></span>
                             <input type="checkbox" class="sheet-sect sheet-split-column-show" value="1" name="attr_npc-spells2-column-show" title="Two or one column rows" /><span class="sheet-sect"></span>
 						<div class="sheet-sect">
 							<div class="sheet-repeating-fields">
 								<fieldset class="repeating_npc-spells2">
-                                        <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_npc-spells2_$X_spells2-show}" name="attr_spells2-show" value="1" style="opacity: 0 ; height: 1.5em ; position: absolute; top: 10px; width: 3.5% ; cursor: pointer ; z-index: 1" checked="checked" />
-                                        <span class="sheet-table-data sheet-center" style="width:4%;"></span>
-                                        <span class="sheet-table-data sheet-center sheet-small-label" sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_npc-spells2_$X_roll}" value="@{macro-text}"></button><br>&nbsp;</span>
+                                        <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_npc-spells2_$X_spells2-show}" name="attr_spells2-show" value="1" checked="checked" />
+                                        <span class="sheet-table-data sheet-center"></span>
+                                        <span class="sheet-table-data sheet-center sheet-repeating-rollbutton"><button type="roll" name="attr_roll" title="%{selected|repeating_npc-spells2_$X_roll}" value="@{macro-text}"></button></span>
 									<span class="sheet-table-data sheet-center sheet-small-label"><input title="@{repeating_npc-spells2_$X_used}" type="number" name="attr_used" value="0" /><br>Uses/Day</span>
 									<span class="sheet-table-data sheet-center sheet-small-label" style="width:20%;"><input title="@{repeating_npc-spells2_$X_name}" type="text" name="attr_name" placeholder="Name" /><br>Name</span>
                                         <span class="sheet-table-data sheet-center sheet-small-label" style="width:25%;"><input title="@{repeating_npc-spells2_$X_short-description}" type="text" name="attr_short-description" placeholder="Short Description" /><br>Short Desc</span>
@@ -10164,27 +10260,27 @@
 	<div>
 		<hr class="sheet-npc-hr sheet-margin-top" />
 		<b>TACTICS</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{npc-tactics-show}" name="attr_npc-tactics-show" value="1" style="opacity:0; width:70px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -55px; cursor:pointer; z-index:1;" /><span></span>
+            <input type="checkbox" class="sheet-sect-show" title="@{npc-tactics-show}" name="attr_npc-tactics-show" value="1" style="width:70px; margin:0 -15px 0 -55px;" /><span></span>
 		<hr class="sheet-npc-hr sheet-margin-bottom" />
 		<div style="text-align:left;" class="sheet-sect">
 			<div>
 				<b>Before Combat</b>
-				<input type="checkbox" class="sheet-sect-show" title="@{npc-before-combat-show}" name="attr_npc-before-combat-show" value="0"  style="opacity: 0;width: 125px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -110px; cursor: pointer; z-index: 1" /><span></span>
+                    <input type="checkbox" class="sheet-sect-show" title="@{npc-before-combat-show}" name="attr_npc-before-combat-show" value="0" style="width:125px; margin:0 -15px 0 -110px;" /><span></span>
 				<textarea class="sheet-sect" title="@{npc-before-combat}" name="attr_npc-before-combat" placeholder="List any spells and/or abilities used before combat. His stats should reflect these spells."></textarea>
 			</div>
 			<div>
 				<b>During Combat</b>
-				<input type="checkbox" class="sheet-sect-show" title="@{npc-during-combat-show}" name="attr_npc-during-combat-show" value="0"  style="opacity: 0;width: 125px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -110px; cursor: pointer; z-index: 1" /><span></span>
+                    <input type="checkbox" class="sheet-sect-show" title="@{npc-during-combat-show}" name="attr_npc-during-combat-show" value="0" style="width:125px; margin:0 -15px 0 -110px;" /><span></span>
 				<textarea class="sheet-sect" title="@{npc-during-combat}" name="attr_npc-during-combat" placeholder="List all combat tactics here, including spell, feat, and magic item use."></textarea>
 			</div>
 			<div>
 				<b>Morale</b>
-				<input type="checkbox" class="sheet-sect-show" title="@{npc-morale-show}" name="attr_npc-morale-show" value="0"  style="opacity:0; width:70px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -55px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
+                    <input type="checkbox" class="sheet-sect-show" title="@{npc-morale-show}" name="attr_npc-morale-show" value="0" style="width:70px; margin:0 -15px 0 -55px;" checked="checked" /><span></span>
 				<textarea class="sheet-sect" title="@{npc-morale}" name="attr_npc-morale" placeholder="List here under what condition the creature flees combat, if any."></textarea>
 			</div>
 			<div>
 				<b>Base Statistics</b>
-				<input type="checkbox" class="sheet-sect-show" title="@{npc-base-statistics-show}" name="attr_npc-base-statistics-show" value="1" style="opacity: 0;width: 125px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -110px; cursor: pointer; z-index: 1" checked="checked" /><span></span>
+                    <input type="checkbox" class="sheet-sect-show" title="@{npc-base-statistics-show}" name="attr_npc-base-statistics-show" value="1" style="width:125px; margin:0 -15px 0 -110px;" checked="checked" /><span></span>
 				<input class="sheet-sect" type="text" title="@{npc-base-statistics}" name="attr_npc-base-statistics" placeholder="If the creature has buffs and other effects active that modify his stats, the base stats should be quickly summarized here." />
 			</div>
 		</div>
@@ -10192,7 +10288,7 @@
 	<div>
 		<hr class="sheet-npc-hr sheet-margin-top" />
 		<b>STATISTICS</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{npc-statistics-show}" name="attr_npc-statistics-show" value="1" style="opacity:0; width:90px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -75px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
+            <input type="checkbox" class="sheet-sect-show" title="@{npc-statistics-show}" name="attr_npc-statistics-show" value="1" style="width:90px; margin:0 -15px 0 -75px;" checked="checked" /><span></span>
 		<hr class="sheet-npc-hr sheet-margin-bottom" />
 		<div style="text-align:left;" class="sheet-sect">
 			<div class="sheet-table">
@@ -10224,15 +10320,15 @@
 			<br>
                 <div class="sheet-repeating-sect">
 				<b>Feats</b>
-				<input type="checkbox" class="sheet-sect-show" title="@{npc-feats-show}" name="attr_npc-feats-show" value="1" style="opacity:0;width: 50px; height:1.5em; position:relative; top:0; left:0;margin: 0px -15px 0 -35px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
+                    <input type="checkbox" class="sheet-sect-show" title="@{npc-feats-show}" name="attr_npc-feats-show" value="1" style="width:50px; margin:0px -15px 0 -35px;" checked="checked" /><span></span>
                     <input type="checkbox" class="sheet-sect sheet-expand-show" title="Collapse or expand all rows." name="attr_npc-feats-expand-show" value="1" style="opacity: 0;height: 1.5em;width: 20px; margin: 0px -20px 2px 0;z-index: 1;cursor: help;" /><span class="sheet-sect"></span>
                     <input type="checkbox" class="sheet-sect sheet-split-column-show" value="1" name="attr_npcfeats-column-show" title="Two or one column rows" /><span class="sheet-sect"></span>
 				<div class="sheet-table sheet-sect">
 					<div class="sheet-repeating-fields">
 						<fieldset class="repeating_feat">
-                                <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_feat_$X_feat-show}" name="attr_feat-show" value="1" style="opacity: 0 ; height: 1.5em ; position: absolute; top: 15px; width: 5.5% ; cursor: pointer ; z-index: 1" checked="checked" />
-                                <span class="sheet-table-data sheet-center" style="width:8%; padding-bottom: 15px;"></span>
-                                <span class="sheet-table-data sheet-center sheet-small-label" sheet-repeating-rollbutton"><button type="roll" name="attr_npc-roll" title="%{selected|repeating_feat_$X_npc-roll" value="@{npc-macro-text}"></button><br>&nbsp;</span>
+                                <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_feat_$X_feat-show}" name="attr_feat-show" value="1" checked="checked" />
+                                <span class="sheet-table-data sheet-center"></span>
+                                <span class="sheet-table-data sheet-center sheet-repeating-rollbutton"><button type="roll" name="attr_npc-roll" title="%{selected|repeating_feat_$X_npc-roll" value="@{npc-macro-text}"></button></span>
                                 <span class="sheet-table-data sheet-center sheet-small-label" style="width:32%;"><input title="@{repeating_feat_$X_name}" type="text" name="attr_name" placeholder="Feat Name"><br>Name</span>
                                 <span class="sheet-table-data sheet-center sheet-small-label" style="width:32%;"><textarea class="sheet-weapon-notes" title="@{repeating_feat_$X_short-description}" name="attr_short-description" placeholder="Short Desc"></textarea><br>Short Desc</span>
                                 <span class="sheet-table-data sheet-center sheet-small-label" style="width:4%;"><input title="@{repeating_feat_$X_used}" type="number" name="attr_used" value="0" /><br>Used</span>
@@ -10261,12 +10357,12 @@
 				</div>
 			</div>
                 <!-- Mythic Adventures display option toggled from Config -->
-                <div style="margin:-15px 0px 15px 0px;">
+                <div style="margin:-15px 0 15px 0;">
                     <input type="checkbox" class="sheet-sect-show" title="@{mythic-adventures-show}" name="attr_mythic-adventures-show" value="1" style="margin:-9999px;" /><span></span>
                     <div class="sheet-sect">
                         <div class="sheet-repeating-sect">
                             <b>Mythic Feats</b>
-                            <input type="checkbox" class="sheet-sect-show" title="@{npc-mythic-feats-show}" name="attr_npc-mythic-feats-show" value="1" style="opacity: 0;width: 100px;height: 1.5em;position: relative;top: 0;left: 0;margin: 0px -15px 0 -82px;cursor: pointer;z-index: 1;" checked="checked" /><span></span>
+                            <input type="checkbox" class="sheet-sect-show" title="@{npc-mythic-feats-show}" name="attr_npc-mythic-feats-show" value="1" style="width:100px; margin:0px -15px 0 -82px;" checked="checked" /><span></span>
                             <input type="checkbox" class="sheet-sect sheet-expand-show" title="Collapse or expand all rows." name="attr_mythic-feats-expand-show" value="1" style="opacity: 0;height: 1.5em;width: 20px; margin: 0px -22px 2px 0; z-index: 1;cursor: help;" /><span class="sheet-sect"></span>
                             <input type="checkbox" class="sheet-sect sheet-split-column-show" value="1" name="attr_mythic-feats-column-show" title="Two or one column rows" /><span class="sheet-sect"></span>
                             <div class="sheet-table sheet-sect">
@@ -10275,8 +10371,8 @@
                             <div class="sheet-table sheet-sect">
                                 <div class="sheet-repeating-fields">
                                     <fieldset class="repeating_mythic-feat">
-                                        <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_mythic-feat_$X_mythic-feat-show}" name="attr_mythic-feat-show" value="1" style="opacity: 0 ; height: 1.5em ; position: absolute; top: 10px; width: 3.5% ; cursor: pointer ; z-index: 1" checked="checked" />
-                                        <span class="sheet-table-data sheet-center" style="width:4%;"></span>
+                                        <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_mythic-feat_$X_mythic-feat-show}" name="attr_mythic-feat-show" value="1" checked="checked" />
+                                        <span class="sheet-table-data sheet-center"></span>
                                         <span class="sheet-table-data sheet-center sheet-repeating-rollbutton"><button type="roll" name="attr_npc-roll" title="%{selected|repeating_mythic-feat_$X_npc-roll" value="@{npc-macro-text}"></button></span>
                                         <span class="sheet-table-data sheet-center sheet-small-label" style="width:24%;"><input title="@{repeating_mythic-feat_$X_name}" type="text" name="attr_name" placeholder="Mythic Feat Name"><br>Name</span>
                                         <span class="sheet-table-data sheet-center sheet-small-label" style="width:40%;"><input title="@{repeating_mythic-feat_$X_short-description}" type="text" name="attr_short-description" placeholder="Short Description"><br>Short Desc</span>
@@ -10312,7 +10408,7 @@
 			<br>
 			<div>
 				<b>Skills</b>
-				<input type="checkbox" class="sheet-sect-show" title="@{npc-skills-show}" name="attr_npc-skills-show" value="1" style="opacity:0; width:70px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -55px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
+                    <input type="checkbox" class="sheet-sect-show" title="@{npc-skills-show}" name="attr_npc-skills-show" value="1" style="width:70px; margin:0 -15px 0 -55px;" checked="checked" /><span></span>
 				<div class="sheet-table sheet-sect">
 					<div class="sheet-table-row">
 						<span class="sheet-table-header"></span>
@@ -10632,7 +10728,7 @@
 			<br>
 			<div class="sheet-table">
 				<b>Combat Gear</b>
-				<input type="checkbox" class="sheet-sect-show" title="@{npc-cgear-show}" name="attr_npc-cgear-show" value="1" style="opacity:0; width:100px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -80px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
+                    <input type="checkbox" class="sheet-sect-show" title="@{npc-cgear-show}" name="attr_npc-cgear-show" value="1" style="width:100px; margin:0 -15px 0 -80px;" checked="checked" /><span></span>
 				<div class="sheet-table-row sheet-sect">
 					<span class="sheet-table-data sheet-center"><textarea title="@{npc-combat-gear}" name="attr_npc-combat-gear" style="height:50px;width:97%;" placeholder="Gear used in combat"></textarea></span>
 				</div>
@@ -10640,7 +10736,7 @@
 			<br>
 			<div class="sheet-table">
 				<b>Other Gear</b>
-                <input type="checkbox" class="sheet-sect-show" title="@{npc-ogear-show}" name="attr_npc-ogear-show" value="1" style="opacity:0; width:100px; height:1.5em; position:relative; top:0; left:0; margin:0 -15px 0 -80px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
+                    <input type="checkbox" class="sheet-sect-show" title="@{npc-ogear-show}" name="attr_npc-ogear-show" value="1" style="width:100px; margin:0 -15px 0 -80px;" checked="checked" /><span></span>
 				<div class="sheet-table-row sheet-sect">
 					<span class="sheet-table-data sheet-center"><textarea title="@{npc-other-gear}" name="attr_npc-other-gear" style="height:50px;width:97%;" placeholder="Gear not used in combat"></textarea></span>
 				</div>
@@ -10650,16 +10746,16 @@
         <div class="sheet-repeating-sect">
 		<hr class="sheet-npc-hr sheet-margin-top" />
 		<b>SPECIAL ABILITIES</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{npc-special-abilities-show}" name="attr_npc-special-abilities-show" value="1" style="opacity: 0;width: 140px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -125px; cursor: pointer; z-index: 1" checked="checked" /><span></span>
+            <input type="checkbox" class="sheet-sect-show" title="@{npc-special-abilities-show}" name="attr_npc-special-abilities-show" value="1" style="width:140px; margin:0 -15px 0 -125px;" checked="checked" /><span></span>
             <input type="checkbox" class="sheet-sect sheet-expand-show" title="Collapse or expand all rows." name="attr_npc-special-abilities-expand-show" value="1" style="opacity: 0;height: 1.5em;width: 20px; margin: 0px -20px 2px 0;z-index: 1;cursor: help;" /><span class="sheet-sect"></span>
             <input type="checkbox" class="sheet-sect sheet-split-column-show" value="1" name="attr_npc-special-abilities-column-show" title="Two or one column rows" /><span class="sheet-sect"></span>
 		<hr class="sheet-npc-hr sheet-margin-bottom" />
 		<div class="sheet-table sheet-sect">
 			<div class="sheet-repeating-fields">
 				<fieldset class="repeating_racial-trait">
-                        <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_racial-trait_$X_racial-trait-show}" name="attr_racial-trait-show" value="1" style="opacity: 0 ; height: 1.5em ; position: absolute; top: 15px; width: 3.5% ; cursor: pointer ; z-index: 1" checked="checked" />
-                        <span class="sheet-table-data sheet-center" style="width:4%;"></span>
-                        <span class="sheet-table-data sheet-center sheet-repeating-rollbutton"><button type="roll" name"attr_npc-roll" title="%{selected|repeating_racial-trait_$X_npc-roll}" value="@{macro-text}"></button><br>&nbsp;</span>
+                        <input type="checkbox" class="sheet-counted sheet-sect-show" title="@{repeating_racial-trait_$X_racial-trait-show}" name="attr_racial-trait-show" value="1" checked="checked" />
+                        <span class="sheet-table-data sheet-center"></span>
+                        <span class="sheet-table-data sheet-center sheet-repeating-rollbutton"><button type="roll" name"attr_npc-roll" title="%{selected|repeating_racial-trait_$X_npc-roll}" value="@{macro-text}"></button></span>
 					<span class="sheet-table-data sheet-center sheet-small-label" style="width:23%;"><input title="@{repeating_racial-trait_$X_name}" type="text" name="attr_name" placeholder="Special Ability Name" /><br>Name</span>
                         <span class="sheet-table-data sheet-center sheet-small-label" style="width:45%;"><input title="@{repeating_racial-trait_$X_short-description}" type="text" name="attr_short-description" placeholder="Short Description" /><br>Short Desc</span>
 					<span class="sheet-table-data sheet-center sheet-small-label" style="width:5%;"><input title="@{repeating_racial-trait_$X_used}" type="number" name="attr_used" value="0" /><br>Uses</span>
@@ -10696,7 +10792,7 @@
 	<div class="sheet-table sheet-header-row">&nbsp;</div>
 	<div class="sheet-header_images">
 		<b>Header Images</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{header_images-show}" name="attr_header_images-show" value="1" style="opacity: 0;width: 125px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -110px; cursor: pointer; z-index: 1" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{header_images-show}" name="attr_header_images-show" value="1" style="width:125px; margin:0 -15px 0 -110px;" /><span></span>
 		<div class="sheet-table sheet-sect">
 			<span class="sheet-table-name">Header Images</span>
             <span style="display:table-caption;">Header images are iconic images that appear in the header of roll templates. All macros on the sheet include <b>{{header_image=<i>image attriubute</i>}}</b>. Each roll template has a specific image attribute that works with the options below. i.e. The Spells roll template would use <b>{{header_image=@{header_image-pf_spell}}}</b> Attack images can be set from within each weapon's "Options" section. Hover over the template names below to learn the specific image attributes. You can substitute images for any roll template by using the URL column below or using the syntax <b>{{header_image=<i>[name](url)</i>}}</b></span>
@@ -10793,7 +10889,7 @@
 	</div>  
 	<div class="sheet-unchained">
 		<b>Pathfinder Unchained</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{pathfinder-unchained-show}" name="attr_pathfinder-unchained-show" value="1" style="opacity:0;width: 150px; height:1.5em; position:relative; top:0; left:0;margin: 0 -15px 0 -133px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{pathfinder-unchained-show}" name="attr_pathfinder-unchained-show" value="1" style="width:150px; margin:0 -15px 0 -133px;" checked="checked" /><span></span>
 		<div class="sheet-table sheet-sect">
 		<span class="sheet-table-name">Pathfinder Unchained</span>
 			<div class="sheet-table-row">
@@ -10830,7 +10926,7 @@
     </div>
     <div class="sheet-mythic-adventures">
         <b>Pathfinder Mythic Adventures</b>
-        <input type="checkbox" class="sheet-sect-show" title="@{pathfinder-mythic-adventures-show}" name="attr_pathfinder-mythic-adventures-show" value="1" style="opacity: 0;width: 205px;height: 1.5em;position: relative;top: 0;left: 0;margin: 0 -15px 0 -188px;cursor: pointer;z-index: 1;" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{pathfinder-mythic-adventures-show}" name="attr_pathfinder-mythic-adventures-show" value="1" style="width:205px; margin:0 -15px 0 -188px;" checked="checked" /><span></span>
         <div class="sheet-table sheet-sect">
             <span class="sheet-table-name">Pathfinder Mythic Adventures</span>
             <div class="sheet-table-row">
@@ -10847,7 +10943,7 @@
 	</div>
     <div class="sheet-psionics">
         <b>Pathfinder Psionics</b>
-        <input type="checkbox" class="sheet-sect-show" title="@{pathfinder-psioncis-show}" name="attr_pathfinder-psionics-show" value="1" style="opacity: 0;width: 205px;height: 1.5em;position: relative;top: 0;left: 0;margin: 0 -15px 0 -188px;cursor: pointer;z-index: 1;" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{pathfinder-psioncis-show}" name="attr_pathfinder-psionics-show" value="1" style="width:205px; margin:0 -15px 0 -188px;" checked="checked" /><span></span>
         <div class="sheet-table sheet-sect">
             <span class="sheet-table-name">Pathfinder Psionics</span>
             <div class="sheet-table-row">
@@ -10864,7 +10960,7 @@
     </div>
 	<div class="sheet-roll_template_info">
 		<b>Roll Template Info</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{roll-template-info-show}" name="attr_roll-template-info-show" value="1" style="opacity: 0;width: 140px; height: 1.5em; position: relative; top: 0; left: 0;margin: 0 -15px 0 -125px; cursor: pointer; z-index: 1" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{roll-template-info-show}" name="attr_roll-template-info-show" value="1" style="opacity: 0;width: 140px; height: 1.5em; position: relative; top: 0; left: 0; margin:0 -15px 0 -125px; cursor: pointer; z-index: 1;" /><span></span>
 		<div class="sheet-table sheet-sect">
 			<span class="sheet-table-name">Roll Template Info</span>	
 			<div class="sheet-table sheet-options">
@@ -10941,7 +11037,7 @@
 	</div>
 	<div class="sheet-sheetconfig">
 		<b>Sheet configuration</b>
-		<input type="checkbox" class="sheet-sect-show" title="@{pathfinder-sheetconfig-show}" name="attr_pathfinder-sheetconfig-show" value="1" style="opacity:0;width: 150px; height:1.5em; position:relative; top:0; left:0;margin: 0 -15px 0 -133px; cursor:pointer; z-index:1;" checked="checked" /><span></span>
+        <input type="checkbox" class="sheet-sect-show" title="@{pathfinder-sheetconfig-show}" name="attr_pathfinder-sheetconfig-show" value="1" style="width:150px; margin:0 -15px 0 -133px;" checked="checked" /><span></span>
 		<div class="sheet-table sheet-sect">
 		<span class="sheet-table-name">Sheet configuration</span>
 			<div class="sheet-table-row">
@@ -10974,7 +11070,7 @@
 <div class="sheet-footer">
 	<div class="sheet-table">
 		<div class="sheet-table-row">
-            <span class="sheet-table-data sheet-center">Created by Samuel Marino w/contributions by Vince, Chris Buchholz, Magik, James W.  | Last updated: <i>03.13.16'&nbsp;&nbsp;</i>v.<input type="text" style="width:2.5em; height:1.4em; vertical-align:top; padding:0px 2px 0px 2px; border:none;" name="attr_PFSheet_Version" value="0" class="sheet-calc" readonly="readonly" title="A non-blank version indicates attributes have been successfully recalculated."></span>
+            <span class="sheet-table-data sheet-center">Created by Samuel Marino w/contributions by Vince, Chris Buchholz, Magik, James W.  | Last updated: <i>03.15.16'&nbsp;&nbsp;</i>v.<input type="text" style="width:2.5em; height:1.4em; vertical-align:top; padding:0px 2px 0 2px; border:none;" name="attr_PFSheet_Version" value="0" class="sheet-calc" readonly="readonly" title="A non-blank version indicates attributes have been successfully recalculated."></span>
 		</div>
 		<div class="sheet-table-row">
 			<span class="sheet-table-data sheet-center">Questions/Feedback?:<input type="text" style="width:75%; border:none; cursor:help; height:1.4em;" value="https://app.roll20.net/forum/post/2788628/pf-pathfinder-sheet-thread-5/?pageforid=2788628#post-2788628" /></span>
@@ -13768,10 +13864,10 @@ var PFSheet = PFSheet || (function () {
     	//TAS.debug("attrs=" + 'buff_' + col + '-total', "fields=" + 'buff-' + col + ', buff-enable_toggle')
     	TAS.repeating('buff')
 	        .attrs('buff_' + col + '-total')
-	        .fields('buff-' + col, 'buff-enable_toggle')
+	        .fields('buff-' + col, 'buff-enable_toggle', 'buff-' + col + '-show')
 	        .reduce(function (m, r) {
-	        	//TAS.debug(r.I['buff-' + col], r.I['buff-enable_toggle']);
-	        	m.mod += (r.I['buff-' + col] * r.I['buff-enable_toggle']);
+	        	//TAS.debug("buff-" + col + "=" + r.I['buff-' + col], "buff-enable_toggle=" + r.I['buff-enable_toggle'], "buff-" + col + "-show=" + r.I['buff-' + col + '-show']);
+	        	m.mod += (r.I['buff-' + col] * (r.I['buff-enable_toggle'] & r.I['buff-' + col + '-show']));
 	        	return m;
 	        }, {
 	        	mod: 0
@@ -13779,6 +13875,12 @@ var PFSheet = PFSheet || (function () {
 	        	a.S['buff_' + col + '-total'] = m.mod;
 	        })
 	        .execute();
+
+        var attribList = ["buffs"];
+        buffColumns.forEach(function (col) {
+            attribList.push("buff_" + col + "-total");
+	    });
+        updateRowTotal(attribList);
     },
 
 	/* recalculateAllBuffs */
@@ -13835,6 +13937,16 @@ var PFSheet = PFSheet || (function () {
 				for (i = 0; i < targetAttribList.length; i++) {
 					if (typeof buffData[attribList[i]] !== "undefined") {
 						newRowAttrs[targetAttribList[i]] = buffData[attribList[i]];
+						// Enable "show" for populated attribute
+						if (targetAttribList[i].indexOf("macro") > 0) {
+							var showStr = targetAttribList[i].replace("_macro-text", "-show");
+							//TAS.debug("showStr=" + showStr);
+							newRowAttrs[showStr] = "1";
+						} else if (targetAttribList[i].indexOf("notes") > 0 && buffData[attribList[i]].length > 0) {
+							var showStr = targetAttribList[i].replace("buff-notes", "description-show");
+							//TAS.debug("showStr=" + showStr);
+							newRowAttrs[showStr] = "1";
+						}
 					}
 				}
 				//TAS.debug("Creating new repeating entry", newRowAttrs);
@@ -14848,6 +14960,43 @@ var PFSheet = PFSheet || (function () {
             });
 	},
 
+	/*verifyHasSkill
+	* Checks to see if you should bother updating the skill after an event.
+	* @skill {string} = the skill name
+	* @callback {function} = a function that takes a a boolean as a first parameter. 
+	*    called with true if you should update, or false if not.
+	*/
+	verifyHasSkill = function (skill, callback) {
+		var first3, first4, core = false, bg = false, cs = false;
+		if (skill && typeof callback === "function") {
+			first4 = skill.substring(0, 4).toLowerCase();
+			first3 = first4.substring(0, 3);
+			if (first3 === 'cs-') {
+				cs = true;
+			} else if (first4 === 'arti' || first4 === 'lore') {
+				bg = true;
+			} else {
+				core = true;
+			}
+
+			getAttrs(["BG-Skill-Use", "unchained_skills-show"], function (v) {
+				var retval = true;
+				//TAS.debug("verifyHasSkill",skill,"first4",first4,"cs",cs,"bg",bg,"core",core,"getAttrs",v);
+				if (core && (v["unchained_skills-show"] == "1" && v["BG-Skill-Use"] == "0")) {
+					retval = false;
+				}
+				if (bg && !(v["unchained_skills-show"] == "1" && v["BG-Skill-Use"] == "1")) {
+					retval = false;
+				}
+				if (cs && !(v["unchained_skills-show"] == "1" && v["BG-Skill-Use"] == "0")) {
+					retval = false;
+				}
+				//TAS.debug("verifyHasSkill: returning "+retval);
+				callback(retval);
+			});
+		}
+	},
+
 	/* updates one  skill row 
 	* @skill {string} skill to update, must have same capitalization as on HTML
 	* @ability {string} {optional} = the value of the ability dropdown
@@ -14864,6 +15013,8 @@ var PFSheet = PFSheet || (function () {
         itemNm = skill + "-item",
         miscNm = skill + "-misc",
         rtNm = skill + "-ReqTrain";
+		verifyHasSkill(skill, function (hasSkill) {
+			if (hasSkill) {
     	getAttrs([skill, csNm, ranksNm, classNm, abNm, modNm, racialNm, featNm, itemNm, miscNm, rtNm,
         "size_skill", "size_skill_double", "acp", "checks-cond", "Phys-skills-cond", "Perception-cond"], function (v) {
 
@@ -14930,6 +15081,8 @@ var PFSheet = PFSheet || (function () {
         		setAttrs(setter);
         	}
         });
+			}
+		});
     },
 
 	/******** ITEMS PAGE ********/
@@ -15502,10 +15655,11 @@ var PFSheet = PFSheet || (function () {
     			return;
     		}
     		if (abilityVal >= 12) {
-    			abilityVal -= 1;
+				//abilityVal -= 1;
     			for (i = 1; i < 10; i++) {
-    				newRaw = Math.max(0, abilityVal - 10 - (2 * (i - 1)));
-    				bonusSpells = Math.ceil(newRaw / 8);
+					//newRaw = Math.max(0, abilityVal - 10 - (2 * (i - 1)));
+					//bonusSpells = Math.ceil(newRaw / 8);
+					bonusSpells = Math.floor(Math.max(Math.floor((abilityVal - 10) / 2) + 4 - i), 0) / 4;
     				bonusName = prefix + i + "-bonus";
     				fields[bonusName] = bonusSpells;
     			}
@@ -16314,6 +16468,9 @@ var PFSheet = PFSheet || (function () {
 			handleDropdown: handleDropdown,
 			isBadRowId: isBadRowId
 		},
+		recalc: {
+			recalculateSkills: recalculateSkills
+		},
 		version: version,
 		updateSize: updateSize,
 		updateAbility: updateAbility,
@@ -16351,6 +16508,7 @@ var PFSheet = PFSheet || (function () {
 		updateConditionAbilityPenalty: updateConditionAbilityPenalty,
 		updateMaxSkills: updateMaxSkills,
 		updateSkill: updateSkill,
+		verifyHasSkill: verifyHasSkill,
 		updateNPCHP: updateNPCHP,
 		updateWornEquipment: updateWornEquipment,
 		updateCarriedCurrency: updateCarriedCurrency,
@@ -16428,7 +16586,7 @@ _.each(PFSheet.lists.buffColumns, function (col) {
 	);
 
 	//Update total for a buff upon Mod change
-	var eventToWatch = "change:repeating_buff:buff-" + col;
+	eventToWatch = "change:repeating_buff:buff-" + col + " change:repeating_buff:buff-" + col + "-show";
 	on(eventToWatch,
 		TAS.callback(function eventBuffMod(eventInfo) {
 			TAS.debug("caught " + eventInfo.sourceAttribute + " event");
@@ -16471,7 +16629,11 @@ _.each(PFSheet.lists.allCoreSkills, function (skill) {
 	on("change:" + skill + "-ability",
 		TAS.callback(function eventNormalSkillAbility(eventInfo) {
 			TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+			PFSheet.verifyHasSkill(skill, function (hasSkill) {
+				if (hasSkill) {
 			PFSheet.util.handleDropdown(skill + "-ability", skill + "-ability-mod");
+				}
+			});
 		})
 	);
 });
@@ -16486,7 +16648,11 @@ _.each(PFSheet.lists.consolidatedSkills, function (skill) {
 	on("change:" + skill + "-ability",
 		TAS.callback(function eventConsolidatedSkillAbility(eventInfo) {
 			TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+			PFSheet.verifyHasSkill(skill, function (hasSkill) {
+				if (hasSkill) {
 			PFSheet.util.handleDropdown(skill + "-ability", skill + "-ability-mod");
+				}
+			});
 		})
 	);
 });
@@ -16501,7 +16667,11 @@ _.each(PFSheet.lists.backgroundSkills, function (skill) {
 	on("change:" + skill + "-ability",
 		TAS.callback(function eventBackgroundSkillAbility(eventInfo) {
 			TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+			PFSheet.verifyHasSkill(skill, function (hasSkill) {
+				if (hasSkill) {
 			PFSheet.util.handleDropdown(skill + "-ability", skill + "-ability-mod");
+				}
+			});
 		})
 	);
 });
@@ -17073,6 +17243,13 @@ on("change:wound_threshold-show",
 	TAS.callback(function eventResetConditionWounds(eventInfo) {
 		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
 		setAttrs({ "condition-Wounds": 0 });
+	})
+);
+
+on("change:unchained_skills-show change:BG-Skill-Use",
+	TAS.callback(function eventResetConditionWounds(eventInfo) {
+		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+		PFSheet.recalc.recalculateSkills();
 	})
 );
 
