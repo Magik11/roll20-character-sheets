@@ -1482,7 +1482,7 @@
 			</div>
 			<div class="sheet-table-row">
                 <span class="sheet-table-data sheet-center"><label><input title="@{armor3-equipped}" type="checkbox" name="attr_armor3-equipped" value="1" checked="checked" /><b title="Worn Armor">&nbsp;&nbsp;Worn Armor</b></label></span>
-                <span class="sheet-table-data sheet-center"><input title="@{armor3}" type="text" name="attr_armor3" value="0" class="sheet-detail-medium" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{armor3}" type="text" name="attr_armor3" placeholder="Worn Armor" class="sheet-detail-medium" /></span>
                 <span class="sheet-table-data sheet-center"><input title="@{armor3-acbonus}" type="number" name="attr_armor3-acbonus" value="0" min="0" /></span>
                 <span class="sheet-table-data sheet-center"><input title="@{armor3-max-dex}" type="number" name="attr_armor3-max-dex" value="99" min="0" /></span>
                 <span class="sheet-table-data sheet-center"><input title="@{armor3-acp}" type="number" name="attr_armor3-acp" value="0" max="0" /></span>
@@ -1560,7 +1560,7 @@
 			</div>
 			<div class="sheet-table-row">
                 <span class="sheet-table-data sheet-center"><label><input title="@{shield3-equipped}" type="checkbox" name="attr_shield3-equipped" value="1" checked="checked" /><b title="Worn Shield">&nbsp;&nbsp;Worn Shield</b></label></span>
-                <span class="sheet-table-data sheet-center"><input title="@{shield3}" type="text" name="attr_shield3" value="0" class="sheet-detail-medium" /></span>
+                <span class="sheet-table-data sheet-center"><input title="@{shield3}" type="text" name="attr_shield3" placeholder="Worn Shield" class="sheet-detail-medium" /></span>
                 <span class="sheet-table-data sheet-center"><input title="@{shield3-acbonus}" type="number" name="attr_shield3-acbonus" value="0" min="0" /></span>
                 <span class="sheet-table-data sheet-center"><input title="@{shield3-max-dex}" type="number" name="attr_shield3-max-dex" value="99" min="0" max="99" /></span>
                 <span class="sheet-table-data sheet-center"><input title="@{shield3-acp}" type="number" name="attr_shield3-acp" value="0" max="0" /></span>
@@ -14034,10 +14034,12 @@ var PFSheet = PFSheet || (function () {
      *
      */
     updateModifiedSpeed = function () {
-    	getAttrs(["current-load", "speed-base", "speed-modified", "speed-run", "load-heavy", "carried-total", "race",
-		"armor-equipped", "armor2-equipped", "armor3-equipped",
-            "armor-type", "armor2-type", "armor3-type"], function (v) {
-
+        var attribList = ["current-load", "speed-base", "speed-modified", "speed-run", "load-heavy", "carried-total", "race"];
+        defenseArmorShieldRows.forEach(function (row) {
+            attribList.push(row + "-equipped");
+            attribList.push(row + "-type");
+		});
+		getAttrs(attribList, function (v) {
             	var currMod = parseInt(v["speed-modified"], 10) || 0,
 				currRun = parseInt(v["speed-run"], 10) || 0,
 				load = parseInt(v["current-load"], 10) || 0,
@@ -14301,6 +14303,22 @@ var PFSheet = PFSheet || (function () {
     	});
     },
 
+    /******* PSIONIC ***************/
+
+    updatePsionicBonusPower = function () {
+		getAttrs(["selected-ability-psionic-power", "psionic-level-total", "ability-psionic-power"], function (v) {
+			SWUtils.evaluateExpression(v["selected-ability-psionic-power"], function (value) {
+				var ability = 0;
+				if (typeof value !== "undefined" && value !== null && !isNaN(value)) {
+					ability = parseInt(value, 10) || 0;
+				}
+				var currentTotal = parseInt(v["ability-psionic-power"], 10) || 0,
+			    newTotal = ability * (parseInt(v["psionic-level-total"], 10) || 0) * 0.5;
+				//TAS.debug("ability=" + ability, "newTotal=" + newTotal, "currentTotal=" + currentTotal);
+				if (currentTotal !== newTotal) { setAttrs({ "ability-psionic-power": newTotal }); }
+			});
+		});
+    }
 
 	/************************************* DEFENSE PAGE ***********************************/
 
@@ -14502,16 +14520,14 @@ var PFSheet = PFSheet || (function () {
     * for backward compatibility, proficiency is string and 0 is proficient, anything else non proficient
      */
     updateArmor = function () {
-    	getAttrs(["shield-equipped", "shield-acbonus", "shield-max-dex", "shield-acp", "shield-spell-fail", "shield-proficiency",
-         "shield2-equipped", "shield2-acbonus", "shield2-max-dex", "shield2-acp", "shield2-spell-fail", "shield2-proficiency",
-		 "shield3-equipped", "shield3-acbonus", "shield3-max-dex", "shield3-acp", "shield3-spell-fail", "shield3-proficiency",
-         "armor-equipped", "armor-acbonus", "armor-max-dex", "armor-acp", "armor-spell-fail", "armor-proficiency",
-         "armor2-equipped", "armor2-acbonus", "armor2-max-dex", "armor2-acp", "armor2-spell-fail", "armor2-proficiency",
-		 "armor3-equipped", "armor3-acbonus", "armor3-max-dex", "armor3-acp", "armor3-spell-fail", "armor3-proficiency",
-         "acp", "max-dex", "AC-armor", "AC-shield", "spell-fail", "acp-attack-mod",
-        "max-dex-source", "acp-source", "current-load"], function (v) {
-        	//TAS.debug("updateArmor");
-        	//TAS.debug(v);
+        var attribList = ["acp", "max-dex", "AC-armor", "AC-shield", "spell-fail", "acp-attack-mod", "max-dex-source", "acp-source", "current-load"];
+        defenseArmorShieldRows.forEach(function (row) {
+            defenseArmorShieldColumns.forEach(function (column) {
+                attribList.push(row + "-" + column);
+            });
+        });
+		getAttrs(attribList, function (v) {
+			//TAS.debug("updateArmor", v);
         	var acp = 0, maxDex = 99, acA = 0, acS = 0, sp = 0, atk = 0
 			   , subAC = 0, subD = 0, subAcp = 0, nonProf = 0, subsp = 0
 			   , currACP = 0, currMaxDex = 99, currACArmor = 0, currACShield = 0, currSpellFail = 0, currAtkMod = 0
@@ -14522,84 +14538,21 @@ var PFSheet = PFSheet || (function () {
 			   , setter = {}
         	;
 
-        	if (v["armor-equipped"] == "1") {
-        		subAC = parseInt(v["armor-acbonus"], 10) || 0;
-        		subD = parseInt(v["armor-max-dex"], 10); subD = isNaN(subD) ? 99 : subD; //cannot do "or 0" since 0 is valid but falsy
-        		subAcp = parseInt(v["armor-acp"], 10) || 0;
-        		nonProf = parseInt(v["armor-proficiency"], 10) || 0;//assume proficient 0 is messing with it //prof=isNaN(prof)?0:prof;//cannot do "||0" since 0 is valid but falsy
-        		subsp = parseInt(v["armor-spell-fail"], 10) || 0;
+            defenseArmorShieldRows.forEach(function (row) {
+			    if (v[row + "-equipped"] == "1") {
+				    subAC = parseInt(v[row + "-acbonus"], 10) || 0;
+				    subD = parseInt(v[row + "-max-dex"], 10); subD = isNaN(subD) ? 99 : subD; //cannot do "or 0" since 0 is valid but falsy
+				    subAcp = parseInt(v[row + "-acp"], 10) || 0;
+				    nonProf = parseInt(v[row + "-proficiency"], 10) || 0;//assume proficient 0 is messing with it //prof=isNaN(prof)?0:prof;//cannot do "||0" since 0 is valid but falsy
+				    subsp = parseInt(v[row + "-spell-fail"], 10) || 0;
         		acA += subAC;
         		maxDex = Math.min(subD, maxDex);
         		acp += subAcp;
         		sp += subsp;
         		if (nonProf) { atk += subAcp; }
-        		//TAS.debug("subAC=" + subAC + ", subD=" + subD + ", subAcp=" + subAcp + ", nonProf=" + nonProf + ", subsp=" + subsp + ", acA=" + acA + ", maxDex=" + maxDex + ", acp=" + acp + ", sp=" + sp + ", atk=" + atk);
-        	}
-        	if (v["armor2-equipped"] == "1") {
-        		subAC = parseInt(v["armor2-acbonus"], 10) || 0;
-        		subD = parseInt(v["armor2-max-dex"], 10); subD = isNaN(subD) ? 99 : subD; //cannot do "or 0" since 0 is valid but falsy
-        		subAcp = parseInt(v["armor2-acp"], 10) || 0;
-        		nonProf = parseInt(v["armor2-proficiency"], 10) || 0;//a;prof=isNaN(prof)?1:prof;
-        		subsp = parseInt(v["armor2-spell-fail"], 10) || 0;
-        		acA += subAC;
-        		maxDex = Math.min(subD, maxDex);
-        		acp += subAcp;
-        		sp += subsp;
-        		if (nonProf) { atk += subAcp; }
-        		//TAS.debug("subAC=" + subAC + ", subD=" + subD + ", subAcp=" + subAcp + ", nonProf=" + nonProf + ", subsp=" + subsp + ", acA=" + acA + ", maxDex=" + maxDex + ", acp=" + acp + ", sp=" + sp + ", atk=" + atk);
-        	}
-        	if (v["armor3-equipped"] == "1") {
-        		subAC = parseInt(v["armor3-acbonus"], 10) || 0;
-        		subD = parseInt(v["armor3-max-dex"], 10); subD = isNaN(subD) ? 99 : subD; //cannot do "or 0" since 0 is valid but falsy
-        		subAcp = parseInt(v["armor3-acp"], 10) || 0;
-        		nonProf = parseInt(v["armor3-proficiency"], 10) || 0;//a;prof=isNaN(prof)?1:prof;
-        		subsp = parseInt(v["armor3-spell-fail"], 10) || 0;
-        		acA += subAC;
-        		maxDex = Math.min(subD, maxDex);
-        		acp += subAcp;
-        		sp += subsp;
-        		if (nonProf) { atk += subAcp; }
-        		//TAS.debug("subAC=" + subAC + ", subD=" + subD + ", subAcp=" + subAcp + ", nonProf=" + nonProf + ", subsp=" + subsp + ", acA=" + acA + ", maxDex=" + maxDex + ", acp=" + acp + ", sp=" + sp + ", atk=" + atk);
-        	}
-        	if (v["shield-equipped"] == "1") {
-        		subAC = parseInt(v["shield-acbonus"], 10) || 0;
-        		subD = parseInt(v["shield-max-dex"], 10); subD = isNaN(subD) ? 99 : subD; //cannot do "or 0" since 0 is valid but falsy
-        		subAcp = parseInt(v["shield-acp"], 10) || 0;
-        		nonProf = parseInt(v["shield-proficiency"], 10) || 0;//a;prof=isNaN(prof)?1:prof;
-        		subsp = parseInt(v["shield-spell-fail"], 10) || 0;
-        		acS += subAC;
-        		maxDex = Math.min(subD, maxDex);
-        		acp += subAcp;
-        		sp += subsp;
-        		if (nonProf) { atk += subAcp; }
-        		//TAS.debug("subAC=" + subAC + ", subD=" + subD + ", subAcp=" + subAcp + ", nonProf=" + nonProf + ", subsp=" + subsp + ", acA=" + acA + ", maxDex=" + maxDex + ", acp=" + acp + ", sp=" + sp + ", atk=" + atk);
-        	}
-        	if (v["shield2-equipped"] == "1") {
-        		subAC = parseInt(v["shield2-acbonus"], 10) || 0;
-        		subD = parseInt(v["shield2-max-dex"], 10); subD = isNaN(subD) ? 99 : subD; //cannot do "or 0" since 0 is valid but falsy
-        		subAcp = parseInt(v["shield2-acp"], 10) || 0;
-        		nonProf = parseInt(v["shield2-proficiency"], 10) || 0;//a;prof=isNaN(prof)?1:prof;
-        		subsp = parseInt(v["shield2-spell-fail"], 10) || 0;
-        		acS += subAC;
-        		maxDex = Math.min(subD, maxDex);
-        		acp += subAcp;
-        		sp += subsp;
-        		if (nonProf) { atk += subAcp; }
-        		//TAS.debug("subAC=" + subAC + ", subD=" + subD + ", subAcp=" + subAcp + ", nonProf=" + nonProf + ", subsp=" + subsp + ", acA=" + acA + ", maxDex=" + maxDex + ", acp=" + acp + ", sp=" + sp + ", atk=" + atk);
-        	}
-        	if (v["shield3-equipped"] == "1") {
-        		subAC = parseInt(v["shield3-acbonus"], 10) || 0;
-        		subD = parseInt(v["shield3-max-dex"], 10); subD = isNaN(subD) ? 99 : subD; //cannot do "or 0" since 0 is valid but falsy
-        		subAcp = parseInt(v["shield3-acp"], 10) || 0;
-        		nonProf = parseInt(v["shield3-proficiency"], 10) || 0;//a;prof=isNaN(prof)?1:prof;
-        		subsp = parseInt(v["shield3-spell-fail"], 10) || 0;
-        		acS += subAC;
-        		maxDex = Math.min(subD, maxDex);
-        		acp += subAcp;
-        		sp += subsp;
-        		if (nonProf) { atk += subAcp; }
-        		//TAS.debug("subAC=" + subAC + ", subD=" + subD + ", subAcp=" + subAcp + ", nonProf=" + nonProf + ", subsp=" + subsp + ", acA=" + acA + ", maxDex=" + maxDex + ", acp=" + acp + ", sp=" + sp + ", atk=" + atk);
-        	}
+				    //TAS.debug("row=" + row + ", subAC=" + subAC + ", subD=" + subD + ", subAcp=" + subAcp + ", nonProf=" + nonProf + ", subsp=" + subsp + ", acA=" + acA + ", maxDex=" + maxDex + ", acp=" + acp + ", sp=" + sp + ", atk=" + atk);
+			    }
+			});
 
         	// #0: Armor, Shield & Load
         	// #1: Armor & Shield only
@@ -15131,18 +15084,13 @@ var PFSheet = PFSheet || (function () {
 	/* updateWornEquipment
 	 * updates the totals for worn equipment
 	 *
-	 * col can be: charges, weight, hp, hp_max, or value
+	* col can be: charges, weight, hp, hp_max, or value (see WornEquipmentColumns)
 	 */
 	updateWornEquipment = function (col) {
-		//TAS.debug("entered updateWornEquipment");
-		var slot = ["Armor", "Belt", "Body", "Chest", "Eyes", "Feet", "Hands", "Head", "Headband", "Neck", "Ring1", "Ring2", "Shield", "Shoulders", "Wrist"];
-		//TAS.debug("slot=" + slot);
-		var numFlds = slot.length, i, attribList = ["worn-total-" + col];
-		//TAS.debug("numFlds=" + numFlds + ", attribList=" + attribList);
-		for (i = 0; i < numFlds; i++) {
-			attribList.push("worn-" + slot[i] + "-" + col);
-		}
-		//TAS.debug("attribList=" + attribList);
+		var attribList = ["worn-total-" + col];
+        wornEquipmentRows.forEach(function (slot) {
+			attribList.push("worn-" + slot + "-" + col);
+		});
 		updateRowTotal(attribList);
 	},
 
@@ -15296,60 +15244,6 @@ var PFSheet = PFSheet || (function () {
     		if (abovehead !== a) { setAttrs({ "lift-above-head": a }); }
     		if (offground !== o) { setAttrs({ "lift-off-ground": o }); }
     		if (drag !== d) { setAttrs({ "lift-drag-and-push": d }); }
-    	});
-    },
-
-    /* updateRepeatingItemTotalWeight
-    * updates the total for repeating item with weight, qty and qty_max
-    *
-    */
-    updateRepeatingItemTotalWeight = function (repeatName, totalVar) {
-    	//TAS.debug("repeatName=" + repeatName + ", totalVar=" + totalVar);
-    	getAttrs([totalVar], function (w) {
-    		var currentTotal = parseFloat(w[totalVar], 10) || 0;
-    		//TAS.debug("currentTotal=" + currentTotal);
-    		getSectionIDs("repeating_" + repeatName, function (idarray) { // get the repeating set
-    			//TAS.debug("idarray.length=" + idarray.length);
-    			var newTotal = 0.0,
-                setter = {};
-    			if (idarray.length > 0) {
-    				_.each(idarray, function (currentID, i) { // loop through the set
-    					getAttrs(["repeating_" + repeatName + "_" + currentID + "_weight",
-                        "repeating_" + repeatName + "_" + currentID + "_qty",
-                        "repeating_" + repeatName + "_" + currentID + "_qty_max",
-                        "repeating_" + repeatName + "_" + currentID + "_location"], function (v) {
-                        	var weight = parseFloat(v["repeating_" + repeatName + "_" + currentID + "_weight"], 10) || 0,
-                            qty = parseInt(v["repeating_" + repeatName + "_" + currentID + "_qty"]) || 0,
-                            max = parseInt(v["repeating_" + repeatName + "_" + currentID + "_qty_max"]) || 0,
-                            location = parseInt(v["repeating_" + repeatName + "_" + currentID + "_location"]) || 0;
-                        	//TAS.debug("weight=" + weight + ", qty=" + qty + ", max=" + ", location=" + location + ", newTotal=" + newTotal);
-                        	if (qty > 0 && location == 0) { // Location #0 = Carried, #1 = Not Carried, #2+ = Worn
-                        		if (max == 0) { // max charges is 0, so qty is the number of items; not charges
-                        			newTotal += weight * qty;
-                        		} else { // this is a single item with charges, so just add the weight once
-                        			newTotal += weight;
-                        		}
-                        		//TAS.debug("change newTotal=" + newTotal);
-                        	}
-                        	if (i === idarray.length - 1) {
-                        		//TAS.debug("loop finished newTotal=" + newTotal + ", currentTotal=" + currentTotal);
-                        		if (currentTotal !== newTotal) {
-                        			//TAS.debug("changing " + totalVar + " to " + newTotal);
-                        			setter[totalVar] = newTotal;
-                        			setAttrs(setter); // could not simply set totalVar to newTotal since it would set newTotal to the attribute named totalVar instead
-                        		}
-                        	}
-                        });
-    				});
-    			} else {
-    				//TAS.debug("no loop? newTotal=" + newTotal + ", currentTotal=" + currentTotal + ", totalVar=" + totalVar);
-    				if (currentTotal !== newTotal) {
-    					//TAS.debug("changing " + totalVar + " to " + newTotal);
-    					setter[totalVar] = newTotal;
-    					setAttrs(setter);
-    				}
-    			}
-    		});
     	});
     },
 
@@ -15997,7 +15891,6 @@ var PFSheet = PFSheet || (function () {
 		, "CMD-ability": "FF-CMD-DEX"
 	},
 	saveTypes = ["Fort", "Ref", "Will"],
-	//note the buffs here should really be created from the buff columns list not this 
 	saveEvents = "change:saves-cond change:total-REPLACE change:REPLACE-ability-mod change:REPLACE-trait change:REPLACE-enhance change:REPLACE-resist change:REPLACE-misc",
 	allCoreSkills = [
 		 "Acrobatics", "Appraise", "Bluff", "Climb", "Craft", "Craft2", "Craft3"
@@ -16050,7 +15943,10 @@ var PFSheet = PFSheet || (function () {
 	},
 	//events for updateBonusSpells CLASSIDX is the 0-2 classes, SPELLLEVEL is 0-9
 	spellClassLevelsEvents = "change:spellclass-CLASSIDX-level-SPELLLEVEL-class change:spellclass-CLASSIDX-level-SPELLLEVEL-bonus change:spellclass-CLASSIDX-level-SPELLLEVEL-misc",
-
+    wornEquipmentRows = ["Belt", "Body", "Chest", "Eyes", "Feet", "Hands", "Head", "Headband", "Neck", "Ring1", "Ring2", "Shoulders", "Wrist"],
+    wornEquipmentColumns = ["charges", "weight", "hp", "hp_max", "value"],
+    defenseArmorShieldRows = ["armor", "armor2", "armor3", "shield", "shield2", "shield3"],
+    defenseArmorShieldColumns = ["equipped", "acbonus", "max-dex", "acp", "spell-fail", "proficiency"],
 
 	/************************************************ RECALCULATE  PAGES  to account for updates  *****************/
 
@@ -16393,11 +16289,9 @@ var PFSheet = PFSheet || (function () {
     	}
     	if (oldversion < 0.37) {
     		updateModifiedSpeed();
-    		updateWornEquipment("charges");
-    		updateWornEquipment("weight");
-    		updateWornEquipment("hp");
-    		updateWornEquipment("hp_max");
-    		updateWornEquipment("value");
+            WornEquipmentColumns.forEach(function (column) {
+			    updateWornEquipment(column);
+            });
     		TAS.repeating('item')
                 .attrs('item_total_weight', 'item-total-hp', 'item-total-hp_max', 'item-total-value')
                 .fields('weight', 'qty', 'qty_max', 'location', 'hp', 'hp_max', 'value')
@@ -16501,7 +16395,11 @@ var PFSheet = PFSheet || (function () {
 			spellClassEvents: spellClassEvents,
 			spellLevels: spellLevels,
 			spellLevelEvents: spellLevelEvents,
-			spellClassLevelsEvents: spellClassLevelsEvents
+			spellClassLevelsEvents: spellClassLevelsEvents,
+            wornEquipmentRows: wornEquipmentRows,
+            wornEquipmentColumns: wornEquipmentColumns,
+            defenseArmorShieldRows: defenseArmorShieldRows,
+            defenseArmorShieldColumns: defenseArmorShieldColumns
 		},
 		util: {
 			findAbilityInString: findAbilityInString,
@@ -16528,6 +16426,7 @@ var PFSheet = PFSheet || (function () {
 		updateMythicPathInformation: updateMythicPathInformation,
 		updateMythicPower: updateMythicPower,
 		updateTierMythicPower: updateTierMythicPower,
+        updatePsionicBonusPower: updatePsionicBonusPower,
 		updateDefenses: updateDefenses,
 		updateArmor: updateArmor,
 		updateAttackEffectTotals: updateAttackEffectTotals,
@@ -16558,7 +16457,6 @@ var PFSheet = PFSheet || (function () {
 		updateCarriedTotal: updateCarriedTotal,
 		updateCurrentLoad: updateCurrentLoad,
 		updateLoadsAndLift: updateLoadsAndLift,
-		updateRepeatingItemTotalWeight: updateRepeatingItemTotalWeight,
 		handleSpellClassDropdown: handleSpellClassDropdown,
 		updateSpellClassRange: updateSpellClassRange,
 		updateConcentration: updateConcentration,
@@ -16665,7 +16563,7 @@ on("change:max-skill-ranks-misc",
 _.each(PFSheet.lists.allCoreSkills, function (skill) {
 	on((PFSheet.lists.skillEvents.replace(/REPLACE/g, skill)),
 		TAS.callback(function eventUpdateAllCoreSkills(eventInfo) {
-			TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+			TAS.debug("caught " + eventInfo.sourceAttribute + " event for " + skill);
 			PFSheet.updateSkill(skill, eventInfo);
 		})
 	);
@@ -16684,7 +16582,7 @@ _.each(PFSheet.lists.allCoreSkills, function (skill) {
 _.each(PFSheet.lists.consolidatedSkills, function (skill) {
 	on((PFSheet.lists.skillEvents.replace(/REPLACE/g, skill)),
 		TAS.callback(function eventUpdateConsolidatedSkills(eventInfo) {
-			TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+			TAS.debug("caught " + eventInfo.sourceAttribute + " event for " + skill);
 			PFSheet.updateSkill(skill, eventInfo);
 		})
 	);
@@ -16703,7 +16601,7 @@ _.each(PFSheet.lists.consolidatedSkills, function (skill) {
 _.each(PFSheet.lists.backgroundSkills, function (skill) {
 	on((PFSheet.lists.skillEvents.replace(/REPLACE/g, skill)),
 		TAS.callback(function eventUpdateBackgroundSkills(eventInfo) {
-			TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+			TAS.debug("caught " + eventInfo.sourceAttribute + " event for " + skill);
 			PFSheet.updateSkill(skill, eventInfo);
 		})
 	);
@@ -16856,42 +16754,19 @@ on("change:misc-mythic-power change:tier-mythic-power",
 on("change:psionic-level change:psionic-level-misc",
 	TAS.callback(function eventUpdatePsionicLevel(eventInfo) {
 		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
-		getAttrs(["psionic-level", "psionic-level-misc", "psionic-level-total"], function (v) {
-			var newTotal = (parseInt(v["psionic-level"], 10) || 0) + (parseInt(v["psionic-level-misc"], 10) || 0),
-			currentTotal = parseInt(v["psionic-level-total"], 10) || 0;
-			//TAS.debug("newTotal=" + newTotal, "currentTotal=" + currentTotal);
-			if (currentTotal !== newTotal) { setAttrs({ "psionic-level-total": newTotal }); }
-		});
+        updateRowTotal(["psionic-level-total", "psionic-level", "psionic-level-misc"]);
 	})
 );
 on("change:class-psionic-power change:ability-psionic-power change:misc-psionic-power",
 	TAS.callback(function eventUpdatePsionicPower(eventInfo) {
 		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
-		getAttrs(["class-psionic-power", "ability-psionic-power", "misc-psionic-power", "psionic-power_max"], function (v) {
-			var newTotal = (parseInt(v["class-psionic-power"], 10) || 0) + (parseInt(v["ability-psionic-power"], 10) || 0) + (parseInt(v["misc-psionic-power"], 10) || 0),
-			currentTotal = parseInt(v["psionic-power_max"], 10) || 0;
-			//TAS.debug("newTotal=" + newTotal, "currentTotal=" + currentTotal);
-			if (currentTotal !== newTotal) { setAttrs({ "psionic-power_max": newTotal }); }
-		});
+        updateRowTotal(["psionic-power_max", "class-psionic-power", "ability-psionic-power", "misc-psionic-power"]);
 	})
 );
 on("change:selected-ability-psionic-power change:psionic-level-total",
 	TAS.callback(function eventUpdatePsionicBonusPower(eventInfo) {
 		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
-		getAttrs(["selected-ability-psionic-power", "psionic-level-total", "ability-psionic-power"], function (v) {
-			SWUtils.evaluateExpression(v["selected-ability-psionic-power"], function (value) {
-		        var ability = 0;
-				//TAS.debug("value=" + value);
-				if (typeof value !== "undefined" && value !== null && !isNaN(value)) {
-					ability = parseInt(value, 10) || 0;
-				}
-                //TAS.debug("ability=" + ability);
-			    var currentTotal = parseInt(v["ability-psionic-power"], 10) || 0,
-			    newTotal = ability * (parseInt(v["psionic-level-total"], 10) || 0) * 0.5;
-			    //TAS.debug("ability=" + ability, "newTotal=" + newTotal, "currentTotal=" + currentTotal);
-			    if (currentTotal !== newTotal) { setAttrs({ "ability-psionic-power": newTotal }); }
-			});
-		});
+        PFSheet.updatePsionicBonusPower();
 	})
 );
 
@@ -16903,25 +16778,30 @@ on("change:ac-ability-mod change:ff-dex change:ac-penalty change:cmd-penalty cha
 	})
 );
 
-on("change:shield-equipped change:shield-acbonus change:shield-max-dex change:shield-acp change:shield-spell-fail change:shield-proficiency "
-	+ "change:shield2-equipped change:shield2-acbonus change:shield2-max-dex change:shield2-acp change:shield2-spell-fail change:shield2-proficiency "
-	+ "change:shield3-equipped change:shield3-acbonus change:shield3-max-dex change:shield3-acp change:shield3-spell-fail change:shield3-proficiency "
-	+ "change:armor-equipped change:armor-acbonus change:armor-max-dex change:armor-acp change:armor-spell-fail change:armor-proficiency "
-	+ "change:armor2-equipped change:armor2-acbonus change:armor2-max-dex change:armor2-acp change:armor2-spell-fail change:armor2-proficiency "
-	+ "change:armor3-equipped change:armor3-acbonus change:armor3-max-dex change:armor3-acp change:armor3-spell-fail change:armor3-proficiency "
-+ "change:max-dex-source change:acp-source change:current-load",
+on("change:max-dex-source change:acp-source change:current-load",
 	TAS.callback(function eventUpdateArmor(eventInfo) {
 		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
 		PFSheet.updateArmor(eventInfo.sourceAttribute);
 	})
 );
+_.each(PFSheet.lists.defenseArmorShieldRows, function (row) {
+    _.each(PFSheet.lists.defenseArmorShieldColumns, function (column) {
+	    var eventToWatch = "change:" + row + "-" + column;
+	    on(eventToWatch,
+		    TAS.callback(function eventUpdateDefenseArmorShield(eventInfo) {
+			    TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+			    PFSheet.updateArmor(eventInfo.sourceAttribute);
+		    })
+	    );
+    });
+});
 
 //saves
 _.each(PFSheet.lists.saveTypes, function (save) {
 	var eventToWatch = PFSheet.lists.saveEvents.replace(/REPLACE/g, save);
 	on(eventToWatch,
 		TAS.callback(function eventUpdateSave(eventInfo) {
-			TAS.debug("caught " + eventInfo.sourceAttribute + " event");
+			TAS.debug("caught " + eventInfo.sourceAttribute + " event for " + save);
 			PFSheet.updateSave(save, eventInfo);
 		})
 	);
@@ -17032,7 +16912,6 @@ on("change:size",
 on("change:size_display",
 	TAS.callback(function eventUpdateSizeText(eventInfo) {
 		TAS.debug("caught size_display event");
-		TAS.notice("YEAH BABY YEAH");
 		PFSheet.updateSizeFromText();
 	})
 );
@@ -17077,41 +16956,20 @@ on("change:npc-hd-misc",
 );
 
 //items
-on("change:worn-Belt-charges change:worn-Body-charges change:worn-Chest-charges change:worn-Eyes-charges change:worn-Feet-charges change:worn-Hands-charges change:worn-Head-charges change:worn-Headband-charges change:worn-Neck-charges change:worn-Ring1-charges change:worn-Ring2-charges change:worn-Shoulders-charges change:worn-Wrist-charges",
-	TAS.callback(function eventUpdateWornEquipmentCharges(eventInfo) {
+_.each(PFSheet.lists.wornEquipmentRows, function (row) {
+    _.each(PFSheet.lists.wornEquipmentColumns, function (column) {
+	    var eventToWatch = "change:worn-" + row + "-" + column;
+	    on(eventToWatch,
+		    TAS.callback(function eventUpdateWornEquipmentTotal(eventInfo) {
 		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
-		PFSheet.updateWornEquipment("charges");
+			    PFSheet.updateWornEquipment(column);
 	})
 );
-on("change:worn-Belt-weight change:worn-Body-weight change:worn-Chest-weight change:worn-Eyes-weight change:worn-Feet-weight change:worn-Hands-weight change:worn-Head-weight change:worn-Headband-weight change:worn-Neck-weight change:worn-Ring1-weight change:worn-Ring2-weight change:worn-Shoulders-weight change:worn-Wrist-weight",
-	TAS.callback(function eventUpdateWornEquipmentWeight(eventInfo) {
-		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
-		PFSheet.updateWornEquipment("weight");
-	})
-);
-on("change:worn-Belt-hp change:worn-Body-hp change:worn-Chest-hp change:worn-Eyes-hp change:worn-Feet-hp change:worn-Hands-hp change:worn-Head-hp change:worn-Headband-hp change:worn-Neck-hp change:worn-Ring1-hp change:worn-Ring2-hp change:worn-Shoulders-hp change:worn-Wrist-hp",
-	TAS.callback(function eventUpdateWornEquipmentHp(eventInfo) {
-		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
-		PFSheet.updateWornEquipment("hp");
-	})
-);
-// The on...hp above catches hp_max as well
-//on("change:worn-Belt-hp_max change:worn-Body-hp_max change:worn-Chest-hp_max change:worn-Eyes-hp_max change:worn-Feet-hp_max change:worn-Hands-hp_max change:worn-Head-hp_max change:worn-Headband-hp_max change:worn-Neck-hp_max change:worn-Ring1-hp_max change:worn-Ring2-hp_max change:worn-Shoulders-hp_max change:worn-Wrist-hp_max",
-//	TAS.callback(function eventUpdateWornEquipment(eventInfo) {
-//TAS.debug("caught " + eventInfo.sourceAttribute + " event");
-//		PFSheet.updateWornEquipment("hp_max");
-//	})
-//);
-on("change:worn-Belt-value change:worn-Body-value change:worn-Chest-value change:worn-Eyes-value change:worn-Feet-value change:worn-Hands-value change:worn-Head-value change:worn-Headband-value change:worn-Neck-value change:worn-Ring1-value change:worn-Ring2-value change:worn-Shoulders-value change:worn-Wrist-value",
-	TAS.callback(function eventUpdateWornEquipmentValue(eventInfo) {
-		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
-		PFSheet.updateWornEquipment("value");
-	})
-);
+    });
+});
 on('change:repeating_item:weight change:repeating_item:qty change:repeating_item:qty_max change:repeating_item:location',
     TAS.callback(function eventUpdateItemTotalWeight(eventInfo) {
     	TAS.debug("caught " + eventInfo.sourceAttribute + " event");
-    	//PFSheet.updateRepeatingItemTotalWeight("item", "item_total_weight"); // Kept around for a speed test comparison to TAS
     	TAS.repeating('item')
 			.attrs('item_total_weight')
 			.fields('weight', 'qty', 'qty_max', 'location')
@@ -17203,7 +17061,6 @@ on('remove:repeating_item',
 			.execute();
 	})
 );
-
 on('change:CP change:SP change:GP change:PP',
     TAS.callback(function eventUpdateCarriedCurrency(eventInfo) {
     	TAS.debug("caught " + eventInfo.sourceAttribute + " event");
