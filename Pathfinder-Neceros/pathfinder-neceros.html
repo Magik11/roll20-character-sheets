@@ -14279,19 +14279,6 @@ var PFSheet = PFSheet || (function () {
     	});
     },
 
-    /* updateMythicPower
-    * sets max MP
-    */
-    updateMythicPower = function () {
-    	//TAS.debug("entered updateMythicPower");
-    	getAttrs(["mythic-power_max", "tier-mythic-power", "misc-mythic-power"], function (values) {
-    		var totalMP = (parseInt(values["tier-mythic-power"], 10) || 0) + (parseInt(values["misc-mythic-power"], 10) || 0),
-            currMP = parseInt(values["mythic-power_max"], 10) || 0;
-    		//TAS.debug("totalMP=" + totalMP + ", currMP=" + currMP);
-    		if (currMP !== totalMP) { setAttrs({ "mythic-power_max": totalMP }); }
-    	});
-    },
-
     /* updateTierMythicPower
     * sets tier mp
     */
@@ -14315,7 +14302,7 @@ var PFSheet = PFSheet || (function () {
 					ability = parseInt(value, 10) || 0;
 				}
 				var currentTotal = parseInt(v["ability-psionic-power"], 10) || 0,
-			    newTotal = ability * (parseInt(v["psionic-level-total"], 10) || 0) * 0.5;
+			    newTotal = Math.floor(ability * (parseInt(v["psionic-level-total"], 10) || 0) * 0.5);
 				//TAS.debug("ability=" + ability, "newTotal=" + newTotal, "currentTotal=" + currentTotal);
 				if (currentTotal !== newTotal) { setAttrs({ "ability-psionic-power": newTotal }); }
 			});
@@ -15111,7 +15098,6 @@ var PFSheet = PFSheet || (function () {
 
     /* updateCarriedTotal
      * updates the total for carried weight
-     *
      */
 	updateCarriedTotal = function () {
 		getAttrs(["carried-currency", "item_total_weight", "worn-total-weight", "carried-misc", "carried-total"], function (v) {
@@ -15124,7 +15110,6 @@ var PFSheet = PFSheet || (function () {
 
     /* updateCurrentLoad
      * updates the current load radio button
-     *
      */
 	updateCurrentLoad = function () {
 		getAttrs(["load-light", "load-medium", "current-load", "carried-total"], function (v) {
@@ -15146,6 +15131,8 @@ var PFSheet = PFSheet || (function () {
 		});
 	},
 
+	// Returns the carrying capacity for a given strength score and load type
+	// Will recursively calculate for strength scores over 29
     getCarryingCapacity = function (str, load) {
     	var l, m, h;
     	switch (str) {
@@ -15188,28 +15175,29 @@ var PFSheet = PFSheet || (function () {
 
     /* updateLoadsAndLift
     * updates the load and lift numbers
-    *
     */
     updateLoadsAndLift = function () {
-    	getAttrs(["STR", "size", "legs", "load-light", "load-medium", "load-heavy", "lift-above-head", "lift-off-ground", "lift-drag-and-push", "load-str-bonus", "load-multiplier", "load-misc"], function (v) {
+		getAttrs(["STR", "size", "legs", "load-light", "load-medium", "load-heavy", "lift-above-head", "lift-off-ground", "lift-drag-and-push",
+			"load-str-bonus", "load-multiplier", "load-misc"], function (v) {
     		var str = parseInt(v["STR"], 10) || 0,
             size = parseInt(v["size"], 10) || 0,
             legs = parseInt(v["legs"], 10) || 0,
             light = parseInt(v["load-light"], 10) || 0,
             medium = parseInt(v["load-medium"], 10) || 0,
             heavy = parseInt(v["load-heavy"], 10) || 0,
-            abovehead = parseInt(v["lift-above-head"], 10) || 0,
-            offground = parseInt(v["lift-off-ground"], 10) || 0,
+			aboveHead = parseInt(v["lift-above-head"], 10) || 0,
+			offGround = parseInt(v["lift-off-ground"], 10) || 0,
             drag = parseInt(v["lift-drag-and-push"], 10) || 0,
-            strmod = parseInt(v["load-str-bonus"], 10) || 0,
-            loadmult = parseInt(v["load-multiplier"], 10) || 0,
+			strMod = parseInt(v["load-str-bonus"], 10) || 0,
+			loadMult = parseInt(v["load-multiplier"], 10) || 0,
             misc = parseInt(v["load-misc"], 10) || 0;
-    		//TAS.debug("STR=" + str + ", legs=" + legs + ", load-light=" + light + ", load-medium=" + medium + ", load-heavy=" + heavy + ", lift-above-head=" + abovehead + ", lift-off-ground=" + offground + ", lift-drag-and-push=" + drag + ", load-str-bonus=" + strmod + ", load-multiplier=" + loadmult + ", load-misc=" + misc);
-    		if (loadmult < 1) { loadmult = 1; }
-    		loadmult--;
-    		var l = getCarryingCapacity(str + strmod, "light") + misc,
-            m = getCarryingCapacity(str + strmod, "medium") + misc,
-            h = getCarryingCapacity(str + strmod, "heavy") + misc,
+			//TAS.debug("STR=" + str + ", legs=" + legs + ", load-light=" + light + ", load-medium=" + medium + ", load-heavy=" + heavy + ", lift-above-head=" + aboveHead + ", lift-off-ground=" + offGround + ", lift-drag-and-push=" + drag + ", load-str-bonus=" + strMod + ", load-multiplier=" + loadMult + ", load-misc=" + misc);
+			if (loadMult < 1) { loadMult = 1; }
+			loadMult--;
+
+			var l = getCarryingCapacity(str + strMod, "light") + misc,
+			m = getCarryingCapacity(str + strMod, "medium") + misc,
+			h = getCarryingCapacity(str + strMod, "heavy") + misc,
             mult = 1;
     		if (legs == 2) {
     			switch (size) {
@@ -15235,17 +15223,18 @@ var PFSheet = PFSheet || (function () {
     				case 8: mult = 1 / 4; break;
     			}
     		}
-    		mult += loadmult;
+			mult += loadMult;
     		l *= mult; m *= mult; h *= mult;
-    		var a = h, o = h * 2, d = h * 5;
+			var a = h, o = h * 2, d = h * 5, setter = {}, setAny = 0;
 
     		//TAS.debug("new light load=" + l + ", new medium load=" + m + ", new heavy load=" + h + ", new above head=" + a + ", new off ground=" + o + ", new drag=" + d);
-    		if (light !== l) { setAttrs({ "load-light": l }); }
-    		if (medium !== m) { setAttrs({ "load-medium": m }); }
-    		if (heavy !== h) { setAttrs({ "load-heavy": h }); }
-    		if (abovehead !== a) { setAttrs({ "lift-above-head": a }); }
-    		if (offground !== o) { setAttrs({ "lift-off-ground": o }); }
-    		if (drag !== d) { setAttrs({ "lift-drag-and-push": d }); }
+			if (light !== l) { setter("load-light") = l; setAny = 1; }
+			if (medium !== m) { setter("load-medium") = m; setAny = 1; }
+			if (heavy !== h) { setter("load-heavy") = h; setAny = 1; }
+			if (aboveHead !== a) { setter("lift-above-head") = a; setAny = 1; }
+			if (offGround !== o) { setter("lift-off-ground") = o; setAny = 1; }
+			if (drag !== d) { setter("lift-drag-and-push") = d; setAny = 1; }
+			if (setAny) { setAttrs(setter); }
     	});
     },
 
@@ -15264,7 +15253,6 @@ var PFSheet = PFSheet || (function () {
 		if (selected === class2name) { return 2; }
 		return 0;
 	},
-
 
 	calculateSpellRanges = function (casterlevel) {
 		casterlevel = casterlevel || 0;
@@ -15501,7 +15489,6 @@ var PFSheet = PFSheet || (function () {
     handleConcentrationAbilityDropdown = function (classidx) {
     	handleDropdown("Concentration-" + classidx + "-ability", "Concentration-" + classidx + "-mod");
     },
-
 
 	/* updateConcentration - updates concentration for spellclass
 	* @classidx {number} = 0,1,2 the spellclass
@@ -16429,7 +16416,6 @@ var PFSheet = PFSheet || (function () {
 		updateTempHP: updateTempHP,
 		updateClassInformation: updateClassInformation,
 		updateMythicPathInformation: updateMythicPathInformation,
-		updateMythicPower: updateMythicPower,
 		updateTierMythicPower: updateTierMythicPower,
         updatePsionicBonusPower: updatePsionicBonusPower,
 		updateDefenses: updateDefenses,
@@ -16751,7 +16737,7 @@ on("change:mythic-tier",
 on("change:misc-mythic-power change:tier-mythic-power",
 	TAS.callback(function eventUpdateMythicPower(eventInfo) {
 		TAS.debug("caught " + eventInfo.sourceAttribute + " event");
-		PFSheet.updateMythicPower();
+		PFSheet.util.updateRowTotal(["mythic-power_max", "tier-mythic-power", "misc-mythic-power"]);
 	})
 );
 
